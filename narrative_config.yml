@@ -1,0 +1,62 @@
+# Narrative AI Configuration
+# Enhanced configuration for GPT-based trading analysis narratives
+
+# OpenAI Model Configuration
+model: "gpt-4o"  # Latest model as of May 2024
+max_retries: 3
+temperature: 0.7
+max_tokens: 2000
+rate_limit_delay: 1.0  # seconds between API calls
+
+# Cache Configuration
+cache_ttl: 3600  # 1 hour cache time-to-live
+
+# Database Configuration
+db_path: "narrative_history.db"
+
+# Template Configuration
+template_path: "narrative_templates.yml"
+
+# Error Handling Thresholds
+error_notification_threshold: 5
+max_consecutive_failures: 10
+
+# Cost Control
+max_daily_cost: 10.0  # Maximum daily API cost in USD
+max_monthly_cost: 200.0  # Maximum monthly API cost in USD
+
+# Language Settings
+default_language: "id"  # Indonesian by default
+supported_languages:
+  - "id"  # Indonesian
+  - "en"  # English
+
+# Prompt Engineering Parameters
+prompt_version: "2.0"
+include_historical_context: true
+max_confluence_factors: 5
+max_support_resistance_levels: 3
+
+# Performance Monitoring
+enable_performance_logging: true
+log_api_usage: true
+usage_report_interval: 86400  # 24 hours
+
+# Content Filtering
+filter_financial_advice: true
+include_disclaimers: true
+disclaimer_prominence: "high"
+
+# Advanced Features
+enable_sentiment_analysis: true
+enable_market_correlation: true
+enable_news_integration: false  # Future feature
+
+# Retry Configuration
+retry_multiplier: 1
+retry_min_wait: 4
+retry_max_wait: 10
+
+# Template Fallback Settings
+use_template_on_api_failure: true
+template_quality_threshold: 0.8

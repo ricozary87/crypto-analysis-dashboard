@@ -1,0 +1,64 @@
+# Trading Configuration
+symbols:
+  - "BTC-USDT"
+  - "ETH-USDT"
+  - "SOL-USDT"
+  - "TIA-USDT"
+  - "RENDER-USDT"
+
+timeframes:
+  - "1m"
+  - "5m" 
+  - "15m"
+  - "1H"
+  - "4H"
+  - "1D"
+
+# Signal Detection Parameters
+signal_detection:
+  confidence_threshold: 0.30  # Lowered to detect more signals
+  min_candles: 50
+  volume_multiplier: 1.5     # Lowered for more sensitive order block detection
+  fvg_min_strength: 0.3      # Lowered for more FVG detection
+  liquidity_lookback: 20
+  swing_window: 5
+
+# Signal Types
+signal_whitelist:
+  - "BOS"     # Break of Structure
+  - "CHoCH"   # Change of Character  
+  - "FVG"     # Fair Value Gap
+  - "ORDER_BLOCK"
+
+# System Configuration
+system:
+  max_retries: 3
+  cycle_interval: 300  # seconds (5 minutes)
+  max_workers: 8
+  cache_ttl: 300      # seconds
+
+# Alert Configuration
+alerts:
+  channels:
+    - "telegram"
+    - "email"
+    - "console"
+  
+  severity_levels:
+    - "info"
+    - "warning"
+    - "error"
+    - "critical"
+
+# API Rate Limiting
+api:
+  rate_limit_per_second: 20
+  timeout: 15
+  backoff_factor: 2
+
+# Monitoring
+monitoring:
+  cpu_threshold: 90
+  memory_threshold: 90
+  disk_threshold: 90
+  api_response_threshold: 5.0  # seconds

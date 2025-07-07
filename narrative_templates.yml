@@ -1,0 +1,55 @@
+# Custom Narrative Templates
+# Templates for generating trading analysis when AI is unavailable
+# Variables: {symbol}, {action}, {confidence}, {pattern}, {entry}, {sl}, {tp1}, {tp2}, {tp3}
+#           {rr}, {size}, {price}, {rsi}, {trend}, {volume}
+
+# Indonesian Templates
+id_buy:
+  executive_summary: "{symbol} menunjukkan peluang BUY yang menarik dengan confidence {confidence}% berdasarkan pola {pattern}. Momentum bullish terdeteksi pada level kunci."
+  technical_analysis: "Analisis menunjukkan {symbol} telah membentuk pola {pattern} yang kuat. RSI di level {rsi} mengkonfirmasi momentum bullish. Price action menunjukkan rejection dari support dengan volume {volume} yang mendukung."
+  risk_assessment: "Risiko dikelola ketat dengan Stop Loss di ${sl} ({rr}:1 RR ratio). Maksimal risiko per trade {size}% dari modal. Invalidasi setup jika harga break below SL level."
+  trade_setup: "ENTRY: ${entry} | SL: ${sl} | TP1: ${tp1} (partial exit 40%) | TP2: ${tp2} (partial exit 40%) | TP3: ${tp3} (final exit 20%). Gunakan maksimal {size}% dari total modal."
+  market_context: "Trend {trend} mendukung setup ini. Volume trading menunjukkan partisipasi yang {volume}. Perhatikan level resistance terdekat untuk kemungkinan rejection."
+  disclaimer: "Trading cryptocurrency berisiko tinggi. Analisis ini bukan saran investasi. Lakukan riset mandiri dan kelola risiko dengan bijak."
+
+id_sell:
+  executive_summary: "{symbol} memberikan sinyal SELL dengan confidence {confidence}% berdasarkan pola {pattern}. Tekanan bearish terlihat jelas pada level resistance."
+  technical_analysis: "Pola {pattern} terbentuk dengan jelas pada {symbol}. RSI {rsi} mengindikasikan kondisi overbought. Price action menunjukkan rejection dari resistance dengan volume {volume} yang signifikan."
+  risk_assessment: "Stop Loss ditempatkan di ${sl} untuk membatasi risiko ({rr}:1 RR). Alokasi maksimal {size}% dari modal trading. Setup invalid jika harga break above SL."
+  trade_setup: "ENTRY: ${entry} | SL: ${sl} | TP1: ${tp1} (exit 40%) | TP2: ${tp2} (exit 40%) | TP3: ${tp3} (exit 20%). Position size: {size}% dari modal."
+  market_context: "Kondisi market {trend} mendukung bias bearish. Volume {volume} mengkonfirmasi tekanan jual. Monitor support levels untuk potential bounce."
+  disclaimer: "Trading cryptocurrency berisiko tinggi. Analisis ini bukan saran investasi. Lakukan riset mandiri dan kelola risiko dengan bijak."
+
+# English Templates
+en_buy:
+  executive_summary: "{symbol} shows a compelling BUY opportunity with {confidence}% confidence based on {pattern} pattern. Bullish momentum detected at key levels."
+  technical_analysis: "Analysis reveals {symbol} has formed a strong {pattern} pattern. RSI at {rsi} confirms bullish momentum. Price action shows rejection from support with {volume} volume supporting the move."
+  risk_assessment: "Risk tightly managed with Stop Loss at ${sl} ({rr}:1 RR ratio). Maximum risk per trade {size}% of capital. Setup invalidated if price breaks below SL level."
+  trade_setup: "ENTRY: ${entry} | SL: ${sl} | TP1: ${tp1} (partial exit 40%) | TP2: ${tp2} (partial exit 40%) | TP3: ${tp3} (final exit 20%). Use maximum {size}% of total capital."
+  market_context: "{trend} trend supports this setup. Trading volume shows {volume} participation. Watch nearby resistance levels for potential rejection."
+  disclaimer: "Cryptocurrency trading carries high risk. This analysis is not investment advice. Do your own research and manage risk wisely."
+
+en_sell:
+  executive_summary: "{symbol} presents a SELL signal with {confidence}% confidence based on {pattern} pattern. Bearish pressure evident at resistance levels."
+  technical_analysis: "{pattern} pattern clearly formed on {symbol}. RSI {rsi} indicates overbought conditions. Price action shows rejection from resistance with significant {volume} volume."
+  risk_assessment: "Stop Loss placed at ${sl} to limit risk ({rr}:1 RR). Maximum allocation {size}% of trading capital. Setup invalid if price breaks above SL."
+  trade_setup: "ENTRY: ${entry} | SL: ${sl} | TP1: ${tp1} (exit 40%) | TP2: ${tp2} (exit 40%) | TP3: ${tp3} (exit 20%). Position size: {size}% of capital."
+  market_context: "{trend} market conditions support bearish bias. {volume} volume confirms selling pressure. Monitor support levels for potential bounce."
+  disclaimer: "Cryptocurrency trading carries high risk. This analysis is not investment advice. Do your own research and manage risk wisely."
+
+# Hold/Neutral Templates
+id_hold:
+  executive_summary: "{symbol} tidak menunjukkan setup trading yang jelas saat ini. Market sedang konsolidasi dengan confidence rendah ({confidence}%)."
+  technical_analysis: "Price action {symbol} sedang sideways tanpa pola yang definitif. RSI {rsi} berada di zona netral. Volume {volume} tidak menunjukkan partisipasi yang kuat."
+  risk_assessment: "Tidak ada setup trading yang memenuhi kriteria risk/reward saat ini. Tunggu konfirmasi breakout atau breakdown dari range konsolidasi."
+  trade_setup: "HOLD - Tidak ada entry yang direkomendasikan. Monitor level ${entry} untuk potential breakout/breakdown."
+  market_context: "Market {trend} dengan volatilitas rendah. Tunggu catalyst atau volume spike untuk arah yang lebih jelas."
+  disclaimer: "Patience adalah kunci dalam trading. Tidak semua kondisi market layak untuk di-trade."
+
+en_hold:
+  executive_summary: "{symbol} shows no clear trading setup currently. Market consolidating with low confidence ({confidence}%)."
+  technical_analysis: "{symbol} price action is sideways without definitive patterns. RSI {rsi} in neutral zone. {volume} volume shows no strong participation."
+  risk_assessment: "No trading setup meets risk/reward criteria currently. Wait for confirmed breakout or breakdown from consolidation range."
+  trade_setup: "HOLD - No entry recommended. Monitor ${entry} level for potential breakout/breakdown."
+  market_context: "{trend} market with low volatility. Wait for catalyst or volume spike for clearer direction."
+  disclaimer: "Patience is key in trading. Not all market conditions are suitable for trading."
