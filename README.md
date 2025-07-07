@@ -30,7 +30,12 @@ Advanced cryptocurrency trading signal detection system leveraging Smart Money C
 - System health monitoring
 - Dark theme Bootstrap 5 UI
 
-## Installation
+### Installation
+
+```bash
+git clone https://github.com/ricozary87/crypto-analysis-dashboard.git
+cd crypto-analysis-dashboard
+pip install -r requirements.txt
 
 ### Prerequisites
 - Python 3.11+
@@ -42,6 +47,8 @@ Advanced cryptocurrency trading signal detection system leveraging Smart Money C
 ```bash
 # Database
 DATABASE_URL=postgresql://user:pass@host:port/db
+- `OPENAI_API_KEY` - Your OpenAI API key
+- `OKX_API_KEY`, `OKX_API_SECRET`, `OKX_PASSPHRASE`
 
 # OKX Exchange API
 OKX_API_KEY=your_api_key
@@ -64,9 +71,10 @@ MAIL_PASSWORD=your_password
 # Install dependencies (handled automatically by Replit)
 # Dependencies are managed via packager_tool in pyproject.toml
 
-# Start the application
-gunicorn --bind 0.0.0.0:5000 --reuse-port --reload main:app
-```
+## Running Application
+
+```bash
+gunicorn main:app --bind 0.0.0.0:8000
 
 ## Usage
 
