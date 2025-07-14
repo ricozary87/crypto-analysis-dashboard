@@ -57130,3 +57130,81 @@ NameError: name 'Config' is not defined
 2025-07-07 10:21:39,789 - orchestrator - INFO - Symbols: ['BTC-USDT', 'ETH-USDT', 'SOL-USDT', 'TIA-USDT', 'RENDER-USDT']
 2025-07-07 10:21:39,790 - orchestrator - INFO - Timeframes: ['15m', '1H', '4H']
 2025-07-07 10:21:39,790 - orchestrator - INFO - Signal confidence threshold: 0.3
+2025-07-14 16:26:45,492 - engineio.server - INFO - Server initialized for threading.
+2025-07-14 16:26:45,493 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-14 16:26:45,495 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-14 16:26:45,495 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-14 16:26:45,495 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-14 16:26:53,279 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-14 16:26:53,279 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-14 16:26:53,279 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-14 16:30:02,462 - engineio.server - INFO - Server initialized for threading.
+2025-07-14 16:30:02,463 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-14 16:30:02,464 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-14 16:30:02,465 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-14 16:30:02,465 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-14 16:30:08,031 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-14 16:30:08,032 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-14 16:30:08,032 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-14 16:30:48,930 - engineio.server - INFO - Server initialized for threading.
+2025-07-14 16:30:48,931 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-14 16:30:48,932 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-14 16:30:48,933 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-14 16:30:48,933 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-14 16:30:54,551 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-14 16:31:02,281 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-14 16:31:02,282 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-14 16:31:02,282 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-14 16:31:03,456 - engineio.server - INFO - Server initialized for threading.
+2025-07-14 16:31:03,456 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-14 16:31:03,458 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-14 16:31:03,458 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-14 16:31:03,458 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-14 16:31:09,092 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-14 16:31:09,106 - app - ERROR - Exception on / [GET]
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/routes.py", line 17, in index
+    return render_template('index.html')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/environment.py", line 1087, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/environment.py", line 1016, in get_template
+    return self._load_template(name, globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/environment.py", line 975, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/loaders.py", line 126, in load
+    source, filename, uptodate = self.get_source(environment, name)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: index.html
+2025-07-14 16:32:54,965 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-14 16:32:54,966 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-14 16:32:54,966 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-14 16:32:56,310 - engineio.server - INFO - Server initialized for threading.
+2025-07-14 16:32:56,311 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-14 16:32:56,312 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-14 16:32:56,312 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-14 16:32:56,313 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-14 16:33:04,348 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.

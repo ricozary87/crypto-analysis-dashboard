@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0d1117;
+            color: #e6edf3;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar {
+            background-color: #161b22;
+            border-bottom: 1px solid #30363d;
+        }
+        .card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+        }
+        .btn-primary {
+            background-color: #238636;
+            border-color: #238636;
+        }
+        .btn-primary:hover {
+            background-color: #2ea043;
+            border-color: #2ea043;
+        }
+        .text-primary {
+            color: #58a6ff !important;
+        }
+        .table-dark {
+            background-color: #161b22;
+        }
+        .alert-dark {
+            background-color: #161b22;
+            border-color: #30363d;
+            color: #e6edf3;
+        }
+        .search-container {
+            max-width: 600px;
+        }
+        .coin-result {
+            background-color: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .signal-badge {
+            font-size: 0.8rem;
+            padding: 4px 8px;
+        }
+        .loading {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand text-white" href="/">
+                <i class="fas fa-chart-line me-2"></i>
+                Trading Dashboard
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link text-white" href="/">Home</a>
+                <a class="nav-link text-white" href="/professional-dashboard">Professional</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-4">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="mb-4">
+                    <i class="fas fa-search me-2"></i>
+                    Cryptocurrency Analysis
+                </h2>
+            </div>
+        </div>
+
+        <!-- Search Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="search-container mx-auto">
+                            <div class="input-group">
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="coinSearch" 
+                                       placeholder="Enter cryptocurrency symbol (BTC, ETH, SOL, TIA, RENDER)"
+                                       value="">
+                                <button class="btn btn-primary" id="searchBtn">
+                                    <i class="fas fa-search"></i>
+                                    Analyze
+                                </button>
+                            </div>
+                            <div class="mt-2">
+                                <small class="text-muted">
+                                    Supported: BTC, ETH, SOL, TIA, RENDER
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div class="row loading" id="loadingDiv">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <div class="mt-3">
+                            <h5>Analyzing Market Data...</h5>
+                            <p class="text-muted">Fetching real-time data and running SMC analysis</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="results"></div>
+
+        <!-- Quick Actions -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="mb-3">Quick Analysis</h5>
+                        <div class="d-flex gap-2 flex-wrap">
+                            <button class="btn btn-outline-primary btn-sm" onclick="analyzeSymbol('BTC')">
+                                <i class="fab fa-bitcoin"></i> BTC
+                            </button>
+                            <button class="btn btn-outline-primary btn-sm" onclick="analyzeSymbol('ETH')">
+                                <i class="fab fa-ethereum"></i> ETH
+                            </button>
+                            <button class="btn btn-outline-primary btn-sm" onclick="analyzeSymbol('SOL')">
+                                <i class="fas fa-sun"></i> SOL
+                            </button>
+                            <button class="btn btn-outline-primary btn-sm" onclick="analyzeSymbol('TIA')">
+                                <i class="fas fa-star"></i> TIA
+                            </button>
+                            <button class="btn btn-outline-primary btn-sm" onclick="analyzeSymbol('RENDER')">
+                                <i class="fas fa-cube"></i> RENDER
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Status -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="mb-3">
+                            <i class="fas fa-info-circle me-2"></i>
+                            System Status
+                        </h6>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="d-flex align-items-center">
+                                    <div class="badge bg-success me-2">●</div>
+                                    <small>OKX API Connection</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="d-flex align-items-center">
+                                    <div class="badge bg-success me-2">●</div>
+                                    <small>SMC Analysis Engine</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="d-flex align-items-center">
+                                    <div class="badge bg-success me-2">●</div>
+                                    <small>Database Connection</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Analysis function
+        async function analyzeSymbol(symbol) {
+            const loadingDiv = document.getElementById('loadingDiv');
+            const resultsDiv = document.getElementById('results');
+            
+            // Show loading
+            loadingDiv.style.display = 'block';
+            resultsDiv.innerHTML = '';
+            
+            try {
+                const response = await fetch(`/api/analyze/${symbol}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayResults(data.analysis);
+                } else {
+                    showError(data.error || 'Analysis failed');
+                }
+            } catch (error) {
+                showError('Failed to connect to analysis service');
+            } finally {
+                loadingDiv.style.display = 'none';
+            }
+        }
+
+        function displayResults(analysis) {
+            const resultsDiv = document.getElementById('results');
+            
+            const signalClass = analysis.signals.action === 'BUY' ? 'success' : 
+                               analysis.signals.action === 'SELL' ? 'danger' : 'secondary';
+            
+            resultsDiv.innerHTML = `
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-coins me-2"></i>
+                                        ${analysis.symbol} Analysis
+                                    </h5>
+                                    <span class="badge bg-${signalClass} signal-badge">
+                                        ${analysis.signals.action}
+                                    </span>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h6>Market Information</h6>
+                                        <ul class="list-unstyled">
+                                            <li><strong>Current Price:</strong> $${analysis.current_price.toFixed(2)}</li>
+                                            <li><strong>24h Change:</strong> ${analysis.price_change_24h.toFixed(2)}%</li>
+                                            <li><strong>Trend:</strong> ${analysis.trend}</li>
+                                            <li><strong>Volume:</strong> ${analysis.volume_status}</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6>Technical Indicators</h6>
+                                        <ul class="list-unstyled">
+                                            <li><strong>RSI:</strong> ${analysis.indicators.rsi.value.toFixed(1)}</li>
+                                            <li><strong>EMA Trend:</strong> ${analysis.indicators.ema.trend}</li>
+                                            <li><strong>MACD:</strong> ${analysis.indicators.macd.bullish ? 'Bullish' : 'Bearish'}</li>
+                                            <li><strong>Confidence:</strong> ${(analysis.signals.confidence * 100).toFixed(1)}%</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                ${analysis.signals.action !== 'HOLD' ? `
+                                <div class="mt-3">
+                                    <h6>Trading Levels</h6>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="text-center p-2 bg-primary bg-opacity-25 rounded">
+                                                <small class="text-muted">Entry</small><br>
+                                                <strong>$${analysis.signals.entry_price.toFixed(2)}</strong>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="text-center p-2 bg-danger bg-opacity-25 rounded">
+                                                <small class="text-muted">Stop Loss</small><br>
+                                                <strong>$${analysis.signals.stop_loss.toFixed(2)}</strong>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="text-center p-2 bg-success bg-opacity-25 rounded">
+                                                <small class="text-muted">Take Profit</small><br>
+                                                <strong>$${analysis.signals.take_profit.toFixed(2)}</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                ` : ''}
+                                
+                                <div class="mt-3">
+                                    <h6>Analysis Summary</h6>
+                                    <p class="text-muted">${analysis.summary}</p>
+                                    
+                                    <div class="mt-2">
+                                        <small class="text-muted">
+                                            <strong>Supporting Factors:</strong>
+                                            ${analysis.signals.reason.join(', ')}
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showError(message) {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = `
+                <div class="row">
+                    <div class="col-12">
+                        <div class="alert alert-danger">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            ${message}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Event listeners
+        document.getElementById('searchBtn').addEventListener('click', function() {
+            const symbol = document.getElementById('coinSearch').value.trim().toUpperCase();
+            if (symbol) {
+                analyzeSymbol(symbol);
+            }
+        });
+
+        document.getElementById('coinSearch').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const symbol = this.value.trim().toUpperCase();
+                if (symbol) {
+                    analyzeSymbol(symbol);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
