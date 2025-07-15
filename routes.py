@@ -573,7 +573,7 @@ def get_orderbook_data(symbol):
         return jsonify({
             'success': True,
             'symbol': symbol.upper(),
-            'timestamp': orderbook.get('ts', None),
+            'timestamp': datetime.fromtimestamp(float(orderbook.get('ts', 0)) / 1000).replace(microsecond=0).isoformat() if orderbook.get('ts') else datetime.now().replace(microsecond=0).isoformat(),
             'bids': bids,
             'asks': asks,
             'spread': {
@@ -647,7 +647,7 @@ def get_depth_chart_data(symbol):
         return jsonify({
             'success': True,
             'symbol': symbol.upper(),
-            'timestamp': orderbook.get('ts', None),
+            'timestamp': datetime.fromtimestamp(float(orderbook.get('ts', 0)) / 1000).replace(microsecond=0).isoformat() if orderbook.get('ts') else datetime.now().replace(microsecond=0).isoformat(),
             'depth_data': {
                 'bids': bid_depths,
                 'asks': ask_depths,
@@ -750,7 +750,7 @@ def get_enhanced_technical_indicators(symbol):
             'indicators': results,
             'signals': signals,
             'cache_info': cache_info,
-            'timestamp': datetime.now().isoformat()
+            'timestamp': datetime.now().replace(microsecond=0).isoformat()
         })
         
     except Exception as e:
@@ -1706,7 +1706,7 @@ def get_enhanced_ai_narrative(symbol):
             'language': language,
             'quick_mode': quick_mode,
             'narrative': narrative,
-            'generated_at': datetime.now().isoformat(),
+            'generated_at': datetime.now().replace(microsecond=0).isoformat(),
             'current_price': analysis_data.get('current_price', 0)
         })
         
@@ -1726,7 +1726,7 @@ def get_enhanced_ai_stats():
         return jsonify({
             'success': True,
             'stats': stats,
-            'retrieved_at': datetime.now().isoformat()
+            'retrieved_at': datetime.now().replace(microsecond=0).isoformat()
         })
         
     except Exception as e:
@@ -1745,7 +1745,7 @@ def test_enhanced_ai_connection():
         return jsonify({
             'success': True,
             'connection_test': connection_status,
-            'tested_at': datetime.now().isoformat()
+            'tested_at': datetime.now().replace(microsecond=0).isoformat()
         })
         
     except Exception as e:
@@ -1919,7 +1919,7 @@ def get_enhanced_chart_data(symbol):
             'smc_levels': smc_levels,
             'current_price': float(df['close'].iloc[-1]),
             'price_change_24h': analysis.get('price_change_24h', 0),
-            'generated_at': datetime.now().isoformat()
+            'generated_at': datetime.now().replace(microsecond=0).isoformat()
         })
         
     except Exception as e:
@@ -2002,7 +2002,7 @@ def get_volume_profile_data(symbol):
                 'value_area_low': value_area_low,
                 'total_volume': total_volume
             },
-            'generated_at': datetime.now().isoformat()
+            'generated_at': datetime.now().replace(microsecond=0).isoformat()
         })
         
     except Exception as e:

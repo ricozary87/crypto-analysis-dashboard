@@ -33,7 +33,7 @@ class MarketSnapshot:
     """Comprehensive market snapshot data structure"""
     symbol: str
     timeframe: str
-    timestamp: datetime
+    timestamp: str
     snapshot_type: SnapshotType
     
     # Price data
@@ -159,7 +159,7 @@ class SnapshotGenerator:
             snapshot = MarketSnapshot(
                 symbol=symbol,
                 timeframe=timeframe,
-                timestamp=datetime.now(timezone.utc),
+                timestamp=datetime.now().replace(microsecond=0).isoformat(),
                 snapshot_type=snapshot_type,
                 
                 # Price data

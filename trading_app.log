@@ -60553,3 +60553,337 @@ jinja2.exceptions.TemplateNotFound: analysis_history.html
 2025-07-15 07:29:20,372 - apscheduler.scheduler - INFO - Scheduler started
 2025-07-15 07:29:20,372 - apscheduler.scheduler - DEBUG - Looking for jobs to run
 2025-07-15 07:29:20,372 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 08:32:59,737 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:32:59,789 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:32:59,793 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:32:59,946 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:32:59,952 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:33:00,081 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:33:00,093 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:33:00,094 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:33:00,220 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:33:00,227 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:33:00,279 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:33:00,295 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:33:00,297 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:33:00,425 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:33:00,430 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:33:00,574 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 38 indicators
+2025-07-15 08:33:00,575 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:33:00,577 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:33:00,707 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:33:00,713 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:33:00,723 - core.indicator_calculator - ERROR - Error calculating indicator kama: KAMA calculation error: module 'ta.trend' has no attribute 'KAMAIndicator'
+2025-07-15 08:33:00,825 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:33:00,836 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:33:00,843 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-15 08:33:00,843 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 08:33:00,844 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:33:00,856 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:33:00,857 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 08:33:00,857 - core.snapshot_generator - INFO - Generating comprehensive snapshot for BTC-USDT (1H)
+2025-07-15 08:33:00,858 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:33:01,002 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:33:01,011 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:33:01,092 - core.snapshot_generator - ERROR - Error generating AI narrative: 'AIEngine' object has no attribute 'generate_comprehensive_analysis'
+2025-07-15 08:33:02,883 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'quick_mode': False, 'symbol': 'BTC-USDT', 'timeframe': '1H', 'ai_narrative': 'Analysis tidak tersedia', 'session_id': 'api_request', 'confluence_sum ... (1669 characters truncated) ... rength': 100.0, 'recent_signals': 5, 'order_blocks_count': 6}, 'risk_assessment': {'risk_score': 50, 'risk_level': 'MEDIUM', 'volatility': 'MEDIUM'}}}]]
+2025-07-15 08:33:02,883 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.24s
+2025-07-15 08:33:02,888 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:33:02,889 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:33:03,059 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=BTC-USDT&sz=20 HTTP/1.1" 200 None
+2025-07-15 08:33:03,066 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:33:03,067 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:33:03,211 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=BTC-USDT&sz=50 HTTP/1.1" 200 None
+2025-07-15 08:33:03,219 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:33:03,235 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:33:03,238 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:33:03,380 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:33:03,385 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:33:04,291 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:33:04,302 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:33:04,305 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:33:04,446 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:33:04,451 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:33:05,406 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:33:05,417 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:33:05,419 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:33:05,570 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:33:05,575 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:33:19,931 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:33:19,944 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:33:19,946 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:33:20,074 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:33:20,079 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:33:20,991 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:33:21,002 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:33:21,003 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:33:21,156 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:33:21,161 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:33:35,994 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:33:36,003 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:33:36,005 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:33:36,135 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:33:36,140 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:33:38,260 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:33:38,269 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:33:38,271 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:33:38,402 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:33:38,407 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:34:36,324 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:34:36,337 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:34:36,339 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:34:36,463 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:34:36,468 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:34:36,578 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:34:36,587 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:34:36,588 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:34:36,731 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:34:36,736 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:34:36,774 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:34:36,784 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:34:36,785 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:34:36,971 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:34:36,975 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:34:37,069 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:34:37,071 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:34:37,206 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:34:37,211 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:34:37,223 - core.indicator_calculator - ERROR - Error calculating indicator kama: KAMA calculation error: module 'ta.trend' has no attribute 'KAMAIndicator'
+2025-07-15 08:34:37,309 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:34:37,320 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:34:37,321 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 08:34:37,321 - core.snapshot_generator - INFO - Generating comprehensive snapshot for BTC-USDT (1H)
+2025-07-15 08:34:37,322 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:34:37,456 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:34:37,461 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:34:37,581 - core.snapshot_generator - ERROR - Error generating AI narrative: 'AIEngine' object has no attribute 'generate_comprehensive_analysis'
+2025-07-15 08:34:39,376 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'quick_mode': False, 'symbol': 'BTC-USDT', 'timeframe': '1H', 'ai_narrative': 'Analysis tidak tersedia', 'session_id': 'api_request', 'confluence_sum ... (1672 characters truncated) ... rength': 100.0, 'recent_signals': 5, 'order_blocks_count': 6}, 'risk_assessment': {'risk_score': 50, 'risk_level': 'MEDIUM', 'volatility': 'MEDIUM'}}}]]
+2025-07-15 08:34:39,376 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.26s
+2025-07-15 08:34:39,382 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:34:39,383 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:34:39,564 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=BTC-USDT&sz=20 HTTP/1.1" 200 None
+2025-07-15 08:34:39,572 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:34:39,573 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:34:39,761 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=BTC-USDT&sz=50 HTTP/1.1" 200 None
+2025-07-15 08:34:39,771 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:34:39,782 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:34:39,783 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:34:39,915 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:34:39,922 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:35:16,366 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 08:35:16,366 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 08:35:16,367 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 08:35:18,409 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 08:35:18,410 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 08:35:18,414 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 08:35:18,414 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 08:35:18,415 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 08:36:14,389 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 08:36:14,390 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 08:36:14,390 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 08:36:15,205 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 08:36:15,206 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 08:36:15,208 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 08:36:15,208 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 08:36:15,220 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 08:36:33,330 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 08:36:33,330 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 08:36:33,331 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 08:36:34,154 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 08:36:34,158 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 08:36:34,159 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 08:36:34,161 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 08:36:34,162 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 08:38:05,130 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 08:38:05,130 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 08:38:05,130 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 08:38:06,369 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 08:38:06,370 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 08:38:06,371 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 08:38:06,372 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 08:38:06,372 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 08:38:59,922 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 08:38:59,922 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 08:38:59,922 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 08:39:00,647 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 08:39:00,648 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 08:39:00,650 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 08:39:00,652 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 08:39:00,672 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 08:39:24,860 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:39:24,896 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:39:24,900 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:39:25,031 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:39:25,037 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:39:25,145 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:39:25,153 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:39:25,155 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:39:25,293 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:39:25,299 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:39:25,342 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:39:25,353 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:39:25,354 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:39:25,517 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:39:25,522 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:39:25,662 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 38 indicators
+2025-07-15 08:39:25,663 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:39:25,664 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:39:25,823 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:39:25,829 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:39:25,843 - core.indicator_calculator - ERROR - Error calculating indicator kama: KAMA calculation error: module 'ta.trend' has no attribute 'KAMAIndicator'
+2025-07-15 08:39:25,990 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:39:26,011 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:39:26,025 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-15 08:39:26,025 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 08:39:26,026 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:39:26,036 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:39:26,037 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 08:39:26,037 - core.snapshot_generator - INFO - Generating comprehensive snapshot for BTC-USDT (1H)
+2025-07-15 08:39:26,038 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:39:26,295 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:39:26,300 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:39:26,398 - core.snapshot_generator - ERROR - Error generating AI narrative: 'AIEngine' object has no attribute 'generate_comprehensive_analysis'
+2025-07-15 08:39:26,663 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'timeframe': '1H', 'symbol': 'BTC-USDT', 'confidence': 0.0, 'snapshot_data': {'symbol': 'BTC-USDT', 'timeframe': '1H', 'timestamp': datetime.datetime ... (1674 characters truncated) ...  'MEDIUM'}}, 'confluence_summary': {'technical_score': 0.0, 'smc_patterns': 0, 'price_action_patterns': 0}, 'ai_narrative': 'Analysis tidak tersedia'}]]
+2025-07-15 08:39:26,664 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.36s
+2025-07-15 08:39:26,673 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:39:26,675 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:39:26,809 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=BTC-USDT&sz=20 HTTP/1.1" 200 None
+2025-07-15 08:39:26,816 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:39:26,818 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:39:26,959 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=BTC-USDT&sz=50 HTTP/1.1" 200 None
+2025-07-15 08:39:26,971 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:39:26,992 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:39:26,993 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:39:27,141 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:39:27,147 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:40:14,610 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 08:40:14,610 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 08:40:14,610 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 08:40:15,325 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 08:40:15,326 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 08:40:15,327 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 08:40:15,327 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 08:40:15,336 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 08:40:21,918 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 08:40:21,919 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 08:40:21,922 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 08:40:21,927 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 08:40:21,934 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 08:40:35,050 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:40:35,071 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:40:35,074 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:40:35,207 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:40:35,213 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:40:35,313 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:40:35,322 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:40:35,323 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:40:35,481 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:40:35,486 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:40:35,525 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:40:35,534 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:40:35,536 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:40:35,695 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:40:35,700 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:40:35,814 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 38 indicators
+2025-07-15 08:40:35,814 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:40:35,815 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:40:35,962 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:40:35,967 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:40:35,975 - core.indicator_calculator - ERROR - Error calculating indicator kama: KAMA calculation error: module 'ta.trend' has no attribute 'KAMAIndicator'
+2025-07-15 08:40:36,066 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:40:36,077 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:40:36,087 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-15 08:40:36,087 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 08:40:36,087 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:40:36,097 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:40:36,097 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 08:40:36,098 - core.snapshot_generator - INFO - Generating comprehensive snapshot for BTC-USDT (1H)
+2025-07-15 08:40:36,099 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:40:36,228 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:40:36,233 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:40:36,316 - core.snapshot_generator - ERROR - Error generating AI narrative: 'AIEngine' object has no attribute 'generate_comprehensive_analysis'
+2025-07-15 08:40:36,579 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type SnapshotType is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'timeframe': '1H', 'symbol': 'BTC-USDT', 'ai_narrative': 'Analysis tidak tersedia', 'session_id': 'api_request', 'layer_analysis': {'technical_indica ... (1622 characters truncated) ... re': 0.0, 'risk_assessment': {'risk_score': 50, 'risk_level': 'MEDIUM', 'volatility': 'MEDIUM'}, 'generation_time': 0.219568, 'data_quality': 'GOOD'}}]]
+2025-07-15 08:40:36,580 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.22s
+2025-07-15 08:40:36,586 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:40:36,587 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:40:36,854 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=BTC-USDT&sz=20 HTTP/1.1" 200 None
+2025-07-15 08:40:36,861 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:40:36,862 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:40:37,003 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=BTC-USDT&sz=50 HTTP/1.1" 200 None
+2025-07-15 08:40:37,012 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:40:37,022 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:40:37,023 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:40:37,166 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:40:37,170 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:40:55,241 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 08:40:55,242 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 08:40:55,242 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 08:40:55,966 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 08:40:55,966 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 08:40:55,968 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 08:40:55,968 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 08:40:55,969 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 08:41:03,585 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:41:03,601 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:41:03,604 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:41:03,740 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:41:03,746 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:41:03,844 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:41:03,856 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:41:03,857 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:41:03,979 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:41:03,984 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:41:04,032 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:41:04,041 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:41:04,043 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:41:04,198 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:41:04,203 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:41:04,311 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 38 indicators
+2025-07-15 08:41:04,311 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:41:04,313 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:41:04,435 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:41:04,440 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:41:04,450 - core.indicator_calculator - ERROR - Error calculating indicator kama: KAMA calculation error: module 'ta.trend' has no attribute 'KAMAIndicator'
+2025-07-15 08:41:04,543 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:41:04,553 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:41:04,564 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-15 08:41:04,564 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 08:41:04,564 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:41:04,572 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:41:04,573 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 08:41:04,573 - core.snapshot_generator - INFO - Generating comprehensive snapshot for BTC-USDT (1H)
+2025-07-15 08:41:04,574 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:41:04,699 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:41:04,705 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:41:04,792 - core.snapshot_generator - ERROR - Error generating AI narrative: 'AIEngine' object has no attribute 'generate_comprehensive_analysis'
+2025-07-15 08:41:05,054 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type SnapshotType is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'timeframe': '1H', 'symbol': 'BTC-USDT', 'ai_narrative': 'Analysis tidak tersedia', 'session_id': 'api_request', 'layer_analysis': {'technical_indica ... (1616 characters truncated) ... re': 0.0, 'risk_assessment': {'risk_score': 50, 'risk_level': 'MEDIUM', 'volatility': 'MEDIUM'}, 'generation_time': 0.219183, 'data_quality': 'GOOD'}}]]
+2025-07-15 08:41:05,055 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.22s
+2025-07-15 08:41:05,060 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:41:05,061 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:41:05,212 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=BTC-USDT&sz=20 HTTP/1.1" 200 None
+2025-07-15 08:41:05,218 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:41:05,219 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:41:05,353 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=BTC-USDT&sz=50 HTTP/1.1" 200 None
+2025-07-15 08:41:05,361 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:41:05,372 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:41:05,374 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 08:41:05,502 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 08:41:05,507 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 08:42:07,586 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 08:42:07,586 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 08:42:07,586 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 08:42:08,841 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 08:42:08,841 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 08:42:08,843 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 08:42:08,843 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 08:42:08,843 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added

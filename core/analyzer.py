@@ -42,7 +42,7 @@ class TechnicalAnalyzer:
             analysis = {
                 'symbol': symbol,
                 'timeframe': timeframe,
-                'timestamp': df['timestamp'].iloc[-1] if 'timestamp' in df.columns else None,
+                'timestamp': df['timestamp'].iloc[-1].replace(microsecond=0).isoformat() if 'timestamp' in df.columns and hasattr(df['timestamp'].iloc[-1], 'isoformat') else datetime.now().replace(microsecond=0).isoformat(),
                 'current_price': float(df['close'].iloc[-1]),
                 'price_change_24h': self._calculate_price_change(df),
                 'indicators': indicators,
