@@ -59909,3 +59909,19 @@ jinja2.exceptions.TemplateNotFound: analysis_history.html
 2025-07-15 05:44:34,947 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
 2025-07-15 05:44:34,952 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
 2025-07-15 05:44:34,967 - core.enhanced_ai_engine - WARNING - OpenAI client not available. Using enhanced fallback narrative.
+2025-07-15 05:57:51,232 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 05:57:51,232 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:57:51,232 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:57:52,281 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 05:57:52,282 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 05:57:52,283 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 05:57:52,284 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:57:52,284 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:58:33,927 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 05:58:33,927 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:58:33,927 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:58:35,082 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 05:58:35,083 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 05:58:35,084 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 05:58:35,085 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:58:35,085 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added

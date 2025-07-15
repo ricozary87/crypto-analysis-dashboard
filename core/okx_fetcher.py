@@ -5,9 +5,13 @@ OKX API data fetcher with rate limiting and caching
 import requests
 import pandas as pd
 import logging
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Optional, Dict, Any
 import time
+import os
+import hmac
+import hashlib
+import base64
 
 logger = logging.getLogger(__name__)
 
@@ -21,6 +25,19 @@ class OKXAPIManager:
         self.cache_ttl = 300  # 5 minutes
         self.last_request_time = 0
         self.min_request_interval = 0.05  # 50ms between requests
+        
+        # Load API credentials
+        self.api_key = os.environ.get('OKX_API_KEY')
+        self.secret_key = os.environ.get('OKX_SECRET_KEY')
+        self.passphrase = os.environ.get('OKX_PASSPHRASE')
+        
+        # Check if credentials are available for authenticated requests
+        self.has_credentials = all([self.api_key, self.secret_key, self.passphrase])
+        
+        if self.has_credentials:
+            logger.info("OKX API initialized with authentication credentials")
+        else:
+            logger.warning("OKX API initialized without authentication credentials (public endpoints only)")
         
     def get_candles(self, symbol: str, timeframe: str = '1H', limit: int = 100) -> Optional[pd.DataFrame]:
         """Get candlestick data from OKX API"""
@@ -180,3 +197,137 @@ class OKXAPIManager:
         except Exception as e:
             logger.error(f"Error fetching orderbook for {symbol}: {e}")
             return None
+    
+    def _generate_signature(self, method: str, path: str, body: str = '') -> tuple:
+        """Generate OKX API signature for authenticated requests"""
+        # Generate ISO timestamp
+        timestamp = datetime.now(timezone.utc).isoformat(timespec='milliseconds').replace('+00:00', 'Z')
+        
+        # Create message to sign
+        message = timestamp + method + path + body
+        
+        # Create signature
+        mac = hmac.new(
+            bytes(self.secret_key, encoding='utf8'),
+            bytes(message, encoding='utf-8'),
+            digestmod=hashlib.sha256
+        )
+        signature = base64.b64encode(mac.digest()).decode('utf-8')
+        
+        return timestamp, signature
+    
+    def _get_auth_headers(self, method: str, path: str, body: str = '') -> Dict[str, str]:
+        """Generate authentication headers for OKX API"""
+        if not self.has_credentials:
+            return {}
+        
+        timestamp, signature = self._generate_signature(method, path, body)
+        
+        return {
+            'OK-ACCESS-KEY': self.api_key,
+            'OK-ACCESS-SIGN': signature,
+            'OK-ACCESS-TIMESTAMP': timestamp,
+            'OK-ACCESS-PASSPHRASE': self.passphrase,
+            'Content-Type': 'application/json'
+        }
+    
+    def get_account_balance(self) -> Optional[Dict[str, Any]]:
+        """Get account balance (authenticated endpoint)"""
+        if not self.has_credentials:
+            logger.warning("Cannot get account balance: No credentials provided")
+            return None
+            
+        try:
+            self._rate_limit()
+            
+            method = 'GET'
+            path = '/api/v5/account/balance'
+            headers = self._get_auth_headers(method, path)
+            
+            url = f"{self.base_url}{path}"
+            response = self.session.get(url, headers=headers, timeout=10)
+            response.raise_for_status()
+            
+            data = response.json()
+            
+            if data.get('code') == '0' and data.get('data'):
+                return data['data'][0]
+            else:
+                logger.error(f"Account balance API error: {data}")
+                return None
+                
+        except Exception as e:
+            logger.error(f"Error fetching account balance: {e}")
+            return None
+    
+    def get_account_config(self) -> Optional[Dict[str, Any]]:
+        """Get account configuration (authenticated endpoint)"""
+        if not self.has_credentials:
+            logger.warning("Cannot get account config: No credentials provided")
+            return None
+            
+        try:
+            self._rate_limit()
+            
+            method = 'GET'
+            path = '/api/v5/account/config'
+            headers = self._get_auth_headers(method, path)
+            
+            url = f"{self.base_url}{path}"
+            response = self.session.get(url, headers=headers, timeout=10)
+            response.raise_for_status()
+            
+            data = response.json()
+            
+            if data.get('code') == '0' and data.get('data'):
+                return data['data'][0]
+            else:
+                logger.error(f"Account config API error: {data}")
+                return None
+                
+        except Exception as e:
+            logger.error(f"Error fetching account config: {e}")
+            return None
+    
+    def get_positions(self) -> Optional[list]:
+        """Get account positions (authenticated endpoint)"""
+        if not self.has_credentials:
+            logger.warning("Cannot get positions: No credentials provided")
+            return None
+            
+        try:
+            self._rate_limit()
+            
+            method = 'GET'
+            path = '/api/v5/account/positions'
+            headers = self._get_auth_headers(method, path)
+            
+            url = f"{self.base_url}{path}"
+            response = self.session.get(url, headers=headers, timeout=10)
+            response.raise_for_status()
+            
+            data = response.json()
+            
+            if data.get('code') == '0':
+                return data.get('data', [])
+            else:
+                logger.error(f"Positions API error: {data}")
+                return None
+                
+        except Exception as e:
+            logger.error(f"Error fetching positions: {e}")
+            return None
+    
+    def test_authentication(self) -> bool:
+        """Test if authentication is working"""
+        if not self.has_credentials:
+            logger.warning("Cannot test authentication: No credentials provided")
+            return False
+            
+        try:
+            config = self.get_account_config()
+            return config is not None
+            
+        except Exception as e:
+            logger.error(f"Authentication test failed: {e}")
+            return False
