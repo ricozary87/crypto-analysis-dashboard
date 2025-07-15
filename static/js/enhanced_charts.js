@@ -106,7 +106,7 @@ class EnhancedChartManager {
         
         // Main candlestick trace
         const candlestickTrace = {
-            x: limitedData.map(d => d.timestamp),
+            x: limitedData.map(d => formatTimestamp(d.timestamp)),
             close: limitedData.map(d => d.close),
             decreasing: {line: {color: this.colors.bearish}},
             high: limitedData.map(d => d.high),
@@ -124,7 +124,7 @@ class EnhancedChartManager {
         // Volume trace (if enabled)
         if (config.showVolume) {
             const volumeTrace = {
-                x: limitedData.map(d => d.timestamp),
+                x: limitedData.map(d => formatTimestamp(d.timestamp)),
                 y: limitedData.map(d => d.volume),
                 type: 'bar',
                 name: 'Volume',
@@ -144,7 +144,7 @@ class EnhancedChartManager {
             
             if (ma20.length > 0) {
                 traces.push({
-                    x: limitedData.slice(-ma20.length).map(d => d.timestamp),
+                    x: limitedData.slice(-ma20.length).map(d => formatTimestamp(d.timestamp)),
                     y: ma20,
                     type: 'scatter',
                     mode: 'lines',
@@ -158,7 +158,7 @@ class EnhancedChartManager {
             
             if (ma50.length > 0) {
                 traces.push({
-                    x: limitedData.slice(-ma50.length).map(d => d.timestamp),
+                    x: limitedData.slice(-ma50.length).map(d => formatTimestamp(d.timestamp)),
                     y: ma50,
                     type: 'scatter',
                     mode: 'lines',
@@ -237,7 +237,7 @@ class EnhancedChartManager {
         // RSI trace
         if (indicators.rsi) {
             const rsiTrace = {
-                x: data.map(d => d.timestamp),
+                x: data.map(d => formatTimestamp(d.timestamp)),
                 y: indicators.rsi,
                 type: 'scatter',
                 mode: 'lines',
@@ -252,7 +252,7 @@ class EnhancedChartManager {
             
             // RSI overbought/oversold lines
             traces.push({
-                x: data.map(d => d.timestamp),
+                x: data.map(d => formatTimestamp(d.timestamp)),
                 y: Array(data.length).fill(70),
                 type: 'scatter',
                 mode: 'lines',
@@ -266,7 +266,7 @@ class EnhancedChartManager {
             });
             
             traces.push({
-                x: data.map(d => d.timestamp),
+                x: data.map(d => formatTimestamp(d.timestamp)),
                 y: Array(data.length).fill(30),
                 type: 'scatter',
                 mode: 'lines',
@@ -283,7 +283,7 @@ class EnhancedChartManager {
         // MACD trace
         if (indicators.macd) {
             const macdTrace = {
-                x: data.map(d => d.timestamp),
+                x: data.map(d => formatTimestamp(d.timestamp)),
                 y: indicators.macd.macd,
                 type: 'scatter',
                 mode: 'lines',
@@ -297,7 +297,7 @@ class EnhancedChartManager {
             traces.push(macdTrace);
             
             const signalTrace = {
-                x: data.map(d => d.timestamp),
+                x: data.map(d => formatTimestamp(d.timestamp)),
                 y: indicators.macd.signal,
                 type: 'scatter',
                 mode: 'lines',
@@ -311,7 +311,7 @@ class EnhancedChartManager {
             traces.push(signalTrace);
             
             const histogramTrace = {
-                x: data.map(d => d.timestamp),
+                x: data.map(d => formatTimestamp(d.timestamp)),
                 y: indicators.macd.histogram,
                 type: 'bar',
                 name: 'Histogram',
@@ -620,7 +620,7 @@ class EnhancedChartManager {
             const candlestickTrace = {
                 x: optimizedData.map(item => {
                     const timestamp = item.timestamp || item.time;
-                    return typeof timestamp === 'string' ? timestamp : new Date(timestamp).toISOString();
+                    return formatTimestamp(timestamp);
                 }),
                 open: optimizedData.map(item => parseFloat(item.open)),
                 high: optimizedData.map(item => parseFloat(item.high)),
@@ -642,7 +642,7 @@ class EnhancedChartManager {
 
             // Prepare volume data
             const volumeTrace = {
-                x: data.map(item => item.timestamp || item.time),
+                x: data.map(item => formatTimestamp(item.timestamp || item.time)),
                 y: data.map(item => item.volume),
                 type: 'bar',
                 name: 'Volume',
@@ -1051,12 +1051,58 @@ class EnhancedChartManager {
 // Initialize global chart manager
 window.enhancedChartManager = new EnhancedChartManager();
 
-// Helper function to format timestamp
+// Enhanced helper function to safely format timestamp
 function formatTimestamp(timestamp) {
-    if (typeof timestamp === 'number') {
-        return new Date(timestamp * 1000).toISOString();
+    try {
+        // Handle null/undefined
+        if (!timestamp) {
+            return new Date().toISOString();
+        }
+        
+        // Handle string timestamps
+        if (typeof timestamp === 'string') {
+            // Check if it's already a valid ISO string
+            if (timestamp.includes('T') && timestamp.includes('Z')) {
+                return timestamp;
+            }
+            // Try to parse as number
+            const numTimestamp = parseFloat(timestamp);
+            if (!isNaN(numTimestamp) && numTimestamp > 0) {
+                timestamp = numTimestamp;
+            } else {
+                console.warn(`Invalid timestamp string: ${timestamp}`);
+                return new Date().toISOString();
+            }
+        }
+        
+        // Handle number timestamps
+        if (typeof timestamp === 'number') {
+            // Filter out invalid small numbers
+            if (timestamp < 1000000000) {
+                console.warn(`Invalid timestamp number: ${timestamp}`);
+                return new Date().toISOString();
+            }
+            
+            // Handle both seconds and milliseconds
+            const date = timestamp > 10000000000 ? new Date(timestamp) : new Date(timestamp * 1000);
+            
+            // Validate the date
+            if (isNaN(date.getTime())) {
+                console.warn(`Invalid date created from timestamp: ${timestamp}`);
+                return new Date().toISOString();
+            }
+            
+            return date.toISOString();
+        }
+        
+        // Fallback for other types
+        console.warn(`Unexpected timestamp type: ${typeof timestamp}, value: ${timestamp}`);
+        return new Date().toISOString();
+        
+    } catch (error) {
+        console.error(`Error formatting timestamp: ${error}, timestamp: ${timestamp}`);
+        return new Date().toISOString();
     }
-    return timestamp;
 }
 
 // Export for use in other scripts
