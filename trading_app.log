@@ -58212,3 +58212,386 @@ jinja2.exceptions.TemplateNotFound: professional_dashboard.html
 2025-07-15 03:41:11,300 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
 2025-07-15 03:41:11,304 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
 2025-07-15 03:41:11,317 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:41:41,323 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:41:41,369 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:41:41,427 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:41:41,470 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:41:41,488 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:42:11,431 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:42:11,509 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:42:11,538 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:42:11,586 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:42:11,650 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:42:41,562 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:42:41,662 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:42:41,675 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:42:41,721 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:42:41,785 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:43:11,673 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:43:11,771 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:43:11,815 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:43:11,891 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:43:11,919 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:43:41,786 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:43:41,891 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:43:41,961 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:43:42,000 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:43:42,051 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:44:11,895 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:44:12,027 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:44:12,067 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:44:12,138 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:44:12,178 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:44:42,010 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:44:42,142 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:44:42,193 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:44:42,248 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:44:42,300 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:45:12,132 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:45:12,276 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:45:12,300 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:45:12,380 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:45:12,413 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:45:23,797 - app - ERROR - Exception on /analysis-history [GET]
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/routes.py", line 1679, in analysis_history_page
+    return render_template('analysis_history.html')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/environment.py", line 1087, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/environment.py", line 1016, in get_template
+    return self._load_template(name, globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/environment.py", line 975, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/loaders.py", line 126, in load
+    source, filename, uptodate = self.get_source(environment, name)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: analysis_history.html
+2025-07-15 03:45:23,816 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:45:23,817 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:45:23,956 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 03:45:23,960 - core.okx_fetcher - DEBUG - Fetched 100 candles for BTC-USDT
+2025-07-15 03:45:23,973 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:45:23,974 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:45:24,101 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 03:45:24,105 - core.okx_fetcher - DEBUG - Fetched 100 candles for ETH-USDT
+2025-07-15 03:45:24,116 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:45:24,117 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:45:24,254 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 03:45:24,258 - core.okx_fetcher - DEBUG - Fetched 100 candles for SOL-USDT
+2025-07-15 03:45:24,269 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:45:24,270 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:45:24,404 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=TIA-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 03:45:24,409 - core.okx_fetcher - DEBUG - Fetched 100 candles for TIA-USDT
+2025-07-15 03:45:24,419 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:45:24,420 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:45:24,547 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=RENDER-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 03:45:24,551 - core.okx_fetcher - DEBUG - Fetched 100 candles for RENDER-USDT
+2025-07-15 03:45:24,564 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:45:24,566 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:45:24,718 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 03:45:24,724 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 03:45:24,764 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:45:24,766 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:45:24,889 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 03:45:24,898 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 03:45:24,993 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:45:24,995 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:45:25,165 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 03:45:25,169 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 03:45:25,186 - core.enhanced_ai_engine - WARNING - OpenAI client not available. Using enhanced fallback narrative.
+2025-07-15 03:45:25,187 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:45:25,188 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:45:25,293 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:45:25,397 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:45:25,511 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:45:25,616 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:45:25,737 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:45:34,604 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 03:45:34,605 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 03:45:34,608 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 03:45:34,609 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 03:45:34,610 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 03:45:41,805 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:45:41,806 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 03:45:53,279 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:45:53,401 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:45:53,511 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:45:53,614 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:45:53,721 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:02,848 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:02,953 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:03,078 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:03,182 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:03,293 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:03,423 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:03,531 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:03,645 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:03,767 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:03,873 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:03,990 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:04,093 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:04,201 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:04,324 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:04,446 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:04,569 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:04,687 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:04,797 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:04,897 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:05,007 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:05,137 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:05,257 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:05,367 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:05,474 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:05,587 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:05,595 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:46:05,598 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:46:05,725 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 03:46:05,729 - core.okx_fetcher - DEBUG - Fetched 100 candles for BTC-USDT
+2025-07-15 03:46:05,745 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:46:05,746 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:46:05,909 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 03:46:05,914 - core.okx_fetcher - DEBUG - Fetched 100 candles for BTC-USDT
+2025-07-15 03:46:05,938 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:46:05,940 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:46:06,084 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 03:46:06,089 - core.okx_fetcher - DEBUG - Fetched 100 candles for BTC-USDT
+2025-07-15 03:46:06,108 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:46:06,110 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:46:06,254 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 03:46:06,259 - core.okx_fetcher - DEBUG - Fetched 100 candles for BTC-USDT
+2025-07-15 03:46:06,285 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:46:06,288 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:46:06,422 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 03:46:06,430 - core.okx_fetcher - DEBUG - Fetched 100 candles for BTC-USDT
+2025-07-15 03:46:06,447 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:46:06,449 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:46:06,581 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 03:46:06,587 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 03:46:06,623 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:46:06,624 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:46:06,777 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 03:46:06,783 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 03:46:06,824 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:46:06,828 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:46:06,951 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 03:46:06,958 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 03:46:07,006 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:46:07,010 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:46:07,143 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 03:46:07,152 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 03:46:07,193 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:46:07,197 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:46:07,334 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 03:46:07,339 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 03:46:07,515 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:07,624 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:07,733 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:07,853 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:07,961 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:08,071 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:08,175 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:08,283 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:08,393 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:08,509 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:08,614 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:08,724 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:08,829 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:08,951 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:09,070 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:09,179 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:09,285 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:09,430 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:09,552 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:09,671 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:09,779 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:09,901 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:10,028 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:10,163 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:10,269 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:10,378 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:10,485 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:10,604 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:10,709 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:10,832 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:10,957 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:11,063 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:11,172 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:11,298 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:11,404 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:11,523 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:11,634 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:11,739 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:11,841 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:11,951 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:12,070 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:12,186 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:12,298 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:12,420 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:12,522 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:12,633 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:12,742 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:12,848 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:12,954 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:13,058 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:13,160 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:13,268 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:13,385 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:13,505 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:13,610 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:13,716 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:13,822 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:13,927 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:14,048 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:14,222 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:14,323 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:14,432 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:14,540 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:14,656 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:14,763 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:14,876 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:14,992 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:15,095 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:15,199 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:15,310 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:15,416 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:15,523 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:15,630 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:15,732 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:15,838 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:15,963 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:16,066 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:16,191 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:16,319 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:16,425 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:16,545 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:16,664 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:16,768 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:16,881 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:16,986 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:17,092 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:17,203 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:17,303 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:17,410 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:17,529 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:17,634 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:17,743 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:17,849 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:17,957 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:18,080 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:18,190 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:18,295 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:18,509 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:18,627 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:18,731 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:46:19,612 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 03:46:19,614 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 03:46:19,617 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 03:46:19,619 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 03:46:19,619 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 03:48:23,638 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 03:48:23,638 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 03:48:23,638 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 03:48:24,493 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 03:48:24,493 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 03:48:24,495 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 03:48:24,495 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 03:48:24,501 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 03:48:32,823 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:48:32,823 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 03:48:43,855 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:48:43,867 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:48:43,903 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (2): www.okx.com:443
+2025-07-15 03:48:43,904 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (3): www.okx.com:443
+2025-07-15 03:48:43,906 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (4): www.okx.com:443
+2025-07-15 03:48:43,907 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (5): www.okx.com:443
+2025-07-15 03:48:43,908 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (6): www.okx.com:443
+2025-07-15 03:48:44,000 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:48:44,026 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:48:44,039 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:48:44,043 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:48:44,045 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:48:44,046 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:48:44,161 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:48:44,271 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:48:44,392 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:48:44,516 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:48:46,300 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:48:46,413 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:48:46,527 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:48:46,646 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:48:46,759 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:48:50,444 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 03:48:50,444 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 03:48:50,445 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 03:48:51,778 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 03:48:51,779 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 03:48:51,780 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 03:48:51,780 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 03:48:51,781 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 03:48:57,742 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:48:57,742 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 03:49:26,446 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:49:26,452 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:49:26,577 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 03:49:26,583 - core.okx_fetcher - DEBUG - Fetched 100 candles for BTC-USDT
+2025-07-15 03:49:26,611 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:49:26,614 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:49:26,737 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 03:49:26,742 - core.okx_fetcher - DEBUG - Fetched 100 candles for ETH-USDT
+2025-07-15 03:49:26,758 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:49:26,761 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:49:26,900 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 03:49:26,904 - core.okx_fetcher - DEBUG - Fetched 100 candles for SOL-USDT
+2025-07-15 03:49:26,916 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:49:26,917 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:49:27,054 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=TIA-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 03:49:27,060 - core.okx_fetcher - DEBUG - Fetched 100 candles for TIA-USDT
+2025-07-15 03:49:27,075 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:49:27,077 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:49:27,205 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=RENDER-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 03:49:27,209 - core.okx_fetcher - DEBUG - Fetched 100 candles for RENDER-USDT
+2025-07-15 03:49:27,226 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:49:27,354 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:49:27,484 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:49:27,602 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:49:27,730 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:49:27,933 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:49:27,935 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:49:27,936 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:49:27,937 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:49:27,938 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:49:28,058 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 03:49:28,064 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 03:49:28,099 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:49:28,101 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:49:28,221 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 03:49:28,226 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 03:49:31,748 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:49:31,864 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:49:31,984 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:49:32,099 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:49:32,237 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None

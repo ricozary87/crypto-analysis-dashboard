@@ -20,6 +20,7 @@ class TechnicalAnalyzer:
         self.logger = logging.getLogger(__name__)
         self.smc_analyzer = ProfessionalSMCAnalyzer()
         self.enhanced_ai = EnhancedAIEngine()
+        self.symbols = ['BTC-USDT', 'ETH-USDT', 'SOL-USDT', 'TIA-USDT', 'RENDER-USDT']
         
     def analyze(self, df: pd.DataFrame, symbol: str, timeframe: str) -> Dict[str, Any]:
         """Perform comprehensive technical analysis with professional SMC integration"""

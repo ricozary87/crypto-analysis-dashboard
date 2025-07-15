@@ -46,6 +46,35 @@ class EnhancedAIEngine:
         else:
             logger.warning("OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives")
     
+    def test_connection(self) -> Dict[str, Any]:
+        """Test connection to OpenAI API"""
+        try:
+            if self.openai_client:
+                # Simple test request
+                response = self.openai_client.chat.completions.create(
+                    model="gpt-4o-mini",
+                    messages=[{"role": "user", "content": "Test connection"}],
+                    max_tokens=10
+                )
+                return {
+                    'status': 'connected',
+                    'service': 'OpenAI GPT-4o',
+                    'test_successful': True
+                }
+            else:
+                return {
+                    'status': 'fallback_mode',
+                    'service': 'Enhanced Fallback Engine',
+                    'test_successful': True
+                }
+        except Exception as e:
+            return {
+                'status': 'error',
+                'service': 'OpenAI GPT-4o',
+                'test_successful': False,
+                'error': str(e)
+            }
+    
     def generate_enhanced_analysis(self, symbol: str, analysis_data: Dict[str, Any], 
                                   language: str = "indonesian", quick_mode: bool = False) -> str:
         """
