@@ -41,14 +41,26 @@ class PriceActionAnalyzer:
             Dictionary containing detected patterns and signals
         """
         
-        if df is None or len(df) < 3:
-            return {
-                'patterns_detected': [],
-                'signals': [],
-                'confidence': 0.0,
-                'trend_strength': 'weak',
-                'support_resistance': {}
-            }
+        # Validate and convert input data
+        if df is None:
+            return self._empty_analysis()
+            
+        # Convert list to DataFrame if needed
+        if isinstance(df, list):
+            try:
+                # Assume list of dicts with OHLCV data
+                df = pd.DataFrame(df)
+            except Exception as e:
+                logger.error(f"Failed to convert list to DataFrame: {e}")
+                return self._empty_analysis()
+        
+        # Ensure it's a DataFrame
+        if not isinstance(df, pd.DataFrame):
+            logger.error(f"Expected DataFrame, got {type(df)}")
+            return self._empty_analysis()
+        
+        if len(df) < 3:
+            return self._empty_analysis()
         
         try:
             # Ensure we have the required columns

@@ -64,6 +64,7 @@ class AdvancedIndicatorCalculator:
             'roc': self._calculate_roc,
             'momentum': self._calculate_momentum,
             'tsi': self._calculate_tsi,
+            'cci': self._calculate_cci,
             
             # Volume indicators
             'obv': self._calculate_obv,
@@ -493,6 +494,52 @@ class AdvancedIndicatorCalculator:
             )
         except Exception as e:
             raise Exception(f"MACD calculation error: {e}")
+    
+    def _calculate_cci(self, df: pd.DataFrame, period: int = 20) -> IndicatorResult:
+        """Commodity Channel Index"""
+        try:
+            # Calculate typical price
+            typical_price = (df['high'] + df['low'] + df['close']) / 3
+            
+            # Calculate moving average of typical price
+            sma = typical_price.rolling(window=period).mean()
+            
+            # Calculate mean absolute deviation
+            mad = typical_price.rolling(window=period).apply(
+                lambda x: np.mean(np.abs(x - np.mean(x))), raw=True
+            )
+            
+            # Calculate CCI
+            cci = (typical_price - sma) / (0.015 * mad)
+            
+            # Handle division by zero
+            cci = cci.fillna(0)
+            
+            current_cci = cci.iloc[-1]
+            
+            # Determine signal
+            if current_cci > 100:
+                signal_str = "SELL"
+                strength = min(abs(current_cci - 100) / 100, 1.0)
+            elif current_cci < -100:
+                signal_str = "BUY"
+                strength = min(abs(current_cci + 100) / 100, 1.0)
+            else:
+                signal_str = "NEUTRAL"
+                strength = 0.5
+            
+            return IndicatorResult(
+                name="CCI",
+                type=IndicatorType.MOMENTUM,
+                values=cci,
+                signal=signal_str,
+                strength=strength,
+                description=f"Commodity Channel Index ({period} periods)",
+                parameters={'period': period},
+                interpretation=f"CCI at {current_cci:.2f} - {'Overbought' if current_cci > 100 else 'Oversold' if current_cci < -100 else 'Neutral'}"
+            )
+        except Exception as e:
+            raise Exception(f"CCI calculation error: {e}")
     
     def _calculate_stochastic(self, df: pd.DataFrame, k_period: int = 14, d_period: int = 3) -> IndicatorResult:
         """Stochastic Oscillator"""

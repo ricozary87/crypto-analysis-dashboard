@@ -4,7 +4,28 @@ from models import TradingSignal, SystemMetrics, AlertLog, TradingAnalysis, Mark
 from datetime import datetime, timedelta, timezone
 from config import Config
 import logging
+import numpy as np
+import pandas as pd
 logger = logging.getLogger(__name__)
+
+# JSON Safe Converter Helper
+def json_safe(obj):
+    """Convert object to JSON-safe format"""
+    if isinstance(obj, (np.integer, np.floating)):
+        return float(obj)
+    elif isinstance(obj, np.ndarray):
+        return obj.tolist()
+    elif isinstance(obj, pd.Series):
+        return obj.fillna(0).tolist()
+    elif isinstance(obj, pd.DataFrame):
+        return obj.fillna(0).to_dict(orient='records')
+    elif pd.isna(obj) or (isinstance(obj, float) and np.isnan(obj)):
+        return 0
+    elif isinstance(obj, dict):
+        return {k: json_safe(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [json_safe(item) for item in obj]
+    return obj
 
 # Initialize services locally to avoid circular imports
 def get_narrative_ai():
@@ -677,36 +698,25 @@ def get_enhanced_technical_indicators(symbol):
             try:
                 result = calculator.calculate_indicator(df, indicator)
                 
-                # Handle JSON serialization for different data types
-                values = result.values
-                try:
-                    if hasattr(values, 'tolist'):
-                        # Pandas Series/DataFrame
-                        values = values.tolist()
-                    elif hasattr(values, '__iter__') and not isinstance(values, (str, dict)):
-                        # List or other iterable
-                        values = list(values)
-                    elif isinstance(values, (int, float)):
-                        # Single numeric value
+                # Handle JSON serialization using json_safe
+                values = json_safe(result.values)
+                
+                # Ensure values is a list
+                if not isinstance(values, list):
+                    if isinstance(values, dict):
                         values = [values]
-                    elif values is None:
-                        values = []
                     else:
-                        # Convert to string if all else fails
-                        values = [str(values)]
-                    
-                    # Take only last 10 values for API efficiency
-                    if isinstance(values, list) and len(values) > 10:
-                        values = values[-10:]
-                except Exception as e:
-                    logger.warning(f"Error serializing values for {indicator}: {e}")
-                    values = []
+                        values = [values] if values is not None else []
+                
+                # Take only last 10 values for API efficiency
+                if len(values) > 10:
+                    values = values[-10:]
                 
                 results[indicator] = {
-                    'signal': str(result.signal) if result.signal is not None else 'NEUTRAL',
-                    'strength': float(result.strength) if result.strength is not None else 0.0,
+                    'signal': json_safe(result.signal) if result.signal is not None else 'NEUTRAL',
+                    'strength': json_safe(result.strength) if result.strength is not None else 0.0,
                     'values': values,
-                    'interpretation': str(result.interpretation) if hasattr(result, 'interpretation') and result.interpretation is not None else 'No interpretation available'
+                    'interpretation': json_safe(result.interpretation) if hasattr(result, 'interpretation') and result.interpretation is not None else 'No interpretation available'
                 }
             except Exception as e:
                 logger.warning(f"Error calculating {indicator}: {e}")
@@ -720,13 +730,8 @@ def get_enhanced_technical_indicators(symbol):
         # Get trading signals with error handling
         try:
             signals = calculator.get_indicator_signals(df)
-            # Convert signals to JSON-serializable format
-            if isinstance(signals, dict):
-                for key, value in signals.items():
-                    if hasattr(value, 'tolist'):
-                        signals[key] = value.tolist()
-                    elif hasattr(value, '__iter__') and not isinstance(value, (str, dict)):
-                        signals[key] = list(value)
+            # Convert signals to JSON-serializable format using json_safe
+            signals = json_safe(signals)
         except Exception as e:
             logger.warning(f"Error getting indicator signals: {e}")
             signals = []
