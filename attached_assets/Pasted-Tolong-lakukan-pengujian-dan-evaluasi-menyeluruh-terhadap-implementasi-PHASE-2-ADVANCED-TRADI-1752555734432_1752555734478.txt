@@ -1,0 +1,49 @@
+Tolong lakukan **pengujian dan evaluasi menyeluruh** terhadap implementasi **PHASE 2: ADVANCED TRADING DASHBOARD** yang telah selesai saya kerjakan.
+
+### 🎯 Tujuan Pengujian
+Pastikan bahwa semua fitur di bawah ini:
+- Berfungsi dengan benar di level frontend & backend
+- Tidak menimbulkan error, broken state, atau konflik dependensi
+- Siap digunakan untuk produksi (deployment-ready)
+
+---
+
+### ✅ Checklist Fitur yang Harus Dicek
+
+#### 🟩 Chart System Upgrade
+- Apakah `Plotly.js` candlestick chart sudah tampil di `/phase2-dashboard`?
+- Apakah volume overlay, EMA, dan zooming interaktif berfungsi?
+- Apakah tidak ada error JS di browser console?
+
+#### 🟩 Snapshot System
+- Apakah `snapshot_generator.py` bekerja dan menyimpan snapshot?
+- Apakah file PDF report berhasil dihasilkan dengan `ReportLab`?
+- Cek endpoint: `/api/snapshot/<symbol>`, `/api/snapshot/export/<symbol>`
+
+#### 🟩 Technical Indicators System
+- Cek sistem kalkulasi 40+ indikator (RSI, MACD, Bollinger, OBV, Volume Profile)
+- Apakah indikator ditampilkan di chart?
+- Apakah caching system bekerja (response cepat untuk query ulang)?
+- Cek endpoint: `/api/indicators/<symbol>`
+
+#### 🟩 Advanced Dashboard
+- Apakah `/phase2-dashboard` memuat dengan 5 tab (chart, indicator, snapshot, orderbook, config)?
+- Apakah navigasi antar tab tidak menyebabkan reload penuh?
+- Apakah UI responsive di mobile dan desktop?
+
+---
+
+### 🛠️ Infrastruktur Teknis yang Harus Dicek
+- Apakah `ReportLab` terinstall dan dipakai dengan benar?
+- Apakah semua 10 endpoint baru bisa diakses (return 200 OK)?
+- Apakah sistem routing Flask tidak bentrok dengan endpoint lama?
+- Apakah ada warning/error di backend log saat fitur dijalankan?
+
+---
+
+### 🔚 Kesimpulan yang Diminta
+Setelah pengecekan:
+
+- Beri saya laporan final: ✅ Semua aman atau ⚠️ Ada yang perlu diperbaiki
+- Rekomendasikan jika perlu refactor, optimasi performa, atau uji tambahan
+- Jika semua baik, nyatakan bahwa: **Phase 2 is Production Ready**

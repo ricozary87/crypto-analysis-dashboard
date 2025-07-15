@@ -26,7 +26,7 @@ except ImportError:
     logging.warning("ReportLab not available - PDF generation disabled")
 
 # Local imports
-from models import AISnapshotArchive, TechnicalIndicatorData, MarketData
+# Import models locally to avoid circular imports
 from core.snapshot_generator import MarketSnapshot, SnapshotType
 
 logger = logging.getLogger(__name__)
@@ -64,6 +64,7 @@ class SnapshotArchiver:
         """
         try:
             from app import db
+            from models import AISnapshotArchive
             
             # Build query
             query = AISnapshotArchive.query
@@ -90,6 +91,7 @@ class SnapshotArchiver:
         """Get specific snapshot by ID"""
         try:
             from app import db
+            from models import AISnapshotArchive
             
             snapshot = AISnapshotArchive.query.get(snapshot_id)
             if snapshot:

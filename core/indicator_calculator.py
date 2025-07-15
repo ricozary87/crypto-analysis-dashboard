@@ -175,48 +175,60 @@ class AdvancedIndicatorCalculator:
             if 'rsi' in indicators:
                 rsi_result = indicators['rsi']
                 if rsi_result.values is not None:
-                    current_rsi = rsi_result.values.iloc[-1] if hasattr(rsi_result.values, 'iloc') else rsi_result.values
-                    if current_rsi > 70:
-                        signals['rsi'] = {'signal': 'SELL', 'strength': 0.8, 'reason': 'Overbought'}
-                    elif current_rsi < 30:
-                        signals['rsi'] = {'signal': 'BUY', 'strength': 0.8, 'reason': 'Oversold'}
-                    else:
-                        signals['rsi'] = {'signal': 'NEUTRAL', 'strength': 0.5, 'reason': 'Normal range'}
+                    try:
+                        current_rsi = float(rsi_result.values.iloc[-1] if hasattr(rsi_result.values, 'iloc') else rsi_result.values)
+                        if current_rsi > 70:
+                            signals['rsi'] = {'signal': 'SELL', 'strength': 0.8, 'reason': 'Overbought'}
+                        elif current_rsi < 30:
+                            signals['rsi'] = {'signal': 'BUY', 'strength': 0.8, 'reason': 'Oversold'}
+                        else:
+                            signals['rsi'] = {'signal': 'NEUTRAL', 'strength': 0.5, 'reason': 'Normal range'}
+                    except Exception as e:
+                        logger.error(f"Error processing RSI signal: {e}")
+                        signals['rsi'] = {'signal': 'NEUTRAL', 'strength': 0.5, 'reason': 'Error processing'}
             
             # MACD signals
             if 'macd' in indicators:
                 macd_result = indicators['macd']
                 if macd_result.values is not None:
-                    macd_data = macd_result.values
-                    if isinstance(macd_data, dict):
-                        macd_line = macd_data.get('macd', 0)
-                        signal_line = macd_data.get('signal', 0)
-                        
-                        if macd_line > signal_line:
-                            signals['macd'] = {'signal': 'BUY', 'strength': 0.7, 'reason': 'MACD above signal'}
-                        else:
-                            signals['macd'] = {'signal': 'SELL', 'strength': 0.7, 'reason': 'MACD below signal'}
+                    try:
+                        macd_data = macd_result.values
+                        if isinstance(macd_data, dict):
+                            macd_line = float(macd_data.get('macd', pd.Series()).iloc[-1] if hasattr(macd_data.get('macd'), 'iloc') else 0)
+                            signal_line = float(macd_data.get('signal', pd.Series()).iloc[-1] if hasattr(macd_data.get('signal'), 'iloc') else 0)
+                            
+                            if macd_line > signal_line:
+                                signals['macd'] = {'signal': 'BUY', 'strength': 0.7, 'reason': 'MACD above signal'}
+                            else:
+                                signals['macd'] = {'signal': 'SELL', 'strength': 0.7, 'reason': 'MACD below signal'}
+                    except Exception as e:
+                        logger.error(f"Error processing MACD signal: {e}")
+                        signals['macd'] = {'signal': 'NEUTRAL', 'strength': 0.5, 'reason': 'Error processing'}
             
             # Bollinger Bands signals
             if 'bb' in indicators:
                 bb_result = indicators['bb']
                 if bb_result.values is not None:
-                    bb_data = bb_result.values
-                    if isinstance(bb_data, dict):
-                        current_price = df['close'].iloc[-1]
-                        upper_band = bb_data.get('upper', {})
-                        lower_band = bb_data.get('lower', {})
-                        
-                        if hasattr(upper_band, 'iloc'):
-                            upper_value = upper_band.iloc[-1]
-                            lower_value = lower_band.iloc[-1]
+                    try:
+                        bb_data = bb_result.values
+                        if isinstance(bb_data, dict):
+                            current_price = float(df['close'].iloc[-1])
+                            upper_band = bb_data.get('upper', pd.Series())
+                            lower_band = bb_data.get('lower', pd.Series())
                             
-                            if current_price > upper_value:
-                                signals['bb'] = {'signal': 'SELL', 'strength': 0.6, 'reason': 'Price above upper band'}
-                            elif current_price < lower_value:
-                                signals['bb'] = {'signal': 'BUY', 'strength': 0.6, 'reason': 'Price below lower band'}
-                            else:
-                                signals['bb'] = {'signal': 'NEUTRAL', 'strength': 0.4, 'reason': 'Price within bands'}
+                            if hasattr(upper_band, 'iloc') and hasattr(lower_band, 'iloc'):
+                                upper_value = float(upper_band.iloc[-1])
+                                lower_value = float(lower_band.iloc[-1])
+                                
+                                if current_price > upper_value:
+                                    signals['bb'] = {'signal': 'SELL', 'strength': 0.6, 'reason': 'Price above upper band'}
+                                elif current_price < lower_value:
+                                    signals['bb'] = {'signal': 'BUY', 'strength': 0.6, 'reason': 'Price below lower band'}
+                                else:
+                                    signals['bb'] = {'signal': 'NEUTRAL', 'strength': 0.4, 'reason': 'Price within bands'}
+                    except Exception as e:
+                        logger.error(f"Error processing Bollinger Bands signal: {e}")
+                        signals['bb'] = {'signal': 'NEUTRAL', 'strength': 0.4, 'reason': 'Error processing'}
             
             return signals
             

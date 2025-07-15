@@ -58833,3 +58833,57 @@ jinja2.exceptions.TemplateNotFound: analysis_history.html
 2025-07-15 04:58:09,590 - apscheduler.scheduler - INFO - Scheduler started
 2025-07-15 04:58:09,591 - apscheduler.scheduler - DEBUG - Looking for jobs to run
 2025-07-15 04:58:09,591 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:02:42,608 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:02:42,608 - core.ai_engine - WARNING - OPENAI_API_KEY not found - AI Engine will use fallback narratives
+2025-07-15 05:02:42,608 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:02:42,608 - core.snapshot_archiver - INFO - SnapshotArchiver initialized
+2025-07-15 05:03:04,273 - core.snapshot_generator - INFO - Generating quick snapshot for BTC-USDT (1H)
+2025-07-15 05:03:04,275 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:03:04,490 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:03:04,497 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:03:04,516 - core.snapshot_generator - ERROR - Error generating snapshot for BTC-USDT: 'ProfessionalSMCAnalyzer' object has no attribute 'analyze_market_structure'
+2025-07-15 05:03:04,517 - routes - ERROR - Error generating snapshot for BTC: 'ProfessionalSMCAnalyzer' object has no attribute 'analyze_market_structure'
+2025-07-15 05:03:09,638 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 05:03:09,640 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 05:03:09,643 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 05:03:09,648 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:03:09,649 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:03:17,604 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 05:03:17,605 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:03:17,605 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:03:43,039 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 05:03:43,039 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:03:43,039 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:03:44,240 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 05:03:44,241 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 05:03:44,242 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 05:03:44,243 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:03:44,243 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:05:35,705 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:05:35,705 - core.ai_engine - WARNING - OPENAI_API_KEY not found - AI Engine will use fallback narratives
+2025-07-15 05:05:35,705 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:05:35,705 - core.snapshot_archiver - INFO - SnapshotArchiver initialized
+2025-07-15 05:05:35,706 - core.snapshot_archiver - ERROR - Error getting snapshot statistics: name 'AISnapshotArchive' is not defined
+2025-07-15 05:05:35,755 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 05:05:59,690 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 05:05:59,690 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:05:59,691 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:06:01,107 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 05:06:01,107 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 05:06:01,109 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 05:06:01,111 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:06:01,111 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:06:20,374 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:06:20,374 - core.ai_engine - WARNING - OPENAI_API_KEY not found - AI Engine will use fallback narratives
+2025-07-15 05:06:20,374 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:06:20,375 - core.snapshot_generator - INFO - Generating quick snapshot for BTC-USDT (1H)
+2025-07-15 05:06:20,377 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:06:20,523 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:06:20,534 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:06:20,565 - core.snapshot_generator - ERROR - Error generating snapshot for BTC-USDT: 'ProfessionalSMCAnalyzer' object has no attribute 'analyze_market_structure'
+2025-07-15 05:06:20,567 - routes - ERROR - Error generating snapshot for BTC: 'ProfessionalSMCAnalyzer' object has no attribute 'analyze_market_structure'
+2025-07-15 05:06:41,183 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 05:06:41,185 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 05:06:41,187 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 05:06:41,188 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:06:41,189 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added

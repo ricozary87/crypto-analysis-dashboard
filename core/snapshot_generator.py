@@ -19,7 +19,7 @@ from core.analyzer import TechnicalAnalyzer
 from core.ai_engine import get_ai_engine
 from core.professional_smc_analyzer import ProfessionalSMCAnalyzer
 from core.price_action import PriceActionAnalyzer
-from models import AISnapshotArchive, TechnicalIndicatorData, MarketData, OrderbookData
+# Import models locally to avoid circular imports
 
 logger = logging.getLogger(__name__)
 
@@ -366,6 +366,7 @@ class SnapshotGenerator:
         """Store snapshot in database"""
         try:
             from app import db
+            from models import AISnapshotArchive
             
             # Create database record
             snapshot_record = AISnapshotArchive(
