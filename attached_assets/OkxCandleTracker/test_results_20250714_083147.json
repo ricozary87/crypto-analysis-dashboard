@@ -1,0 +1,53 @@
+{
+  "timestamp": "2025-07-14T08:31:47.615903",
+  "summary": {
+    "total_tests": 6,
+    "passed": 0,
+    "failed": 6,
+    "warnings": 0
+  },
+  "results": [
+    {
+      "timestamp": "2025-07-14T08:31:46.899670",
+      "test_name": "OKX Data Fetch - SOL-USDT 5m",
+      "status": "FAIL",
+      "details": "Candlestick API failed: 500",
+      "data": null
+    },
+    {
+      "timestamp": "2025-07-14T08:31:47.278454",
+      "test_name": "OKX Data Fetch - SOL-USDT 1h",
+      "status": "FAIL",
+      "details": "Empty or invalid candlestick data",
+      "data": null
+    },
+    {
+      "timestamp": "2025-07-14T08:31:47.362126",
+      "test_name": "OKX Data Fetch - BTC-USDT 15m",
+      "status": "FAIL",
+      "details": "Candlestick API failed: 500",
+      "data": null
+    },
+    {
+      "timestamp": "2025-07-14T08:31:47.445882",
+      "test_name": "OKX Data Fetch - BTC-USDT 1h",
+      "status": "FAIL",
+      "details": "Candlestick API failed: 500",
+      "data": null
+    },
+    {
+      "timestamp": "2025-07-14T08:31:47.530000",
+      "test_name": "OKX Data Fetch - ETH-USDT 1h",
+      "status": "FAIL",
+      "details": "Candlestick API failed: 500",
+      "data": null
+    },
+    {
+      "timestamp": "2025-07-14T08:31:47.614261",
+      "test_name": "OKX Data Fetch - ETH-USDT 4h",
+      "status": "FAIL",
+      "details": "Candlestick API failed: 500",
+      "data": null
+    }
+  ]
+}

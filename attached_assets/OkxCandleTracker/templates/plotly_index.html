@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OKX Market Data Dashboard - Plotly.js</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+        
+        .card {
+            background-color: #2d2d2d;
+            border: 1px solid #404040;
+        }
+        
+        .card-header {
+            background-color: #3d3d3d;
+            border-bottom: 1px solid #404040;
+        }
+        
+        .chart-container {
+            background-color: #2d2d2d;
+            border-radius: 0.5rem;
+            padding: 1rem;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .spinner-border {
+            width: 3rem;
+            height: 3rem;
+        }
+        
+        .alert-info {
+            background-color: #1e3a5f;
+            border-color: #2e5a8f;
+            color: #b8daff;
+        }
+        
+        .btn-primary {
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0b5ed7;
+            border-color: #0a58ca;
+        }
+        
+        .form-select, .form-control {
+            background-color: #3d3d3d;
+            border-color: #404040;
+            color: #e0e0e0;
+        }
+        
+        .form-select:focus, .form-control:focus {
+            background-color: #3d3d3d;
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+            color: #e0e0e0;
+        }
+        
+        .form-select option {
+            background-color: #3d3d3d;
+            color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid py-4">
+        <!-- Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h1 class="h3 mb-0">
+                        <i class="fas fa-chart-line me-2 text-primary"></i>
+                        OKX Market Data Dashboard
+                        <small class="text-muted fs-6">- Plotly.js Edition</small>
+                    </h1>
+                    <button class="btn btn-outline-primary" id="refreshBtn">
+                        <i class="fas fa-sync-alt me-1"></i>
+                        Refresh
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Controls -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-cog me-2"></i>
+                            Chart Controls
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="symbolSelect" class="form-label">Trading Pair</label>
+                            <select class="form-select" id="symbolSelect">
+                                <option value="BTC-USDT">BTC/USDT</option>
+                                <option value="ETH-USDT">ETH/USDT</option>
+                                <option value="BNB-USDT">BNB/USDT</option>
+                                <option value="ADA-USDT">ADA/USDT</option>
+                                <option value="SOL-USDT" selected>SOL/USDT</option>
+                                <option value="DOT-USDT">DOT/USDT</option>
+                                <option value="MATIC-USDT">MATIC/USDT</option>
+                                <option value="AVAX-USDT">AVAX/USDT</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="timeframeSelect" class="form-label">Timeframe</label>
+                            <select class="form-select" id="timeframeSelect">
+                                <option value="1m">1 Minute</option>
+                                <option value="5m">5 Minutes</option>
+                                <option value="15m">15 Minutes</option>
+                                <option value="1h" selected>1 Hour</option>
+                                <option value="4h">4 Hours</option>
+                                <option value="1d">1 Day</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="limitSelect" class="form-label">Data Points</label>
+                            <select class="form-select" id="limitSelect">
+                                <option value="20">20</option>
+                                <option value="50" selected>50</option>
+                                <option value="100">100</option>
+                                <option value="200">200</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary w-100" id="loadDataBtn">
+                            <i class="fas fa-chart-candlestick me-1"></i>
+                            Load Chart
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-chart-candlestick me-2"></i>
+                            Candlestick Chart
+                            <span id="chartTitle" class="text-muted fs-6"></span>
+                        </h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <div id="chart" style="height:600px;"></div>
+                        <div id="loading" class="loading" style="display: none;">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <div class="mt-2">Loading chart data...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Info -->
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-info">
+                    <h6><i class="fas fa-info-circle me-2"></i>Chart Features:</h6>
+                    <ul class="mb-0">
+                        <li><strong>Interactive:</strong> Zoom, pan, and hover for detailed information</li>
+                        <li><strong>Real-time Data:</strong> Powered by OKX API with live market data</li>
+                        <li><strong>Multiple Timeframes:</strong> From 1 minute to 1 day intervals</li>
+                        <li><strong>Professional Charts:</strong> Candlestick visualization with volume</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Chart Script -->
+    <script>
+        let currentSymbol = 'SOL-USDT';
+        let currentTimeframe = '1H';
+        let currentLimit = 50;
+        
+        // Chart configuration
+        const chartConfig = {
+            displayModeBar: true,
+            responsive: true,
+            displaylogo: false,
+            modeBarButtonsToRemove: ['pan2d', 'lasso2d', 'select2d'],
+            theme: 'dark'
+        };
+        
+        const layout = {
+            title: {
+                text: 'Loading...',
+                font: { color: '#e0e0e0', size: 16 }
+            },
+            xaxis: {
+                type: 'category',
+                title: 'Time',
+                gridcolor: '#404040',
+                color: '#e0e0e0',
+                tickfont: { color: '#e0e0e0' }
+            },
+            yaxis: {
+                title: 'Price (USDT)',
+                gridcolor: '#404040',
+                color: '#e0e0e0',
+                tickfont: { color: '#e0e0e0' }
+            },
+            plot_bgcolor: '#2d2d2d',
+            paper_bgcolor: '#2d2d2d',
+            font: { color: '#e0e0e0' },
+            margin: { l: 60, r: 20, t: 50, b: 50 }
+        };
+        
+        function showLoading() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('chart').style.display = 'none';
+        }
+        
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('chart').style.display = 'block';
+        }
+        
+        function updateChart() {
+            showLoading();
+            
+            // Update chart title
+            document.getElementById('chartTitle').textContent = `(${currentSymbol} - ${currentTimeframe})`;
+            
+            // Fetch data from API
+            fetch(`/api/candlestick_data?symbol=${currentSymbol}&timeframe=${currentTimeframe}&limit=${currentLimit}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.error) {
+                        throw new Error(data.error);
+                    }
+                    
+                    // Update layout title
+                    layout.title.text = `${currentSymbol} Candlestick Chart - ${currentTimeframe}`;
+                    
+                    // Create candlestick trace
+                    const trace = {
+                        x: data.time,
+                        open: data.open,
+                        high: data.high,
+                        low: data.low,
+                        close: data.close,
+                        type: 'candlestick',
+                        name: currentSymbol,
+                        increasing: { 
+                            line: { color: '#00ff88' },
+                            fillcolor: '#00ff88'
+                        },
+                        decreasing: { 
+                            line: { color: '#ff4444' },
+                            fillcolor: '#ff4444'
+                        }
+                    };
+                    
+                    // Plot the chart
+                    Plotly.newPlot('chart', [trace], layout, chartConfig);
+                    
+                    hideLoading();
+                })
+                .catch(error => {
+                    console.error('Error loading chart data:', error);
+                    hideLoading();
+                    
+                    // Show error message
+                    const errorTrace = {
+                        x: ['Error'],
+                        y: [0],
+                        type: 'scatter',
+                        mode: 'text',
+                        text: [`Error: ${error.message}`],
+                        textfont: { color: '#ff4444', size: 16 }
+                    };
+                    
+                    const errorLayout = {
+                        ...layout,
+                        title: { text: 'Error Loading Chart', font: { color: '#ff4444' } }
+                    };
+                    
+                    Plotly.newPlot('chart', [errorTrace], errorLayout, chartConfig);
+                });
+        }
+        
+        // Event listeners
+        document.getElementById('loadDataBtn').addEventListener('click', () => {
+            currentSymbol = document.getElementById('symbolSelect').value;
+            currentTimeframe = document.getElementById('timeframeSelect').value;
+            currentLimit = parseInt(document.getElementById('limitSelect').value);
+            updateChart();
+        });
+        
+        document.getElementById('refreshBtn').addEventListener('click', () => {
+            updateChart();
+        });
+        
+        // Load initial chart
+        document.addEventListener('DOMContentLoaded', () => {
+            updateChart();
+        });
+    </script>
+</body>
+</html>

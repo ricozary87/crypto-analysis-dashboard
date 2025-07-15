@@ -57471,3 +57471,143 @@ jinja2.exceptions.TemplateNotFound: index.html
 2025-07-15 02:46:08,264 - apscheduler.scheduler - DEBUG - Looking for jobs to run
 2025-07-15 02:46:08,265 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
 2025-07-15 02:46:13,857 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 03:00:27,379 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 03:00:27,381 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 03:00:27,381 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 03:00:28,367 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 03:00:28,368 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 03:00:28,369 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 03:00:28,370 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 03:00:28,370 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 03:00:34,753 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 03:00:45,457 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:00:45,463 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:00:45,473 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:00:45,477 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:00:45,615 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 03:00:45,626 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 03:00:45,647 - core.professional_smc_analyzer - ERROR - Professional SMC analysis error for BTC-USDT: int() argument must be a string, a bytes-like object or a real number, not 'Timestamp'
+2025-07-15 03:00:45,647 - core.enhanced_ai_engine - WARNING - OpenAI client not available. Using enhanced fallback narrative.
+2025-07-15 03:03:05,155 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 03:03:05,155 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 03:03:05,155 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 03:03:06,149 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 03:03:06,149 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 03:03:06,151 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 03:03:06,151 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 03:03:06,151 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 03:03:14,323 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 03:03:26,404 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:03:26,411 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:03:26,602 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 03:03:26,612 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 03:03:26,634 - core.professional_smc_analyzer - ERROR - Professional SMC analysis error for BTC-USDT: int() argument must be a string, a bytes-like object or a real number, not 'Timestamp'
+2025-07-15 03:03:26,637 - routes - ERROR - Error getting enhanced chart data for BTC: 'int' object has no attribute 'isoformat'
+2025-07-15 03:03:26,646 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:03:26,650 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:03:26,787 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 03:03:26,796 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 03:03:26,916 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:03:26,917 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:03:27,051 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 03:03:27,059 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 03:03:27,079 - core.professional_smc_analyzer - ERROR - Professional SMC analysis error for ETH-USDT: int() argument must be a string, a bytes-like object or a real number, not 'Timestamp'
+2025-07-15 03:03:27,081 - routes - ERROR - Error getting enhanced chart data for ETH: 'int' object has no attribute 'isoformat'
+2025-07-15 03:03:27,087 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:03:27,088 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:03:27,212 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=4H&limit=200 HTTP/1.1" 200 None
+2025-07-15 03:03:27,219 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 03:03:27,244 - core.professional_smc_analyzer - ERROR - Professional SMC analysis error for ETH-USDT: int() argument must be a string, a bytes-like object or a real number, not 'Timestamp'
+2025-07-15 03:03:27,245 - routes - ERROR - Error getting enhanced chart data for ETH: 'int' object has no attribute 'isoformat'
+2025-07-15 03:03:27,253 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:03:27,254 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:03:27,388 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1D&limit=200 HTTP/1.1" 200 None
+2025-07-15 03:03:27,396 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 03:03:27,418 - core.professional_smc_analyzer - ERROR - Professional SMC analysis error for ETH-USDT: int() argument must be a string, a bytes-like object or a real number, not 'Timestamp'
+2025-07-15 03:03:27,419 - routes - ERROR - Error getting enhanced chart data for ETH: 'int' object has no attribute 'isoformat'
+2025-07-15 03:03:30,066 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 03:03:30,066 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 03:03:30,066 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 03:03:31,638 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 03:03:31,639 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 03:03:31,641 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 03:03:31,641 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 03:03:31,641 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 03:03:37,304 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 03:03:38,164 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:03:38,172 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:03:38,297 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 03:03:38,306 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 03:03:38,341 - core.professional_smc_analyzer - ERROR - Professional SMC analysis error for BTC-USDT: int() argument must be a string, a bytes-like object or a real number, not 'Timestamp'
+2025-07-15 03:03:38,354 - routes - ERROR - Error getting enhanced chart data for BTC: 'int' object has no attribute 'isoformat'
+2025-07-15 03:04:13,666 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 03:04:13,666 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 03:04:13,667 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 03:04:14,455 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 03:04:14,455 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 03:04:14,457 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 03:04:14,457 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 03:04:14,457 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 03:04:20,313 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 03:04:31,407 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 03:04:31,407 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 03:04:31,407 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 03:04:32,055 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 03:04:32,057 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 03:04:32,058 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 03:04:32,060 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 03:04:32,060 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 03:04:37,775 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 03:04:53,155 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:04:53,157 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:04:53,285 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 03:04:53,295 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 03:04:53,316 - core.professional_smc_analyzer - ERROR - Professional SMC analysis error for BTC-USDT: int() argument must be a string, a bytes-like object or a real number, not 'Timestamp'
+2025-07-15 03:04:53,335 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:04:53,337 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:04:53,465 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 03:04:53,473 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 03:04:53,497 - core.professional_smc_analyzer - ERROR - Professional SMC analysis error for ETH-USDT: int() argument must be a string, a bytes-like object or a real number, not 'Timestamp'
+2025-07-15 03:04:53,512 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:04:53,513 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:04:53,672 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 03:04:53,679 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 03:04:53,696 - core.professional_smc_analyzer - ERROR - Professional SMC analysis error for SOL-USDT: int() argument must be a string, a bytes-like object or a real number, not 'Timestamp'
+2025-07-15 03:04:53,710 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:04:53,712 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:04:53,841 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=4H&limit=200 HTTP/1.1" 200 None
+2025-07-15 03:04:53,849 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 03:04:53,864 - core.professional_smc_analyzer - ERROR - Professional SMC analysis error for SOL-USDT: int() argument must be a string, a bytes-like object or a real number, not 'Timestamp'
+2025-07-15 03:05:36,456 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:05:36,456 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 03:05:36,458 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:05:36,579 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 03:05:36,584 - core.okx_fetcher - DEBUG - Fetched 100 candles for BTC-USDT
+2025-07-15 03:05:36,596 - core.professional_smc_analyzer - ERROR - Professional SMC analysis error for BTC-USDT: int() argument must be a string, a bytes-like object or a real number, not 'Timestamp'
+2025-07-15 03:05:36,596 - core.advanced_formatter - ERROR - Error formatting analysis: unsupported format string passed to NoneType.__format__
+2025-07-15 03:05:57,348 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:05:57,348 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 03:05:57,350 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:05:57,482 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 03:05:57,488 - core.okx_fetcher - DEBUG - Fetched 100 candles for BTC-USDT
+2025-07-15 03:05:57,501 - core.professional_smc_analyzer - ERROR - Professional SMC analysis error for BTC-USDT: int() argument must be a string, a bytes-like object or a real number, not 'Timestamp'
+2025-07-15 03:05:57,502 - core.advanced_formatter - ERROR - Error formatting analysis: unsupported format string passed to NoneType.__format__
+2025-07-15 03:05:57,510 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:05:57,516 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:05:57,517 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:05:57,639 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 03:05:57,647 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 03:05:57,668 - core.professional_smc_analyzer - ERROR - Professional SMC analysis error for BTC-USDT: int() argument must be a string, a bytes-like object or a real number, not 'Timestamp'
+2025-07-15 03:05:57,687 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:05:57,689 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:05:57,813 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 03:05:57,823 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 03:06:43,027 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 03:06:43,035 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 03:06:43,035 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 03:06:45,383 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 03:06:45,388 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 03:06:45,395 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 03:06:45,395 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 03:06:45,402 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 03:06:53,900 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.

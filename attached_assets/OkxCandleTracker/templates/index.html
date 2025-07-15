@@ -1,0 +1,791 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="h3">
+                <i class="fas fa-chart-line me-2"></i>
+                Market Data Dashboard
+            </h1>
+            <button class="btn btn-outline-primary" id="refreshBtn">
+                <i class="fas fa-sync-alt me-1"></i>
+                Refresh
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Controls -->
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fas fa-cog me-2"></i>
+                    Controls
+                </h5>
+                <div class="mb-3">
+                    <label for="symbolSelect" class="form-label">Trading Pair</label>
+                    <select class="form-select" id="symbolSelect">
+                        <option value="BTC-USDT">BTC/USDT</option>
+                        <option value="ETH-USDT">ETH/USDT</option>
+                        <option value="BNB-USDT">BNB/USDT</option>
+                        <option value="ADA-USDT">ADA/USDT</option>
+                        <option value="SOL-USDT">SOL/USDT</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="timeframeSelect" class="form-label">Timeframe</label>
+                    <select class="form-select" id="timeframeSelect">
+                        <option value="1m">1 Minute</option>
+                        <option value="5m">5 Minutes</option>
+                        <option value="15m">15 Minutes</option>
+                        <option value="1h" selected>1 Hour</option>
+                        <option value="4h">4 Hours</option>
+                        <option value="1d">1 Day</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="limitSelect" class="form-label">Data Points</label>
+                    <select class="form-select" id="limitSelect">
+                        <option value="50">50</option>
+                        <option value="100" selected>100</option>
+                        <option value="200">200</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary w-100 mb-2" id="loadDataBtn">
+                    <i class="fas fa-download me-1"></i>
+                    Load Data
+                </button>
+                
+                <div class="d-grid gap-2">
+                    <button class="btn btn-success" id="aiSnapshotBtn">
+                        <i class="fas fa-brain me-1"></i>
+                        AI Snapshot
+                    </button>
+                    <button class="btn btn-outline-success" id="aiSnapshotQuickBtn">
+                        <i class="fas fa-bolt me-1"></i>
+                        AI Quick Mode
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fas fa-info-circle me-2"></i>
+                    Market Summary
+                </h5>
+                <div id="marketSummary" class="row">
+                    <div class="col-md-6">
+                        <div class="text-center">
+                            <div class="fs-6 text-muted">Current Price</div>
+                            <div class="fs-4 fw-bold" id="currentPrice">-</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-center">
+                            <div class="fs-6 text-muted">24h Change</div>
+                            <div class="fs-4 fw-bold" id="priceChange">-</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Loading Indicator -->
+<div id="loadingIndicator" class="text-center py-4 d-none">
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    <div class="mt-2">Loading market data...</div>
+</div>
+
+<!-- Error Alert -->
+<div id="errorAlert" class="alert alert-danger d-none" role="alert">
+    <i class="fas fa-exclamation-triangle me-2"></i>
+    <span id="errorMessage"></span>
+</div>
+
+<!-- Main Content Tabs -->
+<div class="row">
+    <div class="col-12">
+        <ul class="nav nav-tabs" id="mainTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="candlestick-tab" data-bs-toggle="tab" data-bs-target="#candlestick" type="button" role="tab">
+                    <i class="fas fa-chart-bar me-1"></i>
+                    Candlestick
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="orderbook-tab" data-bs-toggle="tab" data-bs-target="#orderbook" type="button" role="tab">
+                    <i class="fas fa-list me-1"></i>
+                    Order Book
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="indicators-tab" data-bs-toggle="tab" data-bs-target="#indicators" type="button" role="tab">
+                    <i class="fas fa-chart-line me-1"></i>
+                    Technical Indicators
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="volume-tab" data-bs-toggle="tab" data-bs-target="#volume" type="button" role="tab">
+                    <i class="fas fa-volume-up me-1"></i>
+                    Volume Analysis
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="signals-tab" data-bs-toggle="tab" data-bs-target="#signals" type="button" role="tab">
+                    <i class="fas fa-brain me-1"></i>
+                    Trading Signals
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="snapshot-tab" data-bs-toggle="tab" data-bs-target="#snapshot" type="button" role="tab">
+                    <i class="fas fa-camera me-1"></i>
+                    📌 Snapshot Analysis
+                </button>
+            </li>
+        </ul>
+        
+        <div class="tab-content mt-3" id="mainTabsContent">
+            <!-- Candlestick Tab -->
+            <div class="tab-pane fade show active" id="candlestick" role="tabpanel">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-chart-bar me-2"></i>
+                            Candlestick Chart
+                            <span id="chartTitle" class="text-muted fs-6"></span>
+                        </h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <div id="candlestickChart" style="height:600px;"></div>
+                        <div id="chartLoading" class="text-center py-4" style="display: none;">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <div class="mt-2">Loading chart data...</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Candlestick Data Table -->
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-table me-2"></i>
+                            OHLCV Data
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>Open</th>
+                                        <th>High</th>
+                                        <th>Low</th>
+                                        <th>Close</th>
+                                        <th>Volume</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="candlestickTable">
+                                    <tr>
+                                        <td colspan="6" class="text-center text-muted">No data available</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Order Book Tab -->
+            <div class="tab-pane fade" id="orderbook" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header bg-success">
+                                <h5 class="card-title mb-0 text-white">
+                                    <i class="fas fa-arrow-up me-2"></i>
+                                    Bids (Buy Orders)
+                                </h5>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-sm mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Price</th>
+                                                <th>Size</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="bidsTable">
+                                            <tr>
+                                                <td colspan="3" class="text-center text-muted">No data available</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header bg-danger">
+                                <h5 class="card-title mb-0 text-white">
+                                    <i class="fas fa-arrow-down me-2"></i>
+                                    Asks (Sell Orders)
+                                </h5>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-sm mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Price</th>
+                                                <th>Size</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="asksTable">
+                                            <tr>
+                                                <td colspan="3" class="text-center text-muted">No data available</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Market Depth Chart -->
+                <div class="card mt-3">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-chart-area me-2"></i>
+                            Market Depth Chart
+                        </h5>
+                        <button class="btn btn-sm btn-outline-primary" onclick="dashboard.refreshData()">
+                            <i class="fas fa-refresh"></i>
+                            Refresh
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="depthChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Order Book Stats -->
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-chart-pie me-2"></i>
+                            Order Book Statistics
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row" id="orderbookStats">
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <div class="fs-6 text-muted">Spread</div>
+                                    <div class="fs-4 fw-bold" id="spreadValue">-</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <div class="fs-6 text-muted">Best Bid</div>
+                                    <div class="fs-4 fw-bold text-success" id="bestBid">-</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <div class="fs-6 text-muted">Best Ask</div>
+                                    <div class="fs-4 fw-bold text-danger" id="bestAsk">-</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <div class="fs-6 text-muted">Mid Price</div>
+                                    <div class="fs-4 fw-bold" id="midPrice">-</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Technical Indicators Tab -->
+            <div class="tab-pane fade" id="indicators" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-chart-line me-2"></i>
+                                    MACD
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="macdChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-chart-area me-2"></i>
+                                    On-Balance Volume (OBV)
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="obvChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-chart-line me-2"></i>
+                                    RSI
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="rsiChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    Open Interest
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="openInterestData">
+                                    <div class="text-center text-muted">No data available</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Volume Analysis Tab -->
+            <div class="tab-pane fade" id="volume" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-chart-bar me-2"></i>
+                                    Volume Chart
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="volumeChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-analytics me-2"></i>
+                                    Volume Statistics
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="volumeStats">
+                                    <div class="text-center text-muted">No data available</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Trading Signals Tab -->
+            <div class="tab-pane fade" id="signals" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-brain me-2"></i>
+                                    Comprehensive Trading Analysis
+                                </h5>
+                                <button class="btn btn-sm btn-outline-primary" onclick="refreshSignals()">
+                                    <i class="fas fa-sync-alt me-1"></i>
+                                    Refresh
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div id="signalAnalysis" class="text-center text-muted">
+                                    <div class="spinner-border text-primary" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <div class="mt-2">Analyzing market data...</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card mt-3">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-chart-line me-2"></i>
+                                    Component Analysis
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="componentAnalysis">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="card bg-light">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Technical Indicators</h6>
+                                                    <div id="technicalSignals" class="text-muted">Loading...</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="card bg-light">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Smart Money Concepts</h6>
+                                                    <div id="smcSignals" class="text-muted">Loading...</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <div class="card bg-light">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Price Action</h6>
+                                                    <div id="priceActionSignals" class="text-muted">Loading...</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="card bg-light">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Volume Analysis</h6>
+                                                    <div id="volumeSignals" class="text-muted">Loading...</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-bullseye me-2"></i>
+                                    Trading Setup
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="tradeSetup" class="text-center text-muted">
+                                    No setup available
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card mt-3">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-shield-alt me-2"></i>
+                                    Risk Assessment
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="riskAssessment" class="text-center text-muted">
+                                    No risk data available
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Snapshot Analysis Tab -->
+            <div class="tab-pane fade" id="snapshot" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-camera me-2"></i>
+                                    📌 Professional Trading Snapshot
+                                </h5>
+                                <div>
+                                    <button class="btn btn-sm btn-outline-warning me-2" onclick="refreshSnapshotQuick()">
+                                        <i class="fas fa-bolt me-1"></i>
+                                        Quick Mode
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-primary me-2" onclick="refreshSnapshot()">
+                                        <i class="fas fa-sync-alt me-1"></i>
+                                        Full Mode
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-success me-2" onclick="copySnapshot()">
+                                        <i class="fas fa-copy me-1"></i>
+                                        Copy
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger" onclick="exportSnapshotPDF()">
+                                        <i class="fas fa-file-pdf me-1"></i>
+                                        Export PDF
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="snapshotNarrative" class="text-center text-muted">
+                                    <div class="spinner-border text-primary" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <div class="mt-2">Generating professional analysis...</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card mt-3">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-layer-group me-2"></i>
+                                    7-Layer Confluence Analysis
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="layerAnalysis">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="card bg-light mb-3 layer-card">
+                                                <div class="card-body">
+                                                    <h6 class="card-title layer-title">Smart Money Concept (SMC)</h6>
+                                                    <div id="smcLayer" class="text-muted">Loading...</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="card bg-light mb-3 layer-card">
+                                                <div class="card-body">
+                                                    <h6 class="card-title layer-title">Volume Delta (CVD)</h6>
+                                                    <div id="volumeLayer" class="text-muted">Loading...</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="card bg-light mb-3 layer-card">
+                                                <div class="card-body">
+                                                    <h6 class="card-title layer-title">Orderbook & Heatmap</h6>
+                                                    <div id="orderbookLayer" class="text-muted">Loading...</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="card bg-light mb-3 layer-card">
+                                                <div class="card-body">
+                                                    <h6 class="card-title layer-title">RSI & EMA</h6>
+                                                    <div id="rsiEmaLayer" class="text-muted">Loading...</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="card bg-light mb-3 layer-card">
+                                                <div class="card-body">
+                                                    <h6 class="card-title layer-title">Fibonacci Levels</h6>
+                                                    <div id="fibonacciLayer" class="text-muted">Loading...</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="card bg-light mb-3 layer-card">
+                                                <div class="card-body">
+                                                    <h6 class="card-title layer-title">Open Interest & Funding</h6>
+                                                    <div id="oiFundingLayer" class="text-muted">Loading...</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="card bg-light layer-card">
+                                                <div class="card-body">
+                                                    <h6 class="card-title layer-title">Trend Structure</h6>
+                                                    <div id="trendLayer" class="text-muted">Loading...</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-star me-2"></i>
+                                    Confidence Score
+                                </h5>
+                            </div>
+                            <div class="card-body text-center">
+                                <div id="confidenceScore" class="fs-1 mb-2">⚪⚪⚪⚪⚪</div>
+                                <div id="confidenceText" class="text-muted">Waiting for analysis...</div>
+                            </div>
+                        </div>
+                        
+                        <div class="card mt-3">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-crosshairs me-2"></i>
+                                    Primary Trading Plan
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="primaryPlan" class="text-center text-muted">
+                                    No plan available
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card mt-3">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-route me-2"></i>
+                                    Alternative Scenarios
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="alternativeScenarios" class="text-muted">
+                                    No scenarios available
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card mt-3">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-exclamation-triangle me-2"></i>
+                                    Risk Factors
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="riskFactors" class="text-muted">
+                                    No risk data available
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- AI Snapshot Modal -->
+<div class="modal fade" id="aiSnapshotModal" tabindex="-1" aria-labelledby="aiSnapshotModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="aiSnapshotModalLabel">
+                    <i class="fas fa-brain me-2"></i>
+                    AI Market Analysis
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="aiSnapshotContent">
+                    <!-- AI Snapshot content will be loaded here -->
+                    <div class="text-center">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-2">Generating AI analysis...</p>
+                    </div>
+                </div>
+                
+                <!-- Confidence Radar Chart -->
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="card-title mb-0">
+                                    <i class="fas fa-chart-radar me-2"></i>
+                                    Confidence Radar
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="confidenceRadarChart" width="300" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="card-title mb-0">
+                                    <i class="fas fa-layer-group me-2"></i>
+                                    7-Layer Analysis
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <div id="layerAnalysis" class="layer-analysis-container">
+                                    <!-- Layer analysis will be populated here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveSnapshotBtn">
+                    <i class="fas fa-save me-1"></i>
+                    Save Snapshot
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

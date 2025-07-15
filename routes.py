@@ -1209,6 +1209,329 @@ def get_analysis_history(symbol):
         logger.error(f"Error getting analysis history: {e}")
         return jsonify({'error': str(e)}), 500
 
+@app.route('/api/enhanced-ai/narrative/<symbol>')
+def get_enhanced_ai_narrative(symbol):
+    """Get enhanced AI narrative for a symbol using advanced AI engine"""
+    try:
+        from core.analyzer import TechnicalAnalyzer
+        from core.okx_fetcher import OKXAPIManager
+        
+        # Validate symbol
+        valid_symbols = ['BTC', 'ETH', 'SOL', 'TIA', 'RENDER']
+        if symbol.upper() not in valid_symbols:
+            return jsonify({'error': 'Invalid symbol'}), 400
+        
+        # Get parameters
+        language = request.args.get('language', 'indonesian')
+        quick_mode = request.args.get('quick', 'false').lower() == 'true'
+        
+        # Get data and analyze
+        api = OKXAPIManager()
+        analyzer = TechnicalAnalyzer()
+        
+        symbol_okx = f"{symbol.upper()}-USDT"
+        df = api.get_candles(symbol_okx, '1H', limit=200)
+        
+        if df is None or df.empty:
+            return jsonify({'error': 'Failed to fetch market data'}), 500
+        
+        # Get comprehensive analysis
+        analysis_data = analyzer.analyze(df, symbol_okx, '1H')
+        
+        # Generate enhanced AI narrative
+        narrative = analyzer.generate_enhanced_ai_narrative(
+            analysis_data=analysis_data,
+            language=language,
+            quick_mode=quick_mode
+        )
+        
+        return jsonify({
+            'success': True,
+            'symbol': symbol.upper(),
+            'language': language,
+            'quick_mode': quick_mode,
+            'narrative': narrative,
+            'generated_at': datetime.now().isoformat(),
+            'current_price': analysis_data.get('current_price', 0)
+        })
+        
+    except Exception as e:
+        logger.error(f"Error generating enhanced AI narrative for {symbol}: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/enhanced-ai/stats')
+def get_enhanced_ai_stats():
+    """Get enhanced AI engine statistics"""
+    try:
+        from core.analyzer import TechnicalAnalyzer
+        
+        analyzer = TechnicalAnalyzer()
+        stats = analyzer.get_enhanced_ai_stats()
+        
+        return jsonify({
+            'success': True,
+            'stats': stats,
+            'retrieved_at': datetime.now().isoformat()
+        })
+        
+    except Exception as e:
+        logger.error(f"Error getting enhanced AI stats: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/enhanced-ai/test-connection')
+def test_enhanced_ai_connection():
+    """Test enhanced AI connection"""
+    try:
+        from core.analyzer import TechnicalAnalyzer
+        
+        analyzer = TechnicalAnalyzer()
+        connection_status = analyzer.test_enhanced_ai_connection()
+        
+        return jsonify({
+            'success': True,
+            'connection_test': connection_status,
+            'tested_at': datetime.now().isoformat()
+        })
+        
+    except Exception as e:
+        logger.error(f"Error testing enhanced AI connection: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/enhanced-charts/data/<symbol>')
+def get_enhanced_chart_data(symbol):
+    """Get comprehensive chart data for enhanced Plotly.js charts"""
+    try:
+        from core.analyzer import TechnicalAnalyzer
+        from core.okx_fetcher import OKXAPIManager
+        
+        # Validate symbol
+        valid_symbols = ['BTC', 'ETH', 'SOL', 'TIA', 'RENDER']
+        if symbol.upper() not in valid_symbols:
+            return jsonify({'error': 'Invalid symbol'}), 400
+        
+        # Get parameters
+        timeframe = request.args.get('timeframe', '1H')
+        limit = request.args.get('limit', 200, type=int)
+        
+        # Get data
+        api = OKXAPIManager()
+        analyzer = TechnicalAnalyzer()
+        
+        symbol_okx = f"{symbol.upper()}-USDT"
+        df = api.get_candles(symbol_okx, timeframe, limit=limit)
+        
+        if df is None or df.empty:
+            return jsonify({'error': 'Failed to fetch market data'}), 500
+        
+        # Get comprehensive analysis
+        analysis = analyzer.analyze(df, symbol_okx, timeframe)
+        
+        # Prepare candlestick data
+        candlestick_data = []
+        for i in range(len(df)):
+            # Handle timestamp conversion safely
+            timestamp_val = df.index[i]
+            if hasattr(timestamp_val, 'isoformat'):
+                timestamp_iso = timestamp_val.isoformat()
+                timestamp_ms = int(timestamp_val.timestamp() * 1000)
+            else:
+                # Fallback for non-datetime index
+                timestamp_iso = str(timestamp_val)
+                timestamp_ms = int(timestamp_val) if isinstance(timestamp_val, (int, float)) else i
+            
+            candlestick_data.append({
+                'timestamp': timestamp_iso,
+                'time': timestamp_ms,
+                'open': float(df['open'].iloc[i]),
+                'high': float(df['high'].iloc[i]),
+                'low': float(df['low'].iloc[i]),
+                'close': float(df['close'].iloc[i]),
+                'volume': float(df['volume'].iloc[i])
+            })
+        
+        # Prepare technical indicators
+        indicators = analysis.get('indicators', {})
+        
+        # SMC Analysis data
+        smc_analysis = analysis.get('smc_analysis', {})
+        
+        # Prepare support/resistance levels
+        support_levels = []
+        resistance_levels = []
+        
+        # Calculate basic support/resistance (simplified)
+        recent_lows = df['low'].rolling(window=20).min()
+        recent_highs = df['high'].rolling(window=20).max()
+        
+        if not recent_lows.empty and not recent_highs.empty:
+            support_levels = [float(recent_lows.iloc[-1])]
+            resistance_levels = [float(recent_highs.iloc[-1])]
+        
+        # Prepare SMC levels
+        smc_levels = {
+            'orderBlocks': [],
+            'fvgGaps': [],
+            'swingPoints': smc_analysis.get('swing_points', {})
+        }
+        
+        # Extract order blocks from SMC analysis
+        order_blocks = smc_analysis.get('order_blocks', [])
+        for block in order_blocks:
+            # Handle timestamp conversion safely
+            start_time = block.get('start_time', df.index[0])
+            end_time = block.get('end_time', df.index[-1])
+            
+            if hasattr(start_time, 'isoformat'):
+                start_time_iso = start_time.isoformat()
+            else:
+                start_time_iso = str(start_time)
+                
+            if hasattr(end_time, 'isoformat'):
+                end_time_iso = end_time.isoformat()
+            else:
+                end_time_iso = str(end_time)
+            
+            smc_levels['orderBlocks'].append({
+                'start_time': start_time_iso,
+                'end_time': end_time_iso,
+                'high': block.get('high', 0),
+                'low': block.get('low', 0),
+                'type': block.get('type', 'bullish')
+            })
+        
+        # Extract FVG gaps
+        fvg_signals = smc_analysis.get('fvg_signals', [])
+        for gap in fvg_signals:
+            # Handle timestamp conversion safely
+            start_time = gap.get('start_time', df.index[0])
+            end_time = gap.get('end_time', df.index[-1])
+            
+            if hasattr(start_time, 'isoformat'):
+                start_time_iso = start_time.isoformat()
+            else:
+                start_time_iso = str(start_time)
+                
+            if hasattr(end_time, 'isoformat'):
+                end_time_iso = end_time.isoformat()
+            else:
+                end_time_iso = str(end_time)
+            
+            smc_levels['fvgGaps'].append({
+                'start_time': start_time_iso,
+                'end_time': end_time_iso,
+                'high': gap.get('high', 0),
+                'low': gap.get('low', 0),
+                'type': gap.get('type', 'bullish')
+            })
+        
+        return jsonify({
+            'success': True,
+            'symbol': symbol.upper(),
+            'timeframe': timeframe,
+            'data': candlestick_data,
+            'indicators': {
+                'rsi': indicators.get('rsi', {}),
+                'macd': indicators.get('macd', {}),
+                'ema': indicators.get('ema', {}),
+                'bollinger': indicators.get('bollinger', {}),
+                'volume': indicators.get('volume', {})
+            },
+            'smc_analysis': smc_analysis,
+            'support_levels': support_levels,
+            'resistance_levels': resistance_levels,
+            'smc_levels': smc_levels,
+            'current_price': float(df['close'].iloc[-1]),
+            'price_change_24h': analysis.get('price_change_24h', 0),
+            'generated_at': datetime.now().isoformat()
+        })
+        
+    except Exception as e:
+        logger.error(f"Error getting enhanced chart data for {symbol}: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/enhanced-charts/volume-profile/<symbol>')
+def get_volume_profile_data(symbol):
+    """Get volume profile data for enhanced charts"""
+    try:
+        from core.analyzer import TechnicalAnalyzer
+        from core.okx_fetcher import OKXAPIManager
+        
+        # Validate symbol
+        valid_symbols = ['BTC', 'ETH', 'SOL', 'TIA', 'RENDER']
+        if symbol.upper() not in valid_symbols:
+            return jsonify({'error': 'Invalid symbol'}), 400
+        
+        # Get data
+        api = OKXAPIManager()
+        analyzer = TechnicalAnalyzer()
+        
+        symbol_okx = f"{symbol.upper()}-USDT"
+        df = api.get_candles(symbol_okx, '1H', limit=200)
+        
+        if df is None or df.empty:
+            return jsonify({'error': 'Failed to fetch market data'}), 500
+        
+        # Calculate volume profile
+        price_range = df['high'].max() - df['low'].min()
+        price_levels = []
+        volumes = []
+        
+        # Create price bins
+        num_bins = 50
+        bin_size = price_range / num_bins
+        
+        for i in range(num_bins):
+            price_level = df['low'].min() + (i * bin_size)
+            price_levels.append(price_level)
+            
+            # Calculate volume at this price level
+            volume_at_level = 0
+            for j in range(len(df)):
+                if df['low'].iloc[j] <= price_level <= df['high'].iloc[j]:
+                    volume_at_level += df['volume'].iloc[j]
+            
+            volumes.append(volume_at_level)
+        
+        # Find Point of Control (POC) - price level with highest volume
+        max_volume_index = volumes.index(max(volumes))
+        poc = price_levels[max_volume_index]
+        
+        # Calculate Value Area (70% of volume)
+        total_volume = sum(volumes)
+        value_area_volume = total_volume * 0.7
+        
+        # Find value area high and low
+        sorted_volumes = sorted(enumerate(volumes), key=lambda x: x[1], reverse=True)
+        cumulative_volume = 0
+        value_area_indices = []
+        
+        for idx, vol in sorted_volumes:
+            cumulative_volume += vol
+            value_area_indices.append(idx)
+            if cumulative_volume >= value_area_volume:
+                break
+        
+        value_area_high = max([price_levels[i] for i in value_area_indices])
+        value_area_low = min([price_levels[i] for i in value_area_indices])
+        
+        return jsonify({
+            'success': True,
+            'symbol': symbol.upper(),
+            'volume_profile': {
+                'price_levels': price_levels,
+                'volumes': volumes,
+                'poc': poc,
+                'value_area_high': value_area_high,
+                'value_area_low': value_area_low,
+                'total_volume': total_volume
+            },
+            'generated_at': datetime.now().isoformat()
+        })
+        
+    except Exception as e:
+        logger.error(f"Error getting volume profile data for {symbol}: {e}")
+        return jsonify({'error': str(e)}), 500
+
 @app.route('/api/analysis/detail/<int:analysis_id>')
 def get_analysis_detail(analysis_id):
     """Get full analysis detail by ID"""

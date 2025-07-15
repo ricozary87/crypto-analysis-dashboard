@@ -1,0 +1,383 @@
+/* Custom styles for OKX Market Data Dashboard */
+
+.chart-container {
+    position: relative;
+    height: 400px;
+    margin-bottom: 20px;
+}
+
+.chart-container canvas {
+    height: 100% !important;
+    max-height: 400px;
+}
+
+/* Order book styling */
+.orderbook-row {
+    transition: background-color 0.3s ease;
+}
+
+.orderbook-row:hover {
+    background-color: var(--bs-gray-800);
+}
+
+.bid-row {
+    background-color: rgba(40, 167, 69, 0.1);
+}
+
+.ask-row {
+    background-color: rgba(220, 53, 69, 0.1);
+}
+
+/* Technical indicators styling */
+.indicator-value {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.indicator-label {
+    font-size: 0.9rem;
+    color: var(--bs-gray-400);
+}
+
+/* Loading states */
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Card transitions */
+.card {
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+/* Table styling */
+.table-responsive {
+    max-height: 400px;
+}
+
+.table th {
+    position: sticky;
+    top: 0;
+    background-color: var(--bs-gray-900);
+    z-index: 10;
+}
+
+/* Price color indicators */
+.price-up {
+    color: #28a745 !important;
+}
+
+.price-down {
+    color: #dc3545 !important;
+}
+
+.price-neutral {
+    color: var(--bs-gray-400) !important;
+}
+
+/* Button styling */
+.btn-group-sm > .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .chart-container {
+        height: 300px;
+    }
+    
+    .chart-container canvas {
+        max-height: 300px;
+    }
+    
+    .table-responsive {
+        max-height: 300px;
+    }
+}
+
+/* Animation for data updates */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Snapshot Analysis Styling */
+.layer-card {
+    position: relative;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.layer-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+.layer-title {
+    font-weight: 600;
+    color: var(--bs-gray-100);
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+}
+
+.layer-status {
+    font-size: 0.9rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.layer-status.bullish {
+    background-color: rgba(40, 167, 69, 0.2);
+    color: #28a745;
+    border: 1px solid #28a745;
+}
+
+.layer-status.bearish {
+    background-color: rgba(220, 53, 69, 0.2);
+    color: #dc3545;
+    border: 1px solid #dc3545;
+}
+
+.layer-status.neutral {
+    background-color: rgba(108, 117, 125, 0.2);
+    color: #6c757d;
+    border: 1px solid #6c757d;
+}
+
+.layer-description {
+    font-size: 0.85rem;
+    color: var(--bs-gray-400);
+    margin-top: 8px;
+    line-height: 1.4;
+}
+
+.layer-update-time {
+    font-size: 0.75rem;
+    color: var(--bs-gray-500);
+    margin-top: 6px;
+    font-style: italic;
+}
+
+/* Tooltip Styling */
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    width: 280px;
+    background-color: var(--bs-gray-900);
+    color: var(--bs-gray-100);
+    text-align: left;
+    border-radius: 6px;
+    padding: 12px;
+    position: absolute;
+    z-index: 1001;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -140px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    border: 1px solid var(--bs-gray-700);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+}
+
+.tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--bs-gray-900) transparent transparent transparent;
+}
+
+.tooltip-container:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Confidence Score Styling */
+.confidence-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 auto 15px;
+    border: 3px solid;
+    transition: all 0.3s ease;
+}
+
+.confidence-high {
+    background-color: rgba(40, 167, 69, 0.2);
+    border-color: #28a745;
+    color: #28a745;
+}
+
+.confidence-medium {
+    background-color: rgba(255, 193, 7, 0.2);
+    border-color: #ffc107;
+    color: #ffc107;
+}
+
+.confidence-low {
+    background-color: rgba(220, 53, 69, 0.2);
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+/* Narrative Analysis Styling */
+.narrative-section {
+    background-color: var(--bs-gray-800);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-left: 4px solid var(--bs-primary);
+}
+
+.narrative-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--bs-gray-100);
+    margin-bottom: 12px;
+}
+
+.narrative-content {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--bs-gray-300);
+}
+
+/* Alternative Scenarios Styling */
+.scenario-item {
+    background-color: var(--bs-gray-800);
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 12px;
+    border-left: 3px solid var(--bs-info);
+}
+
+.scenario-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--bs-info);
+    margin-bottom: 8px;
+}
+
+.scenario-probability {
+    font-size: 0.8rem;
+    color: var(--bs-gray-400);
+    margin-bottom: 8px;
+}
+
+.scenario-description {
+    font-size: 0.85rem;
+    color: var(--bs-gray-300);
+    line-height: 1.5;
+}
+
+/* Volume bar styling */
+.volume-bar {
+    height: 4px;
+    background-color: var(--bs-primary);
+    border-radius: 2px;
+    margin-top: 5px;
+}
+
+/* Indicator status */
+.indicator-status {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.indicator-status.bullish {
+    background-color: #28a745;
+}
+
+.indicator-status.bearish {
+    background-color: #dc3545;
+}
+
+.indicator-status.neutral {
+    background-color: var(--bs-gray-500);
+}
+
+/* Order book depth visualization */
+.depth-bar {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    opacity: 0.3;
+    z-index: 0;
+}
+
+.depth-bar.bid {
+    background-color: #28a745;
+}
+
+.depth-bar.ask {
+    background-color: #dc3545;
+}
+
+.depth-cell {
+    position: relative;
+    z-index: 1;
+}
+
+/* Scrollbar styling */
+.table-responsive::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    background: var(--bs-gray-800);
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background: var(--bs-gray-600);
+    border-radius: 4px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb:hover {
+    background: var(--bs-gray-500);
+}

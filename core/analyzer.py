@@ -9,6 +9,7 @@ import logging
 from typing import Dict, Any, Optional, List
 import ta
 from .professional_smc_analyzer import ProfessionalSMCAnalyzer
+from .enhanced_ai_engine import EnhancedAIEngine
 
 logger = logging.getLogger(__name__)
 
@@ -18,6 +19,7 @@ class TechnicalAnalyzer:
     def __init__(self):
         self.logger = logging.getLogger(__name__)
         self.smc_analyzer = ProfessionalSMCAnalyzer()
+        self.enhanced_ai = EnhancedAIEngine()
         
     def analyze(self, df: pd.DataFrame, symbol: str, timeframe: str) -> Dict[str, Any]:
         """Perform comprehensive technical analysis with professional SMC integration"""
@@ -367,6 +369,34 @@ class TechnicalAnalyzer:
             self.logger.error(f"Error merging signals: {e}")
             
         return merged_signals
+    
+    def generate_enhanced_ai_narrative(self, analysis_data: Dict[str, Any], 
+                                     language: str = "indonesian", 
+                                     quick_mode: bool = False) -> str:
+        """Generate enhanced AI narrative using advanced AI engine"""
+        
+        try:
+            symbol = analysis_data.get('symbol', 'UNKNOWN')
+            narrative = self.enhanced_ai.generate_enhanced_analysis(
+                symbol=symbol,
+                analysis_data=analysis_data,
+                language=language,
+                quick_mode=quick_mode
+            )
+            
+            return narrative
+            
+        except Exception as e:
+            self.logger.error(f"Error generating enhanced AI narrative: {e}")
+            return f"Enhanced AI narrative generation failed: {str(e)}"
+    
+    def get_enhanced_ai_stats(self) -> Dict[str, Any]:
+        """Get enhanced AI engine statistics"""
+        return self.enhanced_ai.get_usage_stats()
+    
+    def test_enhanced_ai_connection(self) -> Dict[str, Any]:
+        """Test enhanced AI connection"""
+        return self.enhanced_ai.test_ai_connection()
     
     def _calculate_enhanced_confidence(self, traditional_signals: Dict[str, Any], smc_analysis: Dict[str, Any]) -> float:
         """Calculate enhanced confidence score combining traditional and SMC analysis"""

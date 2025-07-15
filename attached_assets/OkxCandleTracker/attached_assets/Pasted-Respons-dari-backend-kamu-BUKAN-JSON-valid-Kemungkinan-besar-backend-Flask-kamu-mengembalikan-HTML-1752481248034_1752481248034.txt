@@ -1,0 +1,77 @@
+Respons dari backend kamu BUKAN JSON valid
+Kemungkinan besar backend (Flask) kamu mengembalikan HTML error page atau string error biasa, bukan JSON, sehingga frontend kamu yang fetch(...).then(res => res.json()) langsung crash saat parsing.
+
+🔍 Kemungkinan Paling Umum:
+✅ 1. OPENAI_API_KEY kamu belum disetel / invalid
+GPT gagal dipanggil → backend mengembalikan error HTML dari OpenAI → frontend gagal .json() → keluar:
+
+javascript
+Salin
+Edit
+Error: Unexpected token '<' in JSON
+✅ Solusi Langkah Demi Langkah:
+✅ A. Cek apakah OPENAI_API_KEY sudah ada di Secrets Replit:
+Klik tab kiri bawah "🔐 Secrets"
+
+Pastikan:
+
+Key = OPENAI_API_KEY
+
+Value = sk-... dari https://platform.openai.com/api-keys
+
+📌 Pastikan tidak ada spasi, dan key-nya sama persis (OPENAI_API_KEY)
+
+✅ B. Tambahkan Penanganan Error di Flask Endpoint
+Di app.py (atau main.py), tambahkan pengecekan:
+
+python
+Salin
+Edit
+from flask import jsonify
+from ai_engine import generate_ai_snapshot
+
+@app.route("/api/snapshot-ai/<symbol>/<tf>")
+def snapshot_ai(symbol, tf):
+    try:
+        result = run_full_analysis(symbol, tf)  # fungsi analisa kamu
+        ai_output = generate_ai_snapshot(symbol, tf, result)
+        return jsonify({"success": True, "data": ai_output})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)})
+✅ C. Tambahkan validasi di frontend sebelum .json()
+javascript
+Salin
+Edit
+fetch('/api/snapshot-ai/SOL-USDT/5m')
+  .then(res => {
+    if (!res.ok) throw new Error("Network error");
+    return res.json();
+  })
+  .then(data => {
+    if (!data.success) throw new Error(data.error || "AI gagal.");
+    showSnapshot(data.data);  // fungsi tampilin narasi GPT
+  })
+  .catch(err => {
+    alert("❌ AI Snapshot Error:\n" + err.message);
+  });
+🔍 Tips Tambahan Debug:
+Tambahkan print(response) di ai_engine.py:
+
+python
+Salin
+Edit
+print(response)
+Atau:
+
+python
+Salin
+Edit
+print("[AI Response]:", response.choices[0].message.content)
+🚀 Setelah Fix Ini:
+API key kamu akan bisa dipakai
+
+GPT akan membalas narasi profesional
+
+Frontend bisa fetch().json() tanpa error
+
+Radar + snapshot UI kamu langsung hidup 🔥
