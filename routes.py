@@ -2173,8 +2173,11 @@ def get_ai_snapshots(symbol):
         if not symbol or len(symbol) < 3:
             return jsonify({'error': 'Invalid symbol'}), 400
         
+        # Standardize symbol format to BTC-USDT
+        symbol_formatted = f"{symbol.upper()}-USDT" if not symbol.upper().endswith('-USDT') else symbol.upper()
+        
         # Build query
-        query = AISnapshotArchive.query.filter_by(symbol=symbol.upper(), timeframe=timeframe)
+        query = AISnapshotArchive.query.filter_by(symbol=symbol_formatted, timeframe=timeframe)
         
         if session_id:
             query = query.filter_by(session_id=session_id)
@@ -2185,7 +2188,7 @@ def get_ai_snapshots(symbol):
         
         return jsonify({
             'success': True,
-            'symbol': symbol.upper(),
+            'symbol': symbol_formatted,
             'timeframe': timeframe,
             'session_id': session_id,
             'count': len(snapshots),
@@ -2205,10 +2208,14 @@ def create_ai_snapshot():
         if not data or 'symbol' not in data:
             return jsonify({'error': 'Symbol is required'}), 400
         
+        # Standardize symbol format to BTC-USDT
+        symbol = data['symbol'].upper()
+        symbol_formatted = f"{symbol}-USDT" if not symbol.endswith('-USDT') else symbol
+        
         # Create new AI snapshot
         snapshot = AISnapshotArchive(
             session_id=data.get('session_id', 'anonymous'),
-            symbol=data['symbol'].upper(),
+            symbol=symbol_formatted,
             timeframe=data.get('timeframe', '1h'),
             quick_mode=data.get('quick_mode', False),
             ai_narrative=data.get('ai_narrative', ''),
@@ -2289,6 +2296,10 @@ def get_snapshot_statistics():
         symbol = request.args.get('symbol', None)
         timeframe = request.args.get('timeframe', None)
         
+        # Standardize symbol format if provided
+        if symbol:
+            symbol = f"{symbol.upper()}-USDT" if not symbol.upper().endswith('-USDT') else symbol.upper()
+        
         stats = snapshot_archiver.get_snapshot_statistics(symbol, timeframe)
         
         return jsonify({
@@ -2312,11 +2323,14 @@ def get_comparative_analysis(symbol):
         if not symbol or len(symbol) < 3:
             return jsonify({'error': 'Invalid symbol'}), 400
         
-        analysis = snapshot_archiver.get_comparative_analysis(symbol.upper(), days)
+        # Standardize symbol format to BTC-USDT
+        symbol_formatted = f"{symbol.upper()}-USDT" if not symbol.upper().endswith('-USDT') else symbol.upper()
+        
+        analysis = snapshot_archiver.get_comparative_analysis(symbol_formatted, days)
         
         return jsonify({
             'success': True,
-            'symbol': symbol.upper(),
+            'symbol': symbol_formatted,
             'analysis': analysis
         })
         
@@ -2332,6 +2346,10 @@ def export_snapshots():
         
         symbol = request.args.get('symbol', None)
         timeframe = request.args.get('timeframe', None)
+        
+        # Standardize symbol format if provided
+        if symbol:
+            symbol = f"{symbol.upper()}-USDT" if not symbol.upper().endswith('-USDT') else symbol.upper()
         
         filepath = snapshot_archiver.export_snapshots_to_json(symbol, timeframe)
         
@@ -2361,8 +2379,11 @@ def generate_pdf_report(symbol):
         if not symbol or len(symbol) < 3:
             return jsonify({'error': 'Invalid symbol'}), 400
         
+        # Standardize symbol format to BTC-USDT
+        symbol_formatted = f"{symbol.upper()}-USDT" if not symbol.upper().endswith('-USDT') else symbol.upper()
+        
         pdf_path = snapshot_archiver.generate_pdf_report(
-            symbol.upper(), timeframe, snapshot_id
+            symbol_formatted, timeframe, snapshot_id
         )
         
         if pdf_path:

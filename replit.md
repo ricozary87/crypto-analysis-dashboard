@@ -138,6 +138,12 @@ This is a real-time cryptocurrency trading signal system built with Flask that i
 - **API Response Format**: Created `json_safe()` helper in `routes.py` - handles NaN, pandas Series, and all edge cases
 - **Test Results**: All 3 fixes verified working with 100% success rate
 
+#### **🔧 PRIORITY 2 HIGH FIXES (July 15, 2025) - 100% COMPLETE**
+- **Routing DB Error Fix**: Fixed AISnapshotArchive queries to use proper BTC-USDT symbol format
+- **Symbol Format Consistency**: Standardized all snapshot endpoints to consistently use BTC-USDT format
+- **Endpoints Fixed**: 6 endpoints updated (ai-snapshots, comparative, statistics, export, pdf-report)
+- **Test Results**: All fixes verified with 100% success rate, backward compatible with both BTC and BTC-USDT inputs
+
 ### July 15, 2025 - OKX API Configuration - 100% AUTHENTICATION SUCCESS! 🔐
 
 **OKX API CONFIGURATION STATUS** - All authenticated endpoints working perfectly:

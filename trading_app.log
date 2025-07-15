@@ -60181,3 +60181,59 @@ jinja2.exceptions.TemplateNotFound: analysis_history.html
 2025-07-15 06:36:50,413 - apscheduler.scheduler - INFO - Scheduler started
 2025-07-15 06:36:50,413 - apscheduler.scheduler - DEBUG - Looking for jobs to run
 2025-07-15 06:36:50,413 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 06:41:34,234 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 06:41:34,234 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 06:41:34,234 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 06:41:35,045 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 06:41:35,046 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 06:41:35,048 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 06:41:35,048 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 06:41:35,049 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 06:41:43,632 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 06:41:43,632 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 06:41:43,632 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 06:41:44,292 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 06:41:44,293 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 06:41:44,296 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 06:41:44,296 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 06:41:44,296 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 06:42:00,364 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 06:42:00,365 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 06:42:00,365 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 06:42:02,094 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 06:42:02,095 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 06:42:02,098 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 06:42:02,098 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 06:42:02,118 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 06:42:16,201 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 06:42:16,202 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 06:42:16,202 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 06:42:16,767 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 06:42:16,767 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 06:42:16,769 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 06:42:16,769 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 06:42:16,769 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 06:42:50,817 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 06:42:50,817 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 06:42:50,817 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 06:42:51,619 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 06:42:51,620 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 06:42:51,621 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 06:42:51,622 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 06:42:51,622 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 06:43:30,342 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 06:43:30,358 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 06:43:30,367 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-15 06:43:30,367 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 06:43:30,368 - core.snapshot_archiver - INFO - SnapshotArchiver initialized
+2025-07-15 06:43:30,368 - core.snapshot_archiver - ERROR - Error getting comparative analysis: name 'AISnapshotArchive' is not defined
+2025-07-15 06:43:30,372 - core.snapshot_archiver - ERROR - Error getting snapshot statistics: name 'AISnapshotArchive' is not defined
+2025-07-15 06:43:31,119 - core.snapshot_archiver - ERROR - Error generating PDF report: No snapshots found for BTC-USDT
+2025-07-15 06:44:43,800 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 06:44:43,800 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 06:44:43,800 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 06:44:45,034 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 06:44:45,035 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 06:44:45,036 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 06:44:45,037 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 06:44:45,037 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
