@@ -57357,3 +57357,17 @@ jinja2.exceptions.TemplateNotFound: index.html
 2025-07-15 00:33:55,840 - apscheduler.scheduler - DEBUG - Looking for jobs to run
 2025-07-15 00:33:55,840 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
 2025-07-15 00:34:01,479 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 00:35:36,143 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 00:35:36,143 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 00:35:36,143 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 00:40:27,695 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 00:40:27,696 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 00:40:27,697 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 00:40:27,697 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 00:40:27,698 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 00:40:33,632 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 00:40:59,997 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 00:41:00,000 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 00:41:00,126 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 00:41:00,133 - core.okx_fetcher - DEBUG - Fetched 100 candles for BTC-USDT
+2025-07-15 00:41:00,137 - core.advanced_formatter - ERROR - Error formatting analysis: unsupported format string passed to NoneType.__format__
