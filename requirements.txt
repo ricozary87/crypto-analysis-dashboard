@@ -17,3 +17,7 @@ pyyaml
 tenacity
 ta
 reportlab
+prometheus-client
+prometheus-flask-exporter
+sentry-sdk
+psutil

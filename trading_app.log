@@ -60955,3 +60955,100 @@ jinja2.exceptions.TemplateNotFound: analysis_history.html
 2025-07-15 08:55:19,107 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
 2025-07-15 08:55:19,118 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
 2025-07-15 08:55:19,118 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 10:14:34,540 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 10:14:34,541 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 10:14:34,542 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 10:14:34,544 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 10:14:34,545 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 10:14:45,955 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 10:14:45,994 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 10:14:46,007 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-15 10:14:46,008 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 10:16:54,062 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 10:16:54,062 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 10:16:54,062 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 10:37:41,030 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 10:37:41,035 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 10:37:41,036 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 10:37:41,036 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 10:37:41,037 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 10:37:49,637 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 10:37:49,660 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 10:37:49,672 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-15 10:37:49,672 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 10:39:08,852 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 10:39:08,852 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 10:39:08,852 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 10:39:11,437 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 10:39:11,440 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 10:39:11,441 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 10:39:11,443 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 10:39:11,465 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 10:39:19,074 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 10:39:19,084 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 10:39:19,095 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-15 10:39:19,095 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 10:39:19,112 - core.monitoring - ERROR - Failed to update active signals count: Working outside of application context.
+
+This typically means that you attempted to use functionality that needed
+the current application. To solve this, set up an application context
+with app.app_context(). See the documentation for more information.
+2025-07-15 10:39:19,120 - core.monitoring - ERROR - Failed to update win rate metrics: Working outside of application context.
+
+This typically means that you attempted to use functionality that needed
+the current application. To solve this, set up an application context
+with app.app_context(). See the documentation for more information.
+2025-07-15 10:39:19,127 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-15 10:39:19,171 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 10:39:19,171 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 10:39:19,172 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 10:40:05,579 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 10:40:05,583 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 10:40:05,583 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 10:40:05,584 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 10:40:05,584 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 10:40:13,088 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 10:40:13,099 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 10:40:13,114 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-15 10:40:13,115 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 10:40:14,889 - core.monitoring - DEBUG - Active signals count updated
+2025-07-15 10:40:17,981 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-15 10:40:18,217 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-15 10:40:18,289 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 10:40:18,290 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 10:40:18,290 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 10:41:52,523 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 10:41:52,526 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 10:41:52,526 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 10:41:52,530 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 10:41:52,531 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 10:42:02,662 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 10:42:02,677 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 10:42:02,690 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-15 10:42:02,712 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 10:42:04,571 - core.monitoring - DEBUG - Active signals count updated
+2025-07-15 10:42:07,843 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-15 10:42:08,101 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-15 10:42:08,256 - monitoring_routes - INFO - Monitoring routes initialized successfully
+2025-07-15 10:42:08,364 - monitoring_routes - ERROR - Health check failed: Textual SQL expression 'SELECT 1' should be explicitly declared as text('SELECT 1')
+2025-07-15 10:42:09,375 - core.monitoring - DEBUG - API call tracked: health_check 0.010s success
+2025-07-15 10:42:29,998 - monitoring_routes - ERROR - Health check failed: Textual SQL expression 'SELECT 1' should be explicitly declared as text('SELECT 1')
+2025-07-15 10:42:31,003 - core.monitoring - DEBUG - API call tracked: health_check 0.004s success
+2025-07-15 10:42:35,313 - core.monitoring - DEBUG - API call tracked: system_metrics 2.532s success
+2025-07-15 10:42:42,838 - core.monitoring - DEBUG - API call tracked: trading_metrics 5.543s success
+2025-07-15 10:43:52,196 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 10:43:52,196 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 10:43:52,197 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 10:43:55,250 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 10:43:55,252 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 10:43:55,253 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 10:43:55,253 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 10:43:55,262 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 10:44:02,140 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 10:44:02,153 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 10:44:02,163 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-15 10:44:02,163 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 10:44:03,868 - core.monitoring - DEBUG - Active signals count updated
+2025-07-15 10:44:06,979 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-15 10:44:07,217 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-15 10:44:07,263 - monitoring_routes - INFO - Monitoring routes initialized successfully

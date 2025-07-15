@@ -1,0 +1,102 @@
+groups:
+  - name: trading_ai_alerts
+    rules:
+      - alert: HighErrorRate
+        expr: sum(rate(flask_http_request_total{status=~"5.."}[5m])) / sum(rate(flask_http_request_total[5m])) > 0.05
+        for: 2m
+        labels:
+          severity: critical
+          service: trading-ai
+        annotations:
+          summary: "High error rate detected"
+          description: "Error rate is {{ $value | humanizePercentage }} for the last 5 minutes"
+
+      - alert: SlowAPIResponse
+        expr: histogram_quantile(0.95, rate(api_response_time_seconds_bucket[5m])) > 2
+        for: 5m
+        labels:
+          severity: warning
+          service: trading-ai
+        annotations:
+          summary: "API response time is slow"
+          description: "95th percentile response time is {{ $value }}s"
+
+      - alert: LowSystemHealth
+        expr: system_health_score < 70
+        for: 5m
+        labels:
+          severity: warning
+          service: trading-ai
+        annotations:
+          summary: "System health is low"
+          description: "System health score is {{ $value }}"
+
+      - alert: HighCPUUsage
+        expr: system_cpu_usage > 80
+        for: 10m
+        labels:
+          severity: warning
+          service: trading-ai
+        annotations:
+          summary: "High CPU usage detected"
+          description: "CPU usage is {{ $value }}%"
+
+      - alert: HighMemoryUsage
+        expr: system_memory_usage > 80
+        for: 10m
+        labels:
+          severity: warning
+          service: trading-ai
+        annotations:
+          summary: "High memory usage detected"
+          description: "Memory usage is {{ $value }}%"
+
+      - alert: DatabaseConnectionsHigh
+        expr: database_connections_active > 80
+        for: 5m
+        labels:
+          severity: warning
+          service: trading-ai
+        annotations:
+          summary: "High database connections"
+          description: "Database connections: {{ $value }}"
+
+      - alert: NoTradingSignals
+        expr: increase(trading_signals_total[1h]) < 1
+        for: 1h
+        labels:
+          severity: warning
+          service: trading-ai
+        annotations:
+          summary: "No trading signals generated"
+          description: "No signals generated in the last hour"
+
+      - alert: LowAnalysisConfidence
+        expr: histogram_quantile(0.50, rate(analysis_confidence_score_bucket[30m])) < 0.5
+        for: 30m
+        labels:
+          severity: warning
+          service: trading-ai
+        annotations:
+          summary: "Low analysis confidence"
+          description: "Median confidence is {{ $value }}"
+
+      - alert: OKXAPIDown
+        expr: rate(okx_api_calls_total{status="error"}[5m]) > 0.1
+        for: 2m
+        labels:
+          severity: critical
+          service: trading-ai
+        annotations:
+          summary: "OKX API errors detected"
+          description: "OKX API error rate: {{ $value }}"
+
+      - alert: AIServiceDown
+        expr: rate(ai_narrative_requests_total{status="error"}[5m]) > 0.1
+        for: 2m
+        labels:
+          severity: critical
+          service: trading-ai
+        annotations:
+          summary: "AI service errors detected"
+          description: "AI service error rate: {{ $value }}"

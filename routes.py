@@ -12,6 +12,9 @@ from core.analyzer import TechnicalAnalyzer
 from core.okx_fetcher import OKXAPIManager
 from core.snapshot_generator import SnapshotGenerator, SnapshotType
 
+# Monitoring imports
+from core.monitoring import monitor_api_performance, track_trading_signal, track_ai_narrative, monitor
+
 logger = logging.getLogger(__name__)
 
 # JSON Safe Converter Helper
@@ -402,6 +405,7 @@ def chart_data(symbol):
         }), 500
 
 @app.route('/api/analyze/<symbol>')
+@monitor_api_performance('analyze_symbol')
 def analyze_coin(symbol):
     """Enhanced real-time analysis with OkxCandleTracker SMC integration"""
     try:

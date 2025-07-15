@@ -9,6 +9,44 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.interval import IntervalTrigger
 import atexit
 
+# Sentry Integration for Error Monitoring
+import sentry_sdk
+from sentry_sdk.integrations.flask import FlaskIntegration
+from sentry_sdk.integrations.sqlalchemy import SqlalchemyIntegration
+from sentry_sdk.integrations.logging import LoggingIntegration
+
+# Prometheus Integration for Metrics
+from prometheus_flask_exporter import PrometheusMetrics
+from prometheus_client import Counter, Histogram, Gauge, generate_latest
+
+# Configure Sentry for Error Monitoring
+sentry_logging = LoggingIntegration(
+    level=logging.INFO,        # Capture info and above as breadcrumbs
+    event_level=logging.ERROR  # Send errors as events
+)
+
+# Initialize Sentry SDK
+sentry_sdk.init(
+    dsn=os.environ.get("SENTRY_DSN"),
+    integrations=[
+        FlaskIntegration(transaction_style='endpoint'),
+        SqlalchemyIntegration(),
+        sentry_logging,
+    ],
+    # Set traces_sample_rate to 1.0 to capture 100% of transactions
+    traces_sample_rate=1.0,
+    # Set profiles_sample_rate to 1.0 to profile 100% of sampled transactions
+    profiles_sample_rate=1.0,
+    # Release information
+    release=os.environ.get("SENTRY_RELEASE", "trading-ai-v1.0.0"),
+    environment=os.environ.get("SENTRY_ENVIRONMENT", "production"),
+    # Enable performance monitoring
+    enable_tracing=True,
+    # Additional configuration
+    before_send_transaction=lambda event, hint: event if event.get('transaction') != '/health' else None,
+    debug=os.environ.get("SENTRY_DEBUG", "false").lower() == "true"
+)
+
 # Configure logging
 logging.basicConfig(
     level=logging.DEBUG,
@@ -42,6 +80,21 @@ app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
 db.init_app(app)
 socketio = SocketIO(app, cors_allowed_origins="*", logger=True, engineio_logger=True)
 
+# Initialize Prometheus Metrics
+metrics = PrometheusMetrics(app)
+metrics.info('trading_ai_app_info', 'Application info', version='1.0.0')
+
+# Custom Prometheus Metrics for Trading AI
+trading_signals_total = Counter('trading_signals_total', 'Total trading signals generated', ['symbol', 'action'])
+api_response_time = Histogram('api_response_time_seconds', 'API response time in seconds', ['endpoint'])
+active_signals = Gauge('active_signals_count', 'Number of active trading signals', ['symbol'])
+win_rate = Gauge('trading_win_rate', 'Trading win rate percentage', ['symbol'])
+analysis_confidence = Histogram('analysis_confidence_score', 'Analysis confidence score distribution', ['symbol'])
+okx_api_calls = Counter('okx_api_calls_total', 'Total OKX API calls', ['endpoint', 'status'])
+ai_narrative_requests = Counter('ai_narrative_requests_total', 'Total AI narrative requests', ['model', 'status'])
+system_health = Gauge('system_health_score', 'System health score (0-100)')
+database_connections = Gauge('database_connections_active', 'Active database connections')
+
 # Initialize scheduler for background tasks
 scheduler = BackgroundScheduler()
 scheduler.start()
@@ -61,6 +114,9 @@ def setup_routes():
 
 # Setup routes
 setup_routes()
+
+# Setup monitoring routes
+import monitoring_routes
 
 # Initialize trading orchestrator
 from core.orchestrator import MainOrchestrator
