@@ -61125,3 +61125,77 @@ with app.app_context(). See the documentation for more information.
 2025-07-15 10:49:05,742 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
 2025-07-15 10:49:05,750 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
 2025-07-15 10:49:06,946 - core.monitoring - DEBUG - API call tracked: analyze_symbol 0.374s success
+2025-07-15 10:50:57,615 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 10:50:57,626 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 10:50:57,628 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 10:50:57,894 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 10:50:57,907 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 10:50:59,040 - core.monitoring - DEBUG - API call tracked: analyze_symbol 0.425s success
+2025-07-15 10:51:43,753 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 10:51:43,767 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 10:51:43,769 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 10:51:43,960 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 10:51:43,971 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 10:51:45,128 - core.monitoring - DEBUG - API call tracked: analyze_symbol 0.375s success
+2025-07-15 10:51:57,592 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 10:51:57,604 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 10:51:57,606 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 10:51:57,788 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 10:51:57,800 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 10:51:58,963 - core.monitoring - DEBUG - API call tracked: analyze_symbol 0.371s success
+2025-07-15 10:52:23,606 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 10:52:23,607 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 10:52:23,607 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 10:52:26,625 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 10:52:26,627 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 10:52:26,628 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 10:52:26,628 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 10:52:26,629 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 10:52:34,423 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 10:52:34,447 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 10:52:34,464 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-15 10:52:34,464 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 10:52:36,255 - core.monitoring - DEBUG - Active signals count updated
+2025-07-15 10:52:39,496 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-15 10:52:39,741 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-15 10:52:39,790 - monitoring_routes - INFO - Monitoring routes initialized successfully
+2025-07-15 10:52:39,805 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 10:52:39,836 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 10:52:39,845 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 10:52:39,997 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 10:52:40,011 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 10:52:41,217 - core.monitoring - DEBUG - API call tracked: analyze_symbol 0.414s success
+2025-07-15 10:52:42,059 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 10:52:42,091 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 10:52:42,093 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 10:52:42,225 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 10:52:42,231 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 10:52:43,430 - core.monitoring - DEBUG - API call tracked: analyze_symbol 0.371s success
+2025-07-15 10:52:44,248 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 10:52:44,268 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 10:52:44,274 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 10:52:44,552 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 10:52:44,558 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 10:52:45,741 - core.monitoring - DEBUG - API call tracked: analyze_symbol 0.493s success
+2025-07-15 10:52:46,543 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 10:52:46,556 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 10:52:46,558 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 10:52:46,788 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 10:52:46,797 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 10:52:47,944 - core.monitoring - DEBUG - API call tracked: analyze_symbol 0.399s success
+2025-07-15 10:53:16,542 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 10:53:16,542 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 10:53:16,542 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 10:53:19,502 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 10:53:19,504 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 10:53:19,505 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 10:53:19,506 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 10:53:19,506 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 10:53:26,656 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 10:53:26,669 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 10:53:26,680 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-15 10:53:26,680 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 10:53:28,456 - core.monitoring - DEBUG - Active signals count updated
+2025-07-15 10:53:31,713 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-15 10:53:31,962 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-15 10:53:32,002 - monitoring_routes - INFO - Monitoring routes initialized successfully

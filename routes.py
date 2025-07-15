@@ -574,6 +574,21 @@ def analyze_coin(symbol):
 
 ⚠️ **Disclaimer:** Analisis ini hanya untuk tujuan edukasi. Selalu lakukan riset sendiri sebelum trading."""
         
+        # Prepare chart data for frontend
+        chart_data = []
+        for i in range(len(df)):
+            try:
+                chart_data.append({
+                    'timestamp': df.index[i].isoformat() if hasattr(df.index[i], 'isoformat') else str(df.index[i]),
+                    'open': float(df['open'].iloc[i]),
+                    'high': float(df['high'].iloc[i]),
+                    'low': float(df['low'].iloc[i]),
+                    'close': float(df['close'].iloc[i]),
+                    'volume': float(df['volume'].iloc[i])
+                })
+            except (IndexError, ValueError, KeyError):
+                continue
+        
         return jsonify({
             'success': True,
             'status': 'success',
@@ -584,7 +599,15 @@ def analyze_coin(symbol):
             'rsiValue': float(rsi_value),
             'macdValue': float(macd_diff),
             'formattedAnalysis': formatted_analysis,
-            'analysis': analysis,
+            'analysis': {
+                **analysis,
+                'chart': chart_data,  # Add chart data for frontend
+                'indicators': indicators,
+                'signals': signals,
+                'smc_analysis': smc_analysis,
+                'signal_data': signal_data
+            },
+            'chart': chart_data,  # Also add at root level for backward compatibility
             'rawData': {
                 'confidence': analysis.get('confidence', 0),
                 'patterns': len(analysis.get('smc_analysis', {}).get('patterns', [])),
@@ -596,7 +619,13 @@ def analyze_coin(symbol):
         logger.error(f"Error analyzing {symbol}: {e}")
         return jsonify({
             'success': False,
-            'error': str(e)
+            'error': str(e),
+            'chart': [],  # Empty chart data for error case
+            'analysis': {
+                'chart': [],
+                'indicators': {},
+                'signals': []
+            }
         }), 500
 
 @app.route('/api/snapshot/<symbol>')
