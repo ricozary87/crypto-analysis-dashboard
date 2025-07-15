@@ -59925,3 +59925,100 @@ jinja2.exceptions.TemplateNotFound: analysis_history.html
 2025-07-15 05:58:35,084 - apscheduler.scheduler - INFO - Scheduler started
 2025-07-15 05:58:35,085 - apscheduler.scheduler - DEBUG - Looking for jobs to run
 2025-07-15 05:58:35,085 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 06:06:01,414 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 06:06:01,468 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 06:06:01,484 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-15 06:06:01,484 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 06:06:01,501 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 06:07:35,086 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 06:07:35,098 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 06:07:35,101 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 06:07:35,247 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 06:07:35,253 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 06:07:35,300 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 06:07:35,308 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 06:07:35,318 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 06:07:35,320 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 06:07:35,457 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 06:07:35,462 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 06:07:35,728 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'idempotency_key': 'stainless-python-retry-0c1f9490-dc61-431a-8548-6c5ef1ecd14d', 'json_data': {'messages': [{'role': 'system', 'content': '\nAnda adalah analis teknikal crypto profesional dengan pengalaman 10+ tahun di pasar finansial.\n\nTUGAS UTAMA:\n- Menjelaskan kondisi pasar berdasarkan analisa teknikal multi-layer (SMC, volume, indikator, konfluensi)\n- Memberikan narasi yang informatif, analitis, dan berkualitas tinggi\n- Tetap menjelaskan arah pasar dan potensi pergerakan meski sinyal belum terbentuk\n- Fokus pada observasi mendalam dan persiapan trader profesional\n\nPRINSIP ANALISIS:\n✅ LAKUKAN:\n• Jelaskan arah pasar berdasarkan konfluensi teknikal\n• Analisis zona-zona penting dan level kritis\n• Berikan perspektif berbagai skenario (bullish/bearish/neutral)\n• Fokus pada risk management dan probabilitas\n• Gunakan terminologi teknikal yang tepat\n• Berikan insight mendalam tentang kondisi pasar\n\n❌ JANGAN:\n• Memaksakan sinyal BUY/SELL palsu\n• Memberikan rekomendasi trading langsung\n• Menggunakan bahasa yang terlalu yakin tanpa basis\n• Mengabaikan risiko atau uncertainty\n\nGAYA KOMUNIKASI:\n- Bahasa Indonesia profesional dan mudah dipahami\n- Struktur yang logis dan sistematis\n- Gunakan bullet points dan formatting yang rapi\n- Berikan reasoning yang jelas untuk setiap analisis\n- Fokus pada actionable insights\n\nSTRUKTUR NARASI:\n1. Executive Summary (bias utama dan confidence level)\n2. Analisis Multi-Layer (SMC, Volume, Indikator, Konfluensi)\n3. Skenario Trading (kondisi, entry zones, risk management)\n4. Key Levels dan Zona Penting\n5. Risk Assessment dan Market Context\n'}, {'role': 'user', 'content': "\n=== COMPREHENSIVE ANALYSIS REQUEST ===\n\n**BTC-USDT Professional Analysis**\n**Current Price: $116,980.00**\n**Analysis Time: 2025-07-15 06:07:35**\n\n## Smart Money Concepts Analysis\nMarket Structure: bullish\nSwing Points: 11 highs, 12 lows\nSMC Patterns: {'total_choch_bos': 5, 'total_order_blocks': 6, 'total_fvg': 39, 'total_liquidity_sweeps': 0, 'total_eqh_eql': 6, 'bullish_signals': 5, 'bearish_signals': 0, 'recent_activity': 5, 'pattern_diversity': 5}\n\n## Technical Indicators\nRSI: 28.25528412295347 (Oversold)\nEMA Trend: bearish\nMACD: -746.8768710592558 (Bearish)\nVolume: 105.716153 (Below Average)\n\n## Trading Signals\nAction: HOLD\nConfidence: 0.2%\nEntry Price: None\nStop Loss: None\nTake Profit: None\n\n## Confluence Analysis\nLevel: N/A\nScore: 0.00\nSupporting Indicators: []\n\nBerikan analisis komprehensif dalam bahasa indonesian yang mencakup:\n1. Executive Summary & Market Bias\n2. Smart Money Concepts Analysis\n3. Technical Indicators Breakdown\n4. Trading Strategy & Levels\n5. Risk Management & Scenarios\n6. Key Levels & Zones\n"}], 'model': 'gpt-4o', 'frequency_penalty': 0.1, 'max_tokens': 2000, 'presence_penalty': 0.0, 'temperature': 0.4, 'top_p': 0.95}}
+2025-07-15 06:07:35,733 - openai._base_client - DEBUG - Sending HTTP Request: POST https://api.openai.com/v1/chat/completions
+2025-07-15 06:07:35,733 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=30.0 socket_options=None
+2025-07-15 06:07:35,737 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f0d5f83ce90>
+2025-07-15 06:07:35,737 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7f0d5fdb4560> server_hostname='api.openai.com' timeout=30.0
+2025-07-15 06:07:35,743 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f0d5f83cf50>
+2025-07-15 06:07:35,743 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-07-15 06:07:35,743 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-07-15 06:07:35,744 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-07-15 06:07:35,744 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-07-15 06:07:35,744 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-07-15 06:07:52,780 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 06:07:52,781 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 06:07:52,782 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 06:07:52,783 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 06:07:52,783 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 06:08:28,237 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 06:08:28,275 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 06:08:28,279 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 06:08:28,418 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 06:08:28,428 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 06:08:28,480 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 06:08:28,490 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 06:08:28,501 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 06:08:28,503 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 06:08:28,633 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 06:08:28,639 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 06:08:28,897 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'idempotency_key': 'stainless-python-retry-fcc51cde-1921-4bf6-ab78-706613c4b7f7', 'json_data': {'messages': [{'role': 'system', 'content': '\nAnda adalah analis teknikal crypto profesional dengan pengalaman 10+ tahun di pasar finansial.\n\nTUGAS UTAMA:\n- Menjelaskan kondisi pasar berdasarkan analisa teknikal multi-layer (SMC, volume, indikator, konfluensi)\n- Memberikan narasi yang informatif, analitis, dan berkualitas tinggi\n- Tetap menjelaskan arah pasar dan potensi pergerakan meski sinyal belum terbentuk\n- Fokus pada observasi mendalam dan persiapan trader profesional\n\nPRINSIP ANALISIS:\n✅ LAKUKAN:\n• Jelaskan arah pasar berdasarkan konfluensi teknikal\n• Analisis zona-zona penting dan level kritis\n• Berikan perspektif berbagai skenario (bullish/bearish/neutral)\n• Fokus pada risk management dan probabilitas\n• Gunakan terminologi teknikal yang tepat\n• Berikan insight mendalam tentang kondisi pasar\n\n❌ JANGAN:\n• Memaksakan sinyal BUY/SELL palsu\n• Memberikan rekomendasi trading langsung\n• Menggunakan bahasa yang terlalu yakin tanpa basis\n• Mengabaikan risiko atau uncertainty\n\nGAYA KOMUNIKASI:\n- Bahasa Indonesia profesional dan mudah dipahami\n- Struktur yang logis dan sistematis\n- Gunakan bullet points dan formatting yang rapi\n- Berikan reasoning yang jelas untuk setiap analisis\n- Fokus pada actionable insights\n\nSTRUKTUR NARASI:\n1. Executive Summary (bias utama dan confidence level)\n2. Analisis Multi-Layer (SMC, Volume, Indikator, Konfluensi)\n3. Skenario Trading (kondisi, entry zones, risk management)\n4. Key Levels dan Zona Penting\n5. Risk Assessment dan Market Context\n'}, {'role': 'user', 'content': "\n=== COMPREHENSIVE ANALYSIS REQUEST ===\n\n**BTC-USDT Professional Analysis**\n**Current Price: $117,106.00**\n**Analysis Time: 2025-07-15 06:08:28**\n\n## Smart Money Concepts Analysis\nMarket Structure: bullish\nSwing Points: 11 highs, 12 lows\nSMC Patterns: {'total_choch_bos': 5, 'total_order_blocks': 6, 'total_fvg': 39, 'total_liquidity_sweeps': 0, 'total_eqh_eql': 6, 'bullish_signals': 5, 'bearish_signals': 0, 'recent_activity': 5, 'pattern_diversity': 5}\n\n## Technical Indicators\nRSI: 28.90829117112861 (Oversold)\nEMA Trend: bearish\nMACD: -736.8255890079599 (Bearish)\nVolume: 116.915752 (Below Average)\n\n## Trading Signals\nAction: HOLD\nConfidence: 0.2%\nEntry Price: None\nStop Loss: None\nTake Profit: None\n\n## Confluence Analysis\nLevel: N/A\nScore: 0.00\nSupporting Indicators: []\n\nBerikan analisis komprehensif dalam bahasa indonesian yang mencakup:\n1. Executive Summary & Market Bias\n2. Smart Money Concepts Analysis\n3. Technical Indicators Breakdown\n4. Trading Strategy & Levels\n5. Risk Management & Scenarios\n6. Key Levels & Zones\n"}], 'model': 'gpt-4o', 'frequency_penalty': 0.1, 'max_tokens': 2000, 'presence_penalty': 0.0, 'temperature': 0.4, 'top_p': 0.95}}
+2025-07-15 06:08:28,902 - openai._base_client - DEBUG - Sending HTTP Request: POST https://api.openai.com/v1/chat/completions
+2025-07-15 06:08:28,903 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=30.0 socket_options=None
+2025-07-15 06:08:28,909 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7feb6e15c250>
+2025-07-15 06:08:28,909 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7feb6e7072f0> server_hostname='api.openai.com' timeout=30.0
+2025-07-15 06:08:28,916 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7feb6e352590>
+2025-07-15 06:08:28,916 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-07-15 06:08:28,916 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-07-15 06:08:28,917 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-07-15 06:08:28,917 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-07-15 06:08:28,917 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-07-15 06:08:58,777 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Tue, 15 Jul 2025 06:08:58 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'access-control-expose-headers', b'X-Request-ID'), (b'openai-organization', b'user-4ezgmzyis7nvjdocwlxbxkb1'), (b'openai-processing-ms', b'29103'), (b'openai-version', b'2020-10-01'), (b'x-envoy-upstream-service-time', b'29120'), (b'x-ratelimit-limit-requests', b'500'), (b'x-ratelimit-limit-tokens', b'30000'), (b'x-ratelimit-remaining-requests', b'499'), (b'x-ratelimit-remaining-tokens', b'29371'), (b'x-ratelimit-reset-requests', b'120ms'), (b'x-ratelimit-reset-tokens', b'1.258s'), (b'x-request-id', b'req_161442965ea3851e18257988860b9daa'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=E0pqB8fEtETj6f0ZUYio0J6PhIW9rRhNjHN_2r7Rw1E-1752559738-1.0.1.1-5NbhDlZsBdONlVRI4weKZCjnU0tglgRGBjN6PPrDtdfGVrGwpZNkSnunteober_A24gmHXtHeQUCROjFKYZPUV_vXRNEikP0ftMOtB4qEQs; path=/; expires=Tue, 15-Jul-25 06:38:58 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=sCz4Tt1n9sT8zv2KDPpMrjb._46eEtFQ4850NTN1w8A-1752559738746-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'95f715e48baf9094-BOM'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-07-15 06:08:58,778 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 06:08:58,778 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-07-15 06:08:58,787 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-07-15 06:08:58,787 - httpcore.http11 - DEBUG - response_closed.started
+2025-07-15 06:08:58,787 - httpcore.http11 - DEBUG - response_closed.complete
+2025-07-15 06:08:58,787 - openai._base_client - DEBUG - HTTP Response: POST https://api.openai.com/v1/chat/completions "200 OK" Headers([('date', 'Tue, 15 Jul 2025 06:08:58 GMT'), ('content-type', 'application/json'), ('transfer-encoding', 'chunked'), ('connection', 'keep-alive'), ('access-control-expose-headers', 'X-Request-ID'), ('openai-organization', 'user-4ezgmzyis7nvjdocwlxbxkb1'), ('openai-processing-ms', '29103'), ('openai-version', '2020-10-01'), ('x-envoy-upstream-service-time', '29120'), ('x-ratelimit-limit-requests', '500'), ('x-ratelimit-limit-tokens', '30000'), ('x-ratelimit-remaining-requests', '499'), ('x-ratelimit-remaining-tokens', '29371'), ('x-ratelimit-reset-requests', '120ms'), ('x-ratelimit-reset-tokens', '1.258s'), ('x-request-id', 'req_161442965ea3851e18257988860b9daa'), ('strict-transport-security', 'max-age=31536000; includeSubDomains; preload'), ('cf-cache-status', 'DYNAMIC'), ('set-cookie', '__cf_bm=E0pqB8fEtETj6f0ZUYio0J6PhIW9rRhNjHN_2r7Rw1E-1752559738-1.0.1.1-5NbhDlZsBdONlVRI4weKZCjnU0tglgRGBjN6PPrDtdfGVrGwpZNkSnunteober_A24gmHXtHeQUCROjFKYZPUV_vXRNEikP0ftMOtB4qEQs; path=/; expires=Tue, 15-Jul-25 06:38:58 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), ('x-content-type-options', 'nosniff'), ('set-cookie', '_cfuvid=sCz4Tt1n9sT8zv2KDPpMrjb._46eEtFQ4850NTN1w8A-1752559738746-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), ('server', 'cloudflare'), ('cf-ray', '95f715e48baf9094-BOM'), ('content-encoding', 'gzip'), ('alt-svc', 'h3=":443"; ma=86400')])
+2025-07-15 06:08:58,787 - openai._base_client - DEBUG - request_id: req_161442965ea3851e18257988860b9daa
+2025-07-15 06:08:58,790 - core.enhanced_ai_engine - INFO - Enhanced AI narrative generated successfully for BTC-USDT
+2025-07-15 06:08:58,798 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 06:08:58,806 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 06:08:58,807 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 06:08:58,938 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 06:08:58,943 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 06:08:58,983 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 06:08:59,678 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 06:08:59,679 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 06:08:59,802 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=BTC-USDT&sz=20 HTTP/1.1" 200 None
+2025-07-15 06:09:00,652 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 06:09:00,653 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 06:09:00,653 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 06:09:00,654 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 06:09:00,789 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 06:09:00,794 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 06:09:00,828 - core.indicator_calculator - ERROR - Error calculating indicator cci: Indicator cci not supported
+2025-07-15 06:10:06,853 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 06:10:06,853 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 06:10:06,854 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 06:10:06,921 - httpcore.connection - DEBUG - close.started
+2025-07-15 06:10:06,922 - httpcore.connection - DEBUG - close.complete
+2025-07-15 06:10:08,296 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 06:10:08,296 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 06:10:08,298 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 06:10:08,298 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 06:10:08,298 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 06:10:11,833 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 06:10:11,834 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 06:10:11,834 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 06:13:11,532 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 06:13:11,533 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 06:13:11,535 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 06:13:11,535 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 06:13:11,535 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
