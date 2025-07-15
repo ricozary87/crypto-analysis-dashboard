@@ -71,9 +71,21 @@
             <span class="badge bg-secondary signal-badge" id="signal"></span>
           </h4>
           <p><b>Current Price:</b> $<span id="price"></span></p>
-          <p><b>Trend:</b> <span id="trend"></span></p>
-          <p><b>Confidence:</b> <span id="confidence"></span>%</p>
-          <p><b>Summary:</b> <span id="summary"></span></p>
+          <p><b>24h Change:</b> <span id="priceChange"></span>%</p>
+          <p><b>RSI:</b> <span id="rsi"></span></p>
+          <p><b>MACD:</b> <span id="macd"></span></p>
+          
+          <!-- AI Analysis Section -->
+          <div class="mt-4">
+            <h5><i class="fas fa-robot me-2"></i>AI-Powered Analysis</h5>
+            <div id="aiAnalysis" class="p-3" style="background-color: #2d3748; border-radius: 8px; white-space: pre-wrap; font-family: monospace; line-height: 1.6;"></div>
+          </div>
+          
+          <!-- Enhanced AI Analysis Section -->
+          <div class="mt-4">
+            <h5><i class="fas fa-brain me-2"></i>Advanced AI Insights</h5>
+            <div id="enhancedAnalysis" class="p-3" style="background-color: #1a202c; border-radius: 8px; white-space: pre-wrap; font-family: monospace; line-height: 1.6;"></div>
+          </div>
         </div>
       </div>
 
@@ -147,30 +159,64 @@
         const data = await res.json();
         if (!data.success) throw new Error(data.error || "Failed");
 
-        const analysis = data.analysis;
-        document.getElementById("symbol").textContent = analysis.symbol;
-        document.getElementById("signal").textContent = analysis.signals.action;
-        document.getElementById("price").textContent = analysis.current_price.toFixed(2);
-        document.getElementById("trend").textContent = analysis.trend;
-        document.getElementById("confidence").textContent = (analysis.signals.confidence * 100).toFixed(1);
-        document.getElementById("summary").textContent = analysis.summary;
+        // Display comprehensive analysis
+        document.getElementById("symbol").textContent = data.symbol;
+        document.getElementById("signal").textContent = data.hasSignal ? "Active Signal" : "No Signal";
+        document.getElementById("price").textContent = data.currentPrice.toFixed(2);
+        document.getElementById("priceChange").textContent = data.priceChange24h.toFixed(2);
+        document.getElementById("rsi").textContent = data.rsiValue.toFixed(1);
+        document.getElementById("macd").textContent = data.macdValue.toFixed(4);
+        
+        // Display comprehensive AI analysis
+        document.getElementById("aiAnalysis").textContent = data.formattedAnalysis;
+        
+        // Get enhanced AI analysis
+        fetch(`/api/enhanced-ai/narrative/${data.symbol}`)
+          .then(res => res.json())
+          .then(aiData => {
+            if (aiData.success && aiData.narrative) {
+              document.getElementById("enhancedAnalysis").textContent = aiData.narrative;
+            } else {
+              document.getElementById("enhancedAnalysis").textContent = "🤖 Enhanced AI analysis generating...";
+            }
+          })
+          .catch(err => {
+            document.getElementById("enhancedAnalysis").textContent = "🤖 AI analysis temporarily unavailable";
+          });
 
-        Plotly.newPlot('priceChart', [{
-          x: analysis.chart.map(c => formatTimestamp(c.timestamp)),
-          open: analysis.chart.map(c => c.open),
-          high: analysis.chart.map(c => c.high),
-          low: analysis.chart.map(c => c.low),
-          close: analysis.chart.map(c => c.close),
-          type: 'candlestick',
-          increasing: {line: {color: 'green'}},
-          decreasing: {line: {color: 'red'}}
-        }], {
-          paper_bgcolor: '#1a1a1a',
-          plot_bgcolor: '#1a1a1a',
-          font: {color: '#e6edf3'},
-          xaxis: {title: 'Time'},
-          yaxis: {title: 'Price (USDT)'}
-        });
+        // Create professional candlestick chart
+        if (data.chart && data.chart.length > 0) {
+          const chartData = data.chart.map((c, index) => ({
+            x: index,  // Use index instead of timestamp to avoid parsing issues
+            open: c.open,
+            high: c.high,
+            low: c.low,
+            close: c.close,
+            volume: c.volume
+          }));
+          
+          Plotly.newPlot('priceChart', [{
+            x: chartData.map(c => c.x),
+            open: chartData.map(c => c.open),
+            high: chartData.map(c => c.high),
+            low: chartData.map(c => c.low),
+            close: chartData.map(c => c.close),
+            type: 'candlestick',
+            name: `${data.symbol} Price`,
+            increasing: {line: {color: '#00ff88'}},
+            decreasing: {line: {color: '#ff4444'}}
+          }], {
+            paper_bgcolor: '#1a1a1a',
+            plot_bgcolor: '#1a1a1a',
+            font: {color: '#e6edf3'},
+            xaxis: {title: 'Time Period', showgrid: false},
+            yaxis: {title: 'Price (USDT)', showgrid: true, gridcolor: '#333'},
+            title: {
+              text: `${data.symbol} Price Analysis`,
+              font: {color: '#e6edf3', size: 16}
+            }
+          });
+        }
 
         document.getElementById("results").classList.remove("d-none");
       } catch (err) {

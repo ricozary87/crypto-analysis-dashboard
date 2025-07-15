@@ -423,7 +423,7 @@ def analyze_coin(symbol):
         
         # Get parameters
         timeframe = request.args.get('timeframe', '1H')
-        include_ai = request.args.get('ai', 'false').lower() == 'true'
+        include_ai = request.args.get('ai', 'true').lower() == 'true'  # Enable AI by default
         include_smc = request.args.get('smc', 'true').lower() == 'true'
             
         # Initialize components
