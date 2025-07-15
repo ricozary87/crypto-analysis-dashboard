@@ -13,6 +13,6 @@ sqlalchemy
 werkzeug
 numpy
 openai
-pandas-ta
 pyyaml
 tenacity
+ta

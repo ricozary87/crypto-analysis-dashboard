@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 import logging
 from typing import Dict, Any, Optional
-import pandas_ta as ta
+import ta
 
 logger = logging.getLogger(__name__)
 
@@ -56,49 +56,57 @@ class TechnicalAnalyzer:
         
         try:
             # RSI
-            rsi = ta.rsi(df['close'], length=14)
+            rsi = ta.momentum.RSIIndicator(df['close'], window=14).rsi()
             indicators['rsi'] = {
-                'value': float(rsi.iloc[-1]) if not rsi.empty else 50,
-                'overbought': rsi.iloc[-1] > 70 if not rsi.empty else False,
-                'oversold': rsi.iloc[-1] < 30 if not rsi.empty else False
+                'value': float(rsi.iloc[-1]) if not rsi.empty else 50.0,
+                'overbought': bool(rsi.iloc[-1] > 70) if not rsi.empty else False,
+                'oversold': bool(rsi.iloc[-1] < 30) if not rsi.empty else False
             }
             
             # Moving Averages
-            ema_20 = ta.ema(df['close'], length=20)
-            ema_50 = ta.ema(df['close'], length=50)
+            ema_20 = ta.trend.EMAIndicator(df['close'], window=20).ema_indicator()
+            ema_50 = ta.trend.EMAIndicator(df['close'], window=50).ema_indicator()
             
             indicators['ema'] = {
-                'ema_20': float(ema_20.iloc[-1]) if not ema_20.empty else df['close'].iloc[-1],
-                'ema_50': float(ema_50.iloc[-1]) if not ema_50.empty else df['close'].iloc[-1],
+                'ema_20': float(ema_20.iloc[-1]) if not ema_20.empty else float(df['close'].iloc[-1]),
+                'ema_50': float(ema_50.iloc[-1]) if not ema_50.empty else float(df['close'].iloc[-1]),
                 'trend': 'bullish' if ema_20.iloc[-1] > ema_50.iloc[-1] else 'bearish'
             }
             
             # MACD
-            macd = ta.macd(df['close'])
-            if macd is not None and not macd.empty:
+            macd_indicator = ta.trend.MACD(df['close'])
+            macd_line = macd_indicator.macd()
+            macd_signal = macd_indicator.macd_signal()
+            macd_histogram = macd_indicator.macd_diff()
+            
+            if not macd_line.empty and not macd_signal.empty:
                 indicators['macd'] = {
-                    'macd': float(macd['MACD_12_26_9'].iloc[-1]),
-                    'signal': float(macd['MACDs_12_26_9'].iloc[-1]),
-                    'histogram': float(macd['MACDh_12_26_9'].iloc[-1]),
-                    'bullish': macd['MACD_12_26_9'].iloc[-1] > macd['MACDs_12_26_9'].iloc[-1]
+                    'macd': float(macd_line.iloc[-1]),
+                    'signal': float(macd_signal.iloc[-1]),
+                    'histogram': float(macd_histogram.iloc[-1]),
+                    'bullish': bool(macd_line.iloc[-1] > macd_signal.iloc[-1])
                 }
             
             # Bollinger Bands
-            bb = ta.bbands(df['close'])
-            if bb is not None and not bb.empty:
+            bb_indicator = ta.volatility.BollingerBands(df['close'])
+            bb_upper = bb_indicator.bollinger_hband()
+            bb_middle = bb_indicator.bollinger_mavg()
+            bb_lower = bb_indicator.bollinger_lband()
+            
+            if not bb_upper.empty and not bb_middle.empty and not bb_lower.empty:
                 indicators['bollinger'] = {
-                    'upper': float(bb['BBU_20_2.0'].iloc[-1]),
-                    'middle': float(bb['BBM_20_2.0'].iloc[-1]),
-                    'lower': float(bb['BBL_20_2.0'].iloc[-1]),
-                    'squeeze': abs(bb['BBU_20_2.0'].iloc[-1] - bb['BBL_20_2.0'].iloc[-1]) < (bb['BBM_20_2.0'].iloc[-1] * 0.1)
+                    'upper': float(bb_upper.iloc[-1]),
+                    'middle': float(bb_middle.iloc[-1]),
+                    'lower': float(bb_lower.iloc[-1]),
+                    'squeeze': bool(abs(bb_upper.iloc[-1] - bb_lower.iloc[-1]) < (bb_middle.iloc[-1] * 0.1))
                 }
             
             # Volume indicators
-            volume_sma = ta.sma(df['volume'], length=20)
+            volume_sma = ta.trend.SMAIndicator(df['volume'], window=20).sma_indicator()
             indicators['volume'] = {
                 'current': float(df['volume'].iloc[-1]),
-                'average': float(volume_sma.iloc[-1]) if not volume_sma.empty else df['volume'].iloc[-1],
-                'above_average': df['volume'].iloc[-1] > volume_sma.iloc[-1] if not volume_sma.empty else False
+                'average': float(volume_sma.iloc[-1]) if not volume_sma.empty else float(df['volume'].iloc[-1]),
+                'above_average': bool(df['volume'].iloc[-1] > volume_sma.iloc[-1]) if not volume_sma.empty else False
             }
             
         except Exception as e:

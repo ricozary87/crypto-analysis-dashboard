@@ -252,17 +252,11 @@ def analyze_coin(symbol):
     try:
         # Import necessary modules
         from core.okx_fetcher import OKXAPIManager
-        from core.analyzer import SMAnalyzer
-        from core.signal_generator import SignalGenerator
-        from core.price_action import PriceActionAnalyzer
-        from core.smc_detector import SMCDetector
+        from core.analyzer import TechnicalAnalyzer
         from core.confluence_checker import ConfluenceChecker
         from core.narrative_ai import NarrativeAI
-        from core.risk_manager import RiskManager
-        from core.chart_generator import ChartGenerator
         from core.advanced_formatter import AdvancedFormatter
         import pandas as pd
-        import pandas_ta as ta
         
         # Validate symbol
         valid_symbols = ['BTC', 'ETH', 'SOL', 'TIA', 'RENDER']
@@ -271,185 +265,85 @@ def analyze_coin(symbol):
             
         # Initialize components
         okx_api = OKXAPIManager()
+        analyzer = TechnicalAnalyzer()
         confluence_checker = ConfluenceChecker()
         narrative_ai = NarrativeAI()
-        risk_manager = RiskManager()
-        chart_generator = ChartGenerator()
         formatter = AdvancedFormatter()
         
         # Fetch real-time data
         symbol_okx = f"{symbol.upper()}-USDT"
         df = okx_api.get_candles(symbol_okx, timeframe="1H", limit=100)
         
-        if df.empty:
+        if df is None or df.empty:
             return jsonify({
-                'symbol': symbol,
-                'hasSignal': False,
-                'status': 'neutral',
-                'indicators': {
-                    'rsi': 50,
-                    'volume': 'normal',
-                    'trend': 'sideways'
-                },
-                'analysis': f"Data pasar {symbol} tidak tersedia saat ini."
-            })
+                'success': False,
+                'error': 'Failed to fetch market data',
+                'symbol': symbol
+            }), 500
+            
+        # Run technical analysis
+        analysis = analyzer.analyze(df, symbol_okx, '1H')
         
-        # Use confluence checker for comprehensive analysis
-        confluence_signal = confluence_checker.analyze_confluence(df, symbol_okx, "1H")
+        # Check confluence
+        confluence_data = confluence_checker.check_confluence(analysis)
         
-        if confluence_signal and confluence_signal.confidence >= 0.65:
-            # Calculate risk parameters
-            capital = 10000  # Default capital for calculation
-            risk_params = risk_manager.calculate_risk_parameters(
-                symbol_okx,
-                capital,
-                confluence_signal.entry_price,
-                confluence_signal.stop_loss,
-                float(df['atr'].iloc[-1]) if 'atr' in df.columns else 0,
-                confluence_signal.confidence
-            )
-            
-            # Generate AI narrative
-            signal_data = {
-                'action': confluence_signal.action,
-                'pattern_type': 'Confluence',
-                'entry_price': confluence_signal.entry_price,
-                'stop_loss': confluence_signal.stop_loss,
-                'take_profit_1': confluence_signal.take_profit_1,
-                'take_profit_2': confluence_signal.take_profit_2,
-                'take_profit_3': confluence_signal.take_profit_3,
-                'confidence': confluence_signal.confidence,
-                'risk_reward_ratio': confluence_signal.risk_reward_ratio,
-                'confluence_factors': confluence_signal.confluence_factors
-            }
-            
-            market_data = {
-                'current_price': float(df['close'].iloc[-1]),
-                'price_change_24h': ((float(df['close'].iloc[-1]) - float(df['close'].iloc[-24])) / float(df['close'].iloc[-24])) * 100 if len(df) > 24 else 0,
-                'volume_ratio': float(df['volume'].iloc[-1]) / df['volume'].rolling(20).mean().iloc[-1] if len(df) > 20 else 1,
-                'rsi': float(df['rsi'].iloc[-1]) if 'rsi' in df.columns else 50,
-                'trend': 'bullish' if confluence_signal.action == 'BUY' else 'bearish'
-            }
-            
-            narrative = narrative_ai.generate_analysis_narrative(
-                symbol_okx,
-                signal_data,
-                market_data,
-                language='id'
-            )
-            
-            # Generate chart data
-            smc_detector = SMCDetector()
-            smc_patterns = smc_detector.detect_all_patterns(df)
-            chart_data = chart_generator.generate_chart_data(
-                df, symbol_okx, "1H", signal_data, smc_patterns
-            )
-            
-            return jsonify({
-                'symbol': symbol,
-                'hasSignal': True,
-                'signal': {
-                    'action': confluence_signal.action,
-                    'pattern': 'Multi-Confluence',
-                    'entry': confluence_signal.entry_price,
-                    'stopLoss': confluence_signal.stop_loss,
-                    'takeProfit': confluence_signal.take_profit_1,
-                    'takeProfit2': confluence_signal.take_profit_2,
-                    'takeProfit3': confluence_signal.take_profit_3,
-                    'confidence': confluence_signal.confidence,
-                    'reason': narrative.executive_summary,
-                    'riskReward': confluence_signal.risk_reward_ratio,
-                    'positionSize': f"{risk_params.position_size:.2f} USDT",
-                    'riskAmount': f"{risk_params.risk_amount:.2f} USDT",
-                    'confluenceFactors': confluence_signal.confluence_factors
-                },
-                'analysis': {
-                    'technical': narrative.technical_analysis,
-                    'risk': narrative.risk_assessment,
-                    'setup': narrative.trade_setup,
-                    'context': narrative.market_context
-                },
-                'currentPrice': float(df['close'].iloc[-1]),
-                'priceData': df[['open', 'high', 'low', 'close', 'volume']].tail(24).reset_index().rename(columns={'index': 'timestamp'}).to_dict('records'),
-                'chartConfig': {
-                    'candles': chart_data.candles[-50:],  # Last 50 candles
-                    'indicators': chart_data.indicators,
-                    'markers': chart_data.markers,
-                    'drawings': chart_data.drawings
-                }
-            })
-        
-        # No signal - return neutral analysis
-        current_price = float(df['close'].iloc[-1])
-        price_change = ((current_price - float(df['close'].iloc[-24])) / float(df['close'].iloc[-24])) * 100
-        
-        # Calculate simple RSI
-        gains = df['close'].diff()
-        avg_gain = gains[gains > 0].rolling(window=14).mean().iloc[-1]
-        avg_loss = -gains[gains < 0].rolling(window=14).mean().iloc[-1]
-        rs = avg_gain / avg_loss if avg_loss != 0 else 1
-        rsi = 100 - (100 / (1 + rs))
+        # Generate formatted analysis
+        formatted_analysis = formatter.format_analysis(analysis)
         
         return jsonify({
+            'success': True,
             'symbol': symbol,
-            'hasSignal': False,
-            'status': 'neutral',
-            'currentPrice': current_price,
-            'priceChange24h': round(price_change, 2),
-            'indicators': {
-                'rsi': round(rsi, 0) if not pd.isna(rsi) else 50,
-                'volume': 'high' if float(df['volume'].iloc[-1]) > df['volume'].mean() * 1.5 else 'normal',
-                'trend': 'bullish' if price_change > 1 else 'bearish' if price_change < -1 else 'sideways'
-            },
-            'analysis': f"Pasar {symbol} sedang konsolidasi. Belum ada setup trading yang ideal.",
-            'priceData': df[['open', 'high', 'low', 'close', 'volume']].tail(24).reset_index().rename(columns={'index': 'timestamp'}).to_dict('records')
+            'analysis': analysis,
+            'confluence': confluence_data,
+            'formatted_analysis': formatted_analysis
         })
         
     except Exception as e:
         logger.error(f"Error analyzing {symbol}: {e}")
-        return jsonify({'error': 'Failed to analyze coin', 'details': str(e)}), 500
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
 
 @app.route('/api/roi-analysis/<symbol>')
 def get_roi_analysis(symbol):
     """Get ROI analysis for a specific symbol"""
     try:
-        from core.historical_analysis import HistoricalAnalysis
-        from datetime import datetime, timedelta
+        # Get signals for the symbol
+        recent_signals = TradingSignal.query.filter_by(symbol=symbol.upper()).order_by(
+            TradingSignal.timestamp.desc()
+        ).limit(100).all()
         
-        # Get time range
-        days = request.args.get('days', 30, type=int)
-        end_date = datetime.utcnow()
-        start_date = end_date - timedelta(days=days)
+        if not recent_signals:
+            return jsonify({
+                'success': False,
+                'message': 'No signal data available'
+            }), 404
         
-        # Get ROI metrics
-        analyzer = HistoricalAnalysis()
-        roi_data = analyzer.calculate_roi_metrics(
-            symbol=symbol,
-            start_date=start_date,
-            end_date=end_date
-        )
+        # Calculate basic ROI metrics
+        total_trades = len(recent_signals)
+        win_count = sum(1 for s in recent_signals if s.status in ['hit_tp1', 'hit_tp2', 'hit_tp3'])
+        loss_count = sum(1 for s in recent_signals if s.status == 'stopped')
         
-        # Get win rate by timeframe
-        win_rates = analyzer.get_win_rate_by_timeframe(
-            symbol=symbol,
-            start_date=start_date,
-            end_date=end_date
-        )
+        win_rate = (win_count / total_trades * 100) if total_trades > 0 else 0
         
         return jsonify({
-            'status': 'success',
+            'success': True,
             'symbol': symbol,
-            'period_days': days,
-            'roi_metrics': roi_data,
-            'win_rates': win_rates
+            'roi_metrics': {
+                'total_trades': total_trades,
+                'win_count': win_count,
+                'loss_count': loss_count,
+                'win_rate': round(win_rate, 2),
+                'active_trades': total_trades - win_count - loss_count
+            }
         })
         
     except Exception as e:
         logger.error(f"Error getting ROI analysis for {symbol}: {e}")
-        return jsonify({
-            'status': 'error',
-            'message': str(e)
-        }), 500
+        return jsonify({'error': str(e)}), 500
+
+
 
 @app.route('/api/performance-chart/<symbol>')
 def get_performance_chart(symbol):
