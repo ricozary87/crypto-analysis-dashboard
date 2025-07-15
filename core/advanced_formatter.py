@@ -127,7 +127,7 @@ class AdvancedFormatter:
 💡 **REKOMENDASI**
 {self._generate_recommendation(signals, indicators, trend)}
 
-───────────────────────────────────────"""
+───────────────────────────────────────
 📅 Analisis: {datetime.now().strftime('%d/%m/%Y %H:%M:%S')} WIB
 🔄 Update: Real-time monitoring aktif
 """
