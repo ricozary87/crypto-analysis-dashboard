@@ -71,7 +71,7 @@ class ProfessionalSMCAnalyzer:
             return {
                 'symbol': symbol,
                 'timeframe': timeframe,
-                'timestamp': int(df['timestamp'].iloc[-1]) if 'timestamp' in df.columns else int(datetime.now().timestamp() * 1000),
+                'timestamp': int(df['timestamp'].iloc[-1].timestamp() * 1000) if 'timestamp' in df.columns else int(datetime.now().timestamp() * 1000),
                 'current_price': float(df['close'].iloc[-1]),
                 'swing_points': swing_points,
                 'choch_bos_signals': choch_bos_signals,
@@ -112,7 +112,7 @@ class ProfessionalSMCAnalyzer:
             
             if is_swing_high:
                 swing_highs.append({
-                    'timestamp': int(data[i]['timestamp']) if isinstance(data[i]['timestamp'], str) else data[i]['timestamp'],
+                    'timestamp': int(data[i]['timestamp'].timestamp() * 1000) if hasattr(data[i]['timestamp'], 'timestamp') else int(data[i]['timestamp']),
                     'index': i,
                     'price': current_high,
                     'type': 'swing_high'
@@ -127,7 +127,7 @@ class ProfessionalSMCAnalyzer:
             
             if is_swing_low:
                 swing_lows.append({
-                    'timestamp': int(data[i]['timestamp']) if isinstance(data[i]['timestamp'], str) else data[i]['timestamp'],
+                    'timestamp': int(data[i]['timestamp'].timestamp() * 1000) if hasattr(data[i]['timestamp'], 'timestamp') else int(data[i]['timestamp']),
                     'index': i,
                     'price': current_low,
                     'type': 'swing_low'
@@ -295,7 +295,7 @@ class ProfessionalSMCAnalyzer:
                 gap_size = next_candle['low'] - prev_candle['high']
                 if gap_size > 0:
                     fvg_signals.append({
-                        'timestamp': int(current_candle['timestamp']),
+                        'timestamp': int(current_candle['timestamp']) if isinstance(current_candle['timestamp'], (int, float)) else int(current_candle['timestamp'].timestamp() * 1000),
                         'type': 'FVG',
                         'direction': 'bullish',
                         'gap_high': next_candle['low'],
@@ -311,7 +311,7 @@ class ProfessionalSMCAnalyzer:
                 gap_size = prev_candle['low'] - next_candle['high']
                 if gap_size > 0:
                     fvg_signals.append({
-                        'timestamp': int(current_candle['timestamp']),
+                        'timestamp': int(current_candle['timestamp']) if isinstance(current_candle['timestamp'], (int, float)) else int(current_candle['timestamp'].timestamp() * 1000),
                         'type': 'FVG',
                         'direction': 'bearish',
                         'gap_high': prev_candle['low'],
@@ -345,7 +345,7 @@ class ProfessionalSMCAnalyzer:
                         
                         if reversal_found:
                             liquidity_sweeps.append({
-                                'timestamp': int(data[i]['timestamp']),
+                                'timestamp': int(data[i]['timestamp']) if isinstance(data[i]['timestamp'], (int, float)) else int(data[i]['timestamp'].timestamp() * 1000),
                                 'type': 'liquidity_sweep',
                                 'direction': 'bearish',
                                 'sweep_price': data[i]['high'],
@@ -370,7 +370,7 @@ class ProfessionalSMCAnalyzer:
                         
                         if reversal_found:
                             liquidity_sweeps.append({
-                                'timestamp': int(data[i]['timestamp']),
+                                'timestamp': int(data[i]['timestamp']) if isinstance(data[i]['timestamp'], (int, float)) else int(data[i]['timestamp'].timestamp() * 1000),
                                 'type': 'liquidity_sweep',
                                 'direction': 'bullish',
                                 'sweep_price': data[i]['low'],

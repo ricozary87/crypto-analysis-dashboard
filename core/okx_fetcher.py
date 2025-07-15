@@ -68,8 +68,8 @@ class OKXAPIManager:
                     'volCcy', 'volCcyQuote', 'confirm'
                 ])
                 
-                # Process data
-                df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
+                # Process data with proper timestamp handling
+                df['timestamp'] = pd.to_datetime(df['timestamp'].astype(float), unit='ms')
                 df['open'] = df['open'].astype(float)
                 df['high'] = df['high'].astype(float)
                 df['low'] = df['low'].astype(float)

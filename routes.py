@@ -5,6 +5,7 @@ from datetime import datetime, timedelta, timezone
 from config import Config
 import logging
 from core.narrative_ai import NarrativeAI
+from core.realtime_streamer import RealtimeDataStreamer, streamer
 
 logger = logging.getLogger(__name__)
 
@@ -1029,6 +1030,7 @@ def get_advanced_analysis(symbol):
         from core.smc_detector import SMCDetector
         from core.confluence_checker import ConfluenceChecker
         from core.advanced_formatter import AdvancedFormatter
+        from core.realtime_streamer import RealtimeDataStreamer, streamer
         import pandas as pd
         import pandas_ta as ta
         
@@ -1596,6 +1598,46 @@ def get_volume_profile_data(symbol):
     except Exception as e:
         logger.error(f"Error getting volume profile data for {symbol}: {e}")
         return jsonify({'error': str(e)}), 500
+
+@app.route('/api/realtime/market-overview')
+def get_market_overview():
+    """Get real-time market overview"""
+    try:
+        overview = streamer.get_market_overview()
+        return jsonify(overview)
+    except Exception as e:
+        logger.error(f"Error getting market overview: {e}")
+        return jsonify({'success': False, 'error': str(e)})
+
+@app.route('/api/realtime/streaming-stats')
+def get_streaming_stats():
+    """Get real-time streaming statistics"""
+    try:
+        stats = streamer.get_streaming_stats()
+        return jsonify({'success': True, 'stats': stats})
+    except Exception as e:
+        logger.error(f"Error getting streaming stats: {e}")
+        return jsonify({'success': False, 'error': str(e)})
+
+@app.route('/api/realtime/start-streaming')
+def start_streaming():
+    """Start real-time streaming"""
+    try:
+        streamer.start_streaming()
+        return jsonify({'success': True, 'message': 'Real-time streaming started'})
+    except Exception as e:
+        logger.error(f"Error starting streaming: {e}")
+        return jsonify({'success': False, 'error': str(e)})
+
+@app.route('/api/realtime/stop-streaming')
+def stop_streaming():
+    """Stop real-time streaming"""
+    try:
+        streamer.stop_streaming()
+        return jsonify({'success': True, 'message': 'Real-time streaming stopped'})
+    except Exception as e:
+        logger.error(f"Error stopping streaming: {e}")
+        return jsonify({'success': False, 'error': str(e)})
 
 @app.route('/api/analysis/detail/<int:analysis_id>')
 def get_analysis_detail(analysis_id):

@@ -49,7 +49,27 @@ class EnhancedChartManager {
                 height: 600,
                 width: 1200,
                 scale: 1
-            }
+            },
+            // Performance optimizations
+            staticPlot: false,
+            doubleClick: 'reset',
+            scrollZoom: true,
+            showTips: false,
+            frameMargins: 0,
+            autosizable: true
+        };
+        
+        // Debounce function for better performance
+        this.debounce = (func, wait) => {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
         };
     }
 
@@ -61,13 +81,25 @@ class EnhancedChartManager {
                 return;
             }
 
-            // Prepare candlestick data
+            // Clear previous chart if exists
+            if (this.charts[containerId]) {
+                Plotly.purge(containerId);
+                delete this.charts[containerId];
+            }
+
+            // Optimize data - limit to last 200 points for better performance
+            const optimizedData = data.slice(-200);
+
+            // Prepare candlestick data with proper date handling
             const candlestickTrace = {
-                x: data.map(item => item.timestamp || item.time),
-                open: data.map(item => item.open),
-                high: data.map(item => item.high),
-                low: data.map(item => item.low),
-                close: data.map(item => item.close),
+                x: optimizedData.map(item => {
+                    const timestamp = item.timestamp || item.time;
+                    return typeof timestamp === 'string' ? timestamp : new Date(timestamp).toISOString();
+                }),
+                open: optimizedData.map(item => parseFloat(item.open)),
+                high: optimizedData.map(item => parseFloat(item.high)),
+                low: optimizedData.map(item => parseFloat(item.low)),
+                close: optimizedData.map(item => parseFloat(item.close)),
                 type: 'candlestick',
                 name: options.symbol || 'Price',
                 increasing: {
