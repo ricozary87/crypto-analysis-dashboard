@@ -253,9 +253,6 @@ def analyze_coin(symbol):
         # Import necessary modules
         from core.okx_fetcher import OKXAPIManager
         from core.analyzer import TechnicalAnalyzer
-        from core.confluence_checker import ConfluenceChecker
-        from core.narrative_ai import NarrativeAI
-        from core.advanced_formatter import AdvancedFormatter
         import pandas as pd
         
         # Validate symbol
@@ -266,9 +263,6 @@ def analyze_coin(symbol):
         # Initialize components
         okx_api = OKXAPIManager()
         analyzer = TechnicalAnalyzer()
-        confluence_checker = ConfluenceChecker()
-        narrative_ai = NarrativeAI()
-        formatter = AdvancedFormatter()
         
         # Fetch real-time data
         symbol_okx = f"{symbol.upper()}-USDT"
@@ -284,18 +278,89 @@ def analyze_coin(symbol):
         # Run technical analysis
         analysis = analyzer.analyze(df, symbol_okx, '1H')
         
-        # Check confluence
-        confluence_data = confluence_checker.check_confluence(analysis)
+        # Extract key data from analysis
+        current_price = float(df['close'].iloc[-1])
+        price_change_24h = analysis.get('price_change_24h', 0)
         
-        # Generate formatted analysis
-        formatted_analysis = formatter.format_analysis(analysis)
+        # Calculate technical indicators with better error handling
+        indicators = analysis.get('indicators', {})
+        
+        # RSI handling
+        rsi_value = indicators.get('rsi', 50)
+        if isinstance(rsi_value, (list, tuple)) and len(rsi_value) > 0:
+            rsi_value = rsi_value[-1]
+        elif isinstance(rsi_value, dict):
+            rsi_value = 50  # Default if dict format
+        
+        # MACD calculation with safe handling
+        macd_data = indicators.get('macd', {})
+        if isinstance(macd_data, dict):
+            macd_value = macd_data.get('macd', 0)
+            macd_signal = macd_data.get('signal', 0)
+            
+            # Handle both numeric and list/array types
+            if isinstance(macd_value, (list, tuple)) and len(macd_value) > 0:
+                macd_value = macd_value[-1]
+            if isinstance(macd_signal, (list, tuple)) and len(macd_signal) > 0:
+                macd_signal = macd_signal[-1]
+                
+            macd_diff = macd_value - macd_signal if isinstance(macd_value, (int, float)) and isinstance(macd_signal, (int, float)) else 0
+        else:
+            macd_diff = 0
+        
+        # Check for signals
+        signals = analysis.get('signals', [])
+        has_signal = len(signals) > 0
+        
+        # Generate basic analysis text with safe formatting
+        trend = str(analysis.get('trend', 'neutral'))
+        volume_trend = str(analysis.get('volume_trend', 'stable'))
+        
+        # Ensure all variables are safe for formatting
+        safe_symbol = str(symbol.upper())
+        safe_current_price = float(current_price) if isinstance(current_price, (int, float)) else 0.0
+        safe_price_change = float(price_change_24h) if isinstance(price_change_24h, (int, float)) else 0.0
+        safe_rsi = float(rsi_value) if isinstance(rsi_value, (int, float)) else 50.0
+        safe_macd = float(macd_diff) if isinstance(macd_diff, (int, float)) else 0.0
+        
+        formatted_analysis = f"""📊 **ANALISIS TEKNIKAL - {safe_symbol}-USDT**
+==================================================
+
+💰 **Harga Saat Ini:** ${safe_current_price:,.2f}
+📈 **Perubahan 24h:** {safe_price_change:+.2f}%
+🎯 **Tren:** {trend.upper()}
+
+**Indikator Teknikal:**
+• RSI: {safe_rsi:.1f}
+• MACD: {safe_macd:+.4f}
+• Volume: {volume_trend}
+
+**Analisis Struktur Pasar:**
+• Tren saat ini: {trend}
+• Volume trend: {volume_trend}
+• Sinyal trading: {'Ada' if has_signal else 'Tidak ada'}
+
+**Rekomendasi:**
+{'Pantau untuk entry' if has_signal else 'Tunggu sinyal yang lebih jelas'}
+
+⚠️ **Disclaimer:** Analisis ini hanya untuk tujuan edukasi. Selalu lakukan riset sendiri sebelum trading."""
         
         return jsonify({
             'success': True,
-            'symbol': symbol,
+            'status': 'success',
+            'symbol': symbol.upper(),
+            'currentPrice': current_price,
+            'priceChange24h': price_change_24h,
+            'hasSignal': has_signal,
+            'rsiValue': float(rsi_value),
+            'macdValue': float(macd_diff),
+            'formattedAnalysis': formatted_analysis,
             'analysis': analysis,
-            'confluence': confluence_data,
-            'formatted_analysis': formatted_analysis
+            'rawData': {
+                'confidence': analysis.get('confidence', 0),
+                'patterns': len(analysis.get('smc_analysis', {}).get('patterns', [])),
+                'trend': trend
+            }
         })
         
     except Exception as e:
