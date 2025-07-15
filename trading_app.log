@@ -57371,3 +57371,17 @@ jinja2.exceptions.TemplateNotFound: index.html
 2025-07-15 00:41:00,126 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
 2025-07-15 00:41:00,133 - core.okx_fetcher - DEBUG - Fetched 100 candles for BTC-USDT
 2025-07-15 00:41:00,137 - core.advanced_formatter - ERROR - Error formatting analysis: unsupported format string passed to NoneType.__format__
+2025-07-15 00:49:22,984 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 00:49:22,985 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 00:49:23,110 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 00:49:23,115 - core.okx_fetcher - DEBUG - Fetched 100 candles for BTC-USDT
+2025-07-15 00:49:23,119 - core.advanced_formatter - ERROR - Error formatting analysis: unsupported format string passed to NoneType.__format__
+2025-07-15 00:49:26,914 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 00:49:26,915 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 00:49:26,915 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 00:49:28,106 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 00:49:28,107 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 00:49:28,108 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 00:49:28,109 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 00:49:28,109 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 00:49:34,160 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
