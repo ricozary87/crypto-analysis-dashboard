@@ -52,7 +52,7 @@ with app.app_context():
     import models
     db.create_all()
 
-# Import routes and websocket handlers
+# Import routes and websocket handlers after app context
 from routes import *
 from websocket_handler import *
 

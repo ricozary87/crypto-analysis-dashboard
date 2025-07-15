@@ -58605,3 +58605,82 @@ jinja2.exceptions.TemplateNotFound: analysis_history.html
 2025-07-15 04:13:30,337 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
 2025-07-15 04:13:30,456 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
 2025-07-15 04:13:30,579 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 04:19:40,972 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 04:19:40,972 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:19:40,972 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:19:42,568 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 04:19:42,569 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 04:19:42,570 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 04:19:42,571 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:19:42,571 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:19:49,381 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 04:19:49,381 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 04:20:03,562 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 04:20:03,563 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:20:03,563 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:20:04,691 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 04:20:04,692 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 04:20:04,694 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 04:20:04,694 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:20:04,694 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:20:16,878 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 04:20:16,878 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 04:24:57,538 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 04:24:57,539 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:24:57,539 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:24:59,350 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 04:24:59,351 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 04:24:59,353 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 04:24:59,353 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:24:59,353 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:25:07,345 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 04:25:07,346 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 04:26:53,025 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 04:26:53,027 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 04:26:53,030 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 04:26:53,032 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:26:53,033 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:26:59,617 - core.ai_engine - WARNING - OPENAI_API_KEY not found - AI Engine will use fallback narratives
+2025-07-15 04:27:00,484 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 04:27:00,495 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 04:27:00,623 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 04:27:00,629 - core.okx_fetcher - DEBUG - Fetched 100 candles for BTC-USDT
+2025-07-15 04:27:00,702 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 04:27:00,703 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:27:00,704 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:27:33,561 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 04:27:33,563 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 04:27:33,566 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 04:27:33,567 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:27:33,568 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:27:37,155 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 04:27:37,155 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:27:37,156 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:28:01,008 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 04:28:01,008 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:28:01,008 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:28:14,882 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 04:28:14,883 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 04:28:14,884 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 04:28:14,884 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:28:14,885 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:28:22,346 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 04:28:22,347 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 04:28:26,642 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 04:28:26,644 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 04:28:26,648 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 04:28:26,650 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:28:26,651 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:28:30,370 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 04:28:30,371 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:28:30,371 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:29:00,133 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 04:29:00,133 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:29:00,133 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:29:01,643 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 04:29:01,644 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 04:29:01,646 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 04:29:01,646 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:29:01,656 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:29:09,158 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 04:29:09,158 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
