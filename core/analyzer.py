@@ -1,35 +1,41 @@
 """
-Technical analysis engine for cryptocurrency trading
+Enhanced Technical analysis engine for cryptocurrency trading
+Integrated with Professional SMC Analysis
 """
 
 import pandas as pd
 import numpy as np
 import logging
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List
 import ta
+from .professional_smc_analyzer import ProfessionalSMCAnalyzer
 
 logger = logging.getLogger(__name__)
 
 class TechnicalAnalyzer:
-    """Technical analysis engine with various indicators"""
+    """Enhanced technical analysis engine with SMC integration"""
     
     def __init__(self):
         self.logger = logging.getLogger(__name__)
+        self.smc_analyzer = ProfessionalSMCAnalyzer()
         
     def analyze(self, df: pd.DataFrame, symbol: str, timeframe: str) -> Dict[str, Any]:
-        """Perform comprehensive technical analysis"""
+        """Perform comprehensive technical analysis with professional SMC integration"""
         
         try:
             if df is None or df.empty:
                 return self._empty_analysis()
             
-            # Calculate indicators
+            # Calculate traditional indicators
             indicators = self._calculate_indicators(df)
             
-            # Generate signals
+            # Generate traditional signals
             signals = self._generate_signals(df, indicators)
             
-            # Create analysis summary
+            # Professional SMC Analysis
+            smc_analysis = self.smc_analyzer.analyze_comprehensive(df, symbol, timeframe)
+            
+            # Create enhanced analysis summary
             analysis = {
                 'symbol': symbol,
                 'timeframe': timeframe,
@@ -40,13 +46,18 @@ class TechnicalAnalyzer:
                 'signals': signals,
                 'trend': self._determine_trend(df, indicators),
                 'volume_status': self._analyze_volume(df),
-                'summary': self._create_summary(indicators, signals)
+                'summary': self._create_summary(indicators, signals),
+                # Professional SMC Analysis Integration
+                'smc_analysis': smc_analysis,
+                'professional_signals': self._merge_signals(signals, smc_analysis.get('trading_signals', [])),
+                'confidence_score': self._calculate_enhanced_confidence(signals, smc_analysis),
+                'market_structure': smc_analysis.get('market_structure', {'trend': 'neutral', 'strength': 0})
             }
             
             return analysis
             
         except Exception as e:
-            self.logger.error(f"Analysis error for {symbol}: {e}")
+            self.logger.error(f"Enhanced analysis error for {symbol}: {e}")
             return self._empty_analysis()
     
     def _calculate_indicators(self, df: pd.DataFrame) -> Dict[str, Any]:
@@ -243,7 +254,7 @@ class TechnicalAnalyzer:
             return "Analysis unavailable"
     
     def _empty_analysis(self) -> Dict[str, Any]:
-        """Return empty analysis structure"""
+        """Return empty analysis structure with SMC integration"""
         
         return {
             'symbol': '',
@@ -262,7 +273,33 @@ class TechnicalAnalyzer:
             },
             'trend': 'NEUTRAL',
             'volume_status': 'STABLE',
-            'summary': 'No data available'
+            'summary': 'No data available',
+            # Enhanced SMC Analysis fields
+            'smc_analysis': {
+                'swing_points': {'swing_highs': [], 'swing_lows': []},
+                'choch_bos_signals': [],
+                'order_blocks': [],
+                'fvg_signals': [],
+                'liquidity_sweeps': [],
+                'eqh_eql_signals': [],
+                'market_structure': {'trend': 'neutral', 'strength': 0},
+                'smc_summary': {
+                    'total_choch_bos': 0,
+                    'total_order_blocks': 0,
+                    'total_fvg': 0,
+                    'total_liquidity_sweeps': 0,
+                    'total_eqh_eql': 0,
+                    'bullish_signals': 0,
+                    'bearish_signals': 0,
+                    'recent_activity': 0,
+                    'pattern_diversity': 0
+                },
+                'trading_signals': [],
+                'confidence_score': 0.0
+            },
+            'professional_signals': [],
+            'confidence_score': 0.0,
+            'market_structure': {'trend': 'neutral', 'strength': 0}
         }
     
     def _default_indicators(self) -> Dict[str, Any]:
@@ -285,3 +322,91 @@ class TechnicalAnalyzer:
             'macd_bullish': indicators.get('macd', {}).get('bullish', False),
             'volume_above_avg': indicators.get('volume', {}).get('above_average', False)
         }
+    
+    def _merge_signals(self, traditional_signals: Dict[str, Any], smc_signals: List[Dict]) -> List[Dict]:
+        """Merge traditional and SMC signals for enhanced trading signals"""
+        
+        merged_signals = []
+        
+        try:
+            # Add traditional signals
+            if traditional_signals.get('buy_signal'):
+                merged_signals.append({
+                    'type': 'traditional',
+                    'action': 'BUY',
+                    'reason': 'Traditional technical indicators',
+                    'confidence': 60,
+                    'source': 'indicators'
+                })
+            
+            if traditional_signals.get('sell_signal'):
+                merged_signals.append({
+                    'type': 'traditional',
+                    'action': 'SELL',
+                    'reason': 'Traditional technical indicators',
+                    'confidence': 60,
+                    'source': 'indicators'
+                })
+            
+            # Add SMC signals with higher priority
+            for smc_signal in smc_signals:
+                merged_signals.append({
+                    'type': 'smc',
+                    'action': smc_signal.get('action', 'HOLD'),
+                    'reason': f"SMC {smc_signal.get('pattern_type', 'pattern')} detected",
+                    'confidence': smc_signal.get('confidence', 70),
+                    'source': 'smc_analysis',
+                    'entry_price': smc_signal.get('entry_price'),
+                    'supporting_patterns': smc_signal.get('supporting_patterns', [])
+                })
+            
+            # Sort by confidence (highest first)
+            merged_signals.sort(key=lambda x: x.get('confidence', 0), reverse=True)
+            
+        except Exception as e:
+            self.logger.error(f"Error merging signals: {e}")
+            
+        return merged_signals
+    
+    def _calculate_enhanced_confidence(self, traditional_signals: Dict[str, Any], smc_analysis: Dict[str, Any]) -> float:
+        """Calculate enhanced confidence score combining traditional and SMC analysis"""
+        
+        try:
+            # Base confidence from traditional analysis
+            base_confidence = 50
+            
+            # Traditional signals boost
+            if traditional_signals.get('buy_signal') or traditional_signals.get('sell_signal'):
+                base_confidence += 15
+            
+            # SMC analysis boost
+            smc_confidence = smc_analysis.get('confidence_score', 0)
+            smc_boost = smc_confidence * 0.4  # 40% weight for SMC
+            
+            # Market structure boost
+            market_structure = smc_analysis.get('market_structure', {})
+            structure_strength = market_structure.get('strength', 0)
+            structure_boost = structure_strength * 0.2  # 20% weight for market structure
+            
+            # Pattern diversity boost
+            smc_summary = smc_analysis.get('smc_summary', {})
+            pattern_diversity = smc_summary.get('pattern_diversity', 0)
+            diversity_boost = pattern_diversity * 2  # Each pattern type adds 2 points
+            
+            # Signal confluence boost
+            traditional_signal_count = sum(1 for key in ['buy_signal', 'sell_signal'] if traditional_signals.get(key))
+            smc_signal_count = len(smc_analysis.get('trading_signals', []))
+            if traditional_signal_count > 0 and smc_signal_count > 0:
+                confluence_boost = 10  # Bonus for signal confluence
+            else:
+                confluence_boost = 0
+            
+            # Calculate total confidence
+            total_confidence = base_confidence + smc_boost + structure_boost + diversity_boost + confluence_boost
+            
+            # Cap at 100
+            return min(total_confidence, 100)
+            
+        except Exception as e:
+            self.logger.error(f"Error calculating enhanced confidence: {e}")
+            return 50.0

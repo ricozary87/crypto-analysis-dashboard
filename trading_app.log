@@ -57399,3 +57399,75 @@ jinja2.exceptions.TemplateNotFound: index.html
 2025-07-15 02:30:10,318 - apscheduler.scheduler - DEBUG - Looking for jobs to run
 2025-07-15 02:30:10,319 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
 2025-07-15 02:30:16,600 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 02:43:44,337 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 02:43:44,339 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 02:43:44,475 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 02:43:44,483 - core.okx_fetcher - DEBUG - Fetched 100 candles for BTC-USDT
+2025-07-15 02:43:44,488 - core.professional_smc_analyzer - ERROR - Professional SMC analysis error for BTC-USDT: int() argument must be a string, a bytes-like object or a real number, not 'Timestamp'
+2025-07-15 02:43:44,489 - core.advanced_formatter - ERROR - Error formatting analysis: unsupported format string passed to NoneType.__format__
+2025-07-15 02:43:47,915 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 02:43:47,946 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 02:43:47,946 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 02:43:49,216 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 02:43:49,217 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 02:43:49,218 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 02:43:49,218 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 02:43:49,219 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 02:43:55,271 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 02:44:23,914 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 02:44:23,916 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 02:44:24,039 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 02:44:24,046 - core.okx_fetcher - DEBUG - Fetched 100 candles for BTC-USDT
+2025-07-15 02:44:24,049 - core.professional_smc_analyzer - ERROR - Professional SMC analysis error for BTC-USDT: int() argument must be a string, a bytes-like object or a real number, not 'Timestamp'
+2025-07-15 02:44:24,050 - core.advanced_formatter - ERROR - Error formatting analysis: unsupported format string passed to NoneType.__format__
+2025-07-15 02:44:24,058 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 02:44:24,059 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 02:44:24,188 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 02:44:24,193 - core.okx_fetcher - DEBUG - Fetched 100 candles for ETH-USDT
+2025-07-15 02:44:24,197 - core.professional_smc_analyzer - ERROR - Professional SMC analysis error for ETH-USDT: int() argument must be a string, a bytes-like object or a real number, not 'Timestamp'
+2025-07-15 02:44:24,198 - core.advanced_formatter - ERROR - Error formatting analysis: unsupported format string passed to NoneType.__format__
+2025-07-15 02:44:24,204 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 02:44:24,205 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 02:44:24,327 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 02:44:24,332 - core.okx_fetcher - DEBUG - Fetched 100 candles for SOL-USDT
+2025-07-15 02:44:24,336 - core.professional_smc_analyzer - ERROR - Professional SMC analysis error for SOL-USDT: int() argument must be a string, a bytes-like object or a real number, not 'Timestamp'
+2025-07-15 02:44:24,336 - core.advanced_formatter - ERROR - Error formatting analysis: unsupported format string passed to NoneType.__format__
+2025-07-15 02:44:39,603 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 02:44:39,604 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 02:44:39,604 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 02:44:40,332 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 02:44:40,333 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 02:44:40,334 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 02:44:40,334 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 02:44:40,335 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 02:44:45,986 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 02:44:57,254 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 02:44:57,258 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 02:44:57,407 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 02:44:57,414 - core.okx_fetcher - DEBUG - Fetched 100 candles for BTC-USDT
+2025-07-15 02:44:57,424 - core.professional_smc_analyzer - ERROR - Professional SMC analysis error for BTC-USDT: int() argument must be a string, a bytes-like object or a real number, not 'Timestamp'
+2025-07-15 02:44:57,425 - core.advanced_formatter - ERROR - Error formatting analysis: unsupported format string passed to NoneType.__format__
+2025-07-15 02:45:09,349 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 02:45:09,350 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 02:45:09,350 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 02:45:10,100 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 02:45:10,101 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 02:45:10,102 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 02:45:10,103 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 02:45:10,103 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 02:45:15,728 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 02:45:53,485 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 02:45:53,489 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 02:45:53,635 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 02:45:53,640 - core.okx_fetcher - DEBUG - Fetched 100 candles for BTC-USDT
+2025-07-15 02:45:53,652 - core.professional_smc_analyzer - ERROR - Professional SMC analysis error for BTC-USDT: int() argument must be a string, a bytes-like object or a real number, not 'Timestamp'
+2025-07-15 02:45:53,653 - core.advanced_formatter - ERROR - Error formatting analysis: unsupported format string passed to NoneType.__format__
+2025-07-15 02:46:06,849 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 02:46:06,850 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 02:46:06,850 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 02:46:08,262 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 02:46:08,262 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 02:46:08,264 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 02:46:08,264 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 02:46:08,265 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 02:46:13,857 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
