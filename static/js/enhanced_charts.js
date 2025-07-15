@@ -71,6 +71,532 @@ class EnhancedChartManager {
                 timeout = setTimeout(later, wait);
             };
         };
+        
+        // Colors for different chart elements
+        this.colors = {
+            bullish: '#26a69a',
+            bearish: '#ef5350',
+            volume: '#64b5f6',
+            ma: '#ffa726',
+            rsi: '#ab47bc',
+            macd: '#66bb6a',
+            support: '#4caf50',
+            resistance: '#f44336',
+            orderblock: '#ffeb3b',
+            fvg: '#9c27b0'
+        };
+    }
+    
+    // Enhanced TradingView-style candlestick chart
+    createCandlestickChart(containerId, data, options = {}) {
+        const defaultOptions = {
+            showVolume: true,
+            showMA: true,
+            showOrderBlocks: true,
+            showFVG: true,
+            limit: 200 // Limit data points for performance
+        };
+        
+        const config = { ...defaultOptions, ...options };
+        
+        // Limit data for performance
+        const limitedData = data.slice(-config.limit);
+        
+        const traces = [];
+        
+        // Main candlestick trace
+        const candlestickTrace = {
+            x: limitedData.map(d => d.timestamp),
+            close: limitedData.map(d => d.close),
+            decreasing: {line: {color: this.colors.bearish}},
+            high: limitedData.map(d => d.high),
+            increasing: {line: {color: this.colors.bullish}},
+            low: limitedData.map(d => d.low),
+            open: limitedData.map(d => d.open),
+            type: 'candlestick',
+            name: 'Price',
+            xaxis: 'x',
+            yaxis: 'y'
+        };
+        
+        traces.push(candlestickTrace);
+        
+        // Volume trace (if enabled)
+        if (config.showVolume) {
+            const volumeTrace = {
+                x: limitedData.map(d => d.timestamp),
+                y: limitedData.map(d => d.volume),
+                type: 'bar',
+                name: 'Volume',
+                yaxis: 'y2',
+                marker: {
+                    color: limitedData.map(d => d.close > d.open ? this.colors.bullish : this.colors.bearish),
+                    opacity: 0.6
+                }
+            };
+            traces.push(volumeTrace);
+        }
+        
+        // Moving averages (if enabled)
+        if (config.showMA && limitedData.length > 20) {
+            const ma20 = this.calculateMA(limitedData.map(d => d.close), 20);
+            const ma50 = this.calculateMA(limitedData.map(d => d.close), 50);
+            
+            if (ma20.length > 0) {
+                traces.push({
+                    x: limitedData.slice(-ma20.length).map(d => d.timestamp),
+                    y: ma20,
+                    type: 'scatter',
+                    mode: 'lines',
+                    name: 'MA20',
+                    line: {
+                        color: this.colors.ma,
+                        width: 2
+                    }
+                });
+            }
+            
+            if (ma50.length > 0) {
+                traces.push({
+                    x: limitedData.slice(-ma50.length).map(d => d.timestamp),
+                    y: ma50,
+                    type: 'scatter',
+                    mode: 'lines',
+                    name: 'MA50',
+                    line: {
+                        color: '#ff7043',
+                        width: 2
+                    }
+                });
+            }
+        }
+        
+        // Layout configuration
+        const layout = {
+            ...this.defaultLayout,
+            title: {
+                text: options.title || 'Price Chart',
+                font: {
+                    size: 18,
+                    color: '#e0e0e0'
+                }
+            },
+            xaxis: {
+                ...this.defaultLayout.xaxis,
+                rangeslider: {visible: false},
+                type: 'date',
+                domain: config.showVolume ? [0, 1] : [0, 1]
+            },
+            yaxis: {
+                ...this.defaultLayout.yaxis,
+                domain: config.showVolume ? [0.3, 1] : [0, 1],
+                title: 'Price ($)'
+            },
+            height: 600,
+            dragmode: 'pan',
+            selectdirection: 'horizontal'
+        };
+        
+        // Add volume y-axis if volume is shown
+        if (config.showVolume) {
+            layout.yaxis2 = {
+                ...this.defaultLayout.yaxis,
+                domain: [0, 0.25],
+                title: 'Volume',
+                overlaying: 'y',
+                side: 'right'
+            };
+        }
+        
+        // Performance optimizations
+        const plotConfig = {
+            ...this.defaultConfig,
+            // Reduce rendering load
+            plotGlPixelRatio: 1,
+            // Optimize for large datasets
+            staticPlot: limitedData.length > 1000
+        };
+        
+        // Create plot
+        const plot = Plotly.newPlot(containerId, traces, layout, plotConfig);
+        
+        // Store reference
+        this.charts[containerId] = {
+            plot: plot,
+            data: limitedData,
+            config: config
+        };
+        
+        return plot;
+    }
+    
+    // Create technical indicators chart
+    createIndicatorsChart(containerId, data, indicators, options = {}) {
+        const traces = [];
+        
+        // RSI trace
+        if (indicators.rsi) {
+            const rsiTrace = {
+                x: data.map(d => d.timestamp),
+                y: indicators.rsi,
+                type: 'scatter',
+                mode: 'lines',
+                name: 'RSI',
+                line: {
+                    color: this.colors.rsi,
+                    width: 2
+                },
+                yaxis: 'y'
+            };
+            traces.push(rsiTrace);
+            
+            // RSI overbought/oversold lines
+            traces.push({
+                x: data.map(d => d.timestamp),
+                y: Array(data.length).fill(70),
+                type: 'scatter',
+                mode: 'lines',
+                name: 'Overbought',
+                line: {
+                    color: 'rgba(244, 67, 54, 0.5)',
+                    width: 1,
+                    dash: 'dash'
+                },
+                showlegend: false
+            });
+            
+            traces.push({
+                x: data.map(d => d.timestamp),
+                y: Array(data.length).fill(30),
+                type: 'scatter',
+                mode: 'lines',
+                name: 'Oversold',
+                line: {
+                    color: 'rgba(76, 175, 80, 0.5)',
+                    width: 1,
+                    dash: 'dash'
+                },
+                showlegend: false
+            });
+        }
+        
+        // MACD trace
+        if (indicators.macd) {
+            const macdTrace = {
+                x: data.map(d => d.timestamp),
+                y: indicators.macd.macd,
+                type: 'scatter',
+                mode: 'lines',
+                name: 'MACD',
+                line: {
+                    color: this.colors.macd,
+                    width: 2
+                },
+                yaxis: 'y2'
+            };
+            traces.push(macdTrace);
+            
+            const signalTrace = {
+                x: data.map(d => d.timestamp),
+                y: indicators.macd.signal,
+                type: 'scatter',
+                mode: 'lines',
+                name: 'Signal',
+                line: {
+                    color: '#ff7043',
+                    width: 2
+                },
+                yaxis: 'y2'
+            };
+            traces.push(signalTrace);
+            
+            const histogramTrace = {
+                x: data.map(d => d.timestamp),
+                y: indicators.macd.histogram,
+                type: 'bar',
+                name: 'Histogram',
+                yaxis: 'y2',
+                marker: {
+                    color: indicators.macd.histogram.map(h => h > 0 ? this.colors.bullish : this.colors.bearish),
+                    opacity: 0.6
+                }
+            };
+            traces.push(histogramTrace);
+        }
+        
+        const layout = {
+            ...this.defaultLayout,
+            title: {
+                text: 'Technical Indicators',
+                font: {
+                    size: 18,
+                    color: '#e0e0e0'
+                }
+            },
+            xaxis: {
+                ...this.defaultLayout.xaxis,
+                type: 'date',
+                domain: [0, 1]
+            },
+            yaxis: {
+                ...this.defaultLayout.yaxis,
+                domain: [0.55, 1],
+                title: 'RSI',
+                range: [0, 100]
+            },
+            yaxis2: {
+                ...this.defaultLayout.yaxis,
+                domain: [0, 0.45],
+                title: 'MACD',
+                overlaying: 'y',
+                side: 'right'
+            },
+            height: 400
+        };
+        
+        const plot = Plotly.newPlot(containerId, traces, layout, this.defaultConfig);
+        
+        this.charts[containerId] = {
+            plot: plot,
+            data: data,
+            indicators: indicators
+        };
+        
+        return plot;
+    }
+    
+    // Create volume profile chart
+    createVolumeProfileChart(containerId, volumeProfile, options = {}) {
+        const traces = [];
+        
+        // Volume profile bars
+        const volumeTrace = {
+            x: volumeProfile.volumes,
+            y: volumeProfile.price_levels,
+            type: 'bar',
+            orientation: 'h',
+            name: 'Volume Profile',
+            marker: {
+                color: this.colors.volume,
+                opacity: 0.7
+            }
+        };
+        traces.push(volumeTrace);
+        
+        // POC line
+        traces.push({
+            x: [0, Math.max(...volumeProfile.volumes)],
+            y: [volumeProfile.poc, volumeProfile.poc],
+            type: 'scatter',
+            mode: 'lines',
+            name: 'POC',
+            line: {
+                color: '#ffeb3b',
+                width: 3
+            }
+        });
+        
+        // Value Area High/Low
+        traces.push({
+            x: [0, Math.max(...volumeProfile.volumes)],
+            y: [volumeProfile.value_area_high, volumeProfile.value_area_high],
+            type: 'scatter',
+            mode: 'lines',
+            name: 'VAH',
+            line: {
+                color: 'rgba(255, 235, 59, 0.5)',
+                width: 2,
+                dash: 'dash'
+            }
+        });
+        
+        traces.push({
+            x: [0, Math.max(...volumeProfile.volumes)],
+            y: [volumeProfile.value_area_low, volumeProfile.value_area_low],
+            type: 'scatter',
+            mode: 'lines',
+            name: 'VAL',
+            line: {
+                color: 'rgba(255, 235, 59, 0.5)',
+                width: 2,
+                dash: 'dash'
+            }
+        });
+        
+        const layout = {
+            ...this.defaultLayout,
+            title: {
+                text: 'Volume Profile',
+                font: {
+                    size: 18,
+                    color: '#e0e0e0'
+                }
+            },
+            xaxis: {
+                ...this.defaultLayout.xaxis,
+                title: 'Volume'
+            },
+            yaxis: {
+                ...this.defaultLayout.yaxis,
+                title: 'Price ($)'
+            },
+            height: 400
+        };
+        
+        const plot = Plotly.newPlot(containerId, traces, layout, this.defaultConfig);
+        
+        this.charts[containerId] = {
+            plot: plot,
+            data: volumeProfile
+        };
+        
+        return plot;
+    }
+    
+    // Create orderbook depth chart
+    createOrderbookChart(containerId, orderbook, options = {}) {
+        const traces = [];
+        
+        // Process orderbook data
+        const bids = orderbook.bids || [];
+        const asks = orderbook.asks || [];
+        
+        // Calculate cumulative volumes
+        let bidsCumulative = [];
+        let asksCumulative = [];
+        
+        let cumulativeBidVolume = 0;
+        for (let i = 0; i < bids.length; i++) {
+            cumulativeBidVolume += parseFloat(bids[i][1]);
+            bidsCumulative.push([parseFloat(bids[i][0]), cumulativeBidVolume]);
+        }
+        
+        let cumulativeAskVolume = 0;
+        for (let i = 0; i < asks.length; i++) {
+            cumulativeAskVolume += parseFloat(asks[i][1]);
+            asksCumulative.push([parseFloat(asks[i][0]), cumulativeAskVolume]);
+        }
+        
+        // Bids trace
+        if (bidsCumulative.length > 0) {
+            traces.push({
+                x: bidsCumulative.map(b => b[0]),
+                y: bidsCumulative.map(b => b[1]),
+                type: 'scatter',
+                mode: 'lines',
+                fill: 'tonexty',
+                name: 'Bids',
+                line: {
+                    color: this.colors.bullish,
+                    width: 2
+                },
+                fillcolor: 'rgba(38, 166, 154, 0.3)'
+            });
+        }
+        
+        // Asks trace
+        if (asksCumulative.length > 0) {
+            traces.push({
+                x: asksCumulative.map(a => a[0]),
+                y: asksCumulative.map(a => a[1]),
+                type: 'scatter',
+                mode: 'lines',
+                fill: 'tonexty',
+                name: 'Asks',
+                line: {
+                    color: this.colors.bearish,
+                    width: 2
+                },
+                fillcolor: 'rgba(239, 83, 80, 0.3)'
+            });
+        }
+        
+        const layout = {
+            ...this.defaultLayout,
+            title: {
+                text: 'Orderbook Depth',
+                font: {
+                    size: 18,
+                    color: '#e0e0e0'
+                }
+            },
+            xaxis: {
+                ...this.defaultLayout.xaxis,
+                title: 'Price ($)'
+            },
+            yaxis: {
+                ...this.defaultLayout.yaxis,
+                title: 'Cumulative Volume'
+            },
+            height: 400
+        };
+        
+        const plot = Plotly.newPlot(containerId, traces, layout, this.defaultConfig);
+        
+        this.charts[containerId] = {
+            plot: plot,
+            data: orderbook
+        };
+        
+        return plot;
+    }
+    
+    // Utility function to calculate moving average
+    calculateMA(data, period) {
+        if (data.length < period) return [];
+        
+        const result = [];
+        for (let i = period - 1; i < data.length; i++) {
+            const sum = data.slice(i - period + 1, i + 1).reduce((a, b) => a + b, 0);
+            result.push(sum / period);
+        }
+        return result;
+    }
+    
+    // Update chart with new data
+    updateChart(containerId, newData) {
+        const chart = this.charts[containerId];
+        if (!chart) return;
+        
+        // Implement update logic based on chart type
+        // This is a placeholder - implement specific update logic for each chart type
+        console.log(`Updating chart ${containerId} with new data`);
+    }
+    
+    // Destroy chart
+    destroyChart(containerId) {
+        const chart = this.charts[containerId];
+        if (chart) {
+            Plotly.purge(containerId);
+            delete this.charts[containerId];
+        }
+    }
+    
+    // Get chart instance
+    getChart(containerId) {
+        return this.charts[containerId];
+    }
+    
+    // Resize chart
+    resizeChart(containerId) {
+        const chart = this.charts[containerId];
+        if (chart) {
+            Plotly.Plots.resize(containerId);
+        }
+    }
+    
+    // Export chart as image
+    exportChart(containerId, format = 'png') {
+        const chart = this.charts[containerId];
+        if (chart) {
+            return Plotly.toImage(containerId, {
+                format: format,
+                width: 1200,
+                height: 600,
+                scale: 2
+            });
+        }
+        return null;
     }
 
     createAdvancedCandlestickChart(containerId, data, options = {}) {

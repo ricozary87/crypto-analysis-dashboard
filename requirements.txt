@@ -16,3 +16,4 @@ openai
 pyyaml
 tenacity
 ta
+reportlab

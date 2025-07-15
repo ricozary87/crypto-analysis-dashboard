@@ -1910,6 +1910,321 @@ def create_ai_snapshot():
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
 
+# =======================================================================
+# PHASE 2: ADVANCED SNAPSHOT AND INDICATOR ENDPOINTS
+# =======================================================================
+
+@app.route('/api/snapshots/generate/<symbol>')
+def generate_market_snapshot(symbol):
+    """Generate comprehensive market snapshot"""
+    try:
+        from core.snapshot_generator import snapshot_generator, SnapshotType
+        
+        # Get parameters
+        timeframe = request.args.get('timeframe', '1H')
+        snapshot_type = request.args.get('type', 'comprehensive')
+        session_id = request.args.get('session_id', 'api_user')
+        
+        # Validate symbol
+        if not symbol or len(symbol) < 3:
+            return jsonify({'error': 'Invalid symbol'}), 400
+        
+        # Convert snapshot type
+        if snapshot_type == 'quick':
+            snap_type = SnapshotType.QUICK
+        elif snapshot_type == 'deep':
+            snap_type = SnapshotType.DEEP_ANALYSIS
+        else:
+            snap_type = SnapshotType.COMPREHENSIVE
+        
+        # Generate snapshot
+        snapshot = snapshot_generator.generate_snapshot(
+            symbol=f"{symbol.upper()}-USDT",
+            timeframe=timeframe,
+            snapshot_type=snap_type,
+            session_id=session_id
+        )
+        
+        return jsonify({
+            'success': True,
+            'symbol': symbol.upper(),
+            'timeframe': timeframe,
+            'snapshot_type': snapshot_type,
+            'snapshot': snapshot.to_dict()
+        })
+        
+    except Exception as e:
+        logger.error(f"Error generating snapshot for {symbol}: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/snapshots/statistics')
+def get_snapshot_statistics():
+    """Get snapshot statistics"""
+    try:
+        from core.snapshot_archiver import snapshot_archiver
+        
+        symbol = request.args.get('symbol', None)
+        timeframe = request.args.get('timeframe', None)
+        
+        stats = snapshot_archiver.get_snapshot_statistics(symbol, timeframe)
+        
+        return jsonify({
+            'success': True,
+            'statistics': stats
+        })
+        
+    except Exception as e:
+        logger.error(f"Error getting snapshot statistics: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/snapshots/comparative/<symbol>')
+def get_comparative_analysis(symbol):
+    """Get comparative analysis over time"""
+    try:
+        from core.snapshot_archiver import snapshot_archiver
+        
+        days = request.args.get('days', 7, type=int)
+        
+        # Validate symbol
+        if not symbol or len(symbol) < 3:
+            return jsonify({'error': 'Invalid symbol'}), 400
+        
+        analysis = snapshot_archiver.get_comparative_analysis(symbol.upper(), days)
+        
+        return jsonify({
+            'success': True,
+            'symbol': symbol.upper(),
+            'analysis': analysis
+        })
+        
+    except Exception as e:
+        logger.error(f"Error getting comparative analysis for {symbol}: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/snapshots/export')
+def export_snapshots():
+    """Export snapshots to JSON"""
+    try:
+        from core.snapshot_archiver import snapshot_archiver
+        
+        symbol = request.args.get('symbol', None)
+        timeframe = request.args.get('timeframe', None)
+        
+        filepath = snapshot_archiver.export_snapshots_to_json(symbol, timeframe)
+        
+        if filepath:
+            return jsonify({
+                'success': True,
+                'message': 'Snapshots exported successfully',
+                'filepath': filepath
+            })
+        else:
+            return jsonify({'error': 'Export failed'}), 500
+        
+    except Exception as e:
+        logger.error(f"Error exporting snapshots: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/snapshots/pdf-report/<symbol>')
+def generate_pdf_report(symbol):
+    """Generate PDF report for symbol"""
+    try:
+        from core.snapshot_archiver import snapshot_archiver
+        
+        timeframe = request.args.get('timeframe', '1H')
+        snapshot_id = request.args.get('snapshot_id', None, type=int)
+        
+        # Validate symbol
+        if not symbol or len(symbol) < 3:
+            return jsonify({'error': 'Invalid symbol'}), 400
+        
+        pdf_path = snapshot_archiver.generate_pdf_report(
+            symbol.upper(), timeframe, snapshot_id
+        )
+        
+        if pdf_path:
+            return jsonify({
+                'success': True,
+                'message': 'PDF report generated successfully',
+                'pdf_path': pdf_path
+            })
+        else:
+            return jsonify({'error': 'PDF generation failed'}), 500
+        
+    except Exception as e:
+        logger.error(f"Error generating PDF report for {symbol}: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/snapshots/cleanup')
+def cleanup_old_snapshots():
+    """Cleanup old snapshots"""
+    try:
+        from core.snapshot_archiver import snapshot_archiver
+        
+        days = request.args.get('days', 30, type=int)
+        
+        deleted_count = snapshot_archiver.cleanup_old_snapshots(days)
+        
+        return jsonify({
+            'success': True,
+            'message': f'Cleaned up {deleted_count} old snapshots',
+            'deleted_count': deleted_count
+        })
+        
+    except Exception as e:
+        logger.error(f"Error cleaning up snapshots: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/indicators/calculate/<symbol>')
+def calculate_technical_indicators(symbol):
+    """Calculate technical indicators for symbol"""
+    try:
+        from core.indicator_calculator import indicator_calculator
+        from core.okx_fetcher import OKXAPIManager
+        
+        # Get parameters
+        timeframe = request.args.get('timeframe', '1H')
+        indicators = request.args.get('indicators', '').split(',')
+        
+        # Validate symbol
+        if not symbol or len(symbol) < 3:
+            return jsonify({'error': 'Invalid symbol'}), 400
+        
+        # Get market data
+        api_manager = OKXAPIManager()
+        df = api_manager.get_candles(f"{symbol.upper()}-USDT", timeframe, limit=200)
+        
+        if df is None or df.empty:
+            return jsonify({'error': 'No market data available'}), 500
+        
+        # Calculate indicators
+        if indicators and indicators[0]:  # If specific indicators requested
+            results = {}
+            for indicator in indicators:
+                if indicator.strip():
+                    try:
+                        result = indicator_calculator.calculate_indicator(df, indicator.strip())
+                        results[indicator.strip()] = {
+                            'name': result.name,
+                            'type': result.type.value,
+                            'signal': result.signal,
+                            'strength': result.strength,
+                            'description': result.description,
+                            'parameters': result.parameters
+                        }
+                    except Exception as e:
+                        logger.error(f"Error calculating indicator {indicator}: {e}")
+                        results[indicator.strip()] = {'error': str(e)}
+        else:
+            # Calculate all indicators
+            results = indicator_calculator.calculate_all_indicators(df)
+            results = {name: {
+                'name': result.name,
+                'type': result.type.value,
+                'signal': result.signal,
+                'strength': result.strength,
+                'description': result.description,
+                'parameters': result.parameters
+            } for name, result in results.items()}
+        
+        return jsonify({
+            'success': True,
+            'symbol': symbol.upper(),
+            'timeframe': timeframe,
+            'indicators': results
+        })
+        
+    except Exception as e:
+        logger.error(f"Error calculating indicators for {symbol}: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/indicators/signals/<symbol>')
+def get_indicator_signals(symbol):
+    """Get trading signals from indicators"""
+    try:
+        from core.indicator_calculator import indicator_calculator
+        from core.okx_fetcher import OKXAPIManager
+        
+        # Get parameters
+        timeframe = request.args.get('timeframe', '1H')
+        confidence_threshold = request.args.get('confidence', 0.6, type=float)
+        
+        # Validate symbol
+        if not symbol or len(symbol) < 3:
+            return jsonify({'error': 'Invalid symbol'}), 400
+        
+        # Get market data
+        api_manager = OKXAPIManager()
+        df = api_manager.get_candles(f"{symbol.upper()}-USDT", timeframe, limit=200)
+        
+        if df is None or df.empty:
+            return jsonify({'error': 'No market data available'}), 500
+        
+        # Get signals
+        signals = indicator_calculator.get_indicator_signals(df, confidence_threshold)
+        
+        # Calculate overall signal
+        buy_signals = [s for s in signals.values() if s.get('signal') == 'BUY']
+        sell_signals = [s for s in signals.values() if s.get('signal') == 'SELL']
+        
+        if len(buy_signals) > len(sell_signals):
+            overall_signal = 'BUY'
+            overall_strength = sum(s.get('strength', 0) for s in buy_signals) / len(buy_signals)
+        elif len(sell_signals) > len(buy_signals):
+            overall_signal = 'SELL'
+            overall_strength = sum(s.get('strength', 0) for s in sell_signals) / len(sell_signals)
+        else:
+            overall_signal = 'NEUTRAL'
+            overall_strength = 0.5
+        
+        return jsonify({
+            'success': True,
+            'symbol': symbol.upper(),
+            'timeframe': timeframe,
+            'overall_signal': overall_signal,
+            'overall_strength': overall_strength,
+            'confidence_threshold': confidence_threshold,
+            'signals': signals
+        })
+        
+    except Exception as e:
+        logger.error(f"Error getting indicator signals for {symbol}: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/indicators/cache')
+def get_indicator_cache_info():
+    """Get indicator cache information"""
+    try:
+        from core.indicator_calculator import indicator_calculator
+        
+        cache_info = indicator_calculator.get_cache_info()
+        
+        return jsonify({
+            'success': True,
+            'cache_info': cache_info
+        })
+        
+    except Exception as e:
+        logger.error(f"Error getting cache info: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/indicators/cache/clear', methods=['POST'])
+def clear_indicator_cache():
+    """Clear indicator cache"""
+    try:
+        from core.indicator_calculator import indicator_calculator
+        
+        indicator_calculator.clear_cache()
+        
+        return jsonify({
+            'success': True,
+            'message': 'Indicator cache cleared successfully'
+        })
+        
+    except Exception as e:
+        logger.error(f"Error clearing cache: {e}")
+        return jsonify({'error': str(e)}), 500
+
 @app.route('/api/analysis/detail/<int:analysis_id>')
 def get_analysis_detail(analysis_id):
     """Get full analysis detail by ID"""
@@ -1953,6 +2268,11 @@ def analysis_history_page():
 def professional_dashboard():
     """Professional trading dashboard with modern UI"""
     return render_template('professional_dashboard.html')
+
+@app.route('/phase2-dashboard')
+def phase2_dashboard():
+    """Phase 2 Advanced Trading Dashboard with enhanced features"""
+    return render_template('phase2_advanced_dashboard.html')
 
 @app.route('/api/dashboard/stats')
 def get_dashboard_stats():

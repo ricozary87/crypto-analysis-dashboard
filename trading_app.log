@@ -58804,3 +58804,32 @@ jinja2.exceptions.TemplateNotFound: analysis_history.html
 2025-07-15 04:43:09,601 - apscheduler.scheduler - INFO - Scheduler started
 2025-07-15 04:43:09,602 - apscheduler.scheduler - DEBUG - Looking for jobs to run
 2025-07-15 04:43:09,602 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:53:33,935 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 04:53:33,944 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:53:33,944 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:53:35,237 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 04:53:35,238 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 04:53:35,239 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 04:53:35,239 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:53:35,240 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:57:16,239 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 04:57:16,239 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:57:16,239 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:57:16,789 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 04:57:16,789 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 04:57:16,791 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 04:57:16,791 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:57:16,791 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:57:35,045 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 04:57:35,045 - core.ai_engine - WARNING - OPENAI_API_KEY not found - AI Engine will use fallback narratives
+2025-07-15 04:57:35,045 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 04:57:35,045 - core.snapshot_archiver - INFO - SnapshotArchiver initialized
+2025-07-15 04:57:37,580 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 04:58:08,312 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 04:58:08,312 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:58:08,313 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:58:09,589 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 04:58:09,589 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 04:58:09,590 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 04:58:09,591 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:58:09,591 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
