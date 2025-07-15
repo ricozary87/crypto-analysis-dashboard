@@ -53,8 +53,14 @@ with app.app_context():
     db.create_all()
 
 # Import routes and websocket handlers after app context
-from routes import *
-from websocket_handler import *
+def setup_routes():
+    """Setup routes after app initialization to avoid circular imports"""
+    import routes
+    import websocket_handler
+    return routes, websocket_handler
+
+# Setup routes
+setup_routes()
 
 # Initialize trading orchestrator
 from core.orchestrator import MainOrchestrator

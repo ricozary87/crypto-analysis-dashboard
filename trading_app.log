@@ -58732,3 +58732,75 @@ jinja2.exceptions.TemplateNotFound: analysis_history.html
 2025-07-15 04:35:50,545 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
 2025-07-15 04:36:00,171 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
 2025-07-15 04:36:00,171 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 04:38:46,538 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 04:38:46,538 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:38:46,539 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:38:47,130 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 04:38:47,131 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 04:38:47,132 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 04:38:47,133 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:38:47,138 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:39:49,418 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 04:39:49,418 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:39:49,419 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:39:49,951 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 04:39:49,952 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 04:39:49,953 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 04:39:49,954 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:39:49,954 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:39:58,752 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 04:39:58,752 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:39:58,753 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:39:59,292 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 04:39:59,293 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 04:39:59,294 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 04:39:59,294 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:39:59,295 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:40:48,168 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 04:40:48,168 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:40:48,168 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:40:48,697 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 04:40:48,697 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 04:40:48,699 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 04:40:48,699 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:40:48,699 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:41:35,703 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 04:41:35,704 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 04:41:35,707 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 04:41:35,708 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:41:35,709 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:41:39,869 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 04:41:39,869 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 04:41:39,870 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:41:39,871 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:41:48,285 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 04:41:48,285 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:41:48,285 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:41:49,297 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 04:41:49,298 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 04:41:49,299 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 04:41:49,299 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:41:49,300 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:42:07,242 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 04:42:07,243 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 04:42:07,246 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 04:42:07,246 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:42:07,247 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:42:10,957 - core.ai_engine - WARNING - OPENAI_API_KEY not found - AI Engine will use fallback narratives
+2025-07-15 04:42:11,665 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 04:42:11,672 - core.advanced_formatter - ERROR - Error formatting analysis: 'int' object has no attribute 'get'
+2025-07-15 04:42:11,676 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:5000
+2025-07-15 04:42:12,681 - urllib3.connectionpool - DEBUG - http://localhost:5000 "GET /api/market-data/BTC-USDT HTTP/1.1" 200 74
+2025-07-15 04:42:12,683 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:5000
+2025-07-15 04:42:13,664 - urllib3.connectionpool - DEBUG - http://localhost:5000 "GET /api/open-interest/BTC-USDT HTTP/1.1" 200 57
+2025-07-15 04:42:13,666 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:5000
+2025-07-15 04:42:14,647 - urllib3.connectionpool - DEBUG - http://localhost:5000 "GET /api/user-preferences/test_session_123 HTTP/1.1" 404 50
+2025-07-15 04:42:14,649 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:5000
+2025-07-15 04:43:08,267 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 04:43:08,267 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:43:08,267 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 04:43:09,599 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 04:43:09,600 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 04:43:09,601 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 04:43:09,602 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 04:43:09,602 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added

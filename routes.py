@@ -4,13 +4,16 @@ from models import TradingSignal, SystemMetrics, AlertLog, TradingAnalysis, Mark
 from datetime import datetime, timedelta, timezone
 from config import Config
 import logging
-from core.narrative_ai import NarrativeAI
-from core.realtime_streamer import RealtimeDataStreamer, streamer
-
 logger = logging.getLogger(__name__)
 
-# Initialize Narrative AI
-narrative_ai = NarrativeAI()
+# Initialize services locally to avoid circular imports
+def get_narrative_ai():
+    from core.narrative_ai import NarrativeAI
+    return NarrativeAI()
+
+def get_realtime_streamer():
+    from core.realtime_streamer import RealtimeDataStreamer, streamer
+    return streamer
 
 @app.route('/')
 def index():
@@ -529,8 +532,9 @@ def get_ai_narrative(symbol):
             'resistance_levels': []
         }
         
-        # Generate narrative
+        # Generate narrative using local import to avoid circular import
         language = request.args.get('lang', 'id')  # Default to Indonesian
+        narrative_ai = get_narrative_ai()
         narrative = narrative_ai.generate_analysis_narrative(
             symbol, 
             signal_data, 
@@ -567,6 +571,7 @@ def get_ai_narrative(symbol):
 def get_narrative_usage():
     """Get OpenAI API usage statistics"""
     try:
+        narrative_ai = get_narrative_ai()
         stats = narrative_ai.get_usage_statistics()
         
         return jsonify({
@@ -1603,6 +1608,7 @@ def get_volume_profile_data(symbol):
 def get_market_overview():
     """Get real-time market overview"""
     try:
+        streamer = get_realtime_streamer()
         overview = streamer.get_market_overview()
         return jsonify(overview)
     except Exception as e:
@@ -1613,6 +1619,7 @@ def get_market_overview():
 def get_streaming_stats():
     """Get real-time streaming statistics"""
     try:
+        streamer = get_realtime_streamer()
         stats = streamer.get_streaming_stats()
         return jsonify({'success': True, 'stats': stats})
     except Exception as e:
@@ -1623,6 +1630,7 @@ def get_streaming_stats():
 def start_streaming():
     """Start real-time streaming"""
     try:
+        streamer = get_realtime_streamer()
         streamer.start_streaming()
         return jsonify({'success': True, 'message': 'Real-time streaming started'})
     except Exception as e:
@@ -1633,11 +1641,274 @@ def start_streaming():
 def stop_streaming():
     """Stop real-time streaming"""
     try:
+        streamer = get_realtime_streamer()
         streamer.stop_streaming()
         return jsonify({'success': True, 'message': 'Real-time streaming stopped'})
     except Exception as e:
         logger.error(f"Error stopping streaming: {e}")
         return jsonify({'success': False, 'error': str(e)})
+
+# =======================================================================
+# NEW ENDPOINTS FOR PHASE 1 INTEGRATED MODELS
+# =======================================================================
+
+@app.route('/api/market-data/<symbol>')
+def get_market_data(symbol):
+    """Get market data (candlestick) for a symbol"""
+    try:
+        # Get query parameters
+        timeframe = request.args.get('timeframe', '1h')
+        limit = request.args.get('limit', 100, type=int)
+        
+        # Validate symbol
+        if not symbol or len(symbol) < 3:
+            return jsonify({'error': 'Invalid symbol'}), 400
+        
+        # Query market data
+        query = MarketData.query.filter_by(symbol=symbol.upper(), timeframe=timeframe)
+        query = query.order_by(MarketData.timestamp.desc()).limit(limit)
+        
+        market_data = query.all()
+        
+        return jsonify({
+            'success': True,
+            'symbol': symbol.upper(),
+            'timeframe': timeframe,
+            'count': len(market_data),
+            'data': [data.to_dict() for data in market_data]
+        })
+        
+    except Exception as e:
+        logger.error(f"Error getting market data for {symbol}: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/open-interest/<symbol>')
+def get_open_interest(symbol):
+    """Get open interest data for a symbol"""
+    try:
+        # Get query parameters
+        limit = request.args.get('limit', 100, type=int)
+        
+        # Validate symbol
+        if not symbol or len(symbol) < 3:
+            return jsonify({'error': 'Invalid symbol'}), 400
+        
+        # Query open interest data
+        query = OpenInterestData.query.filter_by(symbol=symbol.upper())
+        query = query.order_by(OpenInterestData.timestamp.desc()).limit(limit)
+        
+        oi_data = query.all()
+        
+        return jsonify({
+            'success': True,
+            'symbol': symbol.upper(),
+            'count': len(oi_data),
+            'data': [data.to_dict() for data in oi_data]
+        })
+        
+    except Exception as e:
+        logger.error(f"Error getting open interest data for {symbol}: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/orderbook/<symbol>')
+def get_orderbook_data(symbol):
+    """Get orderbook data for a symbol"""
+    try:
+        # Get query parameters
+        limit = request.args.get('limit', 50, type=int)
+        
+        # Validate symbol
+        if not symbol or len(symbol) < 3:
+            return jsonify({'error': 'Invalid symbol'}), 400
+        
+        # Query orderbook data
+        query = OrderbookData.query.filter_by(symbol=symbol.upper())
+        query = query.order_by(OrderbookData.timestamp.desc()).limit(limit)
+        
+        orderbook_data = query.all()
+        
+        return jsonify({
+            'success': True,
+            'symbol': symbol.upper(),
+            'count': len(orderbook_data),
+            'data': [data.to_dict() for data in orderbook_data]
+        })
+        
+    except Exception as e:
+        logger.error(f"Error getting orderbook data for {symbol}: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/technical-indicators/<symbol>')
+def get_technical_indicators(symbol):
+    """Get technical indicator data for a symbol"""
+    try:
+        # Get query parameters
+        timeframe = request.args.get('timeframe', '1h')
+        indicator_type = request.args.get('type', None)
+        limit = request.args.get('limit', 100, type=int)
+        
+        # Validate symbol
+        if not symbol or len(symbol) < 3:
+            return jsonify({'error': 'Invalid symbol'}), 400
+        
+        # Build query
+        query = TechnicalIndicatorData.query.filter_by(symbol=symbol.upper(), timeframe=timeframe)
+        
+        if indicator_type:
+            query = query.filter_by(indicator_type=indicator_type.upper())
+        
+        query = query.order_by(TechnicalIndicatorData.timestamp.desc()).limit(limit)
+        
+        indicator_data = query.all()
+        
+        return jsonify({
+            'success': True,
+            'symbol': symbol.upper(),
+            'timeframe': timeframe,
+            'indicator_type': indicator_type,
+            'count': len(indicator_data),
+            'data': [data.to_dict() for data in indicator_data]
+        })
+        
+    except Exception as e:
+        logger.error(f"Error getting technical indicators for {symbol}: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/user-preferences/<session_id>')
+def get_user_preferences(session_id):
+    """Get user preferences for a session"""
+    try:
+        # Query user preferences
+        preferences = UserPreferences.query.filter_by(session_id=session_id).first()
+        
+        if not preferences:
+            return jsonify({'error': 'No preferences found for this session'}), 404
+        
+        return jsonify({
+            'success': True,
+            'session_id': session_id,
+            'preferences': preferences.to_dict()
+        })
+        
+    except Exception as e:
+        logger.error(f"Error getting user preferences for {session_id}: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/user-preferences/<session_id>', methods=['POST'])
+def save_user_preferences(session_id):
+    """Save or update user preferences"""
+    try:
+        data = request.get_json()
+        
+        if not data:
+            return jsonify({'error': 'No data provided'}), 400
+        
+        # Find existing preferences or create new
+        preferences = UserPreferences.query.filter_by(session_id=session_id).first()
+        
+        if preferences:
+            # Update existing preferences
+            preferences.preferred_symbol = data.get('preferred_symbol', preferences.preferred_symbol)
+            preferences.preferred_timeframe = data.get('preferred_timeframe', preferences.preferred_timeframe)
+            preferences.preferred_limit = data.get('preferred_limit', preferences.preferred_limit)
+            preferences.auto_refresh = data.get('auto_refresh', preferences.auto_refresh)
+            preferences.updated_at = datetime.utcnow()
+        else:
+            # Create new preferences
+            preferences = UserPreferences(
+                session_id=session_id,
+                preferred_symbol=data.get('preferred_symbol', 'BTC-USDT'),
+                preferred_timeframe=data.get('preferred_timeframe', '1h'),
+                preferred_limit=data.get('preferred_limit', 100),
+                auto_refresh=data.get('auto_refresh', True)
+            )
+            db.session.add(preferences)
+        
+        db.session.commit()
+        
+        return jsonify({
+            'success': True,
+            'session_id': session_id,
+            'preferences': preferences.to_dict()
+        })
+        
+    except Exception as e:
+        logger.error(f"Error saving user preferences for {session_id}: {e}")
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/ai-snapshots/<symbol>')
+def get_ai_snapshots(symbol):
+    """Get AI snapshots for a symbol"""
+    try:
+        # Get query parameters
+        timeframe = request.args.get('timeframe', '1h')
+        limit = request.args.get('limit', 50, type=int)
+        session_id = request.args.get('session_id', None)
+        
+        # Validate symbol
+        if not symbol or len(symbol) < 3:
+            return jsonify({'error': 'Invalid symbol'}), 400
+        
+        # Build query
+        query = AISnapshotArchive.query.filter_by(symbol=symbol.upper(), timeframe=timeframe)
+        
+        if session_id:
+            query = query.filter_by(session_id=session_id)
+        
+        query = query.order_by(AISnapshotArchive.created_at.desc()).limit(limit)
+        
+        snapshots = query.all()
+        
+        return jsonify({
+            'success': True,
+            'symbol': symbol.upper(),
+            'timeframe': timeframe,
+            'session_id': session_id,
+            'count': len(snapshots),
+            'data': [snapshot.to_dict() for snapshot in snapshots]
+        })
+        
+    except Exception as e:
+        logger.error(f"Error getting AI snapshots for {symbol}: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/ai-snapshots', methods=['POST'])
+def create_ai_snapshot():
+    """Create a new AI snapshot"""
+    try:
+        data = request.get_json()
+        
+        if not data or 'symbol' not in data:
+            return jsonify({'error': 'Symbol is required'}), 400
+        
+        # Create new AI snapshot
+        snapshot = AISnapshotArchive(
+            session_id=data.get('session_id', 'anonymous'),
+            symbol=data['symbol'].upper(),
+            timeframe=data.get('timeframe', '1h'),
+            quick_mode=data.get('quick_mode', False),
+            ai_narrative=data.get('ai_narrative', ''),
+            confluence_summary=data.get('confluence_summary', {}),
+            layer_analysis=data.get('layer_analysis', {}),
+            snapshot_data=data.get('snapshot_data', {}),
+            confidence=data.get('confidence', 0.0)
+        )
+        
+        db.session.add(snapshot)
+        db.session.commit()
+        
+        return jsonify({
+            'success': True,
+            'message': 'AI snapshot created successfully',
+            'snapshot_id': snapshot.id,
+            'snapshot': snapshot.to_dict()
+        })
+        
+    except Exception as e:
+        logger.error(f"Error creating AI snapshot: {e}")
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/api/analysis/detail/<int:analysis_id>')
 def get_analysis_detail(analysis_id):
