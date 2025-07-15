@@ -60887,3 +60887,71 @@ jinja2.exceptions.TemplateNotFound: analysis_history.html
 2025-07-15 08:42:08,843 - apscheduler.scheduler - INFO - Scheduler started
 2025-07-15 08:42:08,843 - apscheduler.scheduler - DEBUG - Looking for jobs to run
 2025-07-15 08:42:08,843 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 08:51:07,918 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 08:51:07,918 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 08:51:07,918 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 08:51:08,642 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 08:51:08,643 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 08:51:08,645 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 08:51:08,645 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 08:51:08,652 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 08:51:58,180 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 08:51:58,180 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 08:51:58,180 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 08:51:58,923 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 08:51:58,924 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 08:51:58,925 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 08:51:58,926 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 08:51:58,940 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 08:52:06,211 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:52:06,228 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:52:06,239 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-15 08:52:06,239 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 08:52:32,504 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 08:52:32,504 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 08:52:32,504 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 08:52:33,433 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 08:52:33,433 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 08:52:33,435 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 08:52:33,435 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 08:52:33,445 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 08:52:40,889 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:52:40,910 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:52:40,921 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-15 08:52:40,922 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 08:52:49,639 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 08:52:49,639 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 08:52:49,640 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 08:52:50,921 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 08:52:50,923 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 08:52:50,925 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 08:52:50,925 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 08:52:50,925 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 08:52:58,430 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:52:58,449 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:52:58,458 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-15 08:52:58,458 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 08:53:35,852 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 08:53:35,852 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 08:53:35,853 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 08:53:36,554 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 08:53:36,555 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 08:53:36,557 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 08:53:36,557 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 08:53:36,572 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 08:53:44,109 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:53:44,127 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:53:44,138 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-15 08:53:44,138 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 08:55:07,348 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 08:55:07,349 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 08:55:07,349 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 08:55:08,998 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 08:55:08,999 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 08:55:09,002 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 08:55:09,002 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 08:55:09,002 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 08:55:19,070 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 08:55:19,107 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 08:55:19,118 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-15 08:55:19,118 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities

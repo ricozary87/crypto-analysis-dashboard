@@ -6,6 +6,12 @@ from config import Config
 import logging
 import numpy as np
 import pandas as pd
+
+# Common core imports moved to top to avoid repetition
+from core.analyzer import TechnicalAnalyzer
+from core.okx_fetcher import OKXAPIManager
+from core.snapshot_generator import SnapshotGenerator, SnapshotType
+
 logger = logging.getLogger(__name__)
 
 # JSON Safe Converter Helper
@@ -35,6 +41,130 @@ def get_narrative_ai():
 def get_realtime_streamer():
     from core.realtime_streamer import RealtimeDataStreamer, streamer
     return streamer
+
+# Helper functions for enhanced charts endpoint
+def prepare_candlestick_data(df):
+    """Prepare candlestick data with proper timestamp handling"""
+    candlestick_data = []
+    for i in range(len(df)):
+        # Get timestamp from DataFrame - it's a column, not index
+        if 'timestamp' in df.columns:
+            timestamp_val = df['timestamp'].iloc[i]
+            if hasattr(timestamp_val, 'isoformat'):
+                timestamp_iso = timestamp_val.isoformat()
+                timestamp_ms = int(timestamp_val.timestamp() * 1000)
+            else:
+                # Convert to proper datetime if needed
+                try:
+                    if isinstance(timestamp_val, (int, float)):
+                        # Assume Unix timestamp
+                        if timestamp_val > 10000000000:  # Milliseconds
+                            timestamp_dt = datetime.fromtimestamp(timestamp_val / 1000)
+                        else:  # Seconds
+                            timestamp_dt = datetime.fromtimestamp(timestamp_val)
+                    else:
+                        # Invalid timestamp, use current time minus interval
+                        timestamp_dt = datetime.now() - timedelta(hours=(len(df) - i))
+                    
+                    timestamp_iso = timestamp_dt.isoformat()
+                    timestamp_ms = int(timestamp_dt.timestamp() * 1000)
+                except (ValueError, TypeError):
+                    # Final fallback - use current time minus interval
+                    timestamp_dt = datetime.now() - timedelta(hours=(len(df) - i))
+                    timestamp_iso = timestamp_dt.isoformat()
+                    timestamp_ms = int(timestamp_dt.timestamp() * 1000)
+        else:
+            # Fallback if no timestamp column
+            timestamp_dt = datetime.now() - timedelta(hours=(len(df) - i))
+            timestamp_iso = timestamp_dt.isoformat()
+            timestamp_ms = int(timestamp_dt.timestamp() * 1000)
+        
+        candlestick_data.append({
+            'timestamp': timestamp_iso,
+            'time': timestamp_ms,
+            'open': float(df['open'].iloc[i]),
+            'high': float(df['high'].iloc[i]),
+            'low': float(df['low'].iloc[i]),
+            'close': float(df['close'].iloc[i]),
+            'volume': float(df['volume'].iloc[i])
+        })
+    
+    return candlestick_data
+
+def prepare_support_resistance_levels(df):
+    """Calculate and prepare support/resistance levels"""
+    support_levels = []
+    resistance_levels = []
+    
+    # Calculate basic support/resistance (simplified)
+    recent_lows = df['low'].rolling(window=20).min()
+    recent_highs = df['high'].rolling(window=20).max()
+    
+    if not recent_lows.empty and not recent_highs.empty:
+        support_levels = [float(recent_lows.iloc[-1])]
+        resistance_levels = [float(recent_highs.iloc[-1])]
+    
+    return support_levels, resistance_levels
+
+def prepare_smc_levels(smc_analysis, df):
+    """Prepare SMC levels (Order Blocks, FVG Gaps, Swing Points)"""
+    smc_levels = {
+        'orderBlocks': [],
+        'fvgGaps': [],
+        'swingPoints': smc_analysis.get('swing_points', {})
+    }
+    
+    # Extract order blocks from SMC analysis
+    order_blocks = smc_analysis.get('order_blocks', [])
+    for block in order_blocks:
+        # Handle timestamp conversion safely
+        start_time = block.get('start_time', df.index[0])
+        end_time = block.get('end_time', df.index[-1])
+        
+        if hasattr(start_time, 'isoformat'):
+            start_time_iso = start_time.isoformat()
+        else:
+            start_time_iso = str(start_time)
+            
+        if hasattr(end_time, 'isoformat'):
+            end_time_iso = end_time.isoformat()
+        else:
+            end_time_iso = str(end_time)
+        
+        smc_levels['orderBlocks'].append({
+            'start_time': start_time_iso,
+            'end_time': end_time_iso,
+            'high': block.get('high', 0),
+            'low': block.get('low', 0),
+            'type': block.get('type', 'bullish')
+        })
+    
+    # Extract FVG gaps
+    fvg_signals = smc_analysis.get('fvg_signals', [])
+    for gap in fvg_signals:
+        # Handle timestamp conversion safely
+        start_time = gap.get('start_time', df.index[0])
+        end_time = gap.get('end_time', df.index[-1])
+        
+        if hasattr(start_time, 'isoformat'):
+            start_time_iso = start_time.isoformat()
+        else:
+            start_time_iso = str(start_time)
+            
+        if hasattr(end_time, 'isoformat'):
+            end_time_iso = end_time.isoformat()
+        else:
+            end_time_iso = str(end_time)
+        
+        smc_levels['fvgGaps'].append({
+            'start_time': start_time_iso,
+            'end_time': end_time_iso,
+            'high': gap.get('high', 0),
+            'low': gap.get('low', 0),
+            'type': gap.get('type', 'bullish')
+        })
+    
+    return smc_levels
 
 @app.route('/')
 def index():
@@ -1756,9 +1886,6 @@ def test_enhanced_ai_connection():
 def get_enhanced_chart_data(symbol):
     """Get comprehensive chart data for enhanced Plotly.js charts"""
     try:
-        from core.analyzer import TechnicalAnalyzer
-        from core.okx_fetcher import OKXAPIManager
-        
         # Validate symbol
         valid_symbols = ['BTC', 'ETH', 'SOL', 'TIA', 'RENDER']
         if symbol.upper() not in valid_symbols:
@@ -1768,7 +1895,7 @@ def get_enhanced_chart_data(symbol):
         timeframe = request.args.get('timeframe', '1H')
         limit = request.args.get('limit', 200, type=int)
         
-        # Get data
+        # Get data using common imports
         api = OKXAPIManager()
         analyzer = TechnicalAnalyzer()
         
@@ -1781,125 +1908,12 @@ def get_enhanced_chart_data(symbol):
         # Get comprehensive analysis
         analysis = analyzer.analyze(df, symbol_okx, timeframe)
         
-        # Prepare candlestick data
-        candlestick_data = []
-        for i in range(len(df)):
-            # Get timestamp from DataFrame - it's a column, not index
-            if 'timestamp' in df.columns:
-                timestamp_val = df['timestamp'].iloc[i]
-                if hasattr(timestamp_val, 'isoformat'):
-                    timestamp_iso = timestamp_val.isoformat()
-                    timestamp_ms = int(timestamp_val.timestamp() * 1000)
-                else:
-                    # Convert to proper datetime if needed
-                    try:
-                        if isinstance(timestamp_val, (int, float)):
-                            # Assume Unix timestamp
-                            if timestamp_val > 10000000000:  # Milliseconds
-                                timestamp_dt = datetime.fromtimestamp(timestamp_val / 1000)
-                            else:  # Seconds
-                                timestamp_dt = datetime.fromtimestamp(timestamp_val)
-                        else:
-                            # Invalid timestamp, use current time minus interval
-                            timestamp_dt = datetime.now() - timedelta(hours=(len(df) - i))
-                        
-                        timestamp_iso = timestamp_dt.isoformat()
-                        timestamp_ms = int(timestamp_dt.timestamp() * 1000)
-                    except (ValueError, TypeError):
-                        # Final fallback - use current time minus interval
-                        timestamp_dt = datetime.now() - timedelta(hours=(len(df) - i))
-                        timestamp_iso = timestamp_dt.isoformat()
-                        timestamp_ms = int(timestamp_dt.timestamp() * 1000)
-            else:
-                # Fallback if no timestamp column
-                timestamp_dt = datetime.now() - timedelta(hours=(len(df) - i))
-                timestamp_iso = timestamp_dt.isoformat()
-                timestamp_ms = int(timestamp_dt.timestamp() * 1000)
-            
-            candlestick_data.append({
-                'timestamp': timestamp_iso,
-                'time': timestamp_ms,
-                'open': float(df['open'].iloc[i]),
-                'high': float(df['high'].iloc[i]),
-                'low': float(df['low'].iloc[i]),
-                'close': float(df['close'].iloc[i]),
-                'volume': float(df['volume'].iloc[i])
-            })
-        
-        # Prepare technical indicators
+        # Use helper functions for data preparation
+        candlestick_data = prepare_candlestick_data(df)
         indicators = analysis.get('indicators', {})
-        
-        # SMC Analysis data
         smc_analysis = analysis.get('smc_analysis', {})
-        
-        # Prepare support/resistance levels
-        support_levels = []
-        resistance_levels = []
-        
-        # Calculate basic support/resistance (simplified)
-        recent_lows = df['low'].rolling(window=20).min()
-        recent_highs = df['high'].rolling(window=20).max()
-        
-        if not recent_lows.empty and not recent_highs.empty:
-            support_levels = [float(recent_lows.iloc[-1])]
-            resistance_levels = [float(recent_highs.iloc[-1])]
-        
-        # Prepare SMC levels
-        smc_levels = {
-            'orderBlocks': [],
-            'fvgGaps': [],
-            'swingPoints': smc_analysis.get('swing_points', {})
-        }
-        
-        # Extract order blocks from SMC analysis
-        order_blocks = smc_analysis.get('order_blocks', [])
-        for block in order_blocks:
-            # Handle timestamp conversion safely
-            start_time = block.get('start_time', df.index[0])
-            end_time = block.get('end_time', df.index[-1])
-            
-            if hasattr(start_time, 'isoformat'):
-                start_time_iso = start_time.isoformat()
-            else:
-                start_time_iso = str(start_time)
-                
-            if hasattr(end_time, 'isoformat'):
-                end_time_iso = end_time.isoformat()
-            else:
-                end_time_iso = str(end_time)
-            
-            smc_levels['orderBlocks'].append({
-                'start_time': start_time_iso,
-                'end_time': end_time_iso,
-                'high': block.get('high', 0),
-                'low': block.get('low', 0),
-                'type': block.get('type', 'bullish')
-            })
-        
-        # Extract FVG gaps
-        fvg_signals = smc_analysis.get('fvg_signals', [])
-        for gap in fvg_signals:
-            # Handle timestamp conversion safely
-            start_time = gap.get('start_time', df.index[0])
-            end_time = gap.get('end_time', df.index[-1])
-            
-            if hasattr(start_time, 'isoformat'):
-                start_time_iso = start_time.isoformat()
-            else:
-                start_time_iso = str(start_time)
-                
-            if hasattr(end_time, 'isoformat'):
-                end_time_iso = end_time.isoformat()
-            else:
-                end_time_iso = str(end_time)
-            
-            smc_levels['fvgGaps'].append({
-                'start_time': start_time_iso,
-                'end_time': end_time_iso,
-                'high': gap.get('high', 0),
-                'low': gap.get('low', 0),
-                'type': gap.get('type', 'bullish')
-            })
+        support_levels, resistance_levels = prepare_support_resistance_levels(df)
+        smc_levels = prepare_smc_levels(smc_analysis, df)
         
         return jsonify({
             'success': True,
