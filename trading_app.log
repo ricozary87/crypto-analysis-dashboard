@@ -60375,3 +60375,181 @@ jinja2.exceptions.TemplateNotFound: analysis_history.html
 2025-07-15 06:59:31,414 - apscheduler.scheduler - INFO - Scheduler started
 2025-07-15 06:59:31,414 - apscheduler.scheduler - DEBUG - Looking for jobs to run
 2025-07-15 06:59:31,414 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 07:05:56,842 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 07:05:56,859 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 07:05:56,863 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 07:05:57,019 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 07:05:57,026 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 07:05:57,114 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 07:05:57,122 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 07:05:57,124 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 07:05:57,257 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 07:05:57,263 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 07:05:57,298 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 07:05:57,446 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'idempotency_key': 'stainless-python-retry-0552acf3-aae9-473a-b538-3f153c83204f', 'json_data': {'messages': [{'role': 'system', 'content': 'You are a helpful assistant.'}, {'role': 'user', 'content': "Say 'AI connection test successful'"}], 'model': 'gpt-4o', 'max_tokens': 50, 'temperature': 0.1}}
+2025-07-15 07:05:57,452 - openai._base_client - DEBUG - Sending HTTP Request: POST https://api.openai.com/v1/chat/completions
+2025-07-15 07:05:57,452 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=30.0 socket_options=None
+2025-07-15 07:05:57,458 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f5e82e5d950>
+2025-07-15 07:05:57,458 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7f5e8338b4a0> server_hostname='api.openai.com' timeout=30.0
+2025-07-15 07:05:57,463 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f5e82e5da10>
+2025-07-15 07:05:57,464 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-07-15 07:05:57,464 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-07-15 07:05:57,464 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-07-15 07:05:57,465 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-07-15 07:05:57,465 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-07-15 07:05:58,192 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Tue, 15 Jul 2025 07:05:58 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'access-control-expose-headers', b'X-Request-ID'), (b'openai-organization', b'user-4ezgmzyis7nvjdocwlxbxkb1'), (b'openai-processing-ms', b'380'), (b'openai-version', b'2020-10-01'), (b'x-envoy-upstream-service-time', b'389'), (b'x-ratelimit-limit-requests', b'500'), (b'x-ratelimit-limit-tokens', b'30000'), (b'x-ratelimit-remaining-requests', b'499'), (b'x-ratelimit-remaining-tokens', b'29981'), (b'x-ratelimit-reset-requests', b'120ms'), (b'x-ratelimit-reset-tokens', b'38ms'), (b'x-request-id', b'req_ff1c58dd3465fefa8d0d1e806c49c3e2'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=yB.mQybeOfYDomt6T2CHcM_LTtNi39Mtk17cDHYJrrY-1752563158-1.0.1.1-QnlXKi5lXVCpbwJ7Ur4YfXCKu2bDuCVEtD3amDW87xadaFrONjKXRrWwnyS8dr7I08ljA54X_Bbe41N25mqlhsQokZjx7PRWQQJSbI_RLKs; path=/; expires=Tue, 15-Jul-25 07:35:58 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=nrpmNDgOhRgs49d91naEr.K8xSDkOw8w_yzk3WL8aUc-1752563158161-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'95f76a15ffb49905-BOM'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-07-15 07:05:58,193 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 07:05:58,193 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-07-15 07:05:58,195 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-07-15 07:05:58,195 - httpcore.http11 - DEBUG - response_closed.started
+2025-07-15 07:05:58,195 - httpcore.http11 - DEBUG - response_closed.complete
+2025-07-15 07:05:58,195 - openai._base_client - DEBUG - HTTP Response: POST https://api.openai.com/v1/chat/completions "200 OK" Headers([('date', 'Tue, 15 Jul 2025 07:05:58 GMT'), ('content-type', 'application/json'), ('transfer-encoding', 'chunked'), ('connection', 'keep-alive'), ('access-control-expose-headers', 'X-Request-ID'), ('openai-organization', 'user-4ezgmzyis7nvjdocwlxbxkb1'), ('openai-processing-ms', '380'), ('openai-version', '2020-10-01'), ('x-envoy-upstream-service-time', '389'), ('x-ratelimit-limit-requests', '500'), ('x-ratelimit-limit-tokens', '30000'), ('x-ratelimit-remaining-requests', '499'), ('x-ratelimit-remaining-tokens', '29981'), ('x-ratelimit-reset-requests', '120ms'), ('x-ratelimit-reset-tokens', '38ms'), ('x-request-id', 'req_ff1c58dd3465fefa8d0d1e806c49c3e2'), ('strict-transport-security', 'max-age=31536000; includeSubDomains; preload'), ('cf-cache-status', 'DYNAMIC'), ('set-cookie', '__cf_bm=yB.mQybeOfYDomt6T2CHcM_LTtNi39Mtk17cDHYJrrY-1752563158-1.0.1.1-QnlXKi5lXVCpbwJ7Ur4YfXCKu2bDuCVEtD3amDW87xadaFrONjKXRrWwnyS8dr7I08ljA54X_Bbe41N25mqlhsQokZjx7PRWQQJSbI_RLKs; path=/; expires=Tue, 15-Jul-25 07:35:58 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), ('x-content-type-options', 'nosniff'), ('set-cookie', '_cfuvid=nrpmNDgOhRgs49d91naEr.K8xSDkOw8w_yzk3WL8aUc-1752563158161-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), ('server', 'cloudflare'), ('cf-ray', '95f76a15ffb49905-BOM'), ('content-encoding', 'gzip'), ('alt-svc', 'h3=":443"; ma=86400')])
+2025-07-15 07:05:58,195 - openai._base_client - DEBUG - request_id: req_ff1c58dd3465fefa8d0d1e806c49c3e2
+2025-07-15 07:05:58,199 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 07:05:58,209 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 07:05:58,210 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 07:05:58,351 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 07:05:58,356 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 07:05:58,445 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 07:05:58,457 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 07:05:58,459 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 07:05:58,601 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 07:05:58,605 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 07:05:58,695 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 07:05:58,703 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 07:05:58,704 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 07:05:58,847 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 07:05:58,851 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 07:16:21,025 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 07:16:21,041 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 07:16:21,042 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 07:16:21,170 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 07:16:21,174 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 07:16:21,272 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 07:16:21,283 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 07:16:21,284 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 07:16:21,422 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 07:16:21,427 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 07:16:21,454 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 07:16:21,464 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 07:16:21,466 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 07:16:21,671 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 07:16:21,676 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 07:16:21,775 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 07:16:21,776 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'idempotency_key': 'stainless-python-retry-be10f6ea-7cb2-426d-ba52-716f9acc69c4', 'json_data': {'messages': [{'role': 'system', 'content': 'You are a helpful assistant.'}, {'role': 'user', 'content': "Say 'AI connection test successful'"}], 'model': 'gpt-4o', 'max_tokens': 50, 'temperature': 0.1}}
+2025-07-15 07:16:21,777 - openai._base_client - DEBUG - Sending HTTP Request: POST https://api.openai.com/v1/chat/completions
+2025-07-15 07:16:21,777 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=30.0 socket_options=None
+2025-07-15 07:16:21,782 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f5e82e91410>
+2025-07-15 07:16:21,782 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7f5e82f560f0> server_hostname='api.openai.com' timeout=30.0
+2025-07-15 07:16:21,788 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f5e82e917d0>
+2025-07-15 07:16:21,788 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-07-15 07:16:21,788 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-07-15 07:16:21,788 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-07-15 07:16:21,789 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-07-15 07:16:21,789 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-07-15 07:16:22,957 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Tue, 15 Jul 2025 07:16:22 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'access-control-expose-headers', b'X-Request-ID'), (b'openai-organization', b'user-4ezgmzyis7nvjdocwlxbxkb1'), (b'openai-processing-ms', b'438'), (b'openai-version', b'2020-10-01'), (b'x-envoy-upstream-service-time', b'448'), (b'x-ratelimit-limit-requests', b'500'), (b'x-ratelimit-limit-tokens', b'30000'), (b'x-ratelimit-remaining-requests', b'499'), (b'x-ratelimit-remaining-tokens', b'29981'), (b'x-ratelimit-reset-requests', b'120ms'), (b'x-ratelimit-reset-tokens', b'38ms'), (b'x-request-id', b'req_ff7f22808d007b5b82f33a47a322ef42'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=PayFkPfMZyPFp5apeYoy1f1yI2Xq7qw5Gy3r4U14IVE-1752563782-1.0.1.1-M4adxeAVHHBnIJ9_aFxJkriid9BQjvrtO5gUrdiqdRrJqS6eRnQUqXKNBS6cafPEW2Ulkai8mE1J8ZKG1gggRFJdz3VSqkeP7PUeUpFSTxM; path=/; expires=Tue, 15-Jul-25 07:46:22 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=afzO_hJ41ikOcs3pORekn3Fxf_EOQVvvzvjxk0BBvs8-1752563782926-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'95f779540952d89e-BOM'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-07-15 07:16:22,958 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 07:16:22,958 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-07-15 07:16:22,958 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-07-15 07:16:22,958 - httpcore.http11 - DEBUG - response_closed.started
+2025-07-15 07:16:22,958 - httpcore.http11 - DEBUG - response_closed.complete
+2025-07-15 07:16:22,959 - openai._base_client - DEBUG - HTTP Response: POST https://api.openai.com/v1/chat/completions "200 OK" Headers([('date', 'Tue, 15 Jul 2025 07:16:22 GMT'), ('content-type', 'application/json'), ('transfer-encoding', 'chunked'), ('connection', 'keep-alive'), ('access-control-expose-headers', 'X-Request-ID'), ('openai-organization', 'user-4ezgmzyis7nvjdocwlxbxkb1'), ('openai-processing-ms', '438'), ('openai-version', '2020-10-01'), ('x-envoy-upstream-service-time', '448'), ('x-ratelimit-limit-requests', '500'), ('x-ratelimit-limit-tokens', '30000'), ('x-ratelimit-remaining-requests', '499'), ('x-ratelimit-remaining-tokens', '29981'), ('x-ratelimit-reset-requests', '120ms'), ('x-ratelimit-reset-tokens', '38ms'), ('x-request-id', 'req_ff7f22808d007b5b82f33a47a322ef42'), ('strict-transport-security', 'max-age=31536000; includeSubDomains; preload'), ('cf-cache-status', 'DYNAMIC'), ('set-cookie', '__cf_bm=PayFkPfMZyPFp5apeYoy1f1yI2Xq7qw5Gy3r4U14IVE-1752563782-1.0.1.1-M4adxeAVHHBnIJ9_aFxJkriid9BQjvrtO5gUrdiqdRrJqS6eRnQUqXKNBS6cafPEW2Ulkai8mE1J8ZKG1gggRFJdz3VSqkeP7PUeUpFSTxM; path=/; expires=Tue, 15-Jul-25 07:46:22 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), ('x-content-type-options', 'nosniff'), ('set-cookie', '_cfuvid=afzO_hJ41ikOcs3pORekn3Fxf_EOQVvvzvjxk0BBvs8-1752563782926-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), ('server', 'cloudflare'), ('cf-ray', '95f779540952d89e-BOM'), ('content-encoding', 'gzip'), ('alt-svc', 'h3=":443"; ma=86400')])
+2025-07-15 07:16:22,959 - openai._base_client - DEBUG - request_id: req_ff7f22808d007b5b82f33a47a322ef42
+2025-07-15 07:16:22,961 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 07:16:22,973 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 07:16:22,975 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 07:16:23,131 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 07:16:23,135 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 07:16:23,145 - httpcore.connection - DEBUG - close.started
+2025-07-15 07:16:23,145 - httpcore.connection - DEBUG - close.complete
+2025-07-15 07:16:23,232 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 07:16:23,241 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 07:16:23,242 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 07:16:23,366 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 07:16:23,371 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 07:26:49,914 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 07:26:49,925 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 07:26:49,927 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 07:26:50,060 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 07:26:50,065 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 07:26:50,158 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 07:26:50,167 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 07:26:50,168 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 07:26:50,327 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 07:26:50,332 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 07:26:50,391 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 38 indicators
+2025-07-15 07:26:50,391 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 07:26:50,392 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 07:26:50,553 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 07:26:50,557 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 07:26:50,566 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 07:26:50,575 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 07:26:50,576 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 07:26:50,701 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 07:26:50,705 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 07:27:33,994 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 07:27:33,995 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 07:27:33,995 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 07:27:34,063 - httpcore.connection - DEBUG - close.started
+2025-07-15 07:27:34,063 - httpcore.connection - DEBUG - close.complete
+2025-07-15 07:27:34,902 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 07:27:34,905 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 07:27:34,907 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 07:27:34,907 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 07:27:34,908 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 07:27:55,002 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 07:27:55,031 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 07:27:55,034 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 07:27:55,169 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 07:27:55,176 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 07:27:55,274 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 07:27:55,285 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 07:27:55,287 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 07:27:55,406 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 07:27:55,412 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 07:27:55,462 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 38 indicators
+2025-07-15 07:27:55,462 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 07:27:55,464 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 07:27:55,711 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 07:27:55,717 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 07:27:55,730 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 07:27:55,740 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 07:27:55,742 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 07:27:55,882 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 07:27:55,888 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 07:28:41,660 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 07:28:41,660 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 07:28:41,660 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 07:28:42,300 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 07:28:42,300 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 07:28:42,302 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 07:28:42,302 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 07:28:42,321 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 07:29:15,655 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 07:29:15,672 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 07:29:15,675 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 07:29:15,800 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 07:29:15,805 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 07:29:15,903 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 07:29:15,910 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 07:29:15,911 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 07:29:16,076 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 07:29:16,080 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 07:29:16,114 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 38 indicators
+2025-07-15 07:29:16,115 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 07:29:16,116 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 07:29:16,248 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 07:29:16,253 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 07:29:16,263 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 07:29:16,275 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 07:29:16,277 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 07:29:16,404 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 07:29:16,408 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 07:29:19,108 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 07:29:19,108 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 07:29:19,108 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 07:29:20,369 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 07:29:20,370 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 07:29:20,372 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 07:29:20,372 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 07:29:20,372 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added

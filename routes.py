@@ -1784,15 +1784,37 @@ def get_enhanced_chart_data(symbol):
         # Prepare candlestick data
         candlestick_data = []
         for i in range(len(df)):
-            # Handle timestamp conversion safely
-            timestamp_val = df.index[i]
-            if hasattr(timestamp_val, 'isoformat'):
-                timestamp_iso = timestamp_val.isoformat()
-                timestamp_ms = int(timestamp_val.timestamp() * 1000)
+            # Get timestamp from DataFrame - it's a column, not index
+            if 'timestamp' in df.columns:
+                timestamp_val = df['timestamp'].iloc[i]
+                if hasattr(timestamp_val, 'isoformat'):
+                    timestamp_iso = timestamp_val.isoformat()
+                    timestamp_ms = int(timestamp_val.timestamp() * 1000)
+                else:
+                    # Convert to proper datetime if needed
+                    try:
+                        if isinstance(timestamp_val, (int, float)):
+                            # Assume Unix timestamp
+                            if timestamp_val > 10000000000:  # Milliseconds
+                                timestamp_dt = datetime.fromtimestamp(timestamp_val / 1000)
+                            else:  # Seconds
+                                timestamp_dt = datetime.fromtimestamp(timestamp_val)
+                        else:
+                            # Invalid timestamp, use current time minus interval
+                            timestamp_dt = datetime.now() - timedelta(hours=(len(df) - i))
+                        
+                        timestamp_iso = timestamp_dt.isoformat()
+                        timestamp_ms = int(timestamp_dt.timestamp() * 1000)
+                    except (ValueError, TypeError):
+                        # Final fallback - use current time minus interval
+                        timestamp_dt = datetime.now() - timedelta(hours=(len(df) - i))
+                        timestamp_iso = timestamp_dt.isoformat()
+                        timestamp_ms = int(timestamp_dt.timestamp() * 1000)
             else:
-                # Fallback for non-datetime index
-                timestamp_iso = str(timestamp_val)
-                timestamp_ms = int(timestamp_val) if isinstance(timestamp_val, (int, float)) else i
+                # Fallback if no timestamp column
+                timestamp_dt = datetime.now() - timedelta(hours=(len(df) - i))
+                timestamp_iso = timestamp_dt.isoformat()
+                timestamp_ms = int(timestamp_dt.timestamp() * 1000)
             
             candlestick_data.append({
                 'timestamp': timestamp_iso,
