@@ -58887,3 +58887,70 @@ jinja2.exceptions.TemplateNotFound: analysis_history.html
 2025-07-15 05:06:41,187 - apscheduler.scheduler - INFO - Scheduler started
 2025-07-15 05:06:41,188 - apscheduler.scheduler - DEBUG - Looking for jobs to run
 2025-07-15 05:06:41,189 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:23:55,362 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 05:23:55,363 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:23:55,363 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:23:56,570 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 05:23:56,571 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 05:23:56,572 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 05:23:56,572 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:23:56,573 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:25:18,879 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 05:25:18,879 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:25:18,880 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:25:19,392 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 05:25:19,393 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 05:25:19,394 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 05:25:19,395 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:25:19,395 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:26:04,697 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 05:26:04,698 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:26:04,698 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:26:05,223 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 05:26:05,224 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 05:26:05,225 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 05:26:05,226 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:26:05,226 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:26:13,970 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 05:26:13,970 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:26:13,970 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:27:00,056 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 05:27:00,057 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 05:27:00,059 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 05:27:00,060 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:27:00,065 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:27:06,857 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 05:27:06,857 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:27:06,857 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:28:51,746 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 05:28:51,747 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 05:28:51,748 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 05:28:51,748 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:28:51,749 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:29:03,742 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:29:03,745 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:29:03,889 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:29:03,895 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:29:03,913 - routes - WARNING - SMC analysis failed: 'ProfessionalSMCAnalyzer' object has no attribute 'analyze'
+2025-07-15 05:29:03,913 - routes - WARNING - Signal engine analysis failed: 'SignalEngine' object has no attribute 'analyze_market'
+2025-07-15 05:29:03,913 - routes - ERROR - Error analyzing BTC: 'str' object has no attribute 'get'
+2025-07-15 05:29:04,610 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:29:04,610 - core.ai_engine - WARNING - OPENAI_API_KEY not found - AI Engine will use fallback narratives
+2025-07-15 05:29:04,610 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:29:04,611 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:29:04,611 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:29:04,611 - core.snapshot_generator - INFO - Generating quick snapshot for BTC-USDT (1H)
+2025-07-15 05:29:04,612 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:29:04,741 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:29:04,745 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:29:04,760 - core.snapshot_generator - ERROR - Error generating snapshot for BTC-USDT: 'ProfessionalSMCAnalyzer' object has no attribute 'analyze_market_structure'
+2025-07-15 05:29:04,760 - routes - ERROR - Error generating snapshot for BTC: 'ProfessionalSMCAnalyzer' object has no attribute 'analyze_market_structure'
+2025-07-15 05:29:05,560 - routes - ERROR - Error getting orderbook for BTC: 'OKXAPIManager' object has no attribute 'get_orderbook'
+2025-07-15 05:29:06,568 - routes - ERROR - Error getting depth chart for BTC: 'OKXAPIManager' object has no attribute 'get_orderbook'
+2025-07-15 05:29:07,539 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 05:29:07,540 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 05:29:07,541 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:29:07,799 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:29:07,803 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:29:07,805 - routes - WARNING - Error calculating rsi: 'IndicatorResult' object has no attribute 'interpretation'
+2025-07-15 05:29:07,806 - routes - WARNING - Error calculating macd: 'IndicatorResult' object has no attribute 'interpretation'

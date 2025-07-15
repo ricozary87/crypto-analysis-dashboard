@@ -252,17 +252,24 @@ def chart_data(symbol):
 
 @app.route('/api/analyze/<symbol>')
 def analyze_coin(symbol):
-    """Perform real-time analysis for a specific coin"""
+    """Enhanced real-time analysis with OkxCandleTracker SMC integration"""
     try:
         # Import necessary modules
         from core.okx_fetcher import OKXAPIManager
         from core.analyzer import TechnicalAnalyzer
+        from core.professional_smc_analyzer import ProfessionalSMCAnalyzer
+        from core.signal_engine import SignalEngine
         import pandas as pd
         
         # Validate symbol
         valid_symbols = ['BTC', 'ETH', 'SOL', 'TIA', 'RENDER']
         if symbol.upper() not in valid_symbols:
             return jsonify({'error': 'Invalid symbol'}), 400
+        
+        # Get parameters
+        timeframe = request.args.get('timeframe', '1H')
+        include_ai = request.args.get('ai', 'false').lower() == 'true'
+        include_smc = request.args.get('smc', 'true').lower() == 'true'
             
         # Initialize components
         okx_api = OKXAPIManager()
@@ -270,7 +277,7 @@ def analyze_coin(symbol):
         
         # Fetch real-time data
         symbol_okx = f"{symbol.upper()}-USDT"
-        df = okx_api.get_candles(symbol_okx, timeframe="1H", limit=100)
+        df = okx_api.get_candles(symbol_okx, timeframe=timeframe, limit=200)
         
         if df is None or df.empty:
             return jsonify({
@@ -279,12 +286,29 @@ def analyze_coin(symbol):
                 'symbol': symbol
             }), 500
             
-        # Run technical analysis
-        analysis = analyzer.analyze(df, symbol_okx, '1H')
+        # Run enhanced technical analysis
+        analysis = analyzer.analyze(df, symbol_okx, timeframe)
         
         # Extract key data from analysis
         current_price = float(df['close'].iloc[-1])
         price_change_24h = analysis.get('price_change_24h', 0)
+        
+        # Professional SMC analysis (if enabled)
+        smc_analysis = {}
+        if include_smc:
+            try:
+                smc_analyzer = ProfessionalSMCAnalyzer()
+                smc_analysis = smc_analyzer.analyze(df)
+            except Exception as e:
+                logger.warning(f"SMC analysis failed: {e}")
+        
+        # Signal engine analysis
+        signal_data = {}
+        try:
+            signal_engine = SignalEngine()
+            signal_data = signal_engine.analyze_market(df, symbol_okx, timeframe)
+        except Exception as e:
+            logger.warning(f"Signal engine analysis failed: {e}")
         
         # Calculate technical indicators with better error handling
         indicators = analysis.get('indicators', {})
@@ -312,8 +336,49 @@ def analyze_coin(symbol):
         else:
             macd_diff = 0
         
-        # Check for signals
-        signals = analysis.get('signals', [])
+        # Enhanced signal processing
+        signals = []
+        
+        # Traditional signals
+        traditional_signals = analysis.get('signals', [])
+        for sig in traditional_signals:
+            signals.append({
+                'type': 'TRADITIONAL',
+                'action': sig.get('action', 'NEUTRAL'),
+                'confidence': sig.get('confidence', 0),
+                'reason': sig.get('reason', 'Technical indicator signal'),
+                'entry_price': sig.get('entry_price'),
+                'stop_loss': sig.get('stop_loss'),
+                'take_profit_1': sig.get('take_profit_1')
+            })
+        
+        # SMC signals
+        if smc_analysis.get('signals'):
+            for smc_signal in smc_analysis['signals']:
+                signals.append({
+                    'type': 'SMC',
+                    'action': smc_signal.get('action', 'NEUTRAL'),
+                    'confidence': smc_signal.get('confidence', 0),
+                    'pattern': smc_signal.get('pattern', 'UNKNOWN'),
+                    'reason': smc_signal.get('reason', 'SMC Pattern Detection'),
+                    'entry_price': smc_signal.get('entry_price'),
+                    'stop_loss': smc_signal.get('stop_loss'),
+                    'take_profit_1': smc_signal.get('take_profit_1')
+                })
+        
+        # Signal engine signals
+        if signal_data.get('signals'):
+            for eng_signal in signal_data['signals']:
+                signals.append({
+                    'type': 'SIGNAL_ENGINE',
+                    'action': eng_signal.get('action', 'NEUTRAL'),
+                    'confidence': eng_signal.get('confidence', 0),
+                    'reason': eng_signal.get('reason', 'Multi-factor signal'),
+                    'entry_price': eng_signal.get('entry_price'),
+                    'stop_loss': eng_signal.get('stop_loss'),
+                    'take_profit_1': eng_signal.get('take_profit_1')
+                })
+        
         has_signal = len(signals) > 0
         
         # Generate basic analysis text with safe formatting
@@ -373,6 +438,273 @@ def analyze_coin(symbol):
             'success': False,
             'error': str(e)
         }), 500
+
+@app.route('/api/snapshot/<symbol>')
+def get_comprehensive_snapshot(symbol):
+    """Get comprehensive market snapshot with enhanced analysis"""
+    try:
+        from core.snapshot_generator import SnapshotGenerator, SnapshotType
+        
+        # Validate symbol
+        valid_symbols = ['BTC', 'ETH', 'SOL', 'TIA', 'RENDER']
+        if symbol.upper() not in valid_symbols:
+            return jsonify({'error': 'Invalid symbol'}), 400
+        
+        # Get parameters
+        timeframe = request.args.get('timeframe', '1H')
+        snapshot_type = request.args.get('type', 'comprehensive')
+        session_id = request.args.get('session_id', 'api_request')
+        
+        # Map snapshot type
+        type_mapping = {
+            'quick': SnapshotType.QUICK,
+            'comprehensive': SnapshotType.COMPREHENSIVE,
+            'deep': SnapshotType.DEEP_ANALYSIS
+        }
+        
+        snapshot_type_enum = type_mapping.get(snapshot_type, SnapshotType.COMPREHENSIVE)
+        
+        # Generate snapshot
+        generator = SnapshotGenerator()
+        snapshot = generator.generate_snapshot(
+            symbol=f"{symbol.upper()}-USDT",
+            timeframe=timeframe,
+            snapshot_type=snapshot_type_enum,
+            session_id=session_id
+        )
+        
+        return jsonify({
+            'success': True,
+            'snapshot': {
+                'symbol': snapshot.symbol,
+                'timeframe': snapshot.timeframe,
+                'timestamp': snapshot.timestamp,
+                'current_price': snapshot.current_price,
+                'price_change_24h': snapshot.price_change_24h,
+                'confidence_score': snapshot.confidence_score,
+                'data_quality': snapshot.data_quality,
+                'generation_time': snapshot.generation_time,
+                'snapshot_type': snapshot.snapshot_type.value,
+                'analysis': snapshot.analysis_data,
+                'technical_indicators': snapshot.technical_summary,
+                'smc_analysis': snapshot.smc_analysis,
+                'ai_narrative': snapshot.ai_narrative
+            }
+        })
+        
+    except Exception as e:
+        logger.error(f"Error generating snapshot for {symbol}: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/orderbook/<symbol>')
+def get_orderbook_data(symbol):
+    """Get real-time orderbook data"""
+    try:
+        from core.okx_fetcher import OKXAPIManager
+        
+        # Validate symbol
+        valid_symbols = ['BTC', 'ETH', 'SOL', 'TIA', 'RENDER']
+        if symbol.upper() not in valid_symbols:
+            return jsonify({'error': 'Invalid symbol'}), 400
+        
+        # Get parameters
+        depth = request.args.get('depth', 20, type=int)
+        
+        # Initialize API manager
+        api = OKXAPIManager()
+        symbol_okx = f"{symbol.upper()}-USDT"
+        
+        # Get orderbook data
+        orderbook = api.get_orderbook(symbol_okx, depth)
+        
+        if not orderbook:
+            return jsonify({'error': 'Failed to fetch orderbook data'}), 500
+        
+        # Process orderbook data
+        bids = []
+        asks = []
+        
+        for bid in orderbook.get('bids', []):
+            bids.append({
+                'price': float(bid[0]),
+                'size': float(bid[1]),
+                'total': float(bid[0]) * float(bid[1])
+            })
+        
+        for ask in orderbook.get('asks', []):
+            asks.append({
+                'price': float(ask[0]),
+                'size': float(ask[1]),
+                'total': float(ask[0]) * float(ask[1])
+            })
+        
+        # Calculate spread
+        best_bid = float(orderbook['bids'][0][0]) if orderbook.get('bids') else 0
+        best_ask = float(orderbook['asks'][0][0]) if orderbook.get('asks') else 0
+        spread = best_ask - best_bid
+        spread_percentage = (spread / best_ask * 100) if best_ask > 0 else 0
+        
+        return jsonify({
+            'success': True,
+            'symbol': symbol.upper(),
+            'timestamp': orderbook.get('ts', None),
+            'bids': bids,
+            'asks': asks,
+            'spread': {
+                'absolute': spread,
+                'percentage': spread_percentage,
+                'best_bid': best_bid,
+                'best_ask': best_ask
+            }
+        })
+        
+    except Exception as e:
+        logger.error(f"Error getting orderbook for {symbol}: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/depth-chart/<symbol>')
+def get_depth_chart_data(symbol):
+    """Get market depth visualization data"""
+    try:
+        from core.okx_fetcher import OKXAPIManager
+        
+        # Validate symbol
+        valid_symbols = ['BTC', 'ETH', 'SOL', 'TIA', 'RENDER']
+        if symbol.upper() not in valid_symbols:
+            return jsonify({'error': 'Invalid symbol'}), 400
+        
+        # Get parameters
+        depth = request.args.get('depth', 50, type=int)
+        
+        # Initialize API manager
+        api = OKXAPIManager()
+        symbol_okx = f"{symbol.upper()}-USDT"
+        
+        # Get orderbook data
+        orderbook = api.get_orderbook(symbol_okx, depth)
+        
+        if not orderbook:
+            return jsonify({'error': 'Failed to fetch orderbook data'}), 500
+        
+        # Process depth chart data
+        bid_depths = []
+        ask_depths = []
+        
+        cumulative_bid_size = 0
+        for bid in orderbook.get('bids', []):
+            price = float(bid[0])
+            size = float(bid[1])
+            cumulative_bid_size += size
+            bid_depths.append({
+                'price': price,
+                'size': size,
+                'cumulative_size': cumulative_bid_size,
+                'total_value': price * cumulative_bid_size
+            })
+        
+        cumulative_ask_size = 0
+        for ask in orderbook.get('asks', []):
+            price = float(ask[0])
+            size = float(ask[1])
+            cumulative_ask_size += size
+            ask_depths.append({
+                'price': price,
+                'size': size,
+                'cumulative_size': cumulative_ask_size,
+                'total_value': price * cumulative_ask_size
+            })
+        
+        # Calculate market depth metrics
+        total_bid_value = sum(float(bid[0]) * float(bid[1]) for bid in orderbook.get('bids', []))
+        total_ask_value = sum(float(ask[0]) * float(ask[1]) for ask in orderbook.get('asks', []))
+        
+        return jsonify({
+            'success': True,
+            'symbol': symbol.upper(),
+            'timestamp': orderbook.get('ts', None),
+            'depth_data': {
+                'bids': bid_depths,
+                'asks': ask_depths,
+                'total_bid_value': total_bid_value,
+                'total_ask_value': total_ask_value,
+                'imbalance': (total_bid_value - total_ask_value) / (total_bid_value + total_ask_value) if (total_bid_value + total_ask_value) > 0 else 0
+            }
+        })
+        
+    except Exception as e:
+        logger.error(f"Error getting depth chart for {symbol}: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/technical-indicators/<symbol>')
+def get_enhanced_technical_indicators(symbol):
+    """Get complete technical indicators with enhanced analysis"""
+    try:
+        from core.indicator_calculator import AdvancedIndicatorCalculator
+        from core.okx_fetcher import OKXAPIManager
+        
+        # Validate symbol
+        valid_symbols = ['BTC', 'ETH', 'SOL', 'TIA', 'RENDER']
+        if symbol.upper() not in valid_symbols:
+            return jsonify({'error': 'Invalid symbol'}), 400
+        
+        # Get parameters
+        timeframe = request.args.get('timeframe', '1H')
+        indicators = request.args.get('indicators', '').split(',') if request.args.get('indicators') else []
+        
+        # Initialize components
+        api = OKXAPIManager()
+        calculator = AdvancedIndicatorCalculator()
+        
+        # Fetch data
+        symbol_okx = f"{symbol.upper()}-USDT"
+        df = api.get_candles(symbol_okx, timeframe, limit=200)
+        
+        if df is None or df.empty:
+            return jsonify({'error': 'Failed to fetch market data'}), 500
+        
+        # Calculate indicators
+        if not indicators:
+            # Default indicators
+            indicators = ['rsi', 'macd', 'bb', 'sma', 'ema', 'atr', 'obv', 'stoch', 'williams_r', 'cci']
+        
+        results = {}
+        for indicator in indicators:
+            try:
+                result = calculator.calculate_indicator(df, indicator)
+                results[indicator] = {
+                    'signal': result.signal,
+                    'strength': result.strength,
+                    'values': result.values.tolist() if hasattr(result.values, 'tolist') else result.values,
+                    'interpretation': result.interpretation
+                }
+            except Exception as e:
+                logger.warning(f"Error calculating {indicator}: {e}")
+                results[indicator] = {
+                    'signal': 'ERROR',
+                    'strength': 0,
+                    'values': None,
+                    'interpretation': f"Error: {str(e)}"
+                }
+        
+        # Get trading signals
+        signals = calculator.get_indicator_signals(df)
+        
+        # Cache information
+        cache_info = calculator.get_cache_info()
+        
+        return jsonify({
+            'success': True,
+            'symbol': symbol.upper(),
+            'timeframe': timeframe,
+            'indicators': results,
+            'signals': signals,
+            'cache_info': cache_info,
+            'timestamp': datetime.now().isoformat()
+        })
+        
+    except Exception as e:
+        logger.error(f"Error getting technical indicators for {symbol}: {e}")
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/api/roi-analysis/<symbol>')
 def get_roi_analysis(symbol):
@@ -1710,69 +2042,9 @@ def get_open_interest(symbol):
         logger.error(f"Error getting open interest data for {symbol}: {e}")
         return jsonify({'error': str(e)}), 500
 
-@app.route('/api/orderbook/<symbol>')
-def get_orderbook_data(symbol):
-    """Get orderbook data for a symbol"""
-    try:
-        # Get query parameters
-        limit = request.args.get('limit', 50, type=int)
-        
-        # Validate symbol
-        if not symbol or len(symbol) < 3:
-            return jsonify({'error': 'Invalid symbol'}), 400
-        
-        # Query orderbook data
-        query = OrderbookData.query.filter_by(symbol=symbol.upper())
-        query = query.order_by(OrderbookData.timestamp.desc()).limit(limit)
-        
-        orderbook_data = query.all()
-        
-        return jsonify({
-            'success': True,
-            'symbol': symbol.upper(),
-            'count': len(orderbook_data),
-            'data': [data.to_dict() for data in orderbook_data]
-        })
-        
-    except Exception as e:
-        logger.error(f"Error getting orderbook data for {symbol}: {e}")
-        return jsonify({'error': str(e)}), 500
+# Removed duplicate endpoint - enhanced version already exists above
 
-@app.route('/api/technical-indicators/<symbol>')
-def get_technical_indicators(symbol):
-    """Get technical indicator data for a symbol"""
-    try:
-        # Get query parameters
-        timeframe = request.args.get('timeframe', '1h')
-        indicator_type = request.args.get('type', None)
-        limit = request.args.get('limit', 100, type=int)
-        
-        # Validate symbol
-        if not symbol or len(symbol) < 3:
-            return jsonify({'error': 'Invalid symbol'}), 400
-        
-        # Build query
-        query = TechnicalIndicatorData.query.filter_by(symbol=symbol.upper(), timeframe=timeframe)
-        
-        if indicator_type:
-            query = query.filter_by(indicator_type=indicator_type.upper())
-        
-        query = query.order_by(TechnicalIndicatorData.timestamp.desc()).limit(limit)
-        
-        indicator_data = query.all()
-        
-        return jsonify({
-            'success': True,
-            'symbol': symbol.upper(),
-            'timeframe': timeframe,
-            'indicator_type': indicator_type,
-            'count': len(indicator_data),
-            'data': [data.to_dict() for data in indicator_data]
-        })
-        
-    except Exception as e:
-        logger.error(f"Error getting technical indicators for {symbol}: {e}")
-        return jsonify({'error': str(e)}), 500
+# Removed duplicate endpoint - enhanced version already exists above
 
 @app.route('/api/user-preferences/<session_id>')
 def get_user_preferences(session_id):
