@@ -13,6 +13,24 @@
       color: #e6edf3;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
+    
+    /* Enhanced text readability */
+    .ai-analysis-text {
+      color: #ffffff !important;
+      opacity: 1 !important;
+      font-weight: 600 !important;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+      font-size: 14px !important;
+    }
+    
+    /* Better contrast for all text */
+    #aiAnalysis, #enhancedAnalysis {
+      color: #ffffff !important;
+      opacity: 1 !important;
+      font-weight: 600 !important;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+      font-size: 14px !important;
+    }
     .navbar {
       background-color: #161b22;
       border-bottom: 1px solid #30363d;
@@ -78,13 +96,13 @@
           <!-- AI Analysis Section -->
           <div class="mt-4">
             <h5><i class="fas fa-robot me-2"></i>AI-Powered Analysis</h5>
-            <div id="aiAnalysis" class="p-3" style="background-color: #2d3748; border-radius: 8px; white-space: pre-wrap; font-family: monospace; line-height: 1.6;"></div>
+            <div id="aiAnalysis" class="p-3" style="background-color: #2d3748; border-radius: 8px; white-space: pre-wrap; font-family: monospace; line-height: 1.6; color: #ffffff; opacity: 1; font-weight: 500;"></div>
           </div>
           
           <!-- Enhanced AI Analysis Section -->
           <div class="mt-4">
             <h5><i class="fas fa-brain me-2"></i>Advanced AI Insights</h5>
-            <div id="enhancedAnalysis" class="p-3" style="background-color: #1a202c; border-radius: 8px; white-space: pre-wrap; font-family: monospace; line-height: 1.6;"></div>
+            <div id="enhancedAnalysis" class="p-3" style="background-color: #1a202c; border-radius: 8px; white-space: pre-wrap; font-family: monospace; line-height: 1.6; color: #ffffff; opacity: 1; font-weight: 500; text-shadow: 0 1px 2px rgba(0,0,0,0.8);"></div>
           </div>
         </div>
       </div>
@@ -167,21 +185,27 @@
         document.getElementById("rsi").textContent = data.rsiValue.toFixed(1);
         document.getElementById("macd").textContent = data.macdValue.toFixed(4);
         
-        // Display comprehensive AI analysis
-        document.getElementById("aiAnalysis").textContent = data.formattedAnalysis;
+        // Display comprehensive AI analysis with enhanced styling
+        const aiAnalysisElement = document.getElementById("aiAnalysis");
+        aiAnalysisElement.textContent = data.formattedAnalysis;
+        aiAnalysisElement.className += " ai-analysis-text";
         
         // Get enhanced AI analysis
         fetch(`/api/enhanced-ai/narrative/${data.symbol}`)
           .then(res => res.json())
           .then(aiData => {
+            const enhancedElement = document.getElementById("enhancedAnalysis");
             if (aiData.success && aiData.narrative) {
-              document.getElementById("enhancedAnalysis").textContent = aiData.narrative;
+              enhancedElement.textContent = aiData.narrative;
             } else {
-              document.getElementById("enhancedAnalysis").textContent = "🤖 Enhanced AI analysis generating...";
+              enhancedElement.textContent = "🤖 Enhanced AI analysis generating...";
             }
+            enhancedElement.className += " ai-analysis-text";
           })
           .catch(err => {
-            document.getElementById("enhancedAnalysis").textContent = "🤖 AI analysis temporarily unavailable";
+            const enhancedElement = document.getElementById("enhancedAnalysis");
+            enhancedElement.textContent = "🤖 AI analysis temporarily unavailable";
+            enhancedElement.className += " ai-analysis-text";
           });
 
         // Create professional candlestick chart
