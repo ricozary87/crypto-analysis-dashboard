@@ -552,27 +552,78 @@ def analyze_coin(symbol):
         safe_rsi = float(rsi_value) if isinstance(rsi_value, (int, float)) else 50.0
         safe_macd = float(macd_diff) if isinstance(macd_diff, (int, float)) else 0.0
         
-        formatted_analysis = f"""📊 **ANALISIS TEKNIKAL - {safe_symbol}-USDT**
+        # Get detailed SMC and signal data
+        smc_data = smc_analysis if smc_analysis else {}
+        signal_engine_data = signal_data if signal_data else {}
+        
+        # Extract SMC patterns
+        smc_patterns = smc_data.get('smc_summary', {})
+        total_choch_bos = smc_patterns.get('total_choch_bos', 0)
+        total_order_blocks = smc_patterns.get('total_order_blocks', 0)
+        total_fvg = smc_patterns.get('total_fvg', 0)
+        total_liquidity = smc_patterns.get('total_liquidity_sweeps', 0)
+        bullish_signals = smc_patterns.get('bullish_signals', 0)
+        bearish_signals = smc_patterns.get('bearish_signals', 0)
+        
+        # Extract swing points
+        swing_points = smc_data.get('swing_points', {})
+        swing_highs = len(swing_points.get('highs', []))
+        swing_lows = len(swing_points.get('lows', []))
+        
+        # Extract signal engine data
+        final_signal = signal_engine_data.get('final_signal', {})
+        signal_action = final_signal.get('action', 'NEUTRAL')
+        signal_confidence = final_signal.get('confidence', 0)
+        
+        # Extract risk assessment
+        risk_data = signal_engine_data.get('risk_assessment', {})
+        risk_level = risk_data.get('risk_level', 'MEDIUM')
+        
+        # Safe string conversion
+        market_structure = str(smc_data.get('market_structure', 'NEUTRAL')).upper()
+        ema_trend = str(indicators.get('ema', {}).get('trend', 'NEUTRAL')).upper()
+        
+        formatted_analysis = f"""📊 **ANALISIS TEKNIKAL KOMPREHENSIF - {safe_symbol}-USDT**
 ==================================================
 
 💰 **Harga Saat Ini:** ${safe_current_price:,.2f}
 📈 **Perubahan 24h:** {safe_price_change:+.2f}%
 🎯 **Tren:** {trend.upper()}
 
-**Indikator Teknikal:**
-• RSI: {safe_rsi:.1f}
-• MACD: {safe_macd:+.4f}
-• Volume: {volume_trend}
+**📈 SMART MONEY CONCEPTS (SMC):**
+• Market Structure: {market_structure}
+• Swing Points: {swing_highs} highs, {swing_lows} lows
+• CHoCH/BOS Signals: {total_choch_bos}
+• Order Blocks: {total_order_blocks}
+• Fair Value Gaps: {total_fvg}
+• Liquidity Sweeps: {total_liquidity}
+• Bullish Patterns: {bullish_signals}
+• Bearish Patterns: {bearish_signals}
 
-**Analisis Struktur Pasar:**
-• Tren saat ini: {trend}
-• Volume trend: {volume_trend}
-• Sinyal trading: {'Ada' if has_signal else 'Tidak ada'}
+**📊 INDIKATOR TEKNIKAL:**
+• RSI: {safe_rsi:.1f} ({'Oversold' if safe_rsi < 30 else 'Overbought' if safe_rsi > 70 else 'Normal'})
+• MACD: {safe_macd:+.4f} ({'Bullish' if safe_macd > 0 else 'Bearish'})
+• EMA Trend: {ema_trend}
+• Volume: {volume_trend.upper()}
 
-**Rekomendasi:**
-{'Pantau untuk entry' if has_signal else 'Tunggu sinyal yang lebih jelas'}
+**🎯 SIGNAL ENGINE:**
+• Action: {signal_action}
+• Confidence: {signal_confidence:.1f}%
+• Risk Level: {risk_level}
+• Components: {len(signal_engine_data.get('component_signals', []))} signals
 
-⚠️ **Disclaimer:** Analisis ini hanya untuk tujuan edukasi. Selalu lakukan riset sendiri sebelum trading."""
+**📈 PRICE ACTION:**
+• Current Structure: {trend.upper()}
+• Volume Trend: {volume_trend.upper()}
+• Market Momentum: {'Bullish' if bullish_signals > bearish_signals else 'Bearish' if bearish_signals > bullish_signals else 'Neutral'}
+
+**🎯 TRADING OUTLOOK:**
+• Signal Status: {'ACTIVE' if has_signal else 'STANDBY'}
+• Entry Zones: {'Available' if has_signal else 'Waiting for setup'}
+• Risk Management: {risk_level} risk level
+
+**⚠️ DISCLAIMER:** Analisis ini hanya untuk tujuan edukasi. 
+Selalu lakukan riset sendiri sebelum trading."""
         
         # Prepare chart data for frontend
         chart_data = []

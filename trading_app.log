@@ -61428,3 +61428,136 @@ with app.app_context(). See the documentation for more information.
 2025-07-15 11:19:06,486 - core.monitoring - DEBUG - Win rate metrics updated
 2025-07-15 11:19:06,732 - core.monitoring - INFO - Monitoring system initialized successfully
 2025-07-15 11:19:06,775 - monitoring_routes - INFO - Monitoring routes initialized successfully
+2025-07-15 11:19:32,013 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 11:19:32,036 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 11:19:32,041 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 11:19:32,293 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 11:19:32,299 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 11:19:33,491 - core.monitoring - DEBUG - API call tracked: analyze_symbol 0.478s success
+2025-07-15 11:19:33,880 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 11:19:33,891 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 11:19:33,893 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 11:19:34,027 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 11:19:34,035 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 11:19:34,073 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'idempotency_key': 'stainless-python-retry-9dc22a4f-4bdf-44e7-ba9f-d6efe3bea8d8', 'json_data': {'messages': [{'role': 'system', 'content': '\nAnda adalah analis teknikal crypto profesional dengan pengalaman 10+ tahun di pasar finansial.\n\nTUGAS UTAMA:\n- Menjelaskan kondisi pasar berdasarkan analisa teknikal multi-layer (SMC, volume, indikator, konfluensi)\n- Memberikan narasi yang informatif, analitis, dan berkualitas tinggi\n- Tetap menjelaskan arah pasar dan potensi pergerakan meski sinyal belum terbentuk\n- Fokus pada observasi mendalam dan persiapan trader profesional\n\nPRINSIP ANALISIS:\n✅ LAKUKAN:\n• Jelaskan arah pasar berdasarkan konfluensi teknikal\n• Analisis zona-zona penting dan level kritis\n• Berikan perspektif berbagai skenario (bullish/bearish/neutral)\n• Fokus pada risk management dan probabilitas\n• Gunakan terminologi teknikal yang tepat\n• Berikan insight mendalam tentang kondisi pasar\n\n❌ JANGAN:\n• Memaksakan sinyal BUY/SELL palsu\n• Memberikan rekomendasi trading langsung\n• Menggunakan bahasa yang terlalu yakin tanpa basis\n• Mengabaikan risiko atau uncertainty\n\nGAYA KOMUNIKASI:\n- Bahasa Indonesia profesional dan mudah dipahami\n- Struktur yang logis dan sistematis\n- Gunakan bullet points dan formatting yang rapi\n- Berikan reasoning yang jelas untuk setiap analisis\n- Fokus pada actionable insights\n\nSTRUKTUR NARASI:\n1. Executive Summary (bias utama dan confidence level)\n2. Analisis Multi-Layer (SMC, Volume, Indikator, Konfluensi)\n3. Skenario Trading (kondisi, entry zones, risk management)\n4. Key Levels dan Zona Penting\n5. Risk Assessment dan Market Context\n'}, {'role': 'user', 'content': "\n=== COMPREHENSIVE ANALYSIS REQUEST ===\n\n**SOL-USDT Professional Analysis**\n**Current Price: $159.25**\n**Analysis Time: 2025-07-15 11:19:34**\n\n## Smart Money Concepts Analysis\nMarket Structure: bullish\nSwing Points: 11 highs, 10 lows\nSMC Patterns: {'total_choch_bos': 5, 'total_order_blocks': 5, 'total_fvg': 39, 'total_liquidity_sweeps': 0, 'total_eqh_eql': 5, 'bullish_signals': 3, 'bearish_signals': 2, 'recent_activity': 5, 'pattern_diversity': 5}\n\n## Technical Indicators\nRSI: 36.223696230139474 (Normal)\nEMA Trend: bearish\nMACD: -1.3170664514698558 (Bearish)\nVolume: 5651.738505 (Below Average)\n\n## Trading Signals\nAction: HOLD\nConfidence: 0.5%\nEntry Price: None\nStop Loss: None\nTake Profit: None\n\n## Confluence Analysis\nLevel: N/A\nScore: 0.00\nSupporting Indicators: []\n\nBerikan analisis komprehensif dalam bahasa indonesian yang mencakup:\n1. Executive Summary & Market Bias\n2. Smart Money Concepts Analysis\n3. Technical Indicators Breakdown\n4. Trading Strategy & Levels\n5. Risk Management & Scenarios\n6. Key Levels & Zones\n"}], 'model': 'gpt-4o', 'frequency_penalty': 0.1, 'max_tokens': 2000, 'presence_penalty': 0.0, 'temperature': 0.4, 'top_p': 0.95}}
+2025-07-15 11:19:34,088 - openai._base_client - DEBUG - Sending HTTP Request: POST https://api.openai.com/v1/chat/completions
+2025-07-15 11:19:34,088 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=30.0 socket_options=None
+2025-07-15 11:19:34,104 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7fb7460c9a90>
+2025-07-15 11:19:34,105 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7fb746169490> server_hostname='api.openai.com' timeout=30.0
+2025-07-15 11:19:34,115 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7fb7460cb510>
+2025-07-15 11:19:34,115 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-07-15 11:19:34,116 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-07-15 11:19:34,116 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-07-15 11:19:34,117 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-07-15 11:19:34,117 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-07-15 11:19:52,725 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Tue, 15 Jul 2025 11:19:52 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'access-control-expose-headers', b'X-Request-ID'), (b'openai-organization', b'user-4ezgmzyis7nvjdocwlxbxkb1'), (b'openai-processing-ms', b'18010'), (b'openai-version', b'2020-10-01'), (b'x-envoy-upstream-service-time', b'18013'), (b'x-ratelimit-limit-requests', b'500'), (b'x-ratelimit-limit-tokens', b'30000'), (b'x-ratelimit-remaining-requests', b'499'), (b'x-ratelimit-remaining-tokens', b'29371'), (b'x-ratelimit-reset-requests', b'120ms'), (b'x-ratelimit-reset-tokens', b'1.258s'), (b'x-request-id', b'req_d0c46d35a79020cce77f7d12daa8eb68'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=lWKw7QVEfmC44ziAPdJpsrL9I5w5WaeouZtwvUliIMc-1752578392-1.0.1.1-77Ocb5BGr.eulAk5FwkHVHKPDxpCTWmCRirxEXzmCXNdZjTFast8cno5Hq6WRbV1b.JLLiUN72m6NOuZnVjBIZVbuDClcARMdNbwBbT6tZM; path=/; expires=Tue, 15-Jul-25 11:49:52 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=OEYlkMD2xBnBd_vwG7pQdLqiNaYUXR4nJVKed0LmQK8-1752578392698-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'95f8dd961d763bc2-BOM'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-07-15 11:19:52,726 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 11:19:52,726 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-07-15 11:19:52,727 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-07-15 11:19:52,727 - httpcore.http11 - DEBUG - response_closed.started
+2025-07-15 11:19:52,727 - httpcore.http11 - DEBUG - response_closed.complete
+2025-07-15 11:19:52,727 - openai._base_client - DEBUG - HTTP Response: POST https://api.openai.com/v1/chat/completions "200 OK" Headers([('date', 'Tue, 15 Jul 2025 11:19:52 GMT'), ('content-type', 'application/json'), ('transfer-encoding', 'chunked'), ('connection', 'keep-alive'), ('access-control-expose-headers', 'X-Request-ID'), ('openai-organization', 'user-4ezgmzyis7nvjdocwlxbxkb1'), ('openai-processing-ms', '18010'), ('openai-version', '2020-10-01'), ('x-envoy-upstream-service-time', '18013'), ('x-ratelimit-limit-requests', '500'), ('x-ratelimit-limit-tokens', '30000'), ('x-ratelimit-remaining-requests', '499'), ('x-ratelimit-remaining-tokens', '29371'), ('x-ratelimit-reset-requests', '120ms'), ('x-ratelimit-reset-tokens', '1.258s'), ('x-request-id', 'req_d0c46d35a79020cce77f7d12daa8eb68'), ('strict-transport-security', 'max-age=31536000; includeSubDomains; preload'), ('cf-cache-status', 'DYNAMIC'), ('set-cookie', '__cf_bm=lWKw7QVEfmC44ziAPdJpsrL9I5w5WaeouZtwvUliIMc-1752578392-1.0.1.1-77Ocb5BGr.eulAk5FwkHVHKPDxpCTWmCRirxEXzmCXNdZjTFast8cno5Hq6WRbV1b.JLLiUN72m6NOuZnVjBIZVbuDClcARMdNbwBbT6tZM; path=/; expires=Tue, 15-Jul-25 11:49:52 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), ('x-content-type-options', 'nosniff'), ('set-cookie', '_cfuvid=OEYlkMD2xBnBd_vwG7pQdLqiNaYUXR4nJVKed0LmQK8-1752578392698-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), ('server', 'cloudflare'), ('cf-ray', '95f8dd961d763bc2-BOM'), ('content-encoding', 'gzip'), ('alt-svc', 'h3=":443"; ma=86400')])
+2025-07-15 11:19:52,728 - openai._base_client - DEBUG - request_id: req_d0c46d35a79020cce77f7d12daa8eb68
+2025-07-15 11:19:52,731 - core.enhanced_ai_engine - INFO - Enhanced AI narrative generated successfully for SOL-USDT
+2025-07-15 11:21:00,884 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 11:21:00,911 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 11:21:00,917 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 11:21:01,046 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 11:21:01,094 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 11:21:02,360 - core.monitoring - DEBUG - API call tracked: analyze_symbol 0.476s success
+2025-07-15 11:21:04,485 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 11:21:04,537 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 11:21:04,551 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 11:21:04,718 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 11:21:04,726 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 11:21:04,769 - openai._base_client - DEBUG - Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'idempotency_key': 'stainless-python-retry-6f91f4b4-123d-4576-9695-cb5edca6bb7e', 'json_data': {'messages': [{'role': 'system', 'content': '\nAnda adalah analis teknikal crypto profesional dengan pengalaman 10+ tahun di pasar finansial.\n\nTUGAS UTAMA:\n- Menjelaskan kondisi pasar berdasarkan analisa teknikal multi-layer (SMC, volume, indikator, konfluensi)\n- Memberikan narasi yang informatif, analitis, dan berkualitas tinggi\n- Tetap menjelaskan arah pasar dan potensi pergerakan meski sinyal belum terbentuk\n- Fokus pada observasi mendalam dan persiapan trader profesional\n\nPRINSIP ANALISIS:\n✅ LAKUKAN:\n• Jelaskan arah pasar berdasarkan konfluensi teknikal\n• Analisis zona-zona penting dan level kritis\n• Berikan perspektif berbagai skenario (bullish/bearish/neutral)\n• Fokus pada risk management dan probabilitas\n• Gunakan terminologi teknikal yang tepat\n• Berikan insight mendalam tentang kondisi pasar\n\n❌ JANGAN:\n• Memaksakan sinyal BUY/SELL palsu\n• Memberikan rekomendasi trading langsung\n• Menggunakan bahasa yang terlalu yakin tanpa basis\n• Mengabaikan risiko atau uncertainty\n\nGAYA KOMUNIKASI:\n- Bahasa Indonesia profesional dan mudah dipahami\n- Struktur yang logis dan sistematis\n- Gunakan bullet points dan formatting yang rapi\n- Berikan reasoning yang jelas untuk setiap analisis\n- Fokus pada actionable insights\n\nSTRUKTUR NARASI:\n1. Executive Summary (bias utama dan confidence level)\n2. Analisis Multi-Layer (SMC, Volume, Indikator, Konfluensi)\n3. Skenario Trading (kondisi, entry zones, risk management)\n4. Key Levels dan Zona Penting\n5. Risk Assessment dan Market Context\n'}, {'role': 'user', 'content': "\n=== COMPREHENSIVE ANALYSIS REQUEST ===\n\n**SOL-USDT Professional Analysis**\n**Current Price: $159.16**\n**Analysis Time: 2025-07-15 11:21:04**\n\n## Smart Money Concepts Analysis\nMarket Structure: bullish\nSwing Points: 11 highs, 10 lows\nSMC Patterns: {'total_choch_bos': 5, 'total_order_blocks': 5, 'total_fvg': 39, 'total_liquidity_sweeps': 0, 'total_eqh_eql': 5, 'bullish_signals': 3, 'bearish_signals': 2, 'recent_activity': 5, 'pattern_diversity': 5}\n\n## Technical Indicators\nRSI: 35.8715899511036 (Normal)\nEMA Trend: bearish\nMACD: -1.3242459386493124 (Bearish)\nVolume: 5733.42625 (Below Average)\n\n## Trading Signals\nAction: HOLD\nConfidence: 0.5%\nEntry Price: None\nStop Loss: None\nTake Profit: None\n\n## Confluence Analysis\nLevel: N/A\nScore: 0.00\nSupporting Indicators: []\n\nBerikan analisis komprehensif dalam bahasa indonesian yang mencakup:\n1. Executive Summary & Market Bias\n2. Smart Money Concepts Analysis\n3. Technical Indicators Breakdown\n4. Trading Strategy & Levels\n5. Risk Management & Scenarios\n6. Key Levels & Zones\n"}], 'model': 'gpt-4o', 'frequency_penalty': 0.1, 'max_tokens': 2000, 'presence_penalty': 0.0, 'temperature': 0.4, 'top_p': 0.95}}
+2025-07-15 11:21:04,770 - openai._base_client - DEBUG - Sending HTTP Request: POST https://api.openai.com/v1/chat/completions
+2025-07-15 11:21:04,771 - httpcore.connection - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=30.0 socket_options=None
+2025-07-15 11:21:04,823 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7fb7460b1c90>
+2025-07-15 11:21:04,823 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x7fb746169d90> server_hostname='api.openai.com' timeout=30.0
+2025-07-15 11:21:04,832 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7fb7460b3310>
+2025-07-15 11:21:04,833 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-07-15 11:21:04,833 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-07-15 11:21:04,834 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-07-15 11:21:04,834 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-07-15 11:21:04,834 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-07-15 11:21:25,049 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Tue, 15 Jul 2025 11:21:25 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'access-control-expose-headers', b'X-Request-ID'), (b'openai-organization', b'user-4ezgmzyis7nvjdocwlxbxkb1'), (b'openai-processing-ms', b'19576'), (b'openai-version', b'2020-10-01'), (b'x-envoy-upstream-service-time', b'19586'), (b'x-ratelimit-limit-requests', b'500'), (b'x-ratelimit-limit-tokens', b'30000'), (b'x-ratelimit-remaining-requests', b'499'), (b'x-ratelimit-remaining-tokens', b'29372'), (b'x-ratelimit-reset-requests', b'120ms'), (b'x-ratelimit-reset-tokens', b'1.256s'), (b'x-request-id', b'req_39aa9d2c0ba80aca076fa2a52bbc023d'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=R8z0b0YEgqOkhJmr9c.7X6BnueCHCrS1nQ06izIP.c0-1752578485-1.0.1.1-nbaLZfbM6RAq4AzamD97XbIkMyze6o1V5Jpqoq_guW04hS1cVejzyhTYQ0uyaj1WJD5TH.WZIxGVd8WT0.DgsOiJi6iPup3sAjG9wXyAZ3k; path=/; expires=Tue, 15-Jul-25 11:51:25 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=lNbohQ0gPowSnjCBiRtRoo9J5zAGxV23d2O7Gw5KAUs-1752578485019-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'95f8dfcd0e7019bc-BOM'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-07-15 11:21:25,058 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-15 11:21:25,060 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-07-15 11:21:25,064 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-07-15 11:21:25,064 - httpcore.http11 - DEBUG - response_closed.started
+2025-07-15 11:21:25,065 - httpcore.http11 - DEBUG - response_closed.complete
+2025-07-15 11:21:25,065 - openai._base_client - DEBUG - HTTP Response: POST https://api.openai.com/v1/chat/completions "200 OK" Headers([('date', 'Tue, 15 Jul 2025 11:21:25 GMT'), ('content-type', 'application/json'), ('transfer-encoding', 'chunked'), ('connection', 'keep-alive'), ('access-control-expose-headers', 'X-Request-ID'), ('openai-organization', 'user-4ezgmzyis7nvjdocwlxbxkb1'), ('openai-processing-ms', '19576'), ('openai-version', '2020-10-01'), ('x-envoy-upstream-service-time', '19586'), ('x-ratelimit-limit-requests', '500'), ('x-ratelimit-limit-tokens', '30000'), ('x-ratelimit-remaining-requests', '499'), ('x-ratelimit-remaining-tokens', '29372'), ('x-ratelimit-reset-requests', '120ms'), ('x-ratelimit-reset-tokens', '1.256s'), ('x-request-id', 'req_39aa9d2c0ba80aca076fa2a52bbc023d'), ('strict-transport-security', 'max-age=31536000; includeSubDomains; preload'), ('cf-cache-status', 'DYNAMIC'), ('set-cookie', '__cf_bm=R8z0b0YEgqOkhJmr9c.7X6BnueCHCrS1nQ06izIP.c0-1752578485-1.0.1.1-nbaLZfbM6RAq4AzamD97XbIkMyze6o1V5Jpqoq_guW04hS1cVejzyhTYQ0uyaj1WJD5TH.WZIxGVd8WT0.DgsOiJi6iPup3sAjG9wXyAZ3k; path=/; expires=Tue, 15-Jul-25 11:51:25 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), ('x-content-type-options', 'nosniff'), ('set-cookie', '_cfuvid=lNbohQ0gPowSnjCBiRtRoo9J5zAGxV23d2O7Gw5KAUs-1752578485019-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), ('server', 'cloudflare'), ('cf-ray', '95f8dfcd0e7019bc-BOM'), ('content-encoding', 'gzip'), ('alt-svc', 'h3=":443"; ma=86400')])
+2025-07-15 11:21:25,065 - openai._base_client - DEBUG - request_id: req_39aa9d2c0ba80aca076fa2a52bbc023d
+2025-07-15 11:21:25,066 - core.enhanced_ai_engine - INFO - Enhanced AI narrative generated successfully for SOL-USDT
+2025-07-15 11:21:50,505 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 11:21:50,506 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 11:21:50,506 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 11:21:50,595 - httpcore.connection - DEBUG - close.started
+2025-07-15 11:21:50,596 - httpcore.connection - DEBUG - close.complete
+2025-07-15 11:21:50,596 - httpcore.connection - DEBUG - close.started
+2025-07-15 11:21:50,597 - httpcore.connection - DEBUG - close.complete
+2025-07-15 11:21:52,626 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 11:21:52,644 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 11:21:52,645 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 11:21:52,646 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 11:21:52,664 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 11:22:00,248 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 11:22:00,262 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 11:22:00,277 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-15 11:22:00,278 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 11:22:02,090 - core.monitoring - DEBUG - Active signals count updated
+2025-07-15 11:22:05,360 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-15 11:22:05,609 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-15 11:22:05,652 - monitoring_routes - INFO - Monitoring routes initialized successfully
+2025-07-15 11:22:05,673 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 11:22:05,694 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 11:22:05,707 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 11:22:05,836 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 11:22:05,843 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 11:22:05,990 - routes - ERROR - Error analyzing SOL: 'dict' object has no attribute 'upper'
+2025-07-15 11:22:06,998 - core.monitoring - DEBUG - API call tracked: analyze_symbol 0.324s success
+2025-07-15 11:22:52,380 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 11:22:52,381 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 11:22:52,382 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 11:22:55,078 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 11:22:55,081 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 11:22:55,082 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 11:22:55,083 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 11:22:55,083 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 11:23:02,463 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 11:23:02,478 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 11:23:02,495 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-15 11:23:02,496 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 11:23:04,243 - core.monitoring - DEBUG - Active signals count updated
+2025-07-15 11:23:07,429 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-15 11:23:07,673 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-15 11:23:07,777 - monitoring_routes - INFO - Monitoring routes initialized successfully
+2025-07-15 11:23:07,804 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 11:23:07,823 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 11:23:07,832 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 11:23:07,977 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 11:23:07,987 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 11:23:09,366 - core.monitoring - DEBUG - API call tracked: analyze_symbol 0.562s success
+2025-07-15 11:23:16,158 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 11:23:16,210 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 11:23:16,235 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 11:23:16,360 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 11:23:16,373 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 11:23:17,704 - core.monitoring - DEBUG - API call tracked: analyze_symbol 0.546s success
+2025-07-15 11:24:05,495 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 11:24:05,496 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 11:24:05,497 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 11:24:08,415 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 11:24:08,417 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 11:24:08,418 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 11:24:08,420 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 11:24:08,420 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 11:24:15,845 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 11:24:15,856 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 11:24:15,865 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-15 11:24:15,865 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 11:24:17,643 - core.monitoring - DEBUG - Active signals count updated
+2025-07-15 11:24:20,864 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-15 11:24:21,110 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-15 11:24:21,149 - monitoring_routes - INFO - Monitoring routes initialized successfully
