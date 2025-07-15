@@ -149,3 +149,34 @@ class OKXAPIManager:
         """Clear all cached data"""
         self.cache.clear()
         logger.info("Cache cleared")
+    
+    def get_orderbook(self, symbol: str, depth: int = 20) -> Dict[str, Any]:
+        """Get orderbook data for a symbol"""
+        try:
+            self._rate_limit()
+            
+            url = f"{self.base_url}/api/v5/market/books"
+            params = {
+                'instId': symbol,
+                'sz': min(depth, 400)  # Max 400 levels
+            }
+            
+            response = self.session.get(url, params=params, timeout=10)
+            response.raise_for_status()
+            
+            data = response.json()
+            
+            if data.get('code') == '0' and data.get('data'):
+                orderbook_data = data['data'][0]
+                return {
+                    'bids': orderbook_data.get('bids', []),
+                    'asks': orderbook_data.get('asks', []),
+                    'ts': orderbook_data.get('ts', None)
+                }
+            else:
+                logger.error(f"Orderbook API error for {symbol}: {data}")
+                return None
+                
+        except Exception as e:
+            logger.error(f"Error fetching orderbook for {symbol}: {e}")
+            return None

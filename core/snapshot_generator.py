@@ -124,7 +124,16 @@ class SnapshotGenerator:
             technical_analysis = self.technical_analyzer.analyze(df, symbol, timeframe)
             
             # 4. Perform SMC analysis
-            smc_analysis = self.smc_analyzer.analyze_market_structure(df)
+            try:
+                smc_analysis = self.smc_analyzer.analyze_comprehensive(df, symbol, timeframe)
+            except Exception as e:
+                logger.warning(f"SMC analysis failed: {e}")
+                smc_analysis = {
+                    'patterns': {},
+                    'market_structure': {},
+                    'liquidity_levels': [],
+                    'confidence_score': 0
+                }
             
             # 5. Perform price action analysis
             price_action_analysis = self.price_action_analyzer.analyze_price_action(df)

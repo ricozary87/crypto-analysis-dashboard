@@ -58954,3 +58954,958 @@ jinja2.exceptions.TemplateNotFound: analysis_history.html
 2025-07-15 05:29:07,803 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
 2025-07-15 05:29:07,805 - routes - WARNING - Error calculating rsi: 'IndicatorResult' object has no attribute 'interpretation'
 2025-07-15 05:29:07,806 - routes - WARNING - Error calculating macd: 'IndicatorResult' object has no attribute 'interpretation'
+2025-07-15 05:34:35,598 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 05:34:35,599 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:34:35,599 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:34:36,716 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 05:34:36,716 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 05:34:36,717 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 05:34:36,718 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:34:36,718 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:34:44,834 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 05:34:44,834 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:34:44,835 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:34:45,381 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 05:34:45,382 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 05:34:45,383 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 05:34:45,384 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:34:45,384 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:34:52,165 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 05:34:52,165 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:34:52,165 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:34:53,604 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 05:34:53,604 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 05:34:53,606 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 05:34:53,606 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:34:53,611 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:35:07,451 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 05:35:07,451 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:35:07,451 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:35:08,077 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 05:35:08,077 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 05:35:08,079 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 05:35:08,079 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:35:08,079 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:35:15,869 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:35:15,872 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:35:16,007 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:35:16,014 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:35:16,071 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:35:16,072 - routes - ERROR - Error analyzing BTC: 'str' object has no attribute 'get'
+2025-07-15 05:35:16,775 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:35:16,954 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=BTC-USDT&sz=10 HTTP/1.1" 200 None
+2025-07-15 05:35:17,740 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:35:17,905 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=BTC-USDT&sz=20 HTTP/1.1" 200 None
+2025-07-15 05:35:18,801 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 05:35:18,801 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 05:35:18,802 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:35:18,929 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:35:18,940 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:35:18,981 - routes - ERROR - Error getting technical indicators for BTC: Object of type Series is not JSON serializable
+2025-07-15 05:35:19,803 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:35:19,803 - core.ai_engine - WARNING - OPENAI_API_KEY not found - AI Engine will use fallback narratives
+2025-07-15 05:35:19,803 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:35:19,804 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:35:19,805 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:35:19,805 - routes - ERROR - Error generating snapshot for BTC: 'SnapshotGenerator' object has no attribute 'generate_comprehensive_snapshot'
+2025-07-15 05:35:55,254 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 05:35:55,254 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:35:55,254 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:35:56,398 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 05:35:56,398 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 05:35:56,399 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 05:35:56,400 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:35:56,418 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:36:28,297 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 05:36:28,298 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:36:28,299 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:36:29,256 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 05:36:29,257 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 05:36:29,258 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 05:36:29,259 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:36:29,259 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:36:39,511 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 05:36:39,511 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:36:39,511 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:36:40,825 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 05:36:40,825 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 05:36:40,827 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 05:36:40,827 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:36:40,827 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:37:39,856 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:37:39,859 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:40,019 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:37:40,025 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:37:40,077 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:37:40,077 - routes - ERROR - Error analyzing BTC: 'str' object has no attribute 'get'
+2025-07-15 05:37:40,088 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:37:40,090 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:40,235 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=4H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:37:40,242 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:37:40,295 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:37:40,295 - routes - ERROR - Error analyzing BTC: 'str' object has no attribute 'get'
+2025-07-15 05:37:40,301 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:37:40,303 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:40,428 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:37:40,432 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:37:40,467 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:37:40,468 - routes - ERROR - Error analyzing BTC: 'str' object has no attribute 'get'
+2025-07-15 05:37:40,474 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:37:40,475 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:40,641 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:37:40,646 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:37:40,711 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:37:40,712 - routes - ERROR - Error analyzing ETH: 'str' object has no attribute 'get'
+2025-07-15 05:37:40,721 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:37:40,723 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:40,859 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=4H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:37:40,864 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:37:40,921 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:37:40,921 - routes - ERROR - Error analyzing ETH: 'str' object has no attribute 'get'
+2025-07-15 05:37:40,935 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:37:40,936 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:41,125 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:37:41,133 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:37:41,163 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:37:41,163 - routes - ERROR - Error analyzing ETH: 'str' object has no attribute 'get'
+2025-07-15 05:37:41,170 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:37:41,171 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:41,299 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:37:41,304 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 05:37:41,351 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:37:41,351 - routes - ERROR - Error analyzing SOL: 'str' object has no attribute 'get'
+2025-07-15 05:37:41,357 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:37:41,358 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:41,502 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=4H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:37:41,508 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 05:37:41,566 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:37:41,567 - routes - ERROR - Error analyzing SOL: 'str' object has no attribute 'get'
+2025-07-15 05:37:41,572 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:37:41,574 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:41,704 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:37:41,709 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 05:37:41,753 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:37:41,754 - routes - ERROR - Error analyzing SOL: 'str' object has no attribute 'get'
+2025-07-15 05:37:41,764 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:37:41,764 - core.ai_engine - WARNING - OPENAI_API_KEY not found - AI Engine will use fallback narratives
+2025-07-15 05:37:41,764 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:37:41,764 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:37:41,764 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:37:41,764 - core.snapshot_generator - INFO - Generating quick snapshot for BTC-USDT (1H)
+2025-07-15 05:37:41,765 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:41,893 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:37:41,898 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:37:41,918 - core.snapshot_generator - ERROR - Error generating snapshot for BTC-USDT: 'ProfessionalSMCAnalyzer' object has no attribute 'analyze_market_structure'
+2025-07-15 05:37:41,919 - routes - ERROR - Error generating snapshot for BTC: 'ProfessionalSMCAnalyzer' object has no attribute 'analyze_market_structure'
+2025-07-15 05:37:41,924 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:37:41,925 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:37:41,925 - core.snapshot_generator - INFO - Generating comprehensive snapshot for BTC-USDT (1H)
+2025-07-15 05:37:41,926 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:42,080 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:37:42,084 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:37:42,102 - core.snapshot_generator - ERROR - Error generating snapshot for BTC-USDT: 'ProfessionalSMCAnalyzer' object has no attribute 'analyze_market_structure'
+2025-07-15 05:37:42,103 - routes - ERROR - Error generating snapshot for BTC: 'ProfessionalSMCAnalyzer' object has no attribute 'analyze_market_structure'
+2025-07-15 05:37:42,109 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:37:42,109 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:37:42,109 - core.snapshot_generator - INFO - Generating deep_analysis snapshot for BTC-USDT (1H)
+2025-07-15 05:37:42,111 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:42,245 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:37:42,250 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:37:42,272 - core.snapshot_generator - ERROR - Error generating snapshot for BTC-USDT: 'ProfessionalSMCAnalyzer' object has no attribute 'analyze_market_structure'
+2025-07-15 05:37:42,274 - routes - ERROR - Error generating snapshot for BTC: 'ProfessionalSMCAnalyzer' object has no attribute 'analyze_market_structure'
+2025-07-15 05:37:42,289 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:37:42,289 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:37:42,289 - core.snapshot_generator - INFO - Generating quick snapshot for ETH-USDT (1H)
+2025-07-15 05:37:42,291 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:42,434 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:37:42,440 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:37:42,462 - core.snapshot_generator - ERROR - Error generating snapshot for ETH-USDT: 'ProfessionalSMCAnalyzer' object has no attribute 'analyze_market_structure'
+2025-07-15 05:37:42,462 - routes - ERROR - Error generating snapshot for ETH: 'ProfessionalSMCAnalyzer' object has no attribute 'analyze_market_structure'
+2025-07-15 05:37:42,467 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:37:42,467 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:37:42,467 - core.snapshot_generator - INFO - Generating comprehensive snapshot for ETH-USDT (1H)
+2025-07-15 05:37:42,469 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:42,607 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:37:42,612 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:37:42,631 - core.snapshot_generator - ERROR - Error generating snapshot for ETH-USDT: 'ProfessionalSMCAnalyzer' object has no attribute 'analyze_market_structure'
+2025-07-15 05:37:42,631 - routes - ERROR - Error generating snapshot for ETH: 'ProfessionalSMCAnalyzer' object has no attribute 'analyze_market_structure'
+2025-07-15 05:37:42,637 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:37:42,637 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:37:42,637 - core.snapshot_generator - INFO - Generating deep_analysis snapshot for ETH-USDT (1H)
+2025-07-15 05:37:42,638 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:42,774 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:37:42,779 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:37:42,799 - core.snapshot_generator - ERROR - Error generating snapshot for ETH-USDT: 'ProfessionalSMCAnalyzer' object has no attribute 'analyze_market_structure'
+2025-07-15 05:37:42,799 - routes - ERROR - Error generating snapshot for ETH: 'ProfessionalSMCAnalyzer' object has no attribute 'analyze_market_structure'
+2025-07-15 05:37:42,804 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:37:42,804 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:37:42,805 - core.snapshot_generator - INFO - Generating quick snapshot for SOL-USDT (1H)
+2025-07-15 05:37:42,806 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:42,938 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:37:42,942 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 05:37:42,967 - core.snapshot_generator - ERROR - Error generating snapshot for SOL-USDT: 'ProfessionalSMCAnalyzer' object has no attribute 'analyze_market_structure'
+2025-07-15 05:37:42,968 - routes - ERROR - Error generating snapshot for SOL: 'ProfessionalSMCAnalyzer' object has no attribute 'analyze_market_structure'
+2025-07-15 05:37:42,973 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:37:42,974 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:37:42,974 - core.snapshot_generator - INFO - Generating comprehensive snapshot for SOL-USDT (1H)
+2025-07-15 05:37:42,975 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:43,093 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:37:43,098 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 05:37:43,117 - core.snapshot_generator - ERROR - Error generating snapshot for SOL-USDT: 'ProfessionalSMCAnalyzer' object has no attribute 'analyze_market_structure'
+2025-07-15 05:37:43,118 - routes - ERROR - Error generating snapshot for SOL: 'ProfessionalSMCAnalyzer' object has no attribute 'analyze_market_structure'
+2025-07-15 05:37:43,123 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:37:43,123 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:37:43,124 - core.snapshot_generator - INFO - Generating deep_analysis snapshot for SOL-USDT (1H)
+2025-07-15 05:37:43,125 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:43,261 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:37:43,266 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 05:37:43,285 - core.snapshot_generator - ERROR - Error generating snapshot for SOL-USDT: 'ProfessionalSMCAnalyzer' object has no attribute 'analyze_market_structure'
+2025-07-15 05:37:43,285 - routes - ERROR - Error generating snapshot for SOL: 'ProfessionalSMCAnalyzer' object has no attribute 'analyze_market_structure'
+2025-07-15 05:37:43,292 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:43,454 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=BTC-USDT&sz=20 HTTP/1.1" 200 None
+2025-07-15 05:37:43,462 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:43,612 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=ETH-USDT&sz=20 HTTP/1.1" 200 None
+2025-07-15 05:37:43,620 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:43,803 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=SOL-USDT&sz=20 HTTP/1.1" 200 None
+2025-07-15 05:37:43,810 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:43,953 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=BTC-USDT&sz=50 HTTP/1.1" 200 None
+2025-07-15 05:37:43,963 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:44,119 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=ETH-USDT&sz=50 HTTP/1.1" 200 None
+2025-07-15 05:37:44,130 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:44,263 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=SOL-USDT&sz=50 HTTP/1.1" 200 None
+2025-07-15 05:37:44,272 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 05:37:44,273 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 05:37:44,275 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:44,400 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:37:44,405 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:37:44,449 - routes - ERROR - Error getting technical indicators for BTC: Object of type Series is not JSON serializable
+2025-07-15 05:37:44,454 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 05:37:44,455 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:44,598 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:37:44,605 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:37:44,647 - routes - ERROR - Error getting technical indicators for ETH: Object of type Series is not JSON serializable
+2025-07-15 05:37:44,652 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 05:37:44,654 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:44,797 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:37:44,801 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 05:37:44,848 - routes - ERROR - Error getting technical indicators for SOL: Object of type Series is not JSON serializable
+2025-07-15 05:37:44,853 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:37:44,854 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:44,975 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:37:44,980 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:37:45,005 - core.enhanced_ai_engine - WARNING - OpenAI client not available. Using enhanced fallback narrative.
+2025-07-15 05:37:45,011 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:37:45,012 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:45,133 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:37:45,137 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:37:45,157 - core.enhanced_ai_engine - WARNING - OpenAI client not available. Using enhanced fallback narrative.
+2025-07-15 05:37:46,904 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:37:46,907 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:47,056 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:37:47,061 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:37:47,121 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:37:47,121 - routes - ERROR - Error analyzing BTC: 'str' object has no attribute 'get'
+2025-07-15 05:37:47,894 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:48,060 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=BTC-USDT&sz=10 HTTP/1.1" 200 None
+2025-07-15 05:37:48,965 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 05:37:48,967 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:37:49,100 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:37:49,105 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:37:49,138 - routes - ERROR - Error getting technical indicators for BTC: Object of type Series is not JSON serializable
+2025-07-15 05:40:01,262 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 05:40:01,262 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:40:01,262 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:40:02,858 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 05:40:02,859 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 05:40:02,860 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 05:40:02,861 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:40:02,861 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:40:27,149 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 05:40:27,149 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:40:27,149 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:40:27,774 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 05:40:27,775 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 05:40:27,776 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 05:40:27,776 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:40:27,782 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:40:50,743 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 05:40:50,744 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 05:40:50,747 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:40:50,885 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:40:50,891 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:40:50,929 - routes - ERROR - Error getting technical indicators for BTC: Object of type Series is not JSON serializable
+2025-07-15 05:40:52,110 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:40:52,111 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:40:52,240 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:40:52,245 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:40:52,294 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:40:53,007 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:40:53,008 - core.ai_engine - WARNING - OPENAI_API_KEY not found - AI Engine will use fallback narratives
+2025-07-15 05:40:53,008 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:40:53,008 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:40:53,008 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:40:53,008 - core.snapshot_generator - INFO - Generating quick snapshot for BTC-USDT (1H)
+2025-07-15 05:40:53,009 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:40:53,134 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:40:53,140 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:40:53,155 - core.snapshot_generator - ERROR - Error generating snapshot for BTC-USDT: 'ProfessionalSMCAnalyzer' object has no attribute 'analyze_market_structure'
+2025-07-15 05:40:53,155 - routes - ERROR - Error generating snapshot for BTC: 'ProfessionalSMCAnalyzer' object has no attribute 'analyze_market_structure'
+2025-07-15 05:41:20,881 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 05:41:20,881 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:41:20,881 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:41:21,626 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 05:41:21,627 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 05:41:21,628 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 05:41:21,628 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:41:21,629 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:41:28,645 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 05:41:28,646 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 05:41:28,648 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:28,765 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:41:28,770 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:41:28,800 - routes - ERROR - Error getting technical indicators for BTC: Object of type Series is not JSON serializable
+2025-07-15 05:41:29,970 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:41:29,970 - core.ai_engine - WARNING - OPENAI_API_KEY not found - AI Engine will use fallback narratives
+2025-07-15 05:41:29,970 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:41:29,970 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:41:29,970 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:41:29,970 - core.snapshot_generator - INFO - Generating quick snapshot for BTC-USDT (1H)
+2025-07-15 05:41:29,971 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:30,104 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:41:30,109 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:41:30,457 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'quick_mode': True, 'layer_analysis': {'technical_indicators': {'rsi': 50.0, 'macd': {'macd': -661.8031769366062, 'signal': -246.76847337446205, 'his ... (1613 characters truncated) ... UM', 'volatility': 'MEDIUM'}, 'generation_time': 0.228211, 'data_quality': 'GOOD'}, 'confidence': 0.0, 'timeframe': '1H', 'session_id': 'api_request'}]]
+2025-07-15 05:41:30,457 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.23s
+2025-07-15 05:41:30,457 - routes - ERROR - Error generating snapshot for BTC: 'MarketSnapshot' object has no attribute 'analysis_data'
+2025-07-15 05:41:31,532 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:41:31,537 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:31,675 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:41:31,680 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:41:31,732 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:41:31,739 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:41:31,741 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:31,907 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=4H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:41:31,912 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:41:31,954 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:41:31,963 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:41:31,964 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:32,085 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:41:32,091 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:41:32,131 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:41:32,140 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:41:32,141 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:32,258 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:41:32,262 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:41:32,308 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:41:32,316 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:41:32,317 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:32,462 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=4H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:41:32,468 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:41:32,521 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:41:32,529 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:41:32,530 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:32,654 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:41:32,658 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:41:32,687 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:41:32,693 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:41:32,694 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:32,818 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:41:32,824 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 05:41:32,874 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:41:32,881 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:41:32,883 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:33,010 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=4H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:41:33,015 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 05:41:33,067 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:41:33,073 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:41:33,075 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:33,227 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:41:33,231 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 05:41:33,266 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:41:33,273 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:41:33,273 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:41:33,273 - core.snapshot_generator - INFO - Generating quick snapshot for BTC-USDT (1H)
+2025-07-15 05:41:33,274 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:33,412 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:41:33,416 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:41:33,733 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'quick_mode': True, 'layer_analysis': {'technical_indicators': {'rsi': 50.0, 'macd': {'macd': -661.8031769366062, 'signal': -246.76847337446205, 'his ... (1613 characters truncated) ... UM', 'volatility': 'MEDIUM'}, 'generation_time': 0.215653, 'data_quality': 'GOOD'}, 'confidence': 0.0, 'timeframe': '1H', 'session_id': 'api_request'}]]
+2025-07-15 05:41:33,733 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.22s
+2025-07-15 05:41:33,734 - routes - ERROR - Error generating snapshot for BTC: 'MarketSnapshot' object has no attribute 'analysis_data'
+2025-07-15 05:41:33,738 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:41:33,738 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:41:33,738 - core.snapshot_generator - INFO - Generating comprehensive snapshot for BTC-USDT (1H)
+2025-07-15 05:41:33,739 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:33,884 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:41:33,890 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:41:33,976 - core.snapshot_generator - ERROR - Error generating AI narrative: 'AIEngine' object has no attribute 'generate_comprehensive_analysis'
+2025-07-15 05:41:34,221 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'quick_mode': False, 'layer_analysis': {'technical_indicators': {'rsi': 50.0, 'macd': {'macd': -661.8031769366062, 'signal': -246.76847337446205, 'hi ... (1676 characters truncated) ... UM', 'volatility': 'MEDIUM'}, 'generation_time': 0.238156, 'data_quality': 'GOOD'}, 'confidence': 0.0, 'timeframe': '1H', 'session_id': 'api_request'}]]
+2025-07-15 05:41:34,221 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.24s
+2025-07-15 05:41:34,221 - routes - ERROR - Error generating snapshot for BTC: 'MarketSnapshot' object has no attribute 'analysis_data'
+2025-07-15 05:41:34,226 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:41:34,226 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:41:34,226 - core.snapshot_generator - INFO - Generating deep_analysis snapshot for BTC-USDT (1H)
+2025-07-15 05:41:34,228 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:34,368 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:41:34,373 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:41:34,457 - core.snapshot_generator - ERROR - Error generating AI narrative: 'AIEngine' object has no attribute 'generate_comprehensive_analysis'
+2025-07-15 05:41:34,702 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'quick_mode': False, 'layer_analysis': {'technical_indicators': {'rsi': 50.0, 'macd': {'macd': -663.2869376203744, 'signal': -247.0652255112157, 'his ... (1672 characters truncated) ... UM', 'volatility': 'MEDIUM'}, 'generation_time': 0.230688, 'data_quality': 'GOOD'}, 'confidence': 0.0, 'timeframe': '1H', 'session_id': 'api_request'}]]
+2025-07-15 05:41:34,702 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.23s
+2025-07-15 05:41:34,702 - routes - ERROR - Error generating snapshot for BTC: 'MarketSnapshot' object has no attribute 'analysis_data'
+2025-07-15 05:41:34,708 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:41:34,708 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:41:34,708 - core.snapshot_generator - INFO - Generating quick snapshot for ETH-USDT (1H)
+2025-07-15 05:41:34,709 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:34,843 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:41:34,850 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:41:35,189 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'quick_mode': True, 'layer_analysis': {'technical_indicators': {'rsi': 50.0, 'macd': {'macd': -10.507869270394167, 'signal': -3.3262203311630643, 'hi ... (1607 characters truncated) ... UM', 'volatility': 'MEDIUM'}, 'generation_time': 0.235382, 'data_quality': 'GOOD'}, 'confidence': 0.0, 'timeframe': '1H', 'session_id': 'api_request'}]]
+2025-07-15 05:41:35,189 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.24s
+2025-07-15 05:41:35,189 - routes - ERROR - Error generating snapshot for ETH: 'MarketSnapshot' object has no attribute 'analysis_data'
+2025-07-15 05:41:35,193 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:41:35,193 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:41:35,193 - core.snapshot_generator - INFO - Generating comprehensive snapshot for ETH-USDT (1H)
+2025-07-15 05:41:35,194 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:35,346 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:41:35,351 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:41:35,456 - core.snapshot_generator - ERROR - Error generating AI narrative: 'AIEngine' object has no attribute 'generate_comprehensive_analysis'
+2025-07-15 05:41:35,702 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'quick_mode': False, 'layer_analysis': {'technical_indicators': {'rsi': 50.0, 'macd': {'macd': -10.507869270394167, 'signal': -3.3262203311630643, 'h ... (1670 characters truncated) ... UM', 'volatility': 'MEDIUM'}, 'generation_time': 0.263169, 'data_quality': 'GOOD'}, 'confidence': 0.0, 'timeframe': '1H', 'session_id': 'api_request'}]]
+2025-07-15 05:41:35,702 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.26s
+2025-07-15 05:41:35,702 - routes - ERROR - Error generating snapshot for ETH: 'MarketSnapshot' object has no attribute 'analysis_data'
+2025-07-15 05:41:35,707 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:41:35,707 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:41:35,707 - core.snapshot_generator - INFO - Generating deep_analysis snapshot for ETH-USDT (1H)
+2025-07-15 05:41:35,708 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:35,840 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:41:35,845 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:41:35,931 - core.snapshot_generator - ERROR - Error generating AI narrative: 'AIEngine' object has no attribute 'generate_comprehensive_analysis'
+2025-07-15 05:41:36,176 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'quick_mode': False, 'layer_analysis': {'technical_indicators': {'rsi': 50.0, 'macd': {'macd': -10.507869270394167, 'signal': -3.3262203311630643, 'h ... (1670 characters truncated) ... UM', 'volatility': 'MEDIUM'}, 'generation_time': 0.224469, 'data_quality': 'GOOD'}, 'confidence': 0.0, 'timeframe': '1H', 'session_id': 'api_request'}]]
+2025-07-15 05:41:36,176 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.22s
+2025-07-15 05:41:36,176 - routes - ERROR - Error generating snapshot for ETH: 'MarketSnapshot' object has no attribute 'analysis_data'
+2025-07-15 05:41:36,181 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:41:36,181 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:41:36,181 - core.snapshot_generator - INFO - Generating quick snapshot for SOL-USDT (1H)
+2025-07-15 05:41:36,182 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:36,308 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:41:36,313 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 05:41:36,635 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'quick_mode': True, 'layer_analysis': {'technical_indicators': {'rsi': 50.0, 'macd': {'macd': -1.1821747963198277, 'signal': -0.6588883316391397, 'hi ... (1603 characters truncated) ... UM', 'volatility': 'MEDIUM'}, 'generation_time': 0.209743, 'data_quality': 'GOOD'}, 'confidence': 0.0, 'timeframe': '1H', 'session_id': 'api_request'}]]
+2025-07-15 05:41:36,636 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.21s
+2025-07-15 05:41:36,636 - routes - ERROR - Error generating snapshot for SOL: 'MarketSnapshot' object has no attribute 'analysis_data'
+2025-07-15 05:41:36,640 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:41:36,641 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:41:36,641 - core.snapshot_generator - INFO - Generating comprehensive snapshot for SOL-USDT (1H)
+2025-07-15 05:41:36,641 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:36,777 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:41:36,782 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 05:41:36,873 - core.snapshot_generator - ERROR - Error generating AI narrative: 'AIEngine' object has no attribute 'generate_comprehensive_analysis'
+2025-07-15 05:41:37,119 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'quick_mode': False, 'layer_analysis': {'technical_indicators': {'rsi': 50.0, 'macd': {'macd': -1.1821747963198277, 'signal': -0.6588883316391397, 'h ... (1665 characters truncated) ... IUM', 'volatility': 'MEDIUM'}, 'generation_time': 0.23298, 'data_quality': 'GOOD'}, 'confidence': 0.0, 'timeframe': '1H', 'session_id': 'api_request'}]]
+2025-07-15 05:41:37,119 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.23s
+2025-07-15 05:41:37,119 - routes - ERROR - Error generating snapshot for SOL: 'MarketSnapshot' object has no attribute 'analysis_data'
+2025-07-15 05:41:37,124 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:41:37,124 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:41:37,124 - core.snapshot_generator - INFO - Generating deep_analysis snapshot for SOL-USDT (1H)
+2025-07-15 05:41:37,125 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:37,258 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:41:37,262 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 05:41:37,329 - core.snapshot_generator - ERROR - Error generating AI narrative: 'AIEngine' object has no attribute 'generate_comprehensive_analysis'
+2025-07-15 05:41:37,574 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'quick_mode': False, 'layer_analysis': {'technical_indicators': {'rsi': 50.0, 'macd': {'macd': -1.1813770755221071, 'signal': -0.6587287874795956, 'h ... (1667 characters truncated) ... IUM', 'volatility': 'MEDIUM'}, 'generation_time': 0.20555, 'data_quality': 'GOOD'}, 'confidence': 0.0, 'timeframe': '1H', 'session_id': 'api_request'}]]
+2025-07-15 05:41:37,574 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.21s
+2025-07-15 05:41:37,574 - routes - ERROR - Error generating snapshot for SOL: 'MarketSnapshot' object has no attribute 'analysis_data'
+2025-07-15 05:41:37,579 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:37,764 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=BTC-USDT&sz=20 HTTP/1.1" 200 None
+2025-07-15 05:41:37,770 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:37,913 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=ETH-USDT&sz=20 HTTP/1.1" 200 None
+2025-07-15 05:41:37,921 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:38,066 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=SOL-USDT&sz=20 HTTP/1.1" 200 None
+2025-07-15 05:41:38,072 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:38,213 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=BTC-USDT&sz=50 HTTP/1.1" 200 None
+2025-07-15 05:41:38,221 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:38,379 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=ETH-USDT&sz=50 HTTP/1.1" 200 None
+2025-07-15 05:41:38,387 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:38,556 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=SOL-USDT&sz=50 HTTP/1.1" 200 None
+2025-07-15 05:41:38,563 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 05:41:38,563 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:38,690 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:41:38,695 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:41:38,731 - routes - ERROR - Error getting technical indicators for BTC: Object of type Series is not JSON serializable
+2025-07-15 05:41:38,736 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 05:41:38,737 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:38,860 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:41:38,864 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:41:38,906 - routes - ERROR - Error getting technical indicators for ETH: Object of type Series is not JSON serializable
+2025-07-15 05:41:38,912 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 05:41:38,914 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:39,051 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:41:39,055 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 05:41:39,088 - routes - ERROR - Error getting technical indicators for SOL: Object of type Series is not JSON serializable
+2025-07-15 05:41:39,093 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:41:39,094 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:39,248 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:41:39,252 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:41:39,268 - core.enhanced_ai_engine - WARNING - OpenAI client not available. Using enhanced fallback narrative.
+2025-07-15 05:41:39,273 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:41:39,274 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:41:39,414 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:41:39,418 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:41:39,433 - core.enhanced_ai_engine - WARNING - OpenAI client not available. Using enhanced fallback narrative.
+2025-07-15 05:41:42,923 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 05:41:42,923 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:41:42,923 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:41:44,209 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 05:41:44,209 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 05:41:44,211 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 05:41:44,213 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:41:44,213 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:42:03,885 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 05:42:03,885 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:42:03,886 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:42:04,454 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 05:42:04,455 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 05:42:04,457 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 05:42:04,457 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:42:04,458 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:43:04,336 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:43:04,337 - core.ai_engine - WARNING - OPENAI_API_KEY not found - AI Engine will use fallback narratives
+2025-07-15 05:43:04,337 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:43:04,337 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:43:04,337 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:43:04,337 - core.snapshot_generator - INFO - Generating quick snapshot for BTC-USDT (1H)
+2025-07-15 05:43:04,340 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:04,486 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:43:04,491 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:43:04,834 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'session_id': 'api_request', 'confidence': 0.0, 'confluence_summary': {'technical_score': 0.0, 'smc_patterns': 0, 'price_action_patterns': 0}, 'ai_na ... (1610 characters truncated) ... essment': {'risk_score': 50, 'risk_level': 'MEDIUM', 'volatility': 'MEDIUM'}, 'generation_time': 0.237137, 'data_quality': 'GOOD'}, 'timeframe': '1H'}]]
+2025-07-15 05:43:04,834 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.24s
+2025-07-15 05:43:04,834 - routes - ERROR - Error generating snapshot for BTC: 'MarketSnapshot' object has no attribute 'technical_summary'
+2025-07-15 05:43:05,620 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 05:43:05,624 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 05:43:05,625 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:05,788 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:43:05,793 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:43:05,830 - routes - ERROR - Error getting technical indicators for BTC: Object of type Series is not JSON serializable
+2025-07-15 05:43:06,981 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:43:06,983 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:07,147 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:43:07,152 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:43:07,193 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:43:07,200 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:43:07,201 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:07,353 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=4H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:43:07,357 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:43:07,402 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:43:07,410 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:43:07,411 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:07,535 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:43:07,539 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:43:07,571 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:43:07,577 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:43:07,578 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:07,731 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:43:07,736 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:43:07,789 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:43:07,796 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:43:07,798 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:07,945 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=4H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:43:07,950 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:43:08,000 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:43:08,007 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:43:08,009 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:08,146 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:43:08,151 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:43:08,189 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:43:08,197 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:43:08,198 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:08,332 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:43:08,336 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 05:43:08,377 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:43:08,383 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:43:08,384 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:08,529 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=4H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:43:08,534 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 05:43:08,584 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:43:08,590 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:43:08,591 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:08,728 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:43:08,733 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 05:43:08,776 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:43:08,783 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:43:08,783 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:43:08,783 - core.snapshot_generator - INFO - Generating quick snapshot for BTC-USDT (1H)
+2025-07-15 05:43:08,784 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:08,915 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:43:08,921 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:43:09,255 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'session_id': 'api_request', 'confidence': 0.0, 'confluence_summary': {'technical_score': 0.0, 'smc_patterns': 0, 'price_action_patterns': 0}, 'ai_na ... (1608 characters truncated) ... essment': {'risk_score': 50, 'risk_level': 'MEDIUM', 'volatility': 'MEDIUM'}, 'generation_time': 0.222779, 'data_quality': 'GOOD'}, 'timeframe': '1H'}]]
+2025-07-15 05:43:09,255 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.22s
+2025-07-15 05:43:09,255 - routes - ERROR - Error generating snapshot for BTC: 'MarketSnapshot' object has no attribute 'technical_summary'
+2025-07-15 05:43:09,259 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:43:09,259 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:43:09,259 - core.snapshot_generator - INFO - Generating comprehensive snapshot for BTC-USDT (1H)
+2025-07-15 05:43:09,260 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:09,388 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:43:09,392 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:43:09,478 - core.snapshot_generator - ERROR - Error generating AI narrative: 'AIEngine' object has no attribute 'generate_comprehensive_analysis'
+2025-07-15 05:43:09,731 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'session_id': 'api_request', 'confidence': 0.0, 'confluence_summary': {'technical_score': 0.0, 'smc_patterns': 0, 'price_action_patterns': 0}, 'ai_na ... (1670 characters truncated) ... sessment': {'risk_score': 50, 'risk_level': 'MEDIUM', 'volatility': 'MEDIUM'}, 'generation_time': 0.21929, 'data_quality': 'GOOD'}, 'timeframe': '1H'}]]
+2025-07-15 05:43:09,731 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.22s
+2025-07-15 05:43:09,731 - routes - ERROR - Error generating snapshot for BTC: 'MarketSnapshot' object has no attribute 'technical_summary'
+2025-07-15 05:43:09,736 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:43:09,737 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:43:09,737 - core.snapshot_generator - INFO - Generating deep_analysis snapshot for BTC-USDT (1H)
+2025-07-15 05:43:09,738 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:09,865 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:43:09,869 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:43:09,941 - core.snapshot_generator - ERROR - Error generating AI narrative: 'AIEngine' object has no attribute 'generate_comprehensive_analysis'
+2025-07-15 05:43:10,190 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'session_id': 'api_request', 'confidence': 0.0, 'confluence_summary': {'technical_score': 0.0, 'smc_patterns': 0, 'price_action_patterns': 0}, 'ai_na ... (1670 characters truncated) ... sessment': {'risk_score': 50, 'risk_level': 'MEDIUM', 'volatility': 'MEDIUM'}, 'generation_time': 0.20461, 'data_quality': 'GOOD'}, 'timeframe': '1H'}]]
+2025-07-15 05:43:10,190 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.20s
+2025-07-15 05:43:10,190 - routes - ERROR - Error generating snapshot for BTC: 'MarketSnapshot' object has no attribute 'technical_summary'
+2025-07-15 05:43:10,195 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:43:10,195 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:43:10,195 - core.snapshot_generator - INFO - Generating quick snapshot for ETH-USDT (1H)
+2025-07-15 05:43:10,197 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:10,336 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:43:10,342 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:43:10,665 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'session_id': 'api_request', 'confidence': 0.0, 'confluence_summary': {'technical_score': 0.0, 'smc_patterns': 0, 'price_action_patterns': 0}, 'ai_na ... (1607 characters truncated) ... essment': {'risk_score': 50, 'risk_level': 'MEDIUM', 'volatility': 'MEDIUM'}, 'generation_time': 0.220671, 'data_quality': 'GOOD'}, 'timeframe': '1H'}]]
+2025-07-15 05:43:10,666 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.22s
+2025-07-15 05:43:10,666 - routes - ERROR - Error generating snapshot for ETH: 'MarketSnapshot' object has no attribute 'technical_summary'
+2025-07-15 05:43:10,670 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:43:10,670 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:43:10,670 - core.snapshot_generator - INFO - Generating comprehensive snapshot for ETH-USDT (1H)
+2025-07-15 05:43:10,672 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:10,811 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:43:10,817 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:43:10,885 - core.snapshot_generator - ERROR - Error generating AI narrative: 'AIEngine' object has no attribute 'generate_comprehensive_analysis'
+2025-07-15 05:43:11,134 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'session_id': 'api_request', 'confidence': 0.0, 'confluence_summary': {'technical_score': 0.0, 'smc_patterns': 0, 'price_action_patterns': 0}, 'ai_na ... (1670 characters truncated) ... essment': {'risk_score': 50, 'risk_level': 'MEDIUM', 'volatility': 'MEDIUM'}, 'generation_time': 0.214567, 'data_quality': 'GOOD'}, 'timeframe': '1H'}]]
+2025-07-15 05:43:11,134 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.21s
+2025-07-15 05:43:11,134 - routes - ERROR - Error generating snapshot for ETH: 'MarketSnapshot' object has no attribute 'technical_summary'
+2025-07-15 05:43:11,139 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:43:11,139 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:43:11,140 - core.snapshot_generator - INFO - Generating deep_analysis snapshot for ETH-USDT (1H)
+2025-07-15 05:43:11,141 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:11,268 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:43:11,273 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:43:11,351 - core.snapshot_generator - ERROR - Error generating AI narrative: 'AIEngine' object has no attribute 'generate_comprehensive_analysis'
+2025-07-15 05:43:11,600 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'session_id': 'api_request', 'confidence': 0.0, 'confluence_summary': {'technical_score': 0.0, 'smc_patterns': 0, 'price_action_patterns': 0}, 'ai_na ... (1670 characters truncated) ... essment': {'risk_score': 50, 'risk_level': 'MEDIUM', 'volatility': 'MEDIUM'}, 'generation_time': 0.212026, 'data_quality': 'GOOD'}, 'timeframe': '1H'}]]
+2025-07-15 05:43:11,601 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.21s
+2025-07-15 05:43:11,601 - routes - ERROR - Error generating snapshot for ETH: 'MarketSnapshot' object has no attribute 'technical_summary'
+2025-07-15 05:43:11,607 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:43:11,607 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:43:11,608 - core.snapshot_generator - INFO - Generating quick snapshot for SOL-USDT (1H)
+2025-07-15 05:43:11,609 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:11,741 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:43:11,747 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 05:43:12,094 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'session_id': 'api_request', 'confidence': 0.0, 'confluence_summary': {'technical_score': 0.0, 'smc_patterns': 0, 'price_action_patterns': 0}, 'ai_na ... (1604 characters truncated) ... essment': {'risk_score': 50, 'risk_level': 'MEDIUM', 'volatility': 'MEDIUM'}, 'generation_time': 0.237554, 'data_quality': 'GOOD'}, 'timeframe': '1H'}]]
+2025-07-15 05:43:12,095 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.24s
+2025-07-15 05:43:12,095 - routes - ERROR - Error generating snapshot for SOL: 'MarketSnapshot' object has no attribute 'technical_summary'
+2025-07-15 05:43:12,100 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:43:12,100 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:43:12,100 - core.snapshot_generator - INFO - Generating comprehensive snapshot for SOL-USDT (1H)
+2025-07-15 05:43:12,101 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:12,230 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:43:12,235 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 05:43:12,328 - core.snapshot_generator - ERROR - Error generating AI narrative: 'AIEngine' object has no attribute 'generate_comprehensive_analysis'
+2025-07-15 05:43:12,578 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'session_id': 'api_request', 'confidence': 0.0, 'confluence_summary': {'technical_score': 0.0, 'smc_patterns': 0, 'price_action_patterns': 0}, 'ai_na ... (1667 characters truncated) ... essment': {'risk_score': 50, 'risk_level': 'MEDIUM', 'volatility': 'MEDIUM'}, 'generation_time': 0.228756, 'data_quality': 'GOOD'}, 'timeframe': '1H'}]]
+2025-07-15 05:43:12,578 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.23s
+2025-07-15 05:43:12,578 - routes - ERROR - Error generating snapshot for SOL: 'MarketSnapshot' object has no attribute 'technical_summary'
+2025-07-15 05:43:12,582 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:43:12,582 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:43:12,582 - core.snapshot_generator - INFO - Generating deep_analysis snapshot for SOL-USDT (1H)
+2025-07-15 05:43:12,583 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:12,730 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:43:12,734 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 05:43:12,809 - core.snapshot_generator - ERROR - Error generating AI narrative: 'AIEngine' object has no attribute 'generate_comprehensive_analysis'
+2025-07-15 05:43:13,058 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'session_id': 'api_request', 'confidence': 0.0, 'confluence_summary': {'technical_score': 0.0, 'smc_patterns': 0, 'price_action_patterns': 0}, 'ai_na ... (1667 characters truncated) ... essment': {'risk_score': 50, 'risk_level': 'MEDIUM', 'volatility': 'MEDIUM'}, 'generation_time': 0.226959, 'data_quality': 'GOOD'}, 'timeframe': '1H'}]]
+2025-07-15 05:43:13,058 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.23s
+2025-07-15 05:43:13,058 - routes - ERROR - Error generating snapshot for SOL: 'MarketSnapshot' object has no attribute 'technical_summary'
+2025-07-15 05:43:13,068 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:13,202 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=BTC-USDT&sz=20 HTTP/1.1" 200 None
+2025-07-15 05:43:13,209 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:13,361 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=ETH-USDT&sz=20 HTTP/1.1" 200 None
+2025-07-15 05:43:13,367 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:13,503 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=SOL-USDT&sz=20 HTTP/1.1" 200 None
+2025-07-15 05:43:13,511 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:13,653 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=BTC-USDT&sz=50 HTTP/1.1" 200 None
+2025-07-15 05:43:13,660 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:13,807 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=ETH-USDT&sz=50 HTTP/1.1" 200 None
+2025-07-15 05:43:13,815 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:13,955 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=SOL-USDT&sz=50 HTTP/1.1" 200 None
+2025-07-15 05:43:13,962 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 05:43:13,963 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:14,079 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:43:14,083 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:43:14,118 - routes - ERROR - Error getting technical indicators for BTC: Object of type Series is not JSON serializable
+2025-07-15 05:43:14,124 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 05:43:14,125 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:14,248 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:43:14,253 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:43:14,298 - routes - ERROR - Error getting technical indicators for ETH: Object of type Series is not JSON serializable
+2025-07-15 05:43:14,303 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 05:43:14,304 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:14,446 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:43:14,451 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 05:43:14,496 - routes - ERROR - Error getting technical indicators for SOL: Object of type Series is not JSON serializable
+2025-07-15 05:43:14,502 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:43:14,505 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:14,654 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:43:14,659 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:43:14,676 - core.enhanced_ai_engine - WARNING - OpenAI client not available. Using enhanced fallback narrative.
+2025-07-15 05:43:14,680 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:43:14,681 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:43:14,817 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:43:14,822 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:43:14,837 - core.enhanced_ai_engine - WARNING - OpenAI client not available. Using enhanced fallback narrative.
+2025-07-15 05:43:48,822 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 05:43:48,822 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:43:48,822 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:43:49,437 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 05:43:49,437 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 05:43:49,439 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 05:43:49,439 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:43:49,439 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:44:01,886 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:44:01,886 - core.ai_engine - WARNING - OPENAI_API_KEY not found - AI Engine will use fallback narratives
+2025-07-15 05:44:01,886 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:44:01,887 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:44:01,887 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:44:01,887 - core.snapshot_generator - INFO - Generating quick snapshot for BTC-USDT (1H)
+2025-07-15 05:44:01,889 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:02,038 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:44:02,043 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:44:02,373 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'session_id': 'api_request', 'confidence': 0.0, 'confluence_summary': {'technical_score': 0.0, 'smc_patterns': 0, 'price_action_patterns': 0}, 'ai_na ... (1608 characters truncated) ... essment': {'risk_score': 50, 'risk_level': 'MEDIUM', 'volatility': 'MEDIUM'}, 'generation_time': 0.232133, 'data_quality': 'GOOD'}, 'timeframe': '1H'}]]
+2025-07-15 05:44:02,373 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.23s
+2025-07-15 05:44:02,375 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 05:44:02,375 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:44:02,375 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:44:03,201 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 05:44:03,202 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 05:44:03,203 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 05:44:03,206 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:44:03,206 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:44:10,235 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 05:44:10,236 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 05:44:10,238 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:10,371 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:44:10,376 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:44:13,855 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 05:44:13,855 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:44:13,856 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:44:15,084 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 05:44:15,084 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 05:44:15,086 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 05:44:15,086 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 05:44:15,086 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 05:44:27,059 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:44:27,062 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:27,199 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:44:27,205 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:44:27,248 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:44:27,255 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:44:27,257 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:27,386 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=4H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:44:27,390 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:44:27,431 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:44:27,437 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:44:27,438 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:27,571 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:44:27,574 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:44:27,604 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:44:27,611 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:44:27,613 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:27,752 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:44:27,757 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:44:27,812 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:44:27,819 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:44:27,820 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:27,964 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=4H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:44:27,968 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:44:28,007 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:44:28,014 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:44:28,015 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:28,145 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:44:28,149 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:44:28,180 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:44:28,188 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:44:28,189 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:28,326 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:44:28,330 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 05:44:28,368 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:44:28,374 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:44:28,375 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:28,518 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=4H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:44:28,524 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 05:44:28,574 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:44:28,581 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:44:28,582 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:28,703 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:44:28,708 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 05:44:28,745 - core.price_action - ERROR - Error in price action analysis: 'list' object has no attribute 'columns'
+2025-07-15 05:44:28,753 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:44:28,753 - core.ai_engine - WARNING - OPENAI_API_KEY not found - AI Engine will use fallback narratives
+2025-07-15 05:44:28,753 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:44:28,753 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:44:28,753 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:44:28,753 - core.snapshot_generator - INFO - Generating quick snapshot for BTC-USDT (1H)
+2025-07-15 05:44:28,754 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:28,882 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:44:28,887 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:44:29,238 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'symbol': 'BTC-USDT', 'confidence': 0.0, 'timeframe': '1H', 'quick_mode': True, 'layer_analysis': {'technical_indicators': {'rsi': 50.0, 'macd': {'ma ... (1610 characters truncated) ... re': 0.0, 'risk_assessment': {'risk_score': 50, 'risk_level': 'MEDIUM', 'volatility': 'MEDIUM'}, 'generation_time': 0.224442, 'data_quality': 'GOOD'}}]]
+2025-07-15 05:44:29,238 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.22s
+2025-07-15 05:44:29,243 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:44:29,243 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:44:29,243 - core.snapshot_generator - INFO - Generating comprehensive snapshot for BTC-USDT (1H)
+2025-07-15 05:44:29,244 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:29,382 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:44:29,387 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:44:29,464 - core.snapshot_generator - ERROR - Error generating AI narrative: 'AIEngine' object has no attribute 'generate_comprehensive_analysis'
+2025-07-15 05:44:29,717 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'symbol': 'BTC-USDT', 'confidence': 0.0, 'timeframe': '1H', 'quick_mode': False, 'layer_analysis': {'technical_indicators': {'rsi': 50.0, 'macd': {'m ... (1673 characters truncated) ... re': 0.0, 'risk_assessment': {'risk_score': 50, 'risk_level': 'MEDIUM', 'volatility': 'MEDIUM'}, 'generation_time': 0.221332, 'data_quality': 'GOOD'}}]]
+2025-07-15 05:44:29,717 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.22s
+2025-07-15 05:44:29,722 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:44:29,722 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:44:29,723 - core.snapshot_generator - INFO - Generating deep_analysis snapshot for BTC-USDT (1H)
+2025-07-15 05:44:29,724 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:29,850 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:44:29,855 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:44:29,930 - core.snapshot_generator - ERROR - Error generating AI narrative: 'AIEngine' object has no attribute 'generate_comprehensive_analysis'
+2025-07-15 05:44:30,182 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'symbol': 'BTC-USDT', 'confidence': 0.0, 'timeframe': '1H', 'quick_mode': False, 'layer_analysis': {'technical_indicators': {'rsi': 50.0, 'macd': {'m ... (1671 characters truncated) ... core': 0.0, 'risk_assessment': {'risk_score': 50, 'risk_level': 'MEDIUM', 'volatility': 'MEDIUM'}, 'generation_time': 0.2077, 'data_quality': 'GOOD'}}]]
+2025-07-15 05:44:30,182 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.21s
+2025-07-15 05:44:30,188 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:44:30,188 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:44:30,188 - core.snapshot_generator - INFO - Generating quick snapshot for ETH-USDT (1H)
+2025-07-15 05:44:30,189 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:30,311 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:44:30,316 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:44:30,648 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'symbol': 'ETH-USDT', 'confidence': 0.0, 'timeframe': '1H', 'quick_mode': True, 'layer_analysis': {'technical_indicators': {'rsi': 50.0, 'macd': {'ma ... (1602 characters truncated) ... ore': 0.0, 'risk_assessment': {'risk_score': 50, 'risk_level': 'MEDIUM', 'volatility': 'MEDIUM'}, 'generation_time': 0.20835, 'data_quality': 'GOOD'}}]]
+2025-07-15 05:44:30,649 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.21s
+2025-07-15 05:44:30,654 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:44:30,654 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:44:30,654 - core.snapshot_generator - INFO - Generating comprehensive snapshot for ETH-USDT (1H)
+2025-07-15 05:44:30,655 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:30,781 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:44:30,786 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:44:30,875 - core.snapshot_generator - ERROR - Error generating AI narrative: 'AIEngine' object has no attribute 'generate_comprehensive_analysis'
+2025-07-15 05:44:31,127 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'symbol': 'ETH-USDT', 'confidence': 0.0, 'timeframe': '1H', 'quick_mode': False, 'layer_analysis': {'technical_indicators': {'rsi': 50.0, 'macd': {'m ... (1669 characters truncated) ... re': 0.0, 'risk_assessment': {'risk_score': 50, 'risk_level': 'MEDIUM', 'volatility': 'MEDIUM'}, 'generation_time': 0.221123, 'data_quality': 'GOOD'}}]]
+2025-07-15 05:44:31,127 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.22s
+2025-07-15 05:44:31,132 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:44:31,132 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:44:31,133 - core.snapshot_generator - INFO - Generating deep_analysis snapshot for ETH-USDT (1H)
+2025-07-15 05:44:31,134 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:31,270 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:44:31,275 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:44:31,365 - core.snapshot_generator - ERROR - Error generating AI narrative: 'AIEngine' object has no attribute 'generate_comprehensive_analysis'
+2025-07-15 05:44:31,617 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'symbol': 'ETH-USDT', 'confidence': 0.0, 'timeframe': '1H', 'quick_mode': False, 'layer_analysis': {'technical_indicators': {'rsi': 50.0, 'macd': {'m ... (1666 characters truncated) ... re': 0.0, 'risk_assessment': {'risk_score': 50, 'risk_level': 'MEDIUM', 'volatility': 'MEDIUM'}, 'generation_time': 0.232637, 'data_quality': 'GOOD'}}]]
+2025-07-15 05:44:31,617 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.23s
+2025-07-15 05:44:31,622 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:44:31,623 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:44:31,623 - core.snapshot_generator - INFO - Generating quick snapshot for SOL-USDT (1H)
+2025-07-15 05:44:31,624 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:31,746 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:44:31,750 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 05:44:32,072 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'symbol': 'SOL-USDT', 'confidence': 0.0, 'timeframe': '1H', 'quick_mode': True, 'layer_analysis': {'technical_indicators': {'rsi': 50.0, 'macd': {'ma ... (1603 characters truncated) ... re': 0.0, 'risk_assessment': {'risk_score': 50, 'risk_level': 'MEDIUM', 'volatility': 'MEDIUM'}, 'generation_time': 0.197326, 'data_quality': 'GOOD'}}]]
+2025-07-15 05:44:32,072 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.20s
+2025-07-15 05:44:32,078 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:44:32,078 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:44:32,078 - core.snapshot_generator - INFO - Generating comprehensive snapshot for SOL-USDT (1H)
+2025-07-15 05:44:32,079 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:32,227 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:44:32,232 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 05:44:32,305 - core.snapshot_generator - ERROR - Error generating AI narrative: 'AIEngine' object has no attribute 'generate_comprehensive_analysis'
+2025-07-15 05:44:32,557 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'symbol': 'SOL-USDT', 'confidence': 0.0, 'timeframe': '1H', 'quick_mode': False, 'layer_analysis': {'technical_indicators': {'rsi': 50.0, 'macd': {'m ... (1666 characters truncated) ... re': 0.0, 'risk_assessment': {'risk_score': 50, 'risk_level': 'MEDIUM', 'volatility': 'MEDIUM'}, 'generation_time': 0.226974, 'data_quality': 'GOOD'}}]]
+2025-07-15 05:44:32,558 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.23s
+2025-07-15 05:44:32,563 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:44:32,563 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 05:44:32,563 - core.snapshot_generator - INFO - Generating deep_analysis snapshot for SOL-USDT (1H)
+2025-07-15 05:44:32,565 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:32,723 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:44:32,729 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 05:44:32,810 - core.snapshot_generator - ERROR - Error generating AI narrative: 'AIEngine' object has no attribute 'generate_comprehensive_analysis'
+2025-07-15 05:44:33,062 - core.snapshot_generator - ERROR - Error storing snapshot in database: (builtins.TypeError) Object of type datetime is not JSON serializable
+[SQL: INSERT INTO ai_snapshot_archive (session_id, symbol, timeframe, quick_mode, ai_narrative, confluence_summary, layer_analysis, snapshot_data, confidence, created_at) VALUES (%(session_id)s, %(symbol)s, %(timeframe)s, %(quick_mode)s, %(ai_narrative)s, %(confluence_summary)s::JSON, %(layer_analysis)s::JSON, %(snapshot_data)s::JSON, %(confidence)s, %(created_at)s) RETURNING ai_snapshot_archive.id]
+[parameters: [{'symbol': 'SOL-USDT', 'confidence': 0.0, 'timeframe': '1H', 'quick_mode': False, 'layer_analysis': {'technical_indicators': {'rsi': 50.0, 'macd': {'m ... (1666 characters truncated) ... re': 0.0, 'risk_assessment': {'risk_score': 50, 'risk_level': 'MEDIUM', 'volatility': 'MEDIUM'}, 'generation_time': 0.246691, 'data_quality': 'GOOD'}}]]
+2025-07-15 05:44:33,063 - core.snapshot_generator - INFO - Snapshot generated successfully in 0.25s
+2025-07-15 05:44:33,068 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:33,255 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=BTC-USDT&sz=20 HTTP/1.1" 200 None
+2025-07-15 05:44:33,262 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:33,415 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=ETH-USDT&sz=20 HTTP/1.1" 200 None
+2025-07-15 05:44:33,423 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:33,572 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=SOL-USDT&sz=20 HTTP/1.1" 200 None
+2025-07-15 05:44:33,578 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:33,753 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=BTC-USDT&sz=50 HTTP/1.1" 200 None
+2025-07-15 05:44:33,761 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:33,909 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=ETH-USDT&sz=50 HTTP/1.1" 200 None
+2025-07-15 05:44:33,918 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:34,052 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/books?instId=SOL-USDT&sz=50 HTTP/1.1" 200 None
+2025-07-15 05:44:34,060 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 05:44:34,061 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 05:44:34,062 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:34,202 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:44:34,207 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:44:34,274 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 05:44:34,275 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:34,393 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:44:34,398 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:44:34,450 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 37 indicators
+2025-07-15 05:44:34,451 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:34,596 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=SOL-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:44:34,602 - core.okx_fetcher - DEBUG - Fetched 200 candles for SOL-USDT
+2025-07-15 05:44:34,654 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:44:34,656 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:34,785 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:44:34,790 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 05:44:34,811 - core.enhanced_ai_engine - WARNING - OpenAI client not available. Using enhanced fallback narrative.
+2025-07-15 05:44:34,817 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 05:44:34,818 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 05:44:34,947 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 05:44:34,952 - core.okx_fetcher - DEBUG - Fetched 200 candles for ETH-USDT
+2025-07-15 05:44:34,967 - core.enhanced_ai_engine - WARNING - OpenAI client not available. Using enhanced fallback narrative.

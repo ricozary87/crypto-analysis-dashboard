@@ -38,6 +38,7 @@ class IndicatorResult:
     strength: float
     description: str
     parameters: Dict[str, Any]
+    interpretation: str = ""  # Add interpretation field
 
 class AdvancedIndicatorCalculator:
     """Advanced technical indicator calculator with comprehensive features"""
@@ -131,7 +132,7 @@ class AdvancedIndicatorCalculator:
             return IndicatorResult(
                 name=indicator_name,
                 type=IndicatorType.CUSTOM,
-                values=None,
+                values=[],
                 signal="ERROR",
                 strength=0.0,
                 description=f"Error calculating {indicator_name}: {str(e)}",

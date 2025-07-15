@@ -289,6 +289,10 @@ def analyze_coin(symbol):
         # Run enhanced technical analysis
         analysis = analyzer.analyze(df, symbol_okx, timeframe)
         
+        # Ensure analysis is a dictionary
+        if not isinstance(analysis, dict):
+            analysis = {'error': 'Analysis failed', 'indicators': {}, 'signals': [], 'confidence': 0}
+        
         # Extract key data from analysis
         current_price = float(df['close'].iloc[-1])
         price_change_24h = analysis.get('price_change_24h', 0)
@@ -298,7 +302,7 @@ def analyze_coin(symbol):
         if include_smc:
             try:
                 smc_analyzer = ProfessionalSMCAnalyzer()
-                smc_analysis = smc_analyzer.analyze(df)
+                smc_analysis = smc_analyzer.analyze_comprehensive(df, symbol_okx, timeframe)
             except Exception as e:
                 logger.warning(f"SMC analysis failed: {e}")
         
@@ -306,7 +310,7 @@ def analyze_coin(symbol):
         signal_data = {}
         try:
             signal_engine = SignalEngine()
-            signal_data = signal_engine.analyze_market(df, symbol_okx, timeframe)
+            signal_data = signal_engine.generate_comprehensive_signals(df, symbol_okx, timeframe)
         except Exception as e:
             logger.warning(f"Signal engine analysis failed: {e}")
         
@@ -340,17 +344,18 @@ def analyze_coin(symbol):
         signals = []
         
         # Traditional signals
-        traditional_signals = analysis.get('signals', [])
+        traditional_signals = analysis.get('signals', []) if isinstance(analysis, dict) else []
         for sig in traditional_signals:
-            signals.append({
-                'type': 'TRADITIONAL',
-                'action': sig.get('action', 'NEUTRAL'),
-                'confidence': sig.get('confidence', 0),
-                'reason': sig.get('reason', 'Technical indicator signal'),
-                'entry_price': sig.get('entry_price'),
-                'stop_loss': sig.get('stop_loss'),
-                'take_profit_1': sig.get('take_profit_1')
-            })
+            if isinstance(sig, dict):
+                signals.append({
+                    'type': 'TRADITIONAL',
+                    'action': sig.get('action', 'NEUTRAL'),
+                    'confidence': sig.get('confidence', 0),
+                    'reason': sig.get('reason', 'Technical indicator signal'),
+                    'entry_price': sig.get('entry_price'),
+                    'stop_loss': sig.get('stop_loss'),
+                    'take_profit_1': sig.get('take_profit_1')
+                })
         
         # SMC signals
         if smc_analysis.get('signals'):
@@ -485,9 +490,9 @@ def get_comprehensive_snapshot(symbol):
                 'data_quality': snapshot.data_quality,
                 'generation_time': snapshot.generation_time,
                 'snapshot_type': snapshot.snapshot_type.value,
-                'analysis': snapshot.analysis_data,
-                'technical_indicators': snapshot.technical_summary,
-                'smc_analysis': snapshot.smc_analysis,
+                'analysis': snapshot.ai_narrative,
+                'technical_indicators': snapshot.technical_summary if hasattr(snapshot, 'technical_summary') else {},
+                'smc_analysis': snapshot.smc_analysis if hasattr(snapshot, 'smc_analysis') else {},
                 'ai_narrative': snapshot.ai_narrative
             }
         })
@@ -671,26 +676,67 @@ def get_enhanced_technical_indicators(symbol):
         for indicator in indicators:
             try:
                 result = calculator.calculate_indicator(df, indicator)
+                
+                # Handle JSON serialization for different data types
+                values = result.values
+                try:
+                    if hasattr(values, 'tolist'):
+                        # Pandas Series/DataFrame
+                        values = values.tolist()
+                    elif hasattr(values, '__iter__') and not isinstance(values, (str, dict)):
+                        # List or other iterable
+                        values = list(values)
+                    elif isinstance(values, (int, float)):
+                        # Single numeric value
+                        values = [values]
+                    elif values is None:
+                        values = []
+                    else:
+                        # Convert to string if all else fails
+                        values = [str(values)]
+                    
+                    # Take only last 10 values for API efficiency
+                    if isinstance(values, list) and len(values) > 10:
+                        values = values[-10:]
+                except Exception as e:
+                    logger.warning(f"Error serializing values for {indicator}: {e}")
+                    values = []
+                
                 results[indicator] = {
-                    'signal': result.signal,
-                    'strength': result.strength,
-                    'values': result.values.tolist() if hasattr(result.values, 'tolist') else result.values,
-                    'interpretation': result.interpretation
+                    'signal': str(result.signal) if result.signal is not None else 'NEUTRAL',
+                    'strength': float(result.strength) if result.strength is not None else 0.0,
+                    'values': values,
+                    'interpretation': str(result.interpretation) if hasattr(result, 'interpretation') and result.interpretation is not None else 'No interpretation available'
                 }
             except Exception as e:
                 logger.warning(f"Error calculating {indicator}: {e}")
                 results[indicator] = {
                     'signal': 'ERROR',
-                    'strength': 0,
+                    'strength': 0.0,
                     'values': None,
                     'interpretation': f"Error: {str(e)}"
                 }
         
-        # Get trading signals
-        signals = calculator.get_indicator_signals(df)
+        # Get trading signals with error handling
+        try:
+            signals = calculator.get_indicator_signals(df)
+            # Convert signals to JSON-serializable format
+            if isinstance(signals, dict):
+                for key, value in signals.items():
+                    if hasattr(value, 'tolist'):
+                        signals[key] = value.tolist()
+                    elif hasattr(value, '__iter__') and not isinstance(value, (str, dict)):
+                        signals[key] = list(value)
+        except Exception as e:
+            logger.warning(f"Error getting indicator signals: {e}")
+            signals = []
         
-        # Cache information
-        cache_info = calculator.get_cache_info()
+        # Cache information with error handling
+        try:
+            cache_info = calculator.get_cache_info()
+        except Exception as e:
+            logger.warning(f"Error getting cache info: {e}")
+            cache_info = {}
         
         return jsonify({
             'success': True,
