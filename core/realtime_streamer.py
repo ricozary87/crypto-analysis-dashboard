@@ -84,11 +84,23 @@ class RealtimeDataStreamer:
                 ticker_data = self.okx_manager.get_ticker(symbol)
                 
                 if ticker_data:
+                    # Calculate 24h price change percentage correctly
+                    current_price = float(ticker_data.get('last', 0))
+                    open_24h = float(ticker_data.get('open24h', 0))
+                    
+                    try:
+                        if open_24h > 0:
+                            price_change = ((current_price - open_24h) / open_24h) * 100
+                        else:
+                            price_change = 0.0
+                    except (ValueError, TypeError, ZeroDivisionError):
+                        price_change = 0.0
+                    
                     # Create streaming data object
                     streaming_data = StreamingData(
                         symbol=symbol,
-                        price=float(ticker_data.get('last', 0)),
-                        change_24h=float(ticker_data.get('sodUtc0', 0)),
+                        price=current_price,
+                        change_24h=round(price_change, 2),
                         volume=float(ticker_data.get('volCcy24h', 0)),
                         timestamp=int(datetime.now(timezone.utc).timestamp() * 1000),
                         high_24h=float(ticker_data.get('high24h', 0)),
@@ -179,9 +191,21 @@ class RealtimeDataStreamer:
             try:
                 ticker_data = self.okx_manager.get_ticker(symbol)
                 if ticker_data:
+                    # Calculate 24h price change percentage correctly
+                    current_price = float(ticker_data.get('last', 0))
+                    open_24h = float(ticker_data.get('open24h', 0))
+                    
+                    try:
+                        if open_24h > 0:
+                            price_change = ((current_price - open_24h) / open_24h) * 100
+                        else:
+                            price_change = 0.0
+                    except (ValueError, TypeError, ZeroDivisionError):
+                        price_change = 0.0
+                    
                     market_data[symbol] = {
-                        'price': float(ticker_data.get('last', 0)),
-                        'change_24h': float(ticker_data.get('sodUtc0', 0)),
+                        'price': current_price,
+                        'change_24h': round(price_change, 2),
                         'volume': float(ticker_data.get('volCcy24h', 0)),
                         'high_24h': float(ticker_data.get('high24h', 0)),
                         'low_24h': float(ticker_data.get('low24h', 0))

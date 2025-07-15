@@ -58097,3 +58097,118 @@ jinja2.exceptions.TemplateNotFound: professional_dashboard.html
 2025-07-15 03:32:43,856 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
 2025-07-15 03:32:52,378 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
 2025-07-15 03:32:52,379 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 03:38:06,470 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:38:06,480 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:38:06,613 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 03:38:06,621 - core.okx_fetcher - DEBUG - Fetched 100 candles for BTC-USDT
+2025-07-15 03:38:06,767 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:38:06,771 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:38:06,901 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 03:38:06,910 - core.okx_fetcher - DEBUG - Fetched 100 candles for ETH-USDT
+2025-07-15 03:38:07,036 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:38:07,038 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:38:07,173 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 03:38:07,185 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 03:38:07,367 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:38:07,369 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:38:07,516 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 03:38:07,524 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 03:38:07,753 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:38:07,874 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:38:08,008 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:38:08,222 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:38:08,341 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:38:08,467 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:38:08,574 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:38:08,576 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:38:08,704 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 03:38:08,709 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 03:38:08,737 - core.enhanced_ai_engine - WARNING - OpenAI client not available. Using enhanced fallback narrative.
+2025-07-15 03:38:08,846 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:38:12,205 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 03:38:12,207 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 03:38:12,209 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 03:38:12,210 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 03:38:12,211 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 03:39:09,972 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 03:39:09,972 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 03:39:09,972 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 03:39:11,229 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 03:39:11,231 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 03:39:11,232 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 03:39:11,236 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 03:39:11,245 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 03:39:18,135 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:39:18,135 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 03:39:32,345 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 03:39:32,346 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 03:39:32,346 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 03:39:33,736 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 03:39:33,737 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 03:39:33,738 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 03:39:33,738 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 03:39:33,739 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 03:39:40,093 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:39:40,093 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 03:39:49,207 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 03:39:49,207 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 03:39:49,208 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 03:39:50,036 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 03:39:50,037 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 03:39:50,038 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 03:39:50,038 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 03:39:50,039 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 03:39:56,072 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:39:56,072 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 03:40:15,925 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 03:40:15,925 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 03:40:15,925 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 03:40:17,252 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 03:40:17,253 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 03:40:17,254 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 03:40:17,255 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 03:40:17,268 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 03:40:23,302 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:40:23,303 - core.narrative_ai - WARNING - OpenAI API key not found. Narrative AI will use fallback responses.
+2025-07-15 03:40:34,382 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:40:34,519 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:40:34,626 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:40:34,747 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:40:34,853 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:40:34,963 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:40:41,026 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (2): www.okx.com:443
+2025-07-15 03:40:41,027 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (3): www.okx.com:443
+2025-07-15 03:40:41,029 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (4): www.okx.com:443
+2025-07-15 03:40:41,030 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (5): www.okx.com:443
+2025-07-15 03:40:41,077 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:40:41,142 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:40:41,153 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:40:41,160 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:40:41,174 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:41:04,190 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:41:04,303 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 03:41:04,417 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:41:04,530 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:41:04,646 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:41:04,758 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:41:04,759 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:41:04,876 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 03:41:04,881 - core.okx_fetcher - DEBUG - Fetched 100 candles for BTC-USDT
+2025-07-15 03:41:04,998 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:41:04,999 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:41:05,116 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=ETH-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 03:41:05,121 - core.okx_fetcher - DEBUG - Fetched 100 candles for ETH-USDT
+2025-07-15 03:41:05,241 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:41:05,243 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:41:05,374 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 03:41:05,380 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 03:41:05,510 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 03:41:05,511 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 03:41:05,655 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 03:41:05,661 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 03:41:05,678 - core.enhanced_ai_engine - WARNING - OpenAI client not available. Using enhanced fallback narrative.
+2025-07-15 03:41:11,196 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 03:41:11,247 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 03:41:11,300 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 03:41:11,304 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 03:41:11,317 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None

@@ -196,7 +196,7 @@ This is a real-time cryptocurrency trading signal system built with Flask that i
   - System stability maintained throughout all enhancement phases
 - **Status**: Complete gradual enhancement successful dengan real-time streaming fully operational
 
-### July 15, 2025 - Migrasi ke Replit Environment
+### July 15, 2025 - Migrasi ke Replit Environment & Critical Bug Fixes
 - **Migration Complete**: Berhasil migrasi dari Replit Agent ke Replit environment
 - **Dependency Fixes**: 
   - Resolved NumPy 2.x compatibility issues dengan mengganti pandas_ta ke 'ta' library
@@ -206,9 +206,13 @@ This is a real-time cryptocurrency trading signal system built with Flask that i
   - Removed duplicate functions di routes.py
   - Fixed syntax errors dan missing imports
   - Cleaned up boolean serialization dalam analyzer.py
+- **Critical Bug Fix - Price Change Calculation**: Fixed major bug in real-time price change calculation
+  - Issue: OKX API field `sodUtc0` was incorrectly used for percentage calculation
+  - Solution: Implemented proper 24h price change calculation using `(current_price - open24h) / open24h * 100`
+  - Result: Price changes now show realistic percentages (e.g., -2.42% for BTC instead of +119848.70%)
 - **Database**: PostgreSQL configured dan ready untuk production
-- **Testing**: All API endpoints tested dan berfungsi dengan baik
-- **Status**: Aplikasi fully operational untuk cryptocurrency trading analysis
+- **Testing**: All API endpoints tested dan berfungsi dengan baik (9/9 success rate)
+- **Status**: Aplikasi fully operational untuk cryptocurrency trading analysis dengan accurate price data
 
 ### July 07, 2025 - Professional Dashboard Implementation
 - **Major Update**: Created professional trading dashboard with modern UI/UX
