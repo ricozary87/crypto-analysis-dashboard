@@ -61052,3 +61052,76 @@ with app.app_context(). See the documentation for more information.
 2025-07-15 10:44:06,979 - core.monitoring - DEBUG - Win rate metrics updated
 2025-07-15 10:44:07,217 - core.monitoring - INFO - Monitoring system initialized successfully
 2025-07-15 10:44:07,263 - monitoring_routes - INFO - Monitoring routes initialized successfully
+2025-07-15 10:45:24,086 - monitoring_routes - ERROR - Health check failed: Textual SQL expression 'SELECT 1' should be explicitly declared as text('SELECT 1')
+2025-07-15 10:45:25,089 - core.monitoring - DEBUG - API call tracked: health_check 0.002s success
+2025-07-15 10:45:32,952 - core.monitoring - DEBUG - API call tracked: system_metrics 6.102s success
+2025-07-15 10:45:39,980 - core.monitoring - DEBUG - API call tracked: trading_metrics 5.545s success
+2025-07-15 10:45:42,754 - core.monitoring - DEBUG - API call tracked: performance_metrics 0.760s success
+2025-07-15 10:45:52,322 - core.monitoring - DEBUG - API call tracked: trading_metrics 5.042s success
+2025-07-15 10:45:53,576 - core.monitoring - DEBUG - API call tracked: performance_metrics 0.253s success
+2025-07-15 10:45:54,577 - core.monitoring - DEBUG - API call tracked: monitoring_dashboard 9.813s success
+2025-07-15 10:46:16,042 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 10:46:16,042 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 10:46:16,042 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 10:46:18,349 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 10:46:18,351 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 10:46:18,352 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 10:46:18,355 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 10:46:18,356 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 10:46:25,528 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 10:46:25,540 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 10:46:25,551 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-15 10:46:25,551 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 10:46:27,326 - core.monitoring - DEBUG - Active signals count updated
+2025-07-15 10:46:30,573 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-15 10:46:30,822 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-15 10:46:30,869 - monitoring_routes - INFO - Monitoring routes initialized successfully
+2025-07-15 10:46:34,642 - core.monitoring - DEBUG - API call tracked: health_check 2.754s success
+2025-07-15 10:46:39,148 - core.monitoring - DEBUG - API call tracked: system_metrics 2.494s success
+2025-07-15 10:46:46,860 - core.monitoring - DEBUG - API call tracked: trading_metrics 5.496s success
+2025-07-15 10:46:56,357 - core.monitoring - DEBUG - API call tracked: trading_metrics 4.989s success
+2025-07-15 10:46:57,611 - core.monitoring - DEBUG - API call tracked: performance_metrics 0.253s success
+2025-07-15 10:46:58,612 - core.monitoring - DEBUG - API call tracked: monitoring_dashboard 9.741s success
+2025-07-15 10:46:58,866 - core.monitoring - INFO - ALERT: Test info message for Sentry monitoring
+2025-07-15 10:46:59,867 - core.monitoring - DEBUG - API call tracked: test_sentry 0.001s success
+2025-07-15 10:47:15,038 - core.monitoring - DEBUG - API call tracked: health_check 2.745s success
+2025-07-15 10:47:19,554 - core.monitoring - DEBUG - API call tracked: system_metrics 2.494s success
+2025-07-15 10:47:27,033 - core.monitoring - DEBUG - API call tracked: trading_metrics 5.486s success
+2025-07-15 10:47:36,509 - core.monitoring - DEBUG - API call tracked: trading_metrics 4.990s success
+2025-07-15 10:47:37,760 - core.monitoring - DEBUG - API call tracked: performance_metrics 0.250s success
+2025-07-15 10:47:38,761 - core.monitoring - DEBUG - API call tracked: monitoring_dashboard 9.740s success
+2025-07-15 10:47:40,113 - core.monitoring - INFO - ALERT: Test info message for Sentry monitoring
+2025-07-15 10:47:41,114 - core.monitoring - DEBUG - API call tracked: test_sentry 0.001s success
+2025-07-15 10:47:43,760 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-15 10:47:43,760 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 10:47:43,760 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 10:47:47,269 - engineio.server - INFO - Server initialized for threading.
+2025-07-15 10:47:47,272 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-15 10:47:47,272 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-15 10:47:47,273 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-15 10:47:47,273 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-15 10:47:54,474 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 10:47:54,485 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 10:47:54,496 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-15 10:47:54,496 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-15 10:47:56,278 - core.monitoring - DEBUG - Active signals count updated
+2025-07-15 10:47:59,543 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-15 10:47:59,792 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-15 10:47:59,840 - monitoring_routes - INFO - Monitoring routes initialized successfully
+2025-07-15 10:48:30,575 - core.monitoring - DEBUG - API call tracked: health_check 2.778s success
+2025-07-15 10:48:40,192 - core.monitoring - DEBUG - API call tracked: trading_metrics 5.053s success
+2025-07-15 10:48:41,447 - core.monitoring - DEBUG - API call tracked: performance_metrics 0.254s success
+2025-07-15 10:48:42,448 - core.monitoring - DEBUG - API call tracked: monitoring_dashboard 9.821s success
+2025-07-15 10:48:44,477 - core.monitoring - DEBUG - Active signals count updated
+2025-07-15 10:48:47,756 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-15 10:48:48,762 - core.monitoring - DEBUG - Database connections updated: 1
+2025-07-15 10:48:50,014 - core.monitoring - DEBUG - API call tracked: force_metrics_update 6.306s success
+2025-07-15 10:48:54,613 - core.monitoring - DEBUG - API call tracked: health_check 2.765s success
+2025-07-15 10:48:58,435 - core.monitoring - DEBUG - API call tracked: system_metrics 2.512s success
+2025-07-15 10:49:05,309 - core.monitoring - DEBUG - API call tracked: trading_metrics 5.558s success
+2025-07-15 10:49:05,572 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-15 10:49:05,588 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-15 10:49:05,592 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 10:49:05,742 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=200 HTTP/1.1" 200 None
+2025-07-15 10:49:05,750 - core.okx_fetcher - DEBUG - Fetched 200 candles for BTC-USDT
+2025-07-15 10:49:06,946 - core.monitoring - DEBUG - API call tracked: analyze_symbol 0.374s success

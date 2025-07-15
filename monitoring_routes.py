@@ -23,7 +23,8 @@ def health_check():
     """Health check endpoint for load balancers"""
     try:
         # Test database connection
-        db.session.execute('SELECT 1')
+        from sqlalchemy import text
+        db.session.execute(text('SELECT 1'))
         
         # Get basic system metrics
         metrics = monitor.get_system_metrics()
