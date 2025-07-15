@@ -58595,3 +58595,13 @@ jinja2.exceptions.TemplateNotFound: analysis_history.html
 2025-07-15 03:49:31,984 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
 2025-07-15 03:49:32,099 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
 2025-07-15 03:49:32,237 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-15 04:13:01,360 - core.enhanced_ai_engine - WARNING - OPENAI_API_KEY not found - Enhanced AI Engine will use fallback narratives
+2025-07-15 04:13:01,361 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-15 04:13:01,543 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-15 04:13:01,547 - core.okx_fetcher - DEBUG - Fetched 100 candles for BTC-USDT
+2025-07-15 04:13:29,962 - urllib3.connectionpool - DEBUG - Resetting dropped connection: www.okx.com
+2025-07-15 04:13:30,113 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-15 04:13:30,226 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-15 04:13:30,337 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-15 04:13:30,456 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-15 04:13:30,579 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
