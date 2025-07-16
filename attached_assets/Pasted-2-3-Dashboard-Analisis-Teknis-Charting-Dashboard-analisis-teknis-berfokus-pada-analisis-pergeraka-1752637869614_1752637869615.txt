@@ -1,0 +1,28 @@
+2.3. Dashboard Analisis Teknis & Charting
+Dashboard analisis teknis berfokus pada analisis pergerakan harga historis dan real-time untuk memprediksi arah harga di masa depan. Fungsi utamanya meliputi penyajian berbagai jenis grafik harga, visualisasi heatmap likuiditas, alat analisis order flow, dan integrasi ratusan indikator teknis.   
+
+Bagian tengah dashboard ini didominasi oleh area grafik yang besar dan sangat dapat disesuaikan. Pengguna dapat memilih dari berbagai jenis grafik seperti candlestick, Renko, Kagi, dan OHLC. Grafik ini seringkali dilengkapi dengan alat gambar yang ekstensif (lebih dari 40 alat gambar) untuk menandai pola, garis tren, dan level    
+
+support/resistance. Platform seperti TradingView, yang dikenal sebagai pemimpin pasar dalam grafik    
+
+crypto, menawarkan data real-time yang sepenuhnya dapat disesuaikan dan dapat disimpan untuk analisis di kemudian hari.   
+
+Fitur visual yang menonjol adalah heatmap likuiditas real-time yang memberikan "visi seperti X-ray" ke dalam kondisi likuiditas order book. Ini divisualisasikan sebagai kisi blok berwarna di sekitar harga saat ini. Intensitas dan warna blok menunjukkan kekuatan kumulatif penawaran (pesanan jual batas) atau permintaan (pesanan beli batas) pada setiap pengelompokan harga. Perubahan warna atau hilangnya blok menunjukkan perubahan nilai pesanan, memberikan wawasan    
+
+real-time tentang pergeseran supply dan demand.   
+
+Di samping heatmap, dashboard akan menampilkan alat order flow yang dapat dikonfigurasi untuk menganalisis pembelian dan penjualan pasar secara visual. Ini termasuk alat seperti Footprint Cluster, Footprint Profile, TPO + VPSV, Cluster Delta, dan Profile Delta. Alat-alat ini memecah volume perdagangan menjadi detail yang lebih granular, menunjukkan di mana volume beli dan jual terjadi pada setiap level harga, memberikan pemahaman yang lebih dalam tentang tekanan pasar.   
+
+Dashboard dilengkapi dengan perpustakaan luas indikator bawaan dan buatan komunitas (lebih dari 500 indikator buatan komunitas, 200+ open-source) yang dapat ditumpangkan pada grafik. Ini bisa berupa osilator (RSI, MACD), indikator volume, atau rata-rata bergerak, yang ditampilkan sebagai garis, area, atau histogram di atas atau di bawah grafik harga utama. Beberapa platform juga memungkinkan pengguna membuat indikator kustom menggunakan bahasa    
+
+scripting.   
+
+Beberapa dashboard memungkinkan pengguna melihat aliran real-time dari beberapa Order Book dan Trade Feed secara bersamaan langsung di samping grafik, yang dapat dikonfigurasi dan ditempatkan sesuai preferensi workspace pengguna. Ini menciptakan lingkungan perdagangan yang terintegrasi di mana semua informasi relevan tersedia tanpa perlu beralih antar aplikasi.   
+
+Integrasi heatmap likuiditas dan analisis order flow dalam dashboard analisis teknis mewakili konvergensi alat perdagangan tradisional dengan pasar crypto, memberikan keunggulan kompetitif yang signifikan. Secara tradisional, analisis teknis crypto seringkali terbatas pada grafik harga dasar dan indikator. Namun, platform seperti TradingLite telah membawa alat canggih dari pasar keuangan tradisional, seperti heatmap likuiditas dan order flow suite.   
+
+Heatmap memberikan "visi seperti X-ray" ke dalam kedalaman pasar, menunjukkan di mana likuiditas (pesanan beli/jual) terkonsentrasi secara real-time. Ini memungkinkan    
+
+trader untuk mengidentifikasi level support dan resistance yang kuat yang mungkin tidak terlihat hanya dari grafik harga. Analisis order flow lebih lanjut memecah volume perdagangan pada setiap level harga, mengungkapkan tekanan beli atau jual yang sebenarnya. Dengan menggabungkan visualisasi ini, trader mendapatkan pemahaman yang jauh lebih dalam tentang dinamika supply dan demand yang mendasari pergerakan harga, memungkinkan mereka untuk membuat keputusan masuk dan keluar yang lebih tepat dan mendapatkan "keunggulan yang tak tertandingi". Ini adalah evolusi penting yang memungkinkan    
+
+trader crypto profesional untuk bersaing dengan alat yang lebih canggih.
