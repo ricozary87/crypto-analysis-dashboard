@@ -274,6 +274,13 @@
                     });
                 } finally {
                     setIsAnalyzing(false);
+                    // Scroll to the analysis result after a short delay
+                    setTimeout(() => {
+                        const resultElement = document.querySelector('.analysis-result-box');
+                        if (resultElement) {
+                            resultElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        }
+                    }, 100);
                 }
             };
 
@@ -386,7 +393,7 @@
 
                     {/* Analysis Result */}
                     {showAnalysis && analysisResult && (
-                        <div className="mt-4 bg-gray-800 border border-gray-700 rounded-lg p-4">
+                        <div className="analysis-result-box mt-4 bg-gray-800 border border-gray-700 rounded-lg p-4">
                             <h4 className="text-gray-300 text-sm font-semibold mb-2 flex items-center">
                                 <span className="mr-2">📡</span>
                                 Hasil Analisa GPT
@@ -900,13 +907,13 @@ ${narasi}`;
                             </div>
                             
                             {/* Bottom Panels */}
-                            <div className="h-80 p-4">
-                                <div className="grid-cols-2 h-full">
-                                    <div className="panel">
+                            <div className="min-h-80 p-4">
+                                <div className="grid-cols-2">
+                                    <div className="panel overflow-y-auto max-h-96">
                                         <SMCPanel data={smcData} />
                                     </div>
                                     
-                                    <div className="panel">
+                                    <div className="panel overflow-y-auto max-h-96">
                                         <GPTSignalBox {...gptSignalData} />
                                     </div>
                                 </div>
