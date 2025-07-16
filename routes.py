@@ -169,20 +169,10 @@ def prepare_smc_levels(smc_analysis, df):
     
     return smc_levels
 
-@app.route('/')
-def index():
-    """Landing page"""
-    return render_template('index.html')
-
 @app.route('/dashboard')
 def dashboard():
     """Main trading dashboard"""
     return render_template('dashboard.html')
-
-@app.route('/react')
-def react_dashboard():
-    """React dashboard page"""
-    return send_from_directory('.', 'index.html')
 
 @app.route('/react/static/<path:filename>')
 def serve_react_static(filename):
@@ -2752,6 +2742,16 @@ def analysis_history_page():
 def professional_dashboard():
     """Professional trading dashboard with modern UI"""
     return render_template('professional_dashboard.html')
+
+@app.route('/react-dashboard')
+def react_dashboard():
+    """New React-based trading dashboard"""
+    return render_template('react_dashboard.html')
+
+@app.route('/')
+def index():
+    """Default route showing React dashboard"""
+    return render_template('react_dashboard.html')
 
 @app.route('/phase2-dashboard')
 def phase2_dashboard():

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Crypto Trading Dashboard</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial"></script>
+    <script src="https://unpkg.com/lucide-react@latest/dist/umd/lucide-react.js"></script>
+    <script src="https://unpkg.com/clsx@latest/dist/clsx.min.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * { box-sizing: border-box; }
+        
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+        }
+        
+        .dark-bg { background: #0a0a0a; }
+        .dark-surface { background: #1a1a1a; }
+        .dark-border { border-color: #2a2a2a; }
+        .dark-text { color: #e0e0e0; }
+        .dark-muted { color: #9ca3af; }
+        .trading-blue { color: #3b82f6; }
+        .trading-green { color: #10b981; }
+        .trading-red { color: #ef4444; }
+        .trading-yellow { color: #f59e0b; }
+        
+        .panel {
+            background: #1a1a1a;
+            border-radius: 8px;
+            padding: 16px;
+            border: 1px solid #2a2a2a;
+        }
+        
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary:hover {
+            background: #2563eb;
+        }
+        
+        .input-field {
+            background: #0a0a0a;
+            border: 1px solid #2a2a2a;
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: #e0e0e0;
+            width: 100%;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+        
+        .scrollbar-thin::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .scrollbar-thin::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        .scrollbar-thin::-webkit-scrollbar-thumb {
+            background: #2a2a2a;
+            border-radius: 3px;
+        }
+        
+        .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af;
+        }
+        
+        .chart-container {
+            background: #1a1a1a;
+            border-radius: 8px;
+            padding: 16px;
+            border: 1px solid #2a2a2a;
+            height: 100%;
+        }
+        
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .trading-pair {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        
+        .trading-pair:hover {
+            background: #0a0a0a;
+        }
+        
+        .trading-pair.active {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: #3b82f6;
+        }
+        
+        .grid-cols-2 {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+        
+        .grid-cols-20 {
+            display: grid;
+            grid-template-columns: repeat(20, minmax(0, 1fr));
+            gap: 2px;
+        }
+        
+        .heatmap-cell {
+            aspect-ratio: 1;
+            border-radius: 2px;
+            transition: all 0.2s;
+        }
+        
+        .heatmap-cell:hover {
+            transform: scale(1.1);
+        }
+        
+        .indicator-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px;
+            background: #0a0a0a;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+        
+        .indicator-toggle:hover {
+            background: #374151;
+        }
+        
+        .indicator-toggle.active {
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid #3b82f6;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        const { Search, Star, TrendingUp, TrendingDown, BarChart3, ChevronDown, Settings, Bell, Zap, Clock, Volume, Activity, DollarSign } = lucide;
+        
+        // Simple data generators
+        const generateDummyData = (pair, timeframe, count) => {
+            const data = [];
+            let basePrice = 45000;
+            if (pair === 'ETH/USDT') basePrice = 2800;
+            if (pair === 'SOL/USDT') basePrice = 150;
+            
+            for (let i = 0; i < count; i++) {
+                const time = Date.now() - (count - i) * 300000; // 5 minute intervals
+                const open = basePrice + (Math.random() - 0.5) * 1000;
+                const high = open + Math.random() * 200;
+                const low = open - Math.random() * 200;
+                const close = low + Math.random() * (high - low);
+                const volume = Math.random() * 1000000;
+                
+                data.push({
+                    time: new Date(time),
+                    open: open,
+                    high: high,
+                    low: low,
+                    close: close,
+                    volume: volume
+                });
+                
+                basePrice = close;
+            }
+            return data;
+        };
+        
+        const generateOrderbook = (currentPrice) => {
+            const bids = [];
+            const asks = [];
+            
+            for (let i = 0; i < 10; i++) {
+                bids.push({
+                    price: currentPrice - (i + 1) * 0.5,
+                    size: Math.random() * 100
+                });
+                asks.push({
+                    price: currentPrice + (i + 1) * 0.5,
+                    size: Math.random() * 100
+                });
+            }
+            
+            return { bids, asks };
+        };
+        
+        const tradingPairs = [
+            { symbol: 'BTC/USDT', name: 'Bitcoin', price: 45234.12, change: 2.34, volume: 1234567890 },
+            { symbol: 'ETH/USDT', name: 'Ethereum', price: 2845.67, change: -1.23, volume: 876543210 },
+            { symbol: 'SOL/USDT', name: 'Solana', price: 156.78, change: 5.67, volume: 345678901 },
+            { symbol: 'BNB/USDT', name: 'Binance Coin', price: 312.45, change: 1.89, volume: 234567890 },
+            { symbol: 'ADA/USDT', name: 'Cardano', price: 0.4523, change: -0.45, volume: 123456789 },
+            { symbol: 'DOT/USDT', name: 'Polkadot', price: 7.234, change: 3.12, volume: 98765432 }
+        ];
+        
+        const timeframes = ['5m', '15m', '1H', '4H', '1D', '1W'];
+        const chartTypes = [
+            { value: 'candlestick', label: 'Candlestick', icon: BarChart3 },
+            { value: 'line', label: 'Line', icon: Zap }
+        ];
+        
+        // Main Dashboard Component
+        const Dashboard = () => {
+            const [selectedPair, setSelectedPair] = useState('BTC/USDT');
+            const [selectedTimeframe, setSelectedTimeframe] = useState('1H');
+            const [chartType, setChartType] = useState('candlestick');
+            const [chartData, setChartData] = useState([]);
+            const [orderbook, setOrderbook] = useState({ bids: [], asks: [] });
+            const [isLoading, setIsLoading] = useState(true);
+            const [lastUpdate, setLastUpdate] = useState(new Date());
+            const [searchTerm, setSearchTerm] = useState('');
+            const [watchlist, setWatchlist] = useState(['BTC/USDT', 'ETH/USDT']);
+            const [indicators, setIndicators] = useState({
+                ema9: true,
+                ema200: true,
+                rsi: false,
+                macd: false,
+                volume: false
+            });
+            
+            useEffect(() => {
+                loadData();
+                const interval = setInterval(loadData, 5000);
+                return () => clearInterval(interval);
+            }, [selectedPair, selectedTimeframe]);
+            
+            const loadData = () => {
+                setIsLoading(true);
+                const data = generateDummyData(selectedPair, selectedTimeframe, 100);
+                setChartData(data);
+                
+                const currentPrice = data[data.length - 1]?.close || 45000;
+                setOrderbook(generateOrderbook(currentPrice));
+                setLastUpdate(new Date());
+                setIsLoading(false);
+            };
+            
+            const formatPrice = (price) => {
+                if (price >= 1000) return price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                if (price >= 1) return price.toFixed(4);
+                return price.toFixed(6);
+            };
+            
+            const formatVolume = (volume) => {
+                if (volume >= 1e9) return (volume / 1e9).toFixed(1) + 'B';
+                if (volume >= 1e6) return (volume / 1e6).toFixed(1) + 'M';
+                if (volume >= 1e3) return (volume / 1e3).toFixed(1) + 'K';
+                return volume.toString();
+            };
+            
+            const currentPrice = chartData.length > 0 ? chartData[chartData.length - 1].close : 0;
+            const currentPair = tradingPairs.find(p => p.symbol === selectedPair) || tradingPairs[0];
+            
+            return (
+                <div className="h-screen dark-bg flex flex-col">
+                    {/* Top Bar */}
+                    <div className="h-16 dark-surface border-b dark-border flex items-center justify-between px-4">
+                        <div className="flex items-center space-x-4">
+                            <div className="flex items-center space-x-2">
+                                <span className="font-medium dark-text">{selectedPair}</span>
+                                <div className="text-lg font-bold dark-text">${formatPrice(currentPrice)}</div>
+                                <div className={`text-sm ${currentPair.change >= 0 ? 'trading-green' : 'trading-red'}`}>
+                                    {currentPair.change >= 0 ? '+' : ''}{currentPair.change.toFixed(2)}%
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div className="flex items-center space-x-2">
+                            {timeframes.map(tf => (
+                                <button
+                                    key={tf}
+                                    onClick={() => setSelectedTimeframe(tf)}
+                                    className={`px-3 py-1 text-sm font-medium rounded-lg transition-colors ${
+                                        selectedTimeframe === tf
+                                            ? 'btn-primary'
+                                            : 'dark-muted hover:dark-text'
+                                    }`}
+                                >
+                                    {tf}
+                                </button>
+                            ))}
+                        </div>
+                        
+                        <div className="flex items-center space-x-2">
+                            <button className="px-4 py-2 bg-green-600 text-white rounded-lg font-medium">Buy</button>
+                            <button className="px-4 py-2 bg-red-600 text-white rounded-lg font-medium">Sell</button>
+                        </div>
+                    </div>
+                    
+                    {/* Main Content */}
+                    <div className="flex-1 flex overflow-hidden">
+                        {/* Sidebar */}
+                        <div className="w-80 dark-surface border-r dark-border flex flex-col">
+                            <div className="p-4 border-b dark-border">
+                                <h2 className="text-lg font-semibold dark-text mb-4">Market</h2>
+                                <div className="relative mb-4">
+                                    <div className="absolute left-3 top-1/2 transform -translate-y-1/2 dark-muted">
+                                        <Search size={16} />
+                                    </div>
+                                    <input
+                                        type="text"
+                                        placeholder="Search pairs..."
+                                        className="input-field pl-10"
+                                        value={searchTerm}
+                                        onChange={(e) => setSearchTerm(e.target.value)}
+                                    />
+                                </div>
+                            </div>
+                            
+                            <div className="flex-1 overflow-y-auto scrollbar-thin">
+                                {tradingPairs.filter(pair => 
+                                    pair.symbol.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                    pair.name.toLowerCase().includes(searchTerm.toLowerCase())
+                                ).map(pair => (
+                                    <div
+                                        key={pair.symbol}
+                                        className={`trading-pair ${selectedPair === pair.symbol ? 'active' : ''}`}
+                                        onClick={() => setSelectedPair(pair.symbol)}
+                                    >
+                                        <div>
+                                            <div className="font-medium dark-text">{pair.symbol}</div>
+                                            <div className="text-sm dark-muted">{pair.name}</div>
+                                        </div>
+                                        <div className="text-right">
+                                            <div className="font-medium dark-text">${formatPrice(pair.price)}</div>
+                                            <div className={`text-sm ${pair.change >= 0 ? 'trading-green' : 'trading-red'}`}>
+                                                {pair.change >= 0 ? '+' : ''}{pair.change.toFixed(2)}%
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            
+                            <div className="p-4 border-t dark-border">
+                                <div className="flex items-center justify-between text-sm dark-muted">
+                                    <span>Market Cap: $2.1T</span>
+                                    <span>Vol: $89.2B</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        {/* Main Dashboard */}
+                        <div className="flex-1 flex flex-col">
+                            {/* Chart Section */}
+                            <div className="flex-1 flex">
+                                <div className="flex-1 p-4">
+                                    {isLoading ? (
+                                        <div className="chart-container flex items-center justify-center">
+                                            <div className="text-center">
+                                                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mb-4"></div>
+                                                <p className="dark-muted">Loading chart data...</p>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div className="chart-container">
+                                            <div className="flex items-center justify-between mb-4">
+                                                <h3 className="text-lg font-semibold dark-text">{selectedPair} - {selectedTimeframe}</h3>
+                                                <div className="flex items-center space-x-2 text-sm dark-muted">
+                                                    <span>Last: ${formatPrice(currentPrice)}</span>
+                                                    <span>•</span>
+                                                    <span>Vol: {formatVolume(chartData[chartData.length - 1]?.volume || 0)}</span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div className="h-96 flex items-center justify-center">
+                                                <div className="text-center">
+                                                    <BarChart3 size={48} className="dark-muted mx-auto mb-4" />
+                                                    <h4 className="text-lg font-semibold dark-text mb-2">Professional Trading Chart</h4>
+                                                    <p className="dark-muted">Real-time candlestick chart with {chartData.length} data points</p>
+                                                    <div className="mt-4 text-sm dark-muted">
+                                                        <div>Current Price: ${formatPrice(currentPrice)}</div>
+                                                        <div>Timeframe: {selectedTimeframe}</div>
+                                                        <div>Last Update: {lastUpdate.toLocaleTimeString()}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                                
+                                {/* Right Panel */}
+                                <div className="w-80 p-4 space-y-4">
+                                    <div className="panel">
+                                        <div className="flex items-center justify-between mb-4">
+                                            <h3 className="text-lg font-semibold dark-text">Market Overview</h3>
+                                            <Clock size={16} className="dark-muted" />
+                                        </div>
+                                        
+                                        <div className="mb-6">
+                                            <div className="text-2xl font-bold dark-text mb-1">
+                                                ${formatPrice(currentPrice)}
+                                            </div>
+                                            <div className={`flex items-center space-x-1 text-sm font-medium ${currentPair.change >= 0 ? 'trading-green' : 'trading-red'}`}>
+                                                {currentPair.change >= 0 ? <TrendingUp size={16} /> : <TrendingDown size={16} />}
+                                                <span>{currentPair.change >= 0 ? '+' : ''}{currentPair.change.toFixed(2)}%</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div className="grid-cols-2 mb-6">
+                                            <div className="dark-bg rounded-lg p-3">
+                                                <div className="text-sm dark-muted mb-1">24h High</div>
+                                                <div className="text-lg font-semibold dark-text">${formatPrice(currentPrice * 1.05)}</div>
+                                            </div>
+                                            <div className="dark-bg rounded-lg p-3">
+                                                <div className="text-sm dark-muted mb-1">24h Low</div>
+                                                <div className="text-lg font-semibold dark-text">${formatPrice(currentPrice * 0.95)}</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div className="border-t dark-border pt-4">
+                                            <h4 className="text-sm font-medium dark-text mb-3">Orderbook</h4>
+                                            <div className="space-y-2">
+                                                <div className="flex justify-between text-sm">
+                                                    <span className="dark-muted">Best Ask</span>
+                                                    <span className="trading-red">${formatPrice(orderbook.asks[0]?.price || currentPrice)}</span>
+                                                </div>
+                                                <div className="flex justify-between text-sm">
+                                                    <span className="dark-muted">Best Bid</span>
+                                                    <span className="trading-green">${formatPrice(orderbook.bids[0]?.price || currentPrice)}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="panel">
+                                        <h4 className="text-sm font-medium dark-text mb-3">Liquidity Heatmap</h4>
+                                        <div className="grid-cols-20 mb-3">
+                                            {Array.from({ length: 20 }, (_, i) => (
+                                                <div
+                                                    key={i}
+                                                    className="heatmap-cell"
+                                                    style={{
+                                                        backgroundColor: (i < 10 ? 'rgba(16, 185, 129, ' : 'rgba(239, 68, 68, ') + (0.3 + Math.random() * 0.7) + ')'
+                                                    }}
+                                                />
+                                            ))}
+                                        </div>
+                                        <div className="text-center text-xs dark-muted">
+                                            Bid/Ask Depth Visualization
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            {/* Bottom Panels */}
+                            <div className="h-80 p-4">
+                                <div className="grid-cols-2 h-full">
+                                    <div className="panel">
+                                        <h4 className="text-sm font-medium dark-text mb-3">Order Flow</h4>
+                                        <div className="flex items-center justify-center h-full">
+                                            <div className="text-center">
+                                                <Activity size={32} className="dark-muted mx-auto mb-2" />
+                                                <p className="dark-muted">Volume Profile Analysis</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="panel">
+                                        <h4 className="text-sm font-medium dark-text mb-3">Technical Indicators</h4>
+                                        <div className="space-y-2">
+                                            {Object.entries(indicators).map(([key, value]) => (
+                                                <div
+                                                    key={key}
+                                                    className={`indicator-toggle ${value ? 'active' : ''}`}
+                                                    onClick={() => setIndicators(prev => ({...prev, [key]: !prev[key]}))}
+                                                >
+                                                    <span className="text-sm dark-text">{key.toUpperCase()}</span>
+                                                    <div className={`w-4 h-4 rounded ${value ? 'bg-blue-500' : 'dark-bg'}`} />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {/* Status Bar */}
+                    <div className="h-8 dark-surface border-t dark-border flex items-center justify-between px-4 text-xs dark-muted">
+                        <div className="flex items-center space-x-4">
+                            <span>Status: Connected</span>
+                            <span>Last Update: {lastUpdate.toLocaleTimeString()}</span>
+                            <span>Data: {chartData.length} candles</span>
+                        </div>
+                        <div className="flex items-center space-x-4">
+                            <span>React Crypto Technical Dashboard v1.0</span>
+                            <div className="flex items-center space-x-1">
+                                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                                <span>Live</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+        
+        // Render the dashboard
+        ReactDOM.render(<Dashboard />, document.getElementById('root'));
+    </script>
+</body>
+</html>

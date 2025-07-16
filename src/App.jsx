@@ -6,10 +6,11 @@ import OverviewPanel from './components/OverviewPanel'
 import HeatmapLiquidity from './components/HeatmapLiquidity'
 import OrderFlowPanel from './components/OrderFlowPanel'
 import IndicatorsPanel from './components/IndicatorsPanel'
-import { generateDummyData } from './services/dummyData'
+import { generateDummyData, getCurrentMarketData } from './services/dummyData'
 import { generateDummyOrderbook } from './services/orderbook'
+import { wsManager } from './services/api'
 
-export default function App() {
+function App() {
   const [selectedPair, setSelectedPair] = useState('BTC/USDT')
   const [selectedTimeframe, setSelectedTimeframe] = useState('1H')
   const [chartType, setChartType] = useState('candlestick')
@@ -20,35 +21,80 @@ export default function App() {
     ema200: true,
     rsi: false,
     macd: false,
-    bollinger: false
+    bollinger: false,
+    stoch: false,
+    volume: false,
+    obv: false
   })
+  const [isLoading, setIsLoading] = useState(true)
+  const [lastUpdate, setLastUpdate] = useState(new Date())
 
-  // Simulate real-time data updates
+  // Initialize data
   useEffect(() => {
-    const updateData = () => {
-      const newData = generateDummyData(selectedPair, selectedTimeframe, 200)
-      setChartData(newData)
-      setOrderbook(generateDummyOrderbook(newData[newData.length - 1]?.close || 45000))
-    }
-
-    updateData()
+    loadInitialData()
+    
+    // Setup real-time updates
     const interval = setInterval(updateData, 5000) // Update every 5 seconds
-
+    
     return () => clearInterval(interval)
   }, [selectedPair, selectedTimeframe])
 
+  // Load initial data
+  const loadInitialData = async () => {
+    setIsLoading(true)
+    
+    try {
+      // Generate dummy data for the selected pair and timeframe
+      const data = generateDummyData(selectedPair, selectedTimeframe, 200)
+      setChartData(data)
+      
+      // Get current price for orderbook
+      const currentPrice = data[data.length - 1]?.close || 45000
+      const orderbookData = generateDummyOrderbook(currentPrice)
+      setOrderbook(orderbookData)
+      
+      setLastUpdate(new Date())
+    } catch (error) {
+      console.error('Error loading initial data:', error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  // Update data periodically
+  const updateData = async () => {
+    try {
+      // Update chart data with new candle
+      const newData = generateDummyData(selectedPair, selectedTimeframe, 200)
+      setChartData(newData)
+      
+      // Update orderbook
+      const currentPrice = newData[newData.length - 1]?.close || 45000
+      const orderbookData = generateDummyOrderbook(currentPrice)
+      setOrderbook(orderbookData)
+      
+      setLastUpdate(new Date())
+    } catch (error) {
+      console.error('Error updating data:', error)
+    }
+  }
+
+  // Handle pair change
   const handlePairChange = (pair) => {
     setSelectedPair(pair)
   }
 
+  // Handle timeframe change
   const handleTimeframeChange = (timeframe) => {
     setSelectedTimeframe(timeframe)
   }
 
+  // Handle chart type change
   const handleChartTypeChange = (type) => {
     setChartType(type)
   }
 
+  // Handle indicator toggle
   const handleIndicatorToggle = (indicator) => {
     setIndicators(prev => ({
       ...prev,
@@ -56,91 +102,101 @@ export default function App() {
     }))
   }
 
+  // Get current price for displays
+  const currentPrice = chartData.length > 0 ? chartData[chartData.length - 1].close : 0
+
   return (
-    <div className="min-h-screen bg-dark-bg text-dark-text">
-      <div className="flex h-screen">
+    <div className="h-screen bg-dark-bg flex flex-col">
+      {/* Top Bar */}
+      <Topbar
+        selectedPair={selectedPair}
+        selectedTimeframe={selectedTimeframe}
+        chartType={chartType}
+        onPairChange={handlePairChange}
+        onTimeframeChange={handleTimeframeChange}
+        onChartTypeChange={handleChartTypeChange}
+      />
+
+      {/* Main Content */}
+      <div className="flex-1 flex overflow-hidden">
         {/* Sidebar */}
-        <div className="w-64 flex-shrink-0">
-          <Sidebar 
+        <div className="w-80 flex-shrink-0">
+          <Sidebar
             selectedPair={selectedPair}
             onPairChange={handlePairChange}
           />
         </div>
 
-        {/* Main Content */}
-        <div className="flex-1 flex flex-col">
-          {/* Topbar */}
-          <Topbar 
-            selectedPair={selectedPair}
-            selectedTimeframe={selectedTimeframe}
-            chartType={chartType}
-            onPairChange={handlePairChange}
-            onTimeframeChange={handleTimeframeChange}
-            onChartTypeChange={handleChartTypeChange}
-          />
+        {/* Main Dashboard */}
+        <div className="flex-1 flex flex-col overflow-hidden">
+          {/* Chart Section */}
+          <div className="flex-1 flex">
+            {/* Chart View */}
+            <div className="flex-1 p-4">
+              {isLoading ? (
+                <div className="flex items-center justify-center h-full">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-trading-blue"></div>
+                </div>
+              ) : (
+                <ChartView
+                  data={chartData}
+                  pair={selectedPair}
+                  timeframe={selectedTimeframe}
+                  chartType={chartType}
+                  indicators={indicators}
+                />
+              )}
+            </div>
 
-          {/* Content Area */}
-          <div className="flex-1 grid grid-cols-12 gap-4 p-4">
-            {/* Left Column - Overview & Indicators */}
-            <div className="col-span-3 space-y-4">
-              <OverviewPanel 
+            {/* Right Panel */}
+            <div className="w-80 flex-shrink-0 p-4 space-y-4">
+              <OverviewPanel
                 pair={selectedPair}
                 data={chartData}
                 orderbook={orderbook}
               />
-              <IndicatorsPanel 
+              
+              <HeatmapLiquidity
+                orderbook={orderbook}
+                currentPrice={currentPrice}
+              />
+            </div>
+          </div>
+
+          {/* Bottom Panels */}
+          <div className="h-80 flex-shrink-0 p-4">
+            <div className="grid grid-cols-2 gap-4 h-full">
+              <OrderFlowPanel
+                data={chartData}
+                orderbook={orderbook}
+              />
+              
+              <IndicatorsPanel
                 indicators={indicators}
                 onToggle={handleIndicatorToggle}
               />
             </div>
+          </div>
+        </div>
+      </div>
 
-            {/* Main Chart Area */}
-            <div className="col-span-6 space-y-4">
-              <ChartView 
-                data={chartData}
-                pair={selectedPair}
-                timeframe={selectedTimeframe}
-                chartType={chartType}
-                indicators={indicators}
-              />
-              
-              {/* Order Flow Panel */}
-              <OrderFlowPanel 
-                data={chartData}
-                orderbook={orderbook}
-              />
-            </div>
-
-            {/* Right Column - Heatmap & Additional Tools */}
-            <div className="col-span-3 space-y-4">
-              <HeatmapLiquidity 
-                orderbook={orderbook}
-                currentPrice={chartData[chartData.length - 1]?.close || 45000}
-              />
-              
-              {/* Future: SMC Analysis Panel */}
-              <div className="panel">
-                <h3 className="font-semibold mb-4">SMC Analysis</h3>
-                <div className="text-dark-muted text-sm">
-                  <p>• Order Blocks: Ready for integration</p>
-                  <p>• Fair Value Gaps: Ready for integration</p>
-                  <p>• Liquidity Sweeps: Ready for integration</p>
-                </div>
-              </div>
-
-              {/* Future: AI Panel */}
-              <div className="panel">
-                <h3 className="font-semibold mb-4">AI Analysis</h3>
-                <div className="text-dark-muted text-sm">
-                  <p>• GPT Signals: Ready for integration</p>
-                  <p>• AI Recommendations: Ready for integration</p>
-                  <p>• Sentiment Analysis: Ready for integration</p>
-                </div>
-              </div>
-            </div>
+      {/* Status Bar */}
+      <div className="h-8 bg-dark-surface border-t border-dark-border flex items-center justify-between px-4 text-xs text-dark-muted">
+        <div className="flex items-center space-x-4">
+          <span>Status: Connected</span>
+          <span>Last Update: {lastUpdate.toLocaleTimeString()}</span>
+          <span>Data: {chartData.length} candles</span>
+        </div>
+        <div className="flex items-center space-x-4">
+          <span>Crypto Technical Dashboard v1.0</span>
+          <div className="flex items-center space-x-1">
+            <div className="w-2 h-2 bg-trading-green rounded-full"></div>
+            <span>Live</span>
           </div>
         </div>
       </div>
     </div>
   )
 }
+
+export default App
