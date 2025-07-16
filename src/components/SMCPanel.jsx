@@ -1,113 +1,129 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const SMCPanel = ({ data }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  
+  // Default values if data is not provided
   const {
     timeframe = '1H',
     bos = false,
     choch = false,
-    ob = null,
     fvgZone = null,
+    ob = null,
     liquiditySweep = false,
-    status = 'valid'
+    signalStrength = 0,
+    narrative = ''
   } = data || {};
 
-  const getStatusBadge = (isActive, status) => {
-    if (!isActive) return '❌';
-    if (status === 'valid') return '✅';
-    if (status === 'pending') return '⚠️';
-    return '❌';
+  // Calculate actual signal strength if not provided
+  const activeSignals = [bos, choch, fvgZone, ob, liquiditySweep].filter(Boolean).length;
+  const strength = signalStrength || activeSignals;
+
+  // Helper function to get status badge
+  const getStatusBadge = (isActive, value = null) => {
+    if (value !== null && value !== undefined) {
+      return (
+        <div className="flex flex-col items-center">
+          <span className="text-green-500 text-lg mb-1">✅</span>
+          <span className="text-gray-300 text-xs font-mono">{value}</span>
+        </div>
+      );
+    }
+    
+    if (isActive === true) {
+      return <span className="text-green-500 text-lg">✅</span>;
+    } else if (isActive === false) {
+      return <span className="text-red-500 text-lg">❌</span>;
+    } else {
+      return <span className="text-yellow-500 text-lg">⚠️</span>;
+    }
   };
 
-  const SignalColumn = ({ label, isActive, value, status = 'valid' }) => {
-    return (
-      <div className={`flex-1 p-3 rounded-lg border transition-all hover:scale-105 ${
-        isActive 
-          ? status === 'valid' 
-            ? 'bg-green-500/10 border-green-400/30' 
-            : status === 'pending'
-            ? 'bg-yellow-500/10 border-yellow-400/30'
-            : 'bg-red-500/10 border-red-400/30'
-          : 'bg-gray-800/30 border-gray-700/30'
-      }`}>
-        <div className="text-center">
-          <div className="text-2xl mb-2">{getStatusBadge(isActive, status)}</div>
-          <div className="text-xs font-medium text-gray-400 mb-1">{label}</div>
-          {value && (
-            <div className={`text-sm font-semibold ${
-              isActive ? 'text-white' : 'text-gray-500'
-            }`}>
-              {value}
-            </div>
-          )}
-        </div>
-      </div>
-    );
-  };
+  // Truncate narrative for display
+  const maxLines = 4;
+  const narrativeLines = narrative.split('\n');
+  const displayNarrative = isExpanded 
+    ? narrative 
+    : narrativeLines.slice(0, maxLines).join('\n');
+  const needsExpansion = narrativeLines.length > maxLines;
 
   return (
-    <div className="bg-gray-900/90 backdrop-blur rounded-xl p-4 border border-gray-800">
+    <div className="bg-gray-900 border border-gray-700 rounded-lg p-4 h-full flex flex-col">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold text-white">SMC Signal Panel</h3>
-        <span className="text-xs px-3 py-1 rounded-full bg-gray-800 text-gray-400">
+        <h3 className="text-white text-lg font-semibold">SMC Signal Panel</h3>
+        <span className="text-gray-400 text-sm bg-gray-800 px-2 py-1 rounded">
           {timeframe}
         </span>
       </div>
 
-      {/* Signals Table - 1 column per signal */}
-      <div className="flex gap-2 overflow-x-auto scrollbar-thin">
-        <SignalColumn 
-          label="BOS" 
-          isActive={bos} 
-          status={status}
-        />
-        <SignalColumn 
-          label="CHoCH" 
-          isActive={choch} 
-          status={status}
-        />
-        <SignalColumn 
-          label="FVG" 
-          isActive={!!fvgZone} 
-          value={fvgZone}
-          status={status}
-        />
-        <SignalColumn 
-          label="OB" 
-          isActive={!!ob} 
-          value={ob ? `$${ob.toFixed(2)}` : null}
-          status={status}
-        />
-        <SignalColumn 
-          label="Sweep" 
-          isActive={liquiditySweep} 
-          status={status}
-        />
-      </div>
+      {/* Signal Table */}
+      <div className="grid grid-cols-5 gap-2 mb-4">
+        {/* BOS Column */}
+        <div className="bg-gray-800 rounded-lg p-3 flex flex-col items-center hover:bg-gray-750 transition-colors">
+          <span className="text-gray-400 text-xs mb-2">BOS</span>
+          {getStatusBadge(bos)}
+        </div>
 
-      {/* Summary Bar */}
-      <div className="mt-4 p-2 rounded-lg bg-gradient-to-r from-gray-800/50 to-gray-800/30 border border-gray-700/50">
-        <div className="flex items-center justify-between text-sm">
-          <span className="text-gray-400">Signal Strength</span>
-          <div className="flex items-center gap-2">
-            <div className="flex gap-1">
-              {[...Array(5)].map((_, i) => (
-                <div 
-                  key={i}
-                  className={`w-2 h-2 rounded-full ${
-                    i < [bos, choch, !!ob, !!fvgZone, liquiditySweep].filter(Boolean).length
-                      ? 'bg-green-400'
-                      : 'bg-gray-600'
-                  }`}
-                />
-              ))}
-            </div>
-            <span className="text-xs text-gray-400">
-              {[bos, choch, !!ob, !!fvgZone, liquiditySweep].filter(Boolean).length}/5
-            </span>
-          </div>
+        {/* CHoCH Column */}
+        <div className="bg-gray-800 rounded-lg p-3 flex flex-col items-center hover:bg-gray-750 transition-colors">
+          <span className="text-gray-400 text-xs mb-2">CHoCH</span>
+          {getStatusBadge(choch)}
+        </div>
+
+        {/* FVG Column */}
+        <div className="bg-gray-800 rounded-lg p-3 flex flex-col items-center hover:bg-gray-750 transition-colors">
+          <span className="text-gray-400 text-xs mb-2">FVG</span>
+          {getStatusBadge(fvgZone ? true : false, fvgZone)}
+        </div>
+
+        {/* OB Column */}
+        <div className="bg-gray-800 rounded-lg p-3 flex flex-col items-center hover:bg-gray-750 transition-colors">
+          <span className="text-gray-400 text-xs mb-2">OB</span>
+          {getStatusBadge(ob ? true : false, ob ? `$${ob}` : null)}
+        </div>
+
+        {/* Sweep Column */}
+        <div className="bg-gray-800 rounded-lg p-3 flex flex-col items-center hover:bg-gray-750 transition-colors">
+          <span className="text-gray-400 text-xs mb-2">Sweep</span>
+          {getStatusBadge(liquiditySweep)}
         </div>
       </div>
+
+      {/* Signal Strength */}
+      <div className="mb-4">
+        <div className="flex items-center justify-between mb-1">
+          <span className="text-gray-400 text-sm">Signal Strength</span>
+          <span className="text-white text-sm font-medium">{strength}/5 signals</span>
+        </div>
+        <div className="w-full bg-gray-800 rounded-full h-2">
+          <div 
+            className="h-2 rounded-full transition-all duration-300"
+            style={{
+              width: `${(strength / 5) * 100}%`,
+              backgroundColor: strength >= 4 ? '#10b981' : strength >= 3 ? '#f59e0b' : '#ef4444'
+            }}
+          />
+        </div>
+      </div>
+
+      {/* GPT Analysis Narrative */}
+      {narrative && (
+        <div className="bg-gray-800 border border-gray-700 rounded-lg p-4 flex-1">
+          <h4 className="text-gray-300 text-sm font-semibold mb-2">Analisa GPT</h4>
+          <p className="text-gray-400 text-sm whitespace-pre-line leading-relaxed">
+            {displayNarrative}
+          </p>
+          {needsExpansion && (
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="mt-2 text-blue-400 hover:text-blue-300 text-xs font-medium transition-colors"
+            >
+              {isExpanded ? '▲ Show Less' : '▼ Read More'}
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 };
