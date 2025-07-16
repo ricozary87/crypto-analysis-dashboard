@@ -1,0 +1,20 @@
+run = "npm run dev"
+modules = ["nodejs-20"]
+
+[env]
+PORT = "3000"
+
+[interpreter]
+entrypoint = "index.html"
+
+[workflows]
+runButton = "Run Vite Developer Server"
+
+[[workflows.workflow]]
+name = "Run Vite Developer Server"
+author = 44887411
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev"
