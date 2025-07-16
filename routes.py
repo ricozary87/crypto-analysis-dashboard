@@ -14,8 +14,56 @@ from core.snapshot_generator import SnapshotGenerator, SnapshotType
 
 # Monitoring imports
 from core.monitoring import monitor_api_performance, track_trading_signal, track_ai_narrative, monitor
+from core.okx_fetcher import OKXAPIManager
+from core.analyzer import TechnicalAnalyzer
+from core.professional_smc_analyzer import ProfessionalSMCAnalyzer
+from core.signal_engine import SignalEngine
+import pandas as pd
+import time
+from functools import lru_cache
 
 logger = logging.getLogger(__name__)
+
+# Initialize global components for better performance
+_okx_api = None
+_analyzer = None
+
+def get_okx_api():
+    global _okx_api
+    if _okx_api is None:
+        _okx_api = OKXAPIManager()
+    return _okx_api
+
+def get_analyzer():
+    global _analyzer
+    if _analyzer is None:
+        _analyzer = TechnicalAnalyzer()
+    return _analyzer
+
+# Cache for analysis results (5 minutes TTL)
+analysis_cache = {}
+CACHE_TTL = 300  # 5 minutes
+
+# Helper function for symbol validation
+def validate_and_normalize_symbol(symbol):
+    """
+    Validate and normalize symbol to proper format
+    Returns: (is_valid, normalized_symbol, base_symbol)
+    """
+    valid_base_symbols = ['BTC', 'ETH', 'SOL', 'TIA', 'RENDER']
+    
+    # Handle both formats: BTC and BTC-USDT
+    if symbol.upper().endswith('-USDT'):
+        base_symbol = symbol.upper().replace('-USDT', '')
+        normalized_symbol = symbol.upper()
+    else:
+        base_symbol = symbol.upper()
+        normalized_symbol = f"{symbol.upper()}-USDT"
+    
+    # Check if base symbol is valid
+    is_valid = base_symbol in valid_base_symbols
+    
+    return is_valid, normalized_symbol, base_symbol
 
 # JSON Safe Converter Helper
 def json_safe(obj):
@@ -498,31 +546,34 @@ def get_candles():
 @app.route('/api/analyze/<symbol>')
 @monitor_api_performance('analyze_symbol')
 def analyze_coin(symbol):
-    """Enhanced real-time analysis with OkxCandleTracker SMC integration"""
+    """Enhanced real-time analysis with OkxCandleTracker SMC integration - OPTIMIZED"""
     try:
-        # Import necessary modules
-        from core.okx_fetcher import OKXAPIManager
-        from core.analyzer import TechnicalAnalyzer
-        from core.professional_smc_analyzer import ProfessionalSMCAnalyzer
-        from core.signal_engine import SignalEngine
-        import pandas as pd
-        
-        # Validate symbol
-        valid_symbols = ['BTC', 'ETH', 'SOL', 'TIA', 'RENDER']
-        if symbol.upper() not in valid_symbols:
+        # Validate and normalize symbol
+        is_valid, normalized_symbol, base_symbol = validate_and_normalize_symbol(symbol)
+        if not is_valid:
             return jsonify({'error': 'Invalid symbol'}), 400
         
         # Get parameters
         timeframe = request.args.get('timeframe', '1H')
-        include_ai = request.args.get('ai', 'true').lower() == 'true'  # Enable AI by default
+        include_ai = request.args.get('ai', 'true').lower() == 'true'  
         include_smc = request.args.get('smc', 'true').lower() == 'true'
-            
-        # Initialize components
-        okx_api = OKXAPIManager()
-        analyzer = TechnicalAnalyzer()
+        
+        # Check cache first
+        cache_key = f"{normalized_symbol}_{timeframe}_{include_ai}_{include_smc}"
+        current_time = time.time()
+        
+        if cache_key in analysis_cache:
+            cached_data, timestamp = analysis_cache[cache_key]
+            if current_time - timestamp < CACHE_TTL:
+                logger.info(f"Returning cached analysis for {symbol}")
+                return jsonify(cached_data)
+        
+        # Use singleton components for better performance
+        okx_api = get_okx_api()
+        analyzer = get_analyzer()
         
         # Fetch real-time data
-        symbol_okx = f"{symbol.upper()}-USDT"
+        symbol_okx = normalized_symbol
         df = okx_api.get_candles(symbol_okx, timeframe=timeframe, limit=200)
         
         if df is None or df.empty:
@@ -543,7 +594,7 @@ def analyze_coin(symbol):
         current_price = float(df['close'].iloc[-1])
         price_change_24h = analysis.get('price_change_24h', 0)
         
-        # Professional SMC analysis (if enabled)
+        # Professional SMC analysis (if enabled) - OPTIMIZED
         smc_analysis = {}
         if include_smc:
             try:
@@ -551,14 +602,16 @@ def analyze_coin(symbol):
                 smc_analysis = smc_analyzer.analyze_comprehensive(df, symbol_okx, timeframe)
             except Exception as e:
                 logger.warning(f"SMC analysis failed: {e}")
+                smc_analysis = {'error': str(e)}
         
-        # Signal engine analysis
+        # Signal engine analysis - OPTIMIZED
         signal_data = {}
         try:
             signal_engine = SignalEngine()
             signal_data = signal_engine.generate_comprehensive_signals(df, symbol_okx, timeframe)
         except Exception as e:
             logger.warning(f"Signal engine analysis failed: {e}")
+            signal_data = {'error': str(e)}
         
         # Calculate technical indicators with better error handling
         indicators = analysis.get('indicators', {})
@@ -731,7 +784,8 @@ Selalu lakukan riset sendiri sebelum trading."""
             except (IndexError, ValueError, KeyError):
                 continue
         
-        return jsonify({
+        # Prepare response data
+        response_data = {
             'success': True,
             'status': 'success',
             'symbol': symbol.upper(),
@@ -755,7 +809,17 @@ Selalu lakukan riset sendiri sebelum trading."""
                 'patterns': len(analysis.get('smc_analysis', {}).get('patterns', [])),
                 'trend': trend
             }
-        })
+        }
+        
+        # Cache the response for better performance
+        analysis_cache[cache_key] = (response_data, current_time)
+        
+        # Clean old cache entries (keep only last 20 entries)
+        if len(analysis_cache) > 20:
+            oldest_key = min(analysis_cache.keys(), key=lambda k: analysis_cache[k][1])
+            del analysis_cache[oldest_key]
+        
+        return jsonify(response_data)
         
     except Exception as e:
         logger.error(f"Error analyzing {symbol}: {e}")
@@ -776,9 +840,9 @@ def get_comprehensive_snapshot(symbol):
     try:
         from core.snapshot_generator import SnapshotGenerator, SnapshotType
         
-        # Validate symbol
-        valid_symbols = ['BTC', 'ETH', 'SOL', 'TIA', 'RENDER']
-        if symbol.upper() not in valid_symbols:
+        # Validate and normalize symbol
+        is_valid, normalized_symbol, base_symbol = validate_and_normalize_symbol(symbol)
+        if not is_valid:
             return jsonify({'error': 'Invalid symbol'}), 400
         
         # Get parameters
@@ -798,7 +862,7 @@ def get_comprehensive_snapshot(symbol):
         # Generate snapshot
         generator = SnapshotGenerator()
         snapshot = generator.generate_snapshot(
-            symbol=f"{symbol.upper()}-USDT",
+            symbol=normalized_symbol,
             timeframe=timeframe,
             snapshot_type=snapshot_type_enum,
             session_id=session_id

@@ -1052,7 +1052,9 @@ ${narasi}`;
         };
         
         // Render the dashboard
-        ReactDOM.render(<Dashboard />, document.getElementById('root'));
+        // React 18 createRoot API implementation
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<Dashboard />);
         {% endraw %}
     </script>
 </body>

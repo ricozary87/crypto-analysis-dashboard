@@ -1,0 +1,61 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Custom styles for the dashboard */
+.dashboard-container {
+    @apply min-h-screen bg-gray-900 text-white;
+}
+
+.panel {
+    @apply bg-gray-800 rounded-lg p-6 shadow-lg;
+}
+
+.button-primary {
+    @apply bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded transition-colors;
+}
+
+.input-field {
+    @apply w-full p-2 bg-gray-700 text-white rounded border border-gray-600 focus:border-blue-500 focus:outline-none;
+}
+
+.status-indicator {
+    @apply w-3 h-3 rounded-full mr-2;
+}
+
+.status-connected {
+    @apply bg-green-500;
+}
+
+.status-disconnected {
+    @apply bg-red-500;
+}
+
+.chart-container {
+    @apply h-96 bg-gray-700 rounded flex items-center justify-center;
+}
+
+.grid-responsive {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .grid-responsive {
+        @apply grid-cols-1;
+    }
+    
+    .panel {
+        @apply p-4;
+    }
+}
