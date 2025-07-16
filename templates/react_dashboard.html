@@ -18,11 +18,43 @@
         
         * { box-sizing: border-box; }
         
+        html {
+            scroll-behavior: smooth;
+        }
+        
         body {
             margin: 0;
             font-family: 'Inter', sans-serif;
             background: #0a0a0a;
             color: #e0e0e0;
+            overflow-x: hidden;
+        }
+        
+        /* Smooth scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #374151;
+            border-radius: 10px;
+            transition: background 0.3s ease;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4b5563;
+        }
+        
+        /* Smooth scroll for all scrollable containers */
+        .smooth-scroll {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
         }
         
         .dark-bg { background: #0a0a0a; }
@@ -715,9 +747,9 @@ ${narasi}`;
             const currentPair = tradingPairs.find(p => p.symbol === selectedPair) || tradingPairs[0];
             
             return (
-                <div className="h-screen dark-bg flex flex-col">
+                <div className="min-h-screen dark-bg flex flex-col">
                     {/* Top Bar */}
-                    <div className="h-16 dark-surface border-b dark-border flex items-center justify-between px-4">
+                    <div className="h-16 dark-surface border-b dark-border flex items-center justify-between px-4 sticky top-0 z-50">
                         <div className="flex items-center space-x-4">
                             <div className="flex items-center space-x-2">
                                 <span className="font-medium dark-text">{selectedPair}</span>
@@ -748,9 +780,9 @@ ${narasi}`;
                     </div>
                     
                     {/* Main Content */}
-                    <div className="flex-1 flex overflow-hidden">
+                    <div className="flex-1 flex">
                         {/* Sidebar */}
-                        <div className="w-80 dark-surface border-r dark-border flex flex-col">
+                        <div className="w-80 dark-surface border-r dark-border flex flex-col sticky top-16 h-[calc(100vh-4rem)]">
                             <div className="p-4 border-b dark-border">
                                 <h2 className="text-lg font-semibold dark-text mb-4">Market</h2>
                                 <div className="relative mb-4">
@@ -767,7 +799,7 @@ ${narasi}`;
                                 </div>
                             </div>
                             
-                            <div className="flex-1 overflow-y-auto scrollbar-thin">
+                            <div className="flex-1 overflow-y-auto scrollbar-thin smooth-scroll">
                                 {tradingPairs.filter(pair => 
                                     pair.symbol.toLowerCase().includes(searchTerm.toLowerCase()) ||
                                     pair.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -909,11 +941,11 @@ ${narasi}`;
                             {/* Bottom Panels */}
                             <div className="min-h-80 p-4">
                                 <div className="grid-cols-2">
-                                    <div className="panel overflow-y-auto max-h-96">
+                                    <div className="panel overflow-y-auto max-h-96 smooth-scroll">
                                         <SMCPanel data={smcData} />
                                     </div>
                                     
-                                    <div className="panel overflow-y-auto max-h-96">
+                                    <div className="panel overflow-y-auto max-h-96 smooth-scroll">
                                         <GPTSignalBox {...gptSignalData} />
                                     </div>
                                 </div>
