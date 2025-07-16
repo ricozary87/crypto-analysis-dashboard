@@ -13,8 +13,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial"></script>
     <script src="https://unpkg.com/clsx@latest/dist/clsx.min.js"></script>
     
-    <!-- TradingView Charting Library -->
-    <script type="text/javascript" src="/charting_library/charting_library.standalone.js"></script>
+    <!-- TradingView Lightweight Charts (Free Alternative) -->
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -665,112 +665,81 @@ ${narasi}`;
             { value: 'line', label: 'Line', icon: Zap }
         ];
         
-        // ChartContainer component (loaded dynamically)
-        const ChartContainer = ({ symbol, interval }) => {
-            const chartRef = useRef(null);
-            const widgetRef = useRef(null);
-            
+        // TradingViewWidget component
+        const TradingViewWidget = ({ symbol = 'BINANCE:SOLUSDT', interval = '15' }) => {
+            const containerRef = useRef();
+            const widgetIdRef = useRef(`tradingview_${Date.now()}`);
+
             useEffect(() => {
-                if (!window.TradingView) {
-                    console.warn('TradingView library not loaded yet');
-                    return;
-                }
-                
-                // Clean up previous widget
-                if (widgetRef.current) {
-                    widgetRef.current.remove();
-                }
-                
-                // Create new widget
-                const widget = new window.TradingView.widget({
-                    autosize: true,
-                    symbol: symbol,
-                    interval: interval,
-                    timezone: "Etc/UTC",
-                    theme: "dark",
-                    style: "1",
-                    locale: "en",
-                    toolbar_bg: "#1a1a1a",
-                    enable_publishing: false,
-                    allow_symbol_change: false,
-                    container_id: "tv_chart_container_" + Date.now(),
-                    datafeed: {
-                        onReady: (callback) => {
-                            setTimeout(() => callback({
-                                supported_resolutions: ["1", "5", "15", "60", "240", "1D"],
-                                supports_search: false,
-                                supports_group_request: false,
-                                supports_marks: false,
-                                supports_timescale_marks: false,
-                                supports_time: true
-                            }), 0);
-                        },
-                        searchSymbols: () => {},
-                        resolveSymbol: (symbolName, onResolve, onError) => {
-                            setTimeout(() => {
-                                onResolve({
-                                    name: symbolName,
-                                    ticker: symbolName,
-                                    description: symbolName,
-                                    type: 'crypto',
-                                    session: '24x7',
-                                    timezone: 'Etc/UTC',
-                                    minmov: 1,
-                                    pricescale: 100,
-                                    has_intraday: true,
-                                    has_daily: true,
-                                    supported_resolutions: ["1", "5", "15", "60", "240", "1D"],
-                                    volume_precision: 8,
-                                    data_status: 'streaming'
-                                });
-                            }, 0);
-                        },
-                        getBars: async (symbolInfo, resolution, periodParams, onResult, onError) => {
-                            try {
-                                const bars = [];
-                                const interval = 60 * 1000; // 1 minute
-                                const basePrice = 45000;
-                                
-                                for (let i = 0; i < 200; i++) {
-                                    const time = periodParams.from * 1000 + (i * interval);
-                                    const randomWalk = (Math.random() - 0.5) * 100;
-                                    const open = basePrice + randomWalk;
-                                    const close = open + (Math.random() - 0.5) * 50;
-                                    const high = Math.max(open, close) + Math.random() * 20;
-                                    const low = Math.min(open, close) - Math.random() * 20;
-                                    
-                                    bars.push({
-                                        time: time,
-                                        open: open,
-                                        high: high,
-                                        low: low,
-                                        close: close,
-                                        volume: Math.random() * 1000
-                                    });
-                                }
-                                
-                                onResult(bars, { noData: false });
-                            } catch (error) {
-                                onError(error);
+                const script = document.createElement('script');
+                script.src = 'https://s3.tradingview.com/tv.js';
+                script.async = true;
+                script.onload = () => {
+                    if (window.TradingView) {
+                        new window.TradingView.widget({
+                            autosize: true,
+                            symbol: symbol,
+                            interval: interval,
+                            timezone: 'Etc/UTC',
+                            theme: 'dark',
+                            style: '1',
+                            locale: 'en',
+                            toolbar_bg: '#131722',
+                            enable_publishing: false,
+                            hide_side_toolbar: false,
+                            allow_symbol_change: true,
+                            container_id: widgetIdRef.current,
+                            studies: [
+                                'Volume@tv-basicstudies'
+                            ],
+                            overrides: {
+                                "mainSeriesProperties.candleStyle.upColor": "#10b981",
+                                "mainSeriesProperties.candleStyle.downColor": "#ef4444",
+                                "mainSeriesProperties.candleStyle.borderUpColor": "#10b981",
+                                "mainSeriesProperties.candleStyle.borderDownColor": "#ef4444",
+                                "mainSeriesProperties.candleStyle.wickUpColor": "#10b981",
+                                "mainSeriesProperties.candleStyle.wickDownColor": "#ef4444"
                             }
-                        },
-                        subscribeBars: () => {},
-                        unsubscribeBars: () => {}
+                        });
                     }
-                });
-                
-                widgetRef.current = widget;
-                
+                };
+
+                containerRef.current.appendChild(script);
+
                 return () => {
-                    if (widgetRef.current) {
-                        widgetRef.current.remove();
+                    if (containerRef.current && script.parentNode) {
+                        containerRef.current.removeChild(script);
                     }
                 };
             }, [symbol, interval]);
-            
+
             return (
-                <div ref={chartRef} id={"tv_chart_container_" + Date.now()} style={{ height: '100%', width: '100%' }} />
+                <div className="bg-gray-900 rounded-xl overflow-hidden" style={{ height: '500px' }}>
+                    <div id={widgetIdRef.current} ref={containerRef} className="h-full w-full" />
+                </div>
             );
+        };
+        
+        // ChartContainer wrapper to use TradingViewWidget
+        const ChartContainer = ({ symbol, interval }) => {
+            // Convert local symbol format to TradingView format
+            const tvSymbol = symbol.includes('/') 
+                ? `BINANCE:${symbol.replace('/', '')}`
+                : `BINANCE:${symbol}`;
+            
+            // Convert interval format
+            const intervalMap = {
+                '5': '5',
+                '15': '15',
+                '60': '60',
+                '240': '240',
+                '1D': 'D',
+                '1W': 'W'
+            };
+            
+            const tvInterval = intervalMap[interval] || '15';
+            
+            return <TradingViewWidget symbol={tvSymbol} interval={tvInterval} />;
         };
         
         // Main Dashboard Component
