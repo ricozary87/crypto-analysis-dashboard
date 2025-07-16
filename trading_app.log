@@ -62654,3 +62654,19 @@ jinja2.exceptions.TemplateSyntaxError: expected token 'end of print statement', 
 2025-07-16 04:45:17,662 - core.monitoring - DEBUG - Win rate metrics updated
 2025-07-16 04:45:17,910 - core.monitoring - INFO - Monitoring system initialized successfully
 2025-07-16 04:45:17,940 - monitoring_routes - INFO - Monitoring routes initialized successfully
+2025-07-16 04:54:00,228 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-16 04:54:00,229 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-16 04:54:00,229 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-16 04:54:02,702 - engineio.server - INFO - Server initialized for threading.
+2025-07-16 04:54:02,704 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-16 04:54:02,704 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-16 04:54:02,705 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-16 04:54:02,705 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-16 04:54:10,308 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-16 04:54:10,322 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-16 04:54:10,334 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-16 04:54:10,335 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-16 04:54:12,150 - core.monitoring - DEBUG - Active signals count updated
+2025-07-16 04:54:15,435 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-16 04:54:15,687 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-16 04:54:15,727 - monitoring_routes - INFO - Monitoring routes initialized successfully
