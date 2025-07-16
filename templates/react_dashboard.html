@@ -216,38 +216,60 @@
             };
 
             const handleAnalyzeClick = async () => {
+                console.log('Analyze button clicked');
                 setIsAnalyzing(true);
                 setShowAnalysis(true);
                 
                 try {
+                    const requestData = {
+                        symbol: symbol,
+                        timeframe: timeframe,
+                        bos: bos,
+                        choch: choch,
+                        fvgZone: fvgZone,
+                        ob: ob,
+                        liquiditySweep: liquiditySweep
+                    };
+                    console.log('Sending request with data:', requestData);
+                    
                     const response = await fetch('/api/analyze-smc', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({
-                            symbol: symbol,
-                            timeframe: timeframe,
-                            bos: bos,
-                            choch: choch,
-                            fvgZone: fvgZone,
-                            ob: ob,
-                            liquiditySweep: liquiditySweep
-                        })
+                        body: JSON.stringify(requestData)
                     });
                     
+                    console.log('Response status:', response.status);
+                    
                     if (response.ok) {
-                        const data = await response.json();
-                        setAnalysisResult(data);
+                        const text = await response.text();
+                        console.log('Raw response text:', text);
+                        try {
+                            const data = JSON.parse(text);
+                            console.log('Parsed data:', data);
+                            setAnalysisResult(data);
+                            console.log('Analysis result set to state');
+                        } catch (parseError) {
+                            console.error('Error parsing JSON:', parseError);
+                            setAnalysisResult({
+                                narrative: 'Error parsing response: ' + text,
+                                confidence: 0
+                            });
+                        }
                     } else {
+                        console.error('Response not OK:', response.status);
+                        const errorText = await response.text();
+                        console.error('Error response:', errorText);
                         setAnalysisResult({
-                            narrative: 'Gagal mendapatkan analisa. Silakan coba lagi.',
+                            narrative: 'Gagal mendapatkan analisa. Status: ' + response.status,
                             confidence: 0
                         });
                     }
                 } catch (error) {
+                    console.error('Error in fetch:', error);
                     setAnalysisResult({
-                        narrative: 'Error: Tidak dapat terhubung ke server.',
+                        narrative: 'Error: Tidak dapat terhubung ke server. ' + error.message,
                         confidence: 0
                     });
                 } finally {
@@ -650,6 +672,7 @@ ${narasi}`;
             
             // Update SMC data when pair or timeframe changes
             useEffect(() => {
+                console.log('Updating SMC data - selectedPair:', selectedPair, 'selectedTimeframe:', selectedTimeframe);
                 setSmcData(prevData => ({
                     ...prevData,
                     symbol: selectedPair,
