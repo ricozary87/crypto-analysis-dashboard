@@ -62868,3 +62868,138 @@ jinja2.exceptions.TemplateSyntaxError: expected token 'end of print statement', 
 2025-07-16 07:25:26,027 - core.monitoring - DEBUG - Win rate metrics updated
 2025-07-16 07:25:26,277 - core.monitoring - INFO - Monitoring system initialized successfully
 2025-07-16 07:25:26,389 - monitoring_routes - INFO - Monitoring routes initialized successfully
+2025-07-16 16:02:18,842 - engineio.server - INFO - Server initialized for threading.
+2025-07-16 16:02:18,845 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-16 16:02:18,845 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-16 16:02:18,846 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-16 16:02:18,846 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-16 16:02:29,412 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-16 16:02:29,420 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-16 16:02:29,433 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-16 16:02:29,433 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-16 16:02:31,185 - core.monitoring - DEBUG - Active signals count updated
+2025-07-16 16:02:34,289 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-16 16:02:34,527 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-16 16:02:34,564 - monitoring_routes - INFO - Monitoring routes initialized successfully
+2025-07-16 16:05:21,052 - app - ERROR - Exception on /advanced-analysis [GET]
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask_cors/extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/routes.py", line 195, in advanced_analysis_page
+    return render_template('advanced_analysis.html')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/environment.py", line 1087, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/environment.py", line 1016, in get_template
+    return self._load_template(name, globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/environment.py", line 975, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/loaders.py", line 126, in load
+    source, filename, uptodate = self.get_source(environment, name)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: advanced_analysis.html
+2025-07-16 16:05:22,069 - core.monitoring - DEBUG - API call tracked: analyze_symbol 0.001s success
+2025-07-16 16:05:23,075 - core.monitoring - DEBUG - API call tracked: analyze_symbol 0.000s success
+2025-07-16 16:05:23,095 - core.indicator_calculator - INFO - AdvancedIndicatorCalculator initialized with 38 indicators
+2025-07-16 16:05:23,105 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-16 16:05:23,108 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-16 16:05:23,259 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-16 16:05:23,264 - core.okx_fetcher - DEBUG - Fetched 100 candles for BTC-USDT
+2025-07-16 16:05:24,270 - core.monitoring - DEBUG - API call tracked: candles 0.165s success
+2025-07-16 16:05:24,281 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-16 16:05:24,292 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-16 16:05:24,294 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-16 16:05:24,434 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=BTC-USDT HTTP/1.1" 200 None
+2025-07-16 16:05:24,617 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=ETH-USDT HTTP/1.1" 200 None
+2025-07-16 16:05:24,727 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=SOL-USDT HTTP/1.1" 200 None
+2025-07-16 16:05:24,842 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=TIA-USDT HTTP/1.1" 200 None
+2025-07-16 16:05:25,000 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/ticker?instId=RENDER-USDT HTTP/1.1" 200 None
+2025-07-16 16:05:32,072 - core.monitoring - DEBUG - API call tracked: system_metrics 6.061s success
+2025-07-16 16:06:35,089 - app - ERROR - Exception on /advanced-analysis [GET]
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask_cors/extension.py", line 176, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/routes.py", line 195, in advanced_analysis_page
+    return render_template('advanced_analysis.html')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/environment.py", line 1087, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/environment.py", line 1016, in get_template
+    return self._load_template(name, globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/environment.py", line 975, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/loaders.py", line 126, in load
+    source, filename, uptodate = self.get_source(environment, name)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: advanced_analysis.html
+2025-07-16 16:06:35,111 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-16 16:06:35,112 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-16 16:06:35,253 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=100 HTTP/1.1" 200 None
+2025-07-16 16:06:35,258 - core.okx_fetcher - DEBUG - Fetched 100 candles for BTC-USDT
+2025-07-16 16:06:36,267 - core.monitoring - DEBUG - API call tracked: candles 0.155s success
+2025-07-16 16:06:37,275 - core.monitoring - DEBUG - API call tracked: analyze_symbol 0.000s success
+2025-07-16 16:06:54,483 - core.monitoring - DEBUG - API call tracked: health_check 16.195s success
+2025-07-16 16:07:45,785 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-16 16:07:45,785 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-16 16:07:45,785 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-16 16:07:47,721 - engineio.server - INFO - Server initialized for threading.
+2025-07-16 16:07:47,723 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-16 16:07:47,724 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-16 16:07:47,724 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-16 16:07:47,724 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-16 16:07:54,701 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-16 16:07:54,710 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-16 16:07:54,717 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-16 16:07:54,717 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-16 16:07:56,464 - core.monitoring - DEBUG - Active signals count updated
+2025-07-16 16:07:59,663 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-16 16:07:59,909 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-16 16:07:59,935 - monitoring_routes - INFO - Monitoring routes initialized successfully
