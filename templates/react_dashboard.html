@@ -11,7 +11,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial"></script>
-    <script src="https://unpkg.com/lucide-react@latest/dist/umd/lucide-react.js"></script>
     <script src="https://unpkg.com/clsx@latest/dist/clsx.min.js"></script>
     
     <style>
@@ -174,8 +173,23 @@
     <div id="root"></div>
     
     <script type="text/babel">
+        {% raw %}
         const { useState, useEffect, useRef } = React;
-        const { Search, Star, TrendingUp, TrendingDown, BarChart3, ChevronDown, Settings, Bell, Zap, Clock, Volume, Activity, DollarSign } = lucide;
+        
+        // Simple icon components
+        const Search = () => React.createElement('span', {}, '🔍');
+        const Star = () => React.createElement('span', {}, '⭐');
+        const TrendingUp = () => React.createElement('span', {}, '📈');
+        const TrendingDown = () => React.createElement('span', {}, '📉');
+        const BarChart3 = () => React.createElement('span', {}, '📊');
+        const ChevronDown = () => React.createElement('span', {}, '▼');
+        const Settings = () => React.createElement('span', {}, '⚙️');
+        const Bell = () => React.createElement('span', {}, '🔔');
+        const Zap = () => React.createElement('span', {}, '⚡');
+        const Clock = () => React.createElement('span', {}, '⏰');
+        const Volume = () => React.createElement('span', {}, '🔊');
+        const Activity = () => React.createElement('span', {}, '📱');
+        const DollarSign = () => React.createElement('span', {}, '💰');
         
         // Simple data generators
         const generateDummyData = (pair, timeframe, count) => {
@@ -465,15 +479,19 @@
                                     <div className="panel">
                                         <h4 className="text-sm font-medium dark-text mb-3">Liquidity Heatmap</h4>
                                         <div className="grid-cols-20 mb-3">
-                                            {Array.from({ length: 20 }, (_, i) => (
-                                                <div
-                                                    key={i}
-                                                    className="heatmap-cell"
-                                                    style={{
-                                                        backgroundColor: (i < 10 ? 'rgba(16, 185, 129, ' : 'rgba(239, 68, 68, ') + (0.3 + Math.random() * 0.7) + ')'
-                                                    }}
-                                                />
-                                            ))}
+                                            {Array.from({ length: 20 }, (_, i) => {
+                                                const color = i < 10 ? '16, 185, 129' : '239, 68, 68';
+                                                const alpha = 0.3 + Math.random() * 0.7;
+                                                return (
+                                                    <div
+                                                        key={i}
+                                                        className="heatmap-cell"
+                                                        style={{
+                                                            backgroundColor: 'rgba(' + color + ', ' + alpha + ')'
+                                                        }}
+                                                    />
+                                                );
+                                            })}
                                         </div>
                                         <div className="text-center text-xs dark-muted">
                                             Bid/Ask Depth Visualization
@@ -536,6 +554,7 @@
         
         // Render the dashboard
         ReactDOM.render(<Dashboard />, document.getElementById('root'));
+        {% endraw %}
     </script>
 </body>
 </html>
