@@ -533,7 +533,8 @@ ${narasi}`;
                 fvgZone: '148.50 - 149.10',
                 liquiditySweep: false,
                 signalStrength: 4,
-                narrative: "Pasar menunjukkan BOS valid di TF 1H dan FVG belum terisi di atas OB. Potensi retrace kuat di $147.20. Belum ada sweep besar, tren bersih untuk kelanjutan."
+                narrative: "Pasar menunjukkan BOS valid di TF 1H dan FVG belum terisi di atas OB. Potensi retrace kuat di $147.20. Belum ada sweep besar, tren bersih untuk kelanjutan.",
+                symbol: 'BTC/USDT'
             });
             
             const [gptSignalData, setGptSignalData] = useState({
@@ -551,6 +552,15 @@ ${narasi}`;
                 loadData();
                 const interval = setInterval(loadData, 5000);
                 return () => clearInterval(interval);
+            }, [selectedPair, selectedTimeframe]);
+            
+            // Update SMC data when pair or timeframe changes
+            useEffect(() => {
+                setSmcData(prevData => ({
+                    ...prevData,
+                    symbol: selectedPair,
+                    timeframe: selectedTimeframe
+                }));
             }, [selectedPair, selectedTimeframe]);
             
             const loadData = () => {

@@ -2370,6 +2370,83 @@ def create_ai_snapshot():
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
 
+@app.route('/api/analyze-smc', methods=['POST'])
+def analyze_smc():
+    """Generate SMC analysis narrative based on input signals"""
+    try:
+        data = request.get_json()
+        
+        # Extract parameters
+        symbol = data.get('symbol', 'BTC/USDT')
+        timeframe = data.get('timeframe', '1H')
+        bos = data.get('bos', False)
+        choch = data.get('choch', False)
+        fvgZone = data.get('fvgZone', None)
+        ob = data.get('ob', None)
+        liquiditySweep = data.get('liquiditySweep', False)
+        
+        # Generate narrative based on signals
+        narrative_parts = []
+        confidence = 50  # Base confidence
+        
+        # Analyze BOS
+        if bos:
+            narrative_parts.append(f"Pasar {symbol} menunjukkan BOS valid pada TF {timeframe}, menandakan pergeseran struktur bullish.")
+            confidence += 15
+        else:
+            narrative_parts.append(f"Belum ada BOS terkonfirmasi di {timeframe}, struktur pasar masih dalam konsolidasi.")
+            confidence -= 10
+            
+        # Analyze CHoCH
+        if choch:
+            narrative_parts.append("CHoCH terdeteksi dengan jelas, mengkonfirmasi perubahan karakter trend.")
+            confidence += 10
+        else:
+            narrative_parts.append("CHoCH belum terbentuk sempurna, perlu konfirmasi tambahan.")
+            
+        # Analyze FVG
+        if fvgZone:
+            narrative_parts.append(f"FVG terbentuk di zona {fvgZone} yang dapat menjadi area retrace potensial.")
+            confidence += 10
+            
+        # Analyze Order Block
+        if ob:
+            narrative_parts.append(f"Order Block kuat teridentifikasi di ${ob}, menjadi support/resistance utama.")
+            confidence += 15
+            
+        # Analyze Liquidity Sweep
+        if liquiditySweep:
+            narrative_parts.append("Liquidity sweep telah terjadi, mengindikasikan smart money accumulation.")
+            confidence += 10
+        else:
+            narrative_parts.append("Tidak ada sweep besar, tren berjalan natural tanpa manipulasi likuiditas.")
+            
+        # Generate recommendation
+        if confidence >= 80:
+            recommendation = "📌 Rekomendasi: Setup entry sangat valid. Tunggu konfirmasi candle di area key level untuk masuk posisi."
+        elif confidence >= 60:
+            recommendation = "📌 Rekomendasi: Setup cukup menarik namun perlu konfirmasi tambahan. Monitor price action di TF lebih rendah."
+        else:
+            recommendation = "📌 Rekomendasi: Belum ada setup yang jelas. Sebaiknya tunggu struktur pasar lebih matang sebelum entry."
+            
+        # Combine narrative
+        full_narrative = " ".join(narrative_parts) + " " + recommendation
+        
+        # Ensure confidence is within bounds
+        confidence = max(0, min(100, confidence))
+        
+        return jsonify({
+            'narrative': full_narrative,
+            'confidence': confidence
+        })
+        
+    except Exception as e:
+        logger.error(f"Error in SMC analysis: {e}")
+        return jsonify({
+            'narrative': 'Terjadi kesalahan dalam analisis. Silakan coba lagi.',
+            'confidence': 0
+        }), 500
+
 # =======================================================================
 # PHASE 2: ADVANCED SNAPSHOT AND INDICATOR ENDPOINTS
 # =======================================================================
