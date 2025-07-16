@@ -1,0 +1,12 @@
+#!/bin/bash
+echo "=== Starting React Development Server ==="
+echo "Note: This will run React on port 3000"
+echo "Flask backend is already running on port 5000"
+echo "CORS is enabled for React integration"
+echo ""
+echo "To run React app manually:"
+echo "npm run dev -- --host 0.0.0.0 --port 3000"
+echo ""
+echo "React app will be available at: http://localhost:3000"
+echo "Flask backend available at: http://localhost:5000"
+echo "React dashboard at: http://localhost:5000/react"

@@ -1,4 +1,4 @@
-from flask import render_template, jsonify, request
+from flask import render_template, jsonify, request, send_from_directory
 from app import app, db
 from models import TradingSignal, SystemMetrics, AlertLog, TradingAnalysis, MarketData, OrderbookData, OpenInterestData, TechnicalIndicatorData, UserPreferences, AISnapshotArchive
 from datetime import datetime, timedelta, timezone
@@ -178,6 +178,26 @@ def index():
 def dashboard():
     """Main trading dashboard"""
     return render_template('dashboard.html')
+
+@app.route('/react')
+def react_dashboard():
+    """React dashboard page"""
+    return send_from_directory('.', 'index.html')
+
+@app.route('/react/static/<path:filename>')
+def serve_react_static(filename):
+    """Serve React static files"""
+    return send_from_directory('static', filename)
+
+@app.route('/react/src/<path:filename>')
+def serve_react_src(filename):
+    """Serve React source files"""
+    return send_from_directory('src', filename)
+
+@app.route('/react/public/<path:filename>')
+def serve_react_public(filename):
+    """Serve React public files"""
+    return send_from_directory('public', filename)
 
 @app.route('/advanced-analysis')
 def advanced_analysis_page():

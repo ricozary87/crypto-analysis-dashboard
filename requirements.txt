@@ -21,3 +21,4 @@ prometheus-client
 prometheus-flask-exporter
 sentry-sdk
 psutil
+flask-cors
