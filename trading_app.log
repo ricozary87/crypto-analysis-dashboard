@@ -62718,3 +62718,137 @@ jinja2.exceptions.TemplateSyntaxError: expected token 'end of print statement', 
 2025-07-16 05:51:07,215 - core.monitoring - DEBUG - Win rate metrics updated
 2025-07-16 05:51:07,462 - core.monitoring - INFO - Monitoring system initialized successfully
 2025-07-16 05:51:07,489 - monitoring_routes - INFO - Monitoring routes initialized successfully
+2025-07-16 06:10:23,100 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-16 06:10:23,100 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-16 06:10:23,100 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-16 06:10:25,102 - engineio.server - INFO - Server initialized for threading.
+2025-07-16 06:10:25,104 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-16 06:10:25,104 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-16 06:10:25,105 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-16 06:10:25,105 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-16 06:10:32,525 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-16 06:10:32,536 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-16 06:10:32,546 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-16 06:10:32,546 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-16 06:10:34,341 - core.monitoring - DEBUG - Active signals count updated
+2025-07-16 06:10:37,624 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-16 06:10:37,874 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-16 06:10:37,900 - monitoring_routes - INFO - Monitoring routes initialized successfully
+2025-07-16 06:11:51,647 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-16 06:11:51,648 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-16 06:11:51,648 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-16 06:11:53,290 - engineio.server - INFO - Server initialized for threading.
+2025-07-16 06:11:53,293 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-16 06:11:53,293 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-16 06:11:53,294 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-16 06:11:53,294 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-16 06:12:06,433 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-16 06:12:06,433 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-16 06:12:06,433 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-16 06:12:08,211 - engineio.server - INFO - Server initialized for threading.
+2025-07-16 06:12:08,213 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-16 06:12:08,214 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-16 06:12:08,215 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-16 06:12:08,237 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-16 06:12:17,417 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-16 06:12:17,429 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-16 06:12:17,441 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-16 06:12:17,441 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-16 06:12:19,257 - core.monitoring - DEBUG - Active signals count updated
+2025-07-16 06:12:22,546 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-16 06:12:22,798 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-16 06:12:22,828 - monitoring_routes - INFO - Monitoring routes initialized successfully
+2025-07-16 06:12:36,991 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-16 06:12:36,991 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-16 06:12:36,992 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-16 06:12:38,525 - engineio.server - INFO - Server initialized for threading.
+2025-07-16 06:12:38,527 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-16 06:12:38,527 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-16 06:12:38,528 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-16 06:12:38,528 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-16 06:12:45,527 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-16 06:12:45,537 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-16 06:12:45,548 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-16 06:12:45,548 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-16 06:12:47,295 - core.monitoring - DEBUG - Active signals count updated
+2025-07-16 06:12:50,497 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-16 06:12:50,742 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-16 06:12:50,771 - monitoring_routes - INFO - Monitoring routes initialized successfully
+2025-07-16 06:12:50,776 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-16 06:12:50,776 - routes - ERROR - Error fetching candles: 'OKXAPIManager' object has no attribute 'fetch_candles'
+2025-07-16 06:12:51,779 - core.monitoring - DEBUG - API call tracked: candles 0.002s success
+2025-07-16 06:13:12,013 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-16 06:13:12,013 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-16 06:13:12,013 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-16 06:13:13,521 - engineio.server - INFO - Server initialized for threading.
+2025-07-16 06:13:13,523 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-16 06:13:13,523 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-16 06:13:13,524 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-16 06:13:13,524 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-16 06:13:20,385 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-16 06:13:20,395 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-16 06:13:20,405 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-16 06:13:20,405 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-16 06:13:22,107 - core.monitoring - DEBUG - Active signals count updated
+2025-07-16 06:13:25,230 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-16 06:13:25,470 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-16 06:13:25,495 - monitoring_routes - INFO - Monitoring routes initialized successfully
+2025-07-16 06:13:25,500 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-16 06:13:25,503 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-16 06:13:25,642 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=5 HTTP/1.1" 200 None
+2025-07-16 06:13:25,646 - core.okx_fetcher - DEBUG - Fetched 5 candles for BTC-USDT
+2025-07-16 06:13:25,647 - routes - ERROR - Error fetching candles: '>' not supported between instances of 'Timestamp' and 'int'
+2025-07-16 06:13:26,650 - core.monitoring - DEBUG - API call tracked: candles 0.149s success
+2025-07-16 06:13:40,664 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-16 06:13:40,664 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-16 06:13:40,666 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-16 06:13:42,306 - engineio.server - INFO - Server initialized for threading.
+2025-07-16 06:13:42,308 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-16 06:13:42,309 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-16 06:13:42,309 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-16 06:13:42,310 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-16 06:13:49,438 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-16 06:13:49,446 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-16 06:13:49,454 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-16 06:13:49,454 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-16 06:13:51,232 - core.monitoring - DEBUG - Active signals count updated
+2025-07-16 06:13:54,503 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-16 06:13:54,754 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-16 06:13:54,787 - monitoring_routes - INFO - Monitoring routes initialized successfully
+2025-07-16 06:13:54,793 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-16 06:13:54,796 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.okx.com:443
+2025-07-16 06:13:54,940 - urllib3.connectionpool - DEBUG - https://www.okx.com:443 "GET /api/v5/market/candles?instId=BTC-USDT&bar=1H&limit=3 HTTP/1.1" 200 None
+2025-07-16 06:13:54,945 - core.okx_fetcher - DEBUG - Fetched 3 candles for BTC-USDT
+2025-07-16 06:13:55,948 - core.monitoring - DEBUG - API call tracked: candles 0.154s success
+2025-07-16 06:15:23,910 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-16 06:15:23,911 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-16 06:15:23,911 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-16 06:15:25,934 - engineio.server - INFO - Server initialized for threading.
+2025-07-16 06:15:25,937 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-16 06:15:25,938 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-16 06:15:25,938 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-16 06:15:25,938 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-16 06:15:35,297 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-16 06:15:35,306 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-16 06:15:35,314 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-16 06:15:35,314 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-16 06:15:37,099 - core.monitoring - DEBUG - Active signals count updated
+2025-07-16 06:15:40,344 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-16 06:15:40,592 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-16 06:15:40,623 - monitoring_routes - INFO - Monitoring routes initialized successfully
+2025-07-16 06:15:53,255 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-16 06:15:53,255 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-16 06:15:53,255 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-16 06:15:55,488 - engineio.server - INFO - Server initialized for threading.
+2025-07-16 06:15:55,490 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-16 06:15:55,490 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-16 06:15:55,491 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-16 06:15:55,491 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-16 06:16:04,393 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-16 06:16:04,401 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-16 06:16:04,413 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-16 06:16:04,413 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-16 06:16:06,133 - core.monitoring - DEBUG - Active signals count updated
+2025-07-16 06:16:09,355 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-16 06:16:09,597 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-16 06:16:09,627 - monitoring_routes - INFO - Monitoring routes initialized successfully

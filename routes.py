@@ -400,11 +400,10 @@ def chart_data(symbol):
         }
         
         return jsonify({
-            "status": "success",
-            "symbol": symbol,
-            "timeframe": timeframe,
+            "status": "success", 
             "candles": candles,
-            "indicators": indicators
+            "indicators": indicators,
+            "symbol": symbol
         })
         
     except Exception as e:
@@ -412,6 +411,88 @@ def chart_data(symbol):
         return jsonify({
             "status": "error",
             "message": str(e)
+        }), 500
+
+@app.route('/api/candles')
+@monitor_api_performance('candles')
+def get_candles():
+    """Get candlestick data for TradingView charting library"""
+    try:
+        # Get query parameters
+        symbol = request.args.get('symbol', 'BTC-USDT')
+        interval = request.args.get('interval', '1h')
+        from_timestamp = request.args.get('from', type=int)
+        to_timestamp = request.args.get('to', type=int)
+        limit = request.args.get('limit', 300, type=int)
+        
+        # Initialize OKX fetcher
+        okx_manager = OKXAPIManager()
+        
+        # Map interval to OKX format if needed
+        interval_map = {
+            '1m': '1m',
+            '5m': '5m', 
+            '15m': '15m',
+            '1h': '1H',
+            '4h': '4H',
+            '1d': '1D',
+            '1w': '1W',
+            '1M': '1M'
+        }
+        okx_interval = interval_map.get(interval, interval)
+        
+        # Fetch candle data
+        df = okx_manager.get_candles(symbol, okx_interval, limit)
+        
+        if df is None or df.empty:
+            # Return empty array for TradingView
+            return jsonify({
+                'success': True,
+                'candles': []
+            })
+        
+        # Convert to TradingView format
+        candles = []
+        for _, row in df.iterrows():
+            # Handle timestamp - it's already a pandas Timestamp object
+            timestamp_obj = row['timestamp']
+            # Convert to Unix timestamp in seconds
+            timestamp = int(timestamp_obj.timestamp())
+                
+            candle = {
+                'timestamp': int(timestamp),
+                'open': float(row['open']),
+                'high': float(row['high']),
+                'low': float(row['low']),
+                'close': float(row['close']),
+                'volume': float(row['volume'])
+            }
+            
+            # Filter by time range if provided
+            if from_timestamp and timestamp < from_timestamp:
+                continue
+            if to_timestamp and timestamp > to_timestamp:
+                continue
+                
+            candles.append(candle)
+        
+        # Sort by timestamp
+        candles.sort(key=lambda x: x['timestamp'])
+        
+        return jsonify({
+            'success': True,
+            'candles': candles,
+            'symbol': symbol,
+            'interval': interval,
+            'count': len(candles)
+        })
+        
+    except Exception as e:
+        logger.error(f"Error fetching candles: {e}")
+        return jsonify({
+            'success': False,
+            'error': str(e),
+            'candles': []
         }), 500
 
 @app.route('/api/analyze/<symbol>')

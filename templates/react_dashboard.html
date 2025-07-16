@@ -13,6 +13,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial"></script>
     <script src="https://unpkg.com/clsx@latest/dist/clsx.min.js"></script>
     
+    <!-- TradingView Charting Library -->
+    <script type="text/javascript" src="/charting_library/charting_library.standalone.js"></script>
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         
@@ -662,6 +665,114 @@ ${narasi}`;
             { value: 'line', label: 'Line', icon: Zap }
         ];
         
+        // ChartContainer component (loaded dynamically)
+        const ChartContainer = ({ symbol, interval }) => {
+            const chartRef = useRef(null);
+            const widgetRef = useRef(null);
+            
+            useEffect(() => {
+                if (!window.TradingView) {
+                    console.warn('TradingView library not loaded yet');
+                    return;
+                }
+                
+                // Clean up previous widget
+                if (widgetRef.current) {
+                    widgetRef.current.remove();
+                }
+                
+                // Create new widget
+                const widget = new window.TradingView.widget({
+                    autosize: true,
+                    symbol: symbol,
+                    interval: interval,
+                    timezone: "Etc/UTC",
+                    theme: "dark",
+                    style: "1",
+                    locale: "en",
+                    toolbar_bg: "#1a1a1a",
+                    enable_publishing: false,
+                    allow_symbol_change: false,
+                    container_id: "tv_chart_container_" + Date.now(),
+                    datafeed: {
+                        onReady: (callback) => {
+                            setTimeout(() => callback({
+                                supported_resolutions: ["1", "5", "15", "60", "240", "1D"],
+                                supports_search: false,
+                                supports_group_request: false,
+                                supports_marks: false,
+                                supports_timescale_marks: false,
+                                supports_time: true
+                            }), 0);
+                        },
+                        searchSymbols: () => {},
+                        resolveSymbol: (symbolName, onResolve, onError) => {
+                            setTimeout(() => {
+                                onResolve({
+                                    name: symbolName,
+                                    ticker: symbolName,
+                                    description: symbolName,
+                                    type: 'crypto',
+                                    session: '24x7',
+                                    timezone: 'Etc/UTC',
+                                    minmov: 1,
+                                    pricescale: 100,
+                                    has_intraday: true,
+                                    has_daily: true,
+                                    supported_resolutions: ["1", "5", "15", "60", "240", "1D"],
+                                    volume_precision: 8,
+                                    data_status: 'streaming'
+                                });
+                            }, 0);
+                        },
+                        getBars: async (symbolInfo, resolution, periodParams, onResult, onError) => {
+                            try {
+                                const bars = [];
+                                const interval = 60 * 1000; // 1 minute
+                                const basePrice = 45000;
+                                
+                                for (let i = 0; i < 200; i++) {
+                                    const time = periodParams.from * 1000 + (i * interval);
+                                    const randomWalk = (Math.random() - 0.5) * 100;
+                                    const open = basePrice + randomWalk;
+                                    const close = open + (Math.random() - 0.5) * 50;
+                                    const high = Math.max(open, close) + Math.random() * 20;
+                                    const low = Math.min(open, close) - Math.random() * 20;
+                                    
+                                    bars.push({
+                                        time: time,
+                                        open: open,
+                                        high: high,
+                                        low: low,
+                                        close: close,
+                                        volume: Math.random() * 1000
+                                    });
+                                }
+                                
+                                onResult(bars, { noData: false });
+                            } catch (error) {
+                                onError(error);
+                            }
+                        },
+                        subscribeBars: () => {},
+                        unsubscribeBars: () => {}
+                    }
+                });
+                
+                widgetRef.current = widget;
+                
+                return () => {
+                    if (widgetRef.current) {
+                        widgetRef.current.remove();
+                    }
+                };
+            }, [symbol, interval]);
+            
+            return (
+                <div ref={chartRef} id={"tv_chart_container_" + Date.now()} style={{ height: '100%', width: '100%' }} />
+            );
+        };
+        
         // Main Dashboard Component
         const Dashboard = () => {
             const [selectedPair, setSelectedPair] = useState('BTC/USDT');
@@ -854,17 +965,16 @@ ${narasi}`;
                                                 </div>
                                             </div>
                                             
-                                            <div className="h-96 flex items-center justify-center">
-                                                <div className="text-center">
-                                                    <BarChart3 size={48} className="dark-muted mx-auto mb-4" />
-                                                    <h4 className="text-lg font-semibold dark-text mb-2">Professional Trading Chart</h4>
-                                                    <p className="dark-muted">Real-time candlestick chart with {chartData.length} data points</p>
-                                                    <div className="mt-4 text-sm dark-muted">
-                                                        <div>Current Price: ${formatPrice(currentPrice)}</div>
-                                                        <div>Timeframe: {selectedTimeframe}</div>
-                                                        <div>Last Update: {lastUpdate.toLocaleTimeString()}</div>
-                                                    </div>
-                                                </div>
+                                            <div className="h-96">
+                                                <ChartContainer 
+                                                    symbol={selectedPair.replace('/', '')}
+                                                    interval={selectedTimeframe === '5m' ? '5' : 
+                                                            selectedTimeframe === '15m' ? '15' : 
+                                                            selectedTimeframe === '1H' ? '60' : 
+                                                            selectedTimeframe === '4H' ? '240' : 
+                                                            selectedTimeframe === '1D' ? '1D' : 
+                                                            selectedTimeframe === '1W' ? '1W' : '60'}
+                                                />
                                             </div>
                                         </div>
                                     )}
