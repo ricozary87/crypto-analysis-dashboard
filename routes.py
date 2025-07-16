@@ -171,8 +171,8 @@ def prepare_smc_levels(smc_analysis, df):
 
 @app.route('/dashboard')
 def dashboard():
-    """Main trading dashboard"""
-    return render_template('dashboard.html')
+    """Main trading dashboard - redirects to React dashboard"""
+    return render_template('react_dashboard.html')
 
 @app.route('/react/static/<path:filename>')
 def serve_react_static(filename):
@@ -2735,17 +2735,17 @@ def get_analysis_detail(analysis_id):
 
 @app.route('/analysis-history')
 def analysis_history_page():
-    """Page to view historical analyses"""
-    return render_template('analysis_history.html')
+    """Page to view historical analyses - redirects to React dashboard"""
+    return render_template('react_dashboard.html')
 
 @app.route('/professional-dashboard')
 def professional_dashboard():
-    """Professional trading dashboard with modern UI"""
-    return render_template('professional_dashboard.html')
+    """Professional trading dashboard - redirects to React dashboard"""
+    return render_template('react_dashboard.html')
 
 @app.route('/react-dashboard')
 def react_dashboard():
-    """New React-based trading dashboard"""
+    """React-based trading dashboard"""
     return render_template('react_dashboard.html')
 
 @app.route('/')
@@ -2755,8 +2755,8 @@ def index():
 
 @app.route('/phase2-dashboard')
 def phase2_dashboard():
-    """Phase 2 Advanced Trading Dashboard with enhanced features"""
-    return render_template('phase2_advanced_dashboard.html')
+    """Phase 2 Advanced Trading Dashboard - redirects to React dashboard"""
+    return render_template('react_dashboard.html')
 
 @app.route('/api/dashboard/stats')
 def get_dashboard_stats():
