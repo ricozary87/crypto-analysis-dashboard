@@ -48,6 +48,7 @@ This is a real-time cryptocurrency trading signal system built with Flask that i
 - **System Monitor**: Performance tracking and health checks
 - **Price Action**: Candlestick pattern detection for signal confirmation
 - **SMC Detector**: Modular detection of BOS, CHoCH, FVG, Order Blocks
+- **Inducement Detector**: Advanced institutional manipulation detection (false breakouts, volume spikes, wick traps)
 - **Confluence Checker**: Multi-indicator confluence analysis for high-probability signals
 - **Narrative AI**: GPT integration for professional analysis narratives (Indonesian/English)
 - **Chart Generator**: TradingView Lightweight Charts integration
