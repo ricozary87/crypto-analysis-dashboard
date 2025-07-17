@@ -1,0 +1,3124 @@
+{
+  "symbol": "BTC-USDT",
+  "timeframe": "1H",
+  "timestamp": 1752714000000,
+  "current_price": 118960.0,
+  "structure": {
+    "swing_points": {
+      "swing_highs": [
+        {
+          "timestamp": 1752022800000,
+          "price": 109142.7,
+          "index": 7,
+          "type": "swing_high",
+          "candle_data": {
+            "timestamp": 1752022800000,
+            "open": 108933.5,
+            "high": 109142.7,
+            "low": 108718.1,
+            "close": 108788.6,
+            "volume": 145.15312374
+          }
+        },
+        {
+          "timestamp": 1752066000000,
+          "price": 109790.0,
+          "index": 19,
+          "type": "swing_high",
+          "candle_data": {
+            "timestamp": 1752066000000,
+            "open": 109338.0,
+            "high": 109790.0,
+            "low": 109130.7,
+            "close": 109193.8,
+            "volume": 386.07959869
+          }
+        },
+        {
+          "timestamp": 1752087600000,
+          "price": 112000.0,
+          "index": 25,
+          "type": "swing_high",
+          "candle_data": {
+            "timestamp": 1752087600000,
+            "open": 109536.0,
+            "high": 112000.0,
+            "low": 109504.2,
+            "close": 111751.8,
+            "volume": 1663.44458179
+          }
+        },
+        {
+          "timestamp": 1752112800000,
+          "price": 111587.9,
+          "index": 32,
+          "type": "swing_high",
+          "candle_data": {
+            "timestamp": 1752112800000,
+            "open": 111208.1,
+            "high": 111587.9,
+            "low": 111147.1,
+            "close": 111228.0,
+            "volume": 229.78365325
+          }
+        },
+        {
+          "timestamp": 1752181200000,
+          "price": 117548.2,
+          "index": 51,
+          "type": "swing_high",
+          "candle_data": {
+            "timestamp": 1752181200000,
+            "open": 113488.8,
+            "high": 117548.2,
+            "low": 113389.6,
+            "close": 116487.8,
+            "volume": 2602.43745501
+          }
+        },
+        {
+          "timestamp": 1752224400000,
+          "price": 118868.0,
+          "index": 63,
+          "type": "swing_high",
+          "candle_data": {
+            "timestamp": 1752224400000,
+            "open": 117970.1,
+            "high": 118868.0,
+            "low": 117842.5,
+            "close": 118468.1,
+            "volume": 396.52367232
+          }
+        },
+        {
+          "timestamp": 1752310800000,
+          "price": 118230.5,
+          "index": 87,
+          "type": "swing_high",
+          "candle_data": {
+            "timestamp": 1752310800000,
+            "open": 117928.1,
+            "high": 118230.5,
+            "low": 117877.5,
+            "close": 118170.8,
+            "volume": 183.67519805
+          }
+        },
+        {
+          "timestamp": 1752433200000,
+          "price": 119500.0,
+          "index": 121,
+          "type": "swing_high",
+          "candle_data": {
+            "timestamp": 1752433200000,
+            "open": 118996.6,
+            "high": 119500.0,
+            "low": 118904.2,
+            "close": 118970.1,
+            "volume": 166.99485981
+          }
+        },
+        {
+          "timestamp": 1752476400000,
+          "price": 123226.0,
+          "index": 133,
+          "type": "swing_high",
+          "candle_data": {
+            "timestamp": 1752476400000,
+            "open": 122133.0,
+            "high": 123226.0,
+            "low": 122099.8,
+            "close": 122744.0,
+            "volume": 530.38627942
+          }
+        }
+      ],
+      "swing_lows": [
+        {
+          "timestamp": 1752033600000,
+          "price": 108333.4,
+          "index": 10,
+          "type": "swing_low",
+          "candle_data": {
+            "timestamp": 1752033600000,
+            "open": 108373.1,
+            "high": 108577.9,
+            "low": 108333.4,
+            "close": 108562.0,
+            "volume": 108.89872155
+          }
+        },
+        {
+          "timestamp": 1752069600000,
+          "price": 108500.0,
+          "index": 20,
+          "type": "swing_low",
+          "candle_data": {
+            "timestamp": 1752069600000,
+            "open": 109193.8,
+            "high": 109479.4,
+            "low": 108500.0,
+            "close": 108905.1,
+            "volume": 315.87976472
+          }
+        },
+        {
+          "timestamp": 1752152400000,
+          "price": 110504.4,
+          "index": 43,
+          "type": "swing_low",
+          "candle_data": {
+            "timestamp": 1752152400000,
+            "open": 110866.0,
+            "high": 111039.7,
+            "low": 110504.4,
+            "close": 110820.0,
+            "volume": 256.58581301
+          }
+        },
+        {
+          "timestamp": 1752249600000,
+          "price": 116608.9,
+          "index": 70,
+          "type": "swing_low",
+          "candle_data": {
+            "timestamp": 1752249600000,
+            "open": 116921.3,
+            "high": 117447.9,
+            "low": 116608.9,
+            "close": 117403.1,
+            "volume": 345.80374019
+          }
+        },
+        {
+          "timestamp": 1752278400000,
+          "price": 117140.9,
+          "index": 78,
+          "type": "swing_low",
+          "candle_data": {
+            "timestamp": 1752278400000,
+            "open": 117542.2,
+            "high": 117669.7,
+            "low": 117140.9,
+            "close": 117421.9,
+            "volume": 165.28495665
+          }
+        },
+        {
+          "timestamp": 1752332400000,
+          "price": 116916.6,
+          "index": 93,
+          "type": "swing_low",
+          "candle_data": {
+            "timestamp": 1752332400000,
+            "open": 117390.4,
+            "high": 117463.9,
+            "low": 116916.6,
+            "close": 117112.0,
+            "volume": 202.63464677
+          }
+        },
+        {
+          "timestamp": 1752354000000,
+          "price": 117005.0,
+          "index": 99,
+          "type": "swing_low",
+          "candle_data": {
+            "timestamp": 1752354000000,
+            "open": 117030.4,
+            "high": 117566.0,
+            "low": 117005.0,
+            "close": 117500.7,
+            "volume": 56.38253741
+          }
+        },
+        {
+          "timestamp": 1752444000000,
+          "price": 118248.4,
+          "index": 124,
+          "type": "swing_low",
+          "candle_data": {
+            "timestamp": 1752444000000,
+            "open": 118653.5,
+            "high": 118795.3,
+            "low": 118248.4,
+            "close": 118522.0,
+            "volume": 117.28247751
+          }
+        },
+        {
+          "timestamp": 1752508800000,
+          "price": 119226.6,
+          "index": 142,
+          "type": "swing_low",
+          "candle_data": {
+            "timestamp": 1752508800000,
+            "open": 119881.9,
+            "high": 120326.8,
+            "low": 119226.6,
+            "close": 120270.5,
+            "volume": 521.9673746
+          }
+        },
+        {
+          "timestamp": 1752566400000,
+          "price": 116268.0,
+          "index": 158,
+          "type": "swing_low",
+          "candle_data": {
+            "timestamp": 1752566400000,
+            "open": 116789.9,
+            "high": 116871.1,
+            "low": 116268.0,
+            "close": 116762.6,
+            "volume": 346.75171646
+          }
+        },
+        {
+          "timestamp": 1752588000000,
+          "price": 115726.7,
+          "index": 164,
+          "type": "swing_low",
+          "candle_data": {
+            "timestamp": 1752588000000,
+            "open": 118083.8,
+            "high": 118450.0,
+            "low": 115726.7,
+            "close": 116008.0,
+            "volume": 916.20769096
+          }
+        }
+      ]
+    },
+    "choch_bos_signals": [],
+    "market_structure": {
+      "trend": "bullish",
+      "trend_strength": 1.0,
+      "structure_quality": 0.75,
+      "recent_choch_bos_count": 0,
+      "recent_inducement_count": 0,
+      "recent_cvd_divergence_count": 1,
+      "bullish_signals": 1,
+      "bearish_signals": 0,
+      "dominant_pattern": "none",
+      "description": "Bullish trend with 100.0% strength and 75.0% quality"
+    }
+  },
+  "order_blocks": [
+    {
+      "timestamp": 1752087600000,
+      "type": "order_block",
+      "direction": "resistance",
+      "price_high": 112000.0,
+      "price_low": 109032.3,
+      "volume": 456.53739178166666,
+      "volume_ratio": 1.5702160331080761,
+      "size": 2967.699999999997,
+      "strength": 1.0,
+      "confidence_score": 1.0,
+      "description": "Resistance OB at 112000.0000 with 100.0% confidence"
+    },
+    {
+      "timestamp": 1752181200000,
+      "type": "order_block",
+      "direction": "resistance",
+      "price_high": 117548.2,
+      "price_low": 112982.0,
+      "volume": 699.27686566,
+      "volume_ratio": 2.4050948855597936,
+      "size": 4566.199999999997,
+      "strength": 1.0,
+      "confidence_score": 1.0,
+      "description": "Resistance OB at 117548.2000 with 100.0% confidence"
+    },
+    {
+      "timestamp": 1752224400000,
+      "type": "order_block",
+      "direction": "resistance",
+      "price_high": 118868.0,
+      "price_low": 117443.3,
+      "volume": 441.0795253166668,
+      "volume_ratio": 1.5170502022299903,
+      "size": 1424.699999999997,
+      "strength": 1.0,
+      "confidence_score": 1.0,
+      "description": "Resistance OB at 118868.0000 with 100.0% confidence"
+    },
+    {
+      "timestamp": 1752476400000,
+      "type": "order_block",
+      "direction": "resistance",
+      "price_high": 123226.0,
+      "price_low": 120560.0,
+      "volume": 492.2023425766667,
+      "volume_ratio": 1.6928821686019717,
+      "size": 2666.0,
+      "strength": 1.0,
+      "confidence_score": 1.0,
+      "description": "Resistance OB at 123226.0000 with 100.0% confidence"
+    },
+    {
+      "timestamp": 1752508800000,
+      "type": "order_block",
+      "direction": "support",
+      "price_high": 122115.9,
+      "price_low": 119226.6,
+      "volume": 480.82171209333336,
+      "volume_ratio": 1.6537395950176494,
+      "size": 2889.2999999999884,
+      "strength": 1.0,
+      "confidence_score": 1.0,
+      "description": "Support OB at 119226.6000 with 100.0% confidence"
+    },
+    {
+      "timestamp": 1752588000000,
+      "type": "order_block",
+      "direction": "support",
+      "price_high": 118450.0,
+      "price_low": 115726.7,
+      "volume": 627.6966121866667,
+      "volume_ratio": 2.1589015535763307,
+      "size": 2723.300000000003,
+      "strength": 1.0,
+      "confidence_score": 1.0,
+      "description": "Support OB at 115726.7000 with 100.0% confidence"
+    }
+  ],
+  "fvg": [
+    {
+      "timestamp": 1752087600000,
+      "type": "FVG",
+      "direction": "bullish",
+      "gap_high": 110556.0,
+      "gap_low": 109579.1,
+      "gap_size": 976.8999999999942,
+      "gap_size_percent": 0.8741693646097818,
+      "volume_confirmation": {
+        "timestamp": 1752087600000,
+        "total_volume": 1663.44458179,
+        "buy_volume": 1498.019890228067,
+        "sell_volume": 165.42469156193303,
+        "delta": 1332.595198666134,
+        "delta_ratio": 0.8011058578411758
+      },
+      "confidence_score": 0.966343457007773,
+      "strength": 1.0,
+      "description": "Bullish FVG at 109579.1000-110556.0000 with 96.6% confidence"
+    },
+    {
+      "timestamp": 1752163200000,
+      "type": "FVG",
+      "direction": "bullish",
+      "gap_high": 112567.8,
+      "gap_low": 111416.0,
+      "gap_size": 1151.800000000003,
+      "gap_size_percent": 1.022441698719687,
+      "volume_confirmation": {
+        "timestamp": 1752163200000,
+        "total_volume": 1092.57596812,
+        "buy_volume": 1035.0761097545728,
+        "sell_volume": 57.499858365427166,
+        "delta": 977.5762513891457,
+        "delta_ratio": 0.8947444204463559
+      },
+      "confidence_score": 0.9677969762418993,
+      "strength": 1.0,
+      "description": "Bullish FVG at 111416.0000-112567.8000 with 96.8% confidence"
+    },
+    {
+      "timestamp": 1752166800000,
+      "type": "FVG",
+      "direction": "bullish",
+      "gap_high": 112982.0,
+      "gap_low": 112725.0,
+      "gap_size": 257.0,
+      "gap_size_percent": 0.22597677802837457,
+      "volume_confirmation": {
+        "timestamp": 1752166800000,
+        "total_volume": 1142.62567433,
+        "buy_volume": 1076.3233405249398,
+        "sell_volume": 66.30233380506023,
+        "delta": 1010.0210067198796,
+        "delta_ratio": 0.8839474111345558
+      },
+      "confidence_score": 0.7880689708542152,
+      "strength": 0.7259767780283746,
+      "description": "Bullish FVG at 112725.0000-112982.0000 with 78.8% confidence"
+    },
+    {
+      "timestamp": 1752181200000,
+      "type": "FVG",
+      "direction": "bullish",
+      "gap_high": 115785.9,
+      "gap_low": 113585.9,
+      "gap_size": 2200.0,
+      "gap_size_percent": 1.8886097943303932,
+      "volume_confirmation": {
+        "timestamp": 1752181200000,
+        "total_volume": 2602.43745501,
+        "buy_volume": 1938.8428132332976,
+        "sell_volume": 663.5946417767024,
+        "delta": 1275.2481714565952,
+        "delta_ratio": 0.49002068003655247
+      },
+      "confidence_score": 0.9163468474967541,
+      "strength": 1.0,
+      "description": "Bullish FVG at 113585.9000-115785.9000 with 91.6% confidence"
+    },
+    {
+      "timestamp": 1752199200000,
+      "type": "FVG",
+      "direction": "bullish",
+      "gap_high": 116370.0,
+      "gap_low": 116080.1,
+      "gap_size": 289.8999999999942,
+      "gap_size_percent": 0.24848372641589794,
+      "volume_confirmation": {
+        "timestamp": 1752199200000,
+        "total_volume": 255.30827308,
+        "buy_volume": 225.56384819086765,
+        "sell_volume": 29.74442488913236,
+        "delta": 195.8194233017353,
+        "delta_ratio": 0.766992079572666
+      },
+      "confidence_score": 0.7416132161930202,
+      "strength": 0.7484837264158979,
+      "description": "Bullish FVG at 116080.1000-116370.0000 with 74.2% confidence"
+    },
+    {
+      "timestamp": 1752210000000,
+      "type": "FVG",
+      "direction": "bullish",
+      "gap_high": 117594.3,
+      "gap_low": 116930.9,
+      "gap_size": 663.4000000000087,
+      "gap_size_percent": 0.5628907844240371,
+      "volume_confirmation": {
+        "timestamp": 1752210000000,
+        "total_volume": 825.49112135,
+        "buy_volume": 522.5188989089318,
+        "sell_volume": 302.9722224410682,
+        "delta": 219.54667646786356,
+        "delta_ratio": 0.26595885865958085
+      },
+      "confidence_score": 0.8890975447909742,
+      "strength": 1.0,
+      "description": "Bullish FVG at 116930.9000-117594.3000 with 88.9% confidence"
+    },
+    {
+      "timestamp": 1752404400000,
+      "type": "FVG",
+      "direction": "bullish",
+      "gap_high": 117992.0,
+      "gap_low": 117856.9,
+      "gap_size": 135.10000000000582,
+      "gap_size_percent": 0.11440727125532624,
+      "volume_confirmation": {
+        "timestamp": 1752404400000,
+        "total_volume": 100.62842835,
+        "buy_volume": 86.59965726277352,
+        "sell_volume": 14.028771087226469,
+        "delta": 72.57088617554705,
+        "delta_ratio": 0.7211767824012433
+      },
+      "confidence_score": 0.6725042762910978,
+      "strength": 0.6144072712553262,
+      "description": "Bullish FVG at 117856.9000-117992.0000 with 67.3% confidence"
+    },
+    {
+      "timestamp": 1752458400000,
+      "type": "FVG",
+      "direction": "bullish",
+      "gap_high": 119596.1,
+      "gap_low": 119249.9,
+      "gap_size": 346.20000000001164,
+      "gap_size_percent": 0.289301123026524,
+      "volume_confirmation": {
+        "timestamp": 1752458400000,
+        "total_volume": 536.77102362,
+        "buy_volume": 333.88895417082057,
+        "sell_volume": 202.8820694491795,
+        "delta": 131.00688472164106,
+        "delta_ratio": 0.24406474820143356
+      },
+      "confidence_score": 0.7402723460481043,
+      "strength": 0.789301123026524,
+      "description": "Bullish FVG at 119249.9000-119596.1000 with 74.0% confidence"
+    },
+    {
+      "timestamp": 1752462000000,
+      "type": "FVG",
+      "direction": "bullish",
+      "gap_high": 120560.0,
+      "gap_low": 120088.0,
+      "gap_size": 472.0,
+      "gap_size_percent": 0.3907909127865628,
+      "volume_confirmation": {
+        "timestamp": 1752462000000,
+        "total_volume": 1053.77793802,
+        "buy_volume": 605.8852329168033,
+        "sell_volume": 447.89270510319676,
+        "delta": 157.9925278136065,
+        "delta_ratio": 0.14992962189972125
+      },
+      "confidence_score": 0.8528546899064007,
+      "strength": 0.8907909127865627,
+      "description": "Bullish FVG at 120088.0000-120560.0000 with 85.3% confidence"
+    },
+    {
+      "timestamp": 1752469200000,
+      "type": "FVG",
+      "direction": "bullish",
+      "gap_high": 122041.0,
+      "gap_low": 121460.6,
+      "gap_size": 580.3999999999942,
+      "gap_size_percent": 0.4739762227916858,
+      "volume_confirmation": {
+        "timestamp": 1752469200000,
+        "total_volume": 912.12528423,
+        "buy_volume": 777.5308972834345,
+        "sell_volume": 134.59438694656555,
+        "delta": 642.9365103368689,
+        "delta_ratio": 0.7048774126238858
+      },
+      "confidence_score": 0.9036971830985904,
+      "strength": 0.9739762227916857,
+      "description": "Bullish FVG at 121460.6000-122041.0000 with 90.4% confidence"
+    },
+    {
+      "timestamp": 1752505200000,
+      "type": "FVG",
+      "direction": "bearish",
+      "gap_high": 120641.8,
+      "gap_low": 120326.8,
+      "gap_size": 315.0,
+      "gap_size_percent": 0.2627583790727549,
+      "volume_confirmation": {
+        "timestamp": 1752505200000,
+        "total_volume": 594.27498179,
+        "buy_volume": 105.4751100967064,
+        "sell_volume": 488.7998716932936,
+        "delta": -383.3247615965872,
+        "delta_ratio": -0.6450292765850328
+      },
+      "confidence_score": 0.8075672942651018,
+      "strength": 0.7627583790727549,
+      "description": "Bearish FVG at 120326.8000-120641.8000 with 80.8% confidence"
+    },
+    {
+      "timestamp": 1752541200000,
+      "type": "FVG",
+      "direction": "bearish",
+      "gap_high": 119100.0,
+      "gap_low": 118887.3,
+      "gap_size": 212.6999999999971,
+      "gap_size_percent": 0.17946656159111588,
+      "volume_confirmation": {
+        "timestamp": 1752541200000,
+        "total_volume": 401.05047918,
+        "buy_volume": 41.623108710668724,
+        "sell_volume": 359.42737046933127,
+        "delta": -317.80426175866256,
+        "delta_ratio": -0.7924295774647989
+      },
+      "confidence_score": 0.7382957869432301,
+      "strength": 0.6794665615911158,
+      "description": "Bearish FVG at 118887.3000-119100.0000 with 73.8% confidence"
+    },
+    {
+      "timestamp": 1752548400000,
+      "type": "FVG",
+      "direction": "bearish",
+      "gap_high": 117822.9,
+      "gap_low": 117519.8,
+      "gap_size": 303.09999999999127,
+      "gap_size_percent": 0.2587102385579753,
+      "volume_confirmation": {
+        "timestamp": 1752548400000,
+        "total_volume": 1175.43387583,
+        "buy_volume": 260.85451970905575,
+        "sell_volume": 914.5793561209443,
+        "delta": -653.7248364118886,
+        "delta_ratio": -0.5561561988761631
+      },
+      "confidence_score": 0.7904479154909018,
+      "strength": 0.7587102385579754,
+      "description": "Bearish FVG at 117519.8000-117822.9000 with 79.0% confidence"
+    },
+    {
+      "timestamp": 1752588000000,
+      "type": "FVG",
+      "direction": "bearish",
+      "gap_high": 117147.8,
+      "gap_low": 116749.9,
+      "gap_size": 397.90000000000873,
+      "gap_size_percent": 0.3429935866492041,
+      "volume_confirmation": {
+        "timestamp": 1752588000000,
+        "total_volume": 916.20769096,
+        "buy_volume": 94.63857212464671,
+        "sell_volume": 821.5691188353533,
+        "delta": -726.9305467107065,
+        "delta_ratio": -0.7934124040685913
+      },
+      "confidence_score": 0.8716646842146578,
+      "strength": 0.8429935866492041,
+      "description": "Bearish FVG at 116749.9000-117147.8000 with 87.2% confidence"
+    },
+    {
+      "timestamp": 1752595200000,
+      "type": "FVG",
+      "direction": "bullish",
+      "gap_high": 117124.0,
+      "gap_low": 116749.9,
+      "gap_size": 374.1000000000058,
+      "gap_size_percent": 0.31924180710831934,
+      "volume_confirmation": {
+        "timestamp": 1752595200000,
+        "total_volume": 480.94448905,
+        "buy_volume": 290.65607979543154,
+        "sell_volume": 190.28840925456848,
+        "delta": 100.36767054086306,
+        "delta_ratio": 0.2086886799329322
+      },
+      "confidence_score": 0.7937880568349759,
+      "strength": 0.8192418071083194,
+      "description": "Bullish FVG at 116749.9000-117124.0000 with 79.4% confidence"
+    },
+    {
+      "timestamp": 1752613200000,
+      "type": "FVG",
+      "direction": "bullish",
+      "gap_high": 117232.4,
+      "gap_low": 116692.3,
+      "gap_size": 540.0999999999913,
+      "gap_size_percent": 0.45947226619955894,
+      "volume_confirmation": {
+        "timestamp": 1752613200000,
+        "total_volume": 146.99896902,
+        "buy_volume": 142.29940858174533,
+        "sell_volume": 4.699560438254675,
+        "delta": 137.59984814349065,
+        "delta_ratio": 0.9360599537590597
+      },
+      "confidence_score": 0.9754604161683793,
+      "strength": 0.9594722661995589,
+      "description": "Bullish FVG at 116692.3000-117232.4000 with 97.5% confidence"
+    },
+    {
+      "timestamp": 1752652800000,
+      "type": "FVG",
+      "direction": "bullish",
+      "gap_high": 118689.9,
+      "gap_low": 118301.7,
+      "gap_size": 388.1999999999971,
+      "gap_size_percent": 0.3270236801536532,
+      "volume_confirmation": {
+        "timestamp": 1752652800000,
+        "total_volume": 187.59679236,
+        "buy_volume": 165.45560026246386,
+        "sell_volume": 22.14119209753613,
+        "delta": 143.31440816492773,
+        "delta_ratio": 0.7639491398653877
+      },
+      "confidence_score": 0.8567469411858122,
+      "strength": 0.8270236801536532,
+      "description": "Bullish FVG at 118301.7000-118689.9000 with 85.7% confidence"
+    },
+    {
+      "timestamp": 1752703200000,
+      "type": "FVG",
+      "direction": "bearish",
+      "gap_high": 119210.0,
+      "gap_low": 118840.2,
+      "gap_size": 369.8000000000029,
+      "gap_size_percent": 0.3116572276159679,
+      "volume_confirmation": {
+        "timestamp": 1752703200000,
+        "total_volume": 159.78844637,
+        "buy_volume": 10.803195888028686,
+        "sell_volume": 148.98525048197132,
+        "delta": -138.18205459394264,
+        "delta_ratio": -0.864781263809109
+      },
+      "confidence_score": 0.8257867017653299,
+      "strength": 0.8116572276159679,
+      "description": "Bearish FVG at 118840.2000-119210.0000 with 82.6% confidence"
+    }
+  ],
+  "liquidity_sweeps": [
+    {
+      "timestamp": 1752062400000,
+      "type": "liquidity_sweep",
+      "direction": "bearish",
+      "sweep_level": 109142.7,
+      "sweep_price": 109525.3,
+      "sweep_distance": 382.6000000000058,
+      "liquidity_category": "IRL",
+      "volume_confirmation": {
+        "timestamp": 1752062400000,
+        "total_volume": 304.99573308,
+        "buy_volume": 198.27856363130846,
+        "sell_volume": 106.71716944869151,
+        "delta": 91.56139418261695,
+        "delta_ratio": 0.30020549224733095
+      },
+      "confidence_score": 1.0,
+      "strength": 0.8505502429388367,
+      "description": "Bearish IRL sweep at 109525.3000 with 100.0% confidence"
+    },
+    {
+      "timestamp": 1752166800000,
+      "type": "liquidity_sweep",
+      "direction": "bearish",
+      "sweep_level": 111587.9,
+      "sweep_price": 113800.0,
+      "sweep_distance": 2212.100000000006,
+      "liquidity_category": "IRL",
+      "volume_confirmation": {
+        "timestamp": 1752166800000,
+        "total_volume": 1142.62567433,
+        "buy_volume": 1076.3233405249398,
+        "sell_volume": 66.30233380506023,
+        "delta": 1010.0210067198796,
+        "delta_ratio": 0.8839474111345558
+      },
+      "confidence_score": 1.0,
+      "strength": 1.0,
+      "description": "Bearish IRL sweep at 113800.0000 with 100.0% confidence"
+    },
+    {
+      "timestamp": 1752210000000,
+      "type": "liquidity_sweep",
+      "direction": "bearish",
+      "sweep_level": 117548.2,
+      "sweep_price": 118409.0,
+      "sweep_distance": 860.8000000000029,
+      "liquidity_category": "IRL",
+      "volume_confirmation": {
+        "timestamp": 1752210000000,
+        "total_volume": 825.49112135,
+        "buy_volume": 522.5188989089318,
+        "sell_volume": 302.9722224410682,
+        "delta": 219.54667646786356,
+        "delta_ratio": 0.26595885865958085
+      },
+      "confidence_score": 1.0,
+      "strength": 1.0,
+      "description": "Bearish IRL sweep at 118409.0000 with 100.0% confidence"
+    },
+    {
+      "timestamp": 1752415200000,
+      "type": "liquidity_sweep",
+      "direction": "bearish",
+      "sweep_level": 118230.5,
+      "sweep_price": 119449.9,
+      "sweep_distance": 1219.3999999999942,
+      "liquidity_category": "IRL",
+      "volume_confirmation": {
+        "timestamp": 1752415200000,
+        "total_volume": 775.34777895,
+        "buy_volume": 288.69029168472525,
+        "sell_volume": 486.6574872652747,
+        "delta": -197.96719558054946,
+        "delta_ratio": -0.25532696546657135
+      },
+      "confidence_score": 1.0,
+      "strength": 1.0,
+      "description": "Bearish IRL sweep at 119449.9000 with 100.0% confidence"
+    },
+    {
+      "timestamp": 1752469200000,
+      "type": "liquidity_sweep",
+      "direction": "bearish",
+      "sweep_level": 119500.0,
+      "sweep_price": 122679.7,
+      "sweep_distance": 3179.699999999997,
+      "liquidity_category": "IRL",
+      "volume_confirmation": {
+        "timestamp": 1752469200000,
+        "total_volume": 912.12528423,
+        "buy_volume": 777.5308972834345,
+        "sell_volume": 134.59438694656555,
+        "delta": 642.9365103368689,
+        "delta_ratio": 0.7048774126238858
+      },
+      "confidence_score": 1.0,
+      "strength": 1.0,
+      "description": "Bearish IRL sweep at 122679.7000 with 100.0% confidence"
+    },
+    {
+      "timestamp": 1752552000000,
+      "type": "liquidity_sweep",
+      "direction": "bullish",
+      "sweep_level": 119226.6,
+      "sweep_price": 116285.8,
+      "sweep_distance": 2940.800000000003,
+      "liquidity_category": "IRL",
+      "volume_confirmation": {
+        "timestamp": 1752552000000,
+        "total_volume": 827.35745884,
+        "buy_volume": 803.4217527779372,
+        "sell_volume": 23.935706062062927,
+        "delta": 779.4860467158743,
+        "delta_ratio": 0.9421393841166984
+      },
+      "confidence_score": 1.0,
+      "strength": 1.0,
+      "description": "Bullish IRL sweep at 116285.8000 with 100.0% confidence"
+    }
+  ],
+  "eqh_eql_signals": [
+    {
+      "timestamp": 1752069600000,
+      "type": "EQL",
+      "direction": "support",
+      "price_level": 108416.7,
+      "price_1": 108333.4,
+      "price_2": 108500.0,
+      "price_difference": 166.60000000000582,
+      "tolerance": 216.6668,
+      "confidence_score": 0.750764291837348,
+      "strength": 0.8839906582657436,
+      "description": "EQL at 108416.7000 with 75.1% confidence"
+    },
+    {
+      "timestamp": 1752332400000,
+      "type": "EQL",
+      "direction": "support",
+      "price_level": 117028.75,
+      "price_1": 117140.9,
+      "price_2": 116916.6,
+      "price_difference": 224.29999999998836,
+      "tolerance": 234.2818,
+      "confidence_score": 0.6545423822934802,
+      "strength": 0.8492883311640514,
+      "description": "EQL at 117028.7500 with 65.5% confidence"
+    },
+    {
+      "timestamp": 1752354000000,
+      "type": "EQL",
+      "direction": "support",
+      "price_level": 117072.95,
+      "price_1": 117140.9,
+      "price_2": 117005.0,
+      "price_difference": 135.89999999999418,
+      "tolerance": 234.2818,
+      "confidence_score": 0.7804717331862839,
+      "strength": 0.8803511186828412,
+      "description": "EQL at 117072.9500 with 78.0% confidence"
+    },
+    {
+      "timestamp": 1752354000000,
+      "type": "EQL",
+      "direction": "support",
+      "price_level": 116960.8,
+      "price_1": 116916.6,
+      "price_2": 117005.0,
+      "price_difference": 88.39999999999418,
+      "tolerance": 233.8332,
+      "confidence_score": 0.9237810969528806,
+      "strength": 0.9403657586864298,
+      "description": "EQL at 116960.8000 with 92.4% confidence"
+    }
+  ],
+  "inducement": [
+    {
+      "timestamp": 1752073200000,
+      "type": "multiple_attempts",
+      "direction": "bearish_inducement",
+      "key_level": 109142.7,
+      "attempt_count": 10,
+      "attempts": [
+        {
+          "index": 1,
+          "timestamp": 1752001200000,
+          "high": 109154.0,
+          "close": 108766.1
+        },
+        {
+          "index": 2,
+          "timestamp": 1752004800000,
+          "high": 108942.0,
+          "close": 108632.1
+        },
+        {
+          "index": 3,
+          "timestamp": 1752008400000,
+          "high": 108976.8,
+          "close": 108896.2
+        },
+        {
+          "index": 4,
+          "timestamp": 1752012000000,
+          "high": 108974.0,
+          "close": 108908.0
+        },
+        {
+          "index": 5,
+          "timestamp": 1752015600000,
+          "high": 108976.0,
+          "close": 108926.0
+        },
+        {
+          "index": 6,
+          "timestamp": 1752019200000,
+          "high": 108966.1,
+          "close": 108933.5
+        },
+        {
+          "index": 7,
+          "timestamp": 1752022800000,
+          "high": 109142.7,
+          "close": 108788.6
+        },
+        {
+          "index": 11,
+          "timestamp": 1752037200000,
+          "high": 108949.4,
+          "close": 108784.4
+        },
+        {
+          "index": 17,
+          "timestamp": 1752058800000,
+          "high": 109138.0,
+          "close": 109066.0
+        },
+        {
+          "index": 21,
+          "timestamp": 1752073200000,
+          "high": 109222.3,
+          "close": 109079.9
+        }
+      ],
+      "strength": 96.29645221551425,
+      "description": "10 failed attempts at $109142.70 resistance",
+      "confidence_score": 100
+    },
+    {
+      "timestamp": 1752087600000,
+      "type": "volume_inducement",
+      "direction": "bearish_inducement",
+      "volume": 1663.44458179,
+      "avg_volume": 290.74814048229996,
+      "volume_ratio": 5.721256132646759,
+      "key_level": 112000.0,
+      "reversal_price": 110716.0,
+      "strength": 100,
+      "description": "Volume spike (5.7x) at $112000.00 with bearish reversal",
+      "confidence_score": 100
+    },
+    {
+      "timestamp": 1752159600000,
+      "type": "multiple_attempts",
+      "direction": "bearish_inducement",
+      "key_level": 111587.9,
+      "attempt_count": 7,
+      "attempts": [
+        {
+          "index": 28,
+          "timestamp": 1752098400000,
+          "high": 111415.0,
+          "close": 111385.0
+        },
+        {
+          "index": 29,
+          "timestamp": 1752102000000,
+          "high": 111527.6,
+          "close": 111239.3
+        },
+        {
+          "index": 31,
+          "timestamp": 1752109200000,
+          "high": 111379.0,
+          "close": 111208.1
+        },
+        {
+          "index": 32,
+          "timestamp": 1752112800000,
+          "high": 111587.9,
+          "close": 111228.0
+        },
+        {
+          "index": 37,
+          "timestamp": 1752130800000,
+          "high": 111440.0,
+          "close": 111225.1
+        },
+        {
+          "index": 38,
+          "timestamp": 1752134400000,
+          "high": 111408.9,
+          "close": 111232.1
+        },
+        {
+          "index": 45,
+          "timestamp": 1752159600000,
+          "high": 111416.0,
+          "close": 111412.0
+        }
+      ],
+      "strength": 95.81791530448835,
+      "description": "7 failed attempts at $111587.90 resistance",
+      "confidence_score": 100
+    },
+    {
+      "timestamp": 1752181200000,
+      "type": "volume_inducement",
+      "direction": "bearish_inducement",
+      "volume": 2602.43745501,
+      "avg_volume": 290.74814048229996,
+      "volume_ratio": 8.950830951809406,
+      "key_level": 117548.2,
+      "reversal_price": 116016.0,
+      "strength": 100,
+      "description": "Volume spike (9.0x) at $117548.20 with bearish reversal",
+      "confidence_score": 100
+    },
+    {
+      "timestamp": 1752184800000,
+      "type": "volume_inducement",
+      "direction": "bearish_inducement",
+      "volume": 573.60972554,
+      "avg_volume": 290.74814048229996,
+      "volume_ratio": 1.972874958335013,
+      "key_level": 117548.2,
+      "reversal_price": 116015.9,
+      "strength": 59.18624875005039,
+      "description": "Volume spike (2.0x) at $117548.20 with bearish reversal",
+      "confidence_score": 65.10487362505543
+    },
+    {
+      "timestamp": 1752217200000,
+      "type": "volume_inducement",
+      "direction": "bearish_inducement",
+      "volume": 1198.75306595,
+      "avg_volume": 290.74814048229996,
+      "volume_ratio": 4.122994781536624,
+      "key_level": 118868.0,
+      "reversal_price": 117970.0,
+      "strength": 100,
+      "description": "Volume spike (4.1x) at $118868.00 with bearish reversal",
+      "confidence_score": 100
+    },
+    {
+      "timestamp": 1752314400000,
+      "type": "volume_inducement",
+      "direction": "bearish_inducement",
+      "volume": 980.82140225,
+      "avg_volume": 290.74814048229996,
+      "volume_ratio": 3.373439983564435,
+      "key_level": 118230.5,
+      "reversal_price": 117549.9,
+      "strength": 100,
+      "description": "Volume spike (3.4x) at $118230.50 with bearish reversal",
+      "confidence_score": 100
+    },
+    {
+      "timestamp": 1752318000000,
+      "type": "multiple_attempts",
+      "direction": "bearish_inducement",
+      "key_level": 118230.5,
+      "attempt_count": 9,
+      "attempts": [
+        {
+          "index": 67,
+          "timestamp": 1752238800000,
+          "high": 118199.0,
+          "close": 117978.9
+        },
+        {
+          "index": 68,
+          "timestamp": 1752242400000,
+          "high": 118180.0,
+          "close": 117855.7
+        },
+        {
+          "index": 73,
+          "timestamp": 1752260400000,
+          "high": 118158.0,
+          "close": 118107.3
+        },
+        {
+          "index": 74,
+          "timestamp": 1752264000000,
+          "high": 118107.2,
+          "close": 117657.9
+        },
+        {
+          "index": 84,
+          "timestamp": 1752300000000,
+          "high": 117998.0,
+          "close": 117850.1
+        },
+        {
+          "index": 85,
+          "timestamp": 1752303600000,
+          "high": 118072.7,
+          "close": 117745.9
+        },
+        {
+          "index": 87,
+          "timestamp": 1752310800000,
+          "high": 118230.5,
+          "close": 118170.8
+        },
+        {
+          "index": 88,
+          "timestamp": 1752314400000,
+          "high": 118191.3,
+          "close": 118086.4
+        },
+        {
+          "index": 89,
+          "timestamp": 1752318000000,
+          "high": 118122.0,
+          "close": 117818.0
+        }
+      ],
+      "strength": 97.25615545340588,
+      "description": "9 failed attempts at $118230.50 resistance",
+      "confidence_score": 100
+    },
+    {
+      "timestamp": 1752325200000,
+      "type": "volume_inducement",
+      "direction": "bearish_inducement",
+      "volume": 1198.76688905,
+      "avg_volume": 290.74814048229996,
+      "volume_ratio": 4.123042324746968,
+      "key_level": 118230.5,
+      "reversal_price": 117390.3,
+      "strength": 100,
+      "description": "Volume spike (4.1x) at $118230.50 with bearish reversal",
+      "confidence_score": 100
+    },
+    {
+      "timestamp": 1752451200000,
+      "type": "multiple_attempts",
+      "direction": "bearish_inducement",
+      "key_level": 119500.0,
+      "attempt_count": 4,
+      "attempts": [
+        {
+          "index": 116,
+          "timestamp": 1752415200000,
+          "high": 119449.9,
+          "close": 118766.5
+        },
+        {
+          "index": 121,
+          "timestamp": 1752433200000,
+          "high": 119500.0,
+          "close": 118970.1
+        },
+        {
+          "index": 122,
+          "timestamp": 1752436800000,
+          "high": 119383.7,
+          "close": 119086.0
+        },
+        {
+          "index": 126,
+          "timestamp": 1752451200000,
+          "high": 119480.2,
+          "close": 119078.1
+        }
+      ],
+      "strength": 98.54772676465657,
+      "description": "4 failed attempts at $119500.00 resistance",
+      "confidence_score": 100
+    },
+    {
+      "timestamp": 1752469200000,
+      "type": "volume_inducement",
+      "direction": "bearish_inducement",
+      "volume": 912.12528423,
+      "avg_volume": 290.74814048229996,
+      "volume_ratio": 3.137166355447518,
+      "key_level": 123226.0,
+      "reversal_price": 122132.9,
+      "strength": 94.11499066342554,
+      "description": "Volume spike (3.1x) at $123226.00 with bearish reversal",
+      "confidence_score": 100
+    },
+    {
+      "timestamp": 1752476400000,
+      "type": "volume_inducement",
+      "direction": "bearish_inducement",
+      "volume": 530.38627942,
+      "avg_volume": 290.74814048229996,
+      "volume_ratio": 1.8242121120368393,
+      "key_level": 123226.0,
+      "reversal_price": 122562.0,
+      "strength": 54.72636336110518,
+      "description": "Volume spike (1.8x) at $123226.00 with bearish reversal",
+      "confidence_score": 60.198999697215704
+    }
+  ],
+  "nested_order_blocks": [],
+  "confluence_zones": [
+    {
+      "timestamp": 1752588000000,
+      "type": "fvg_ob_confluence",
+      "fvg_pattern": {
+        "timestamp": 1752199200000,
+        "type": "FVG",
+        "direction": "bullish",
+        "gap_high": 116370.0,
+        "gap_low": 116080.1,
+        "gap_size": 289.8999999999942,
+        "gap_size_percent": 0.24848372641589794,
+        "volume_confirmation": {
+          "timestamp": 1752199200000,
+          "total_volume": 255.30827308,
+          "buy_volume": 225.56384819086765,
+          "sell_volume": 29.74442488913236,
+          "delta": 195.8194233017353,
+          "delta_ratio": 0.766992079572666
+        },
+        "confidence_score": 0.7416132161930202,
+        "strength": 0.7484837264158979,
+        "description": "Bullish FVG at 116080.1000-116370.0000 with 74.2% confidence"
+      },
+      "order_block": {
+        "timestamp": 1752588000000,
+        "type": "order_block",
+        "direction": "support",
+        "price_high": 118450.0,
+        "price_low": 115726.7,
+        "volume": 627.6966121866667,
+        "volume_ratio": 2.1589015535763307,
+        "size": 2723.300000000003,
+        "strength": 1.0,
+        "confidence_score": 1.0,
+        "description": "Support OB at 115726.7000 with 100.0% confidence"
+      },
+      "direction": "bullish",
+      "confluence_strength": 0.8742418632079489,
+      "high_probability_zone": {
+        "high": 116370.0,
+        "low": 116080.1
+      }
+    },
+    {
+      "timestamp": 1752588000000,
+      "type": "fvg_ob_confluence",
+      "fvg_pattern": {
+        "timestamp": 1752210000000,
+        "type": "FVG",
+        "direction": "bullish",
+        "gap_high": 117594.3,
+        "gap_low": 116930.9,
+        "gap_size": 663.4000000000087,
+        "gap_size_percent": 0.5628907844240371,
+        "volume_confirmation": {
+          "timestamp": 1752210000000,
+          "total_volume": 825.49112135,
+          "buy_volume": 522.5188989089318,
+          "sell_volume": 302.9722224410682,
+          "delta": 219.54667646786356,
+          "delta_ratio": 0.26595885865958085
+        },
+        "confidence_score": 0.8890975447909742,
+        "strength": 1.0,
+        "description": "Bullish FVG at 116930.9000-117594.3000 with 88.9% confidence"
+      },
+      "order_block": {
+        "timestamp": 1752588000000,
+        "type": "order_block",
+        "direction": "support",
+        "price_high": 118450.0,
+        "price_low": 115726.7,
+        "volume": 627.6966121866667,
+        "volume_ratio": 2.1589015535763307,
+        "size": 2723.300000000003,
+        "strength": 1.0,
+        "confidence_score": 1.0,
+        "description": "Support OB at 115726.7000 with 100.0% confidence"
+      },
+      "direction": "bullish",
+      "confluence_strength": 1.0,
+      "high_probability_zone": {
+        "high": 117594.3,
+        "low": 116930.9
+      }
+    },
+    {
+      "timestamp": 1752588000000,
+      "type": "fvg_ob_confluence",
+      "fvg_pattern": {
+        "timestamp": 1752404400000,
+        "type": "FVG",
+        "direction": "bullish",
+        "gap_high": 117992.0,
+        "gap_low": 117856.9,
+        "gap_size": 135.10000000000582,
+        "gap_size_percent": 0.11440727125532624,
+        "volume_confirmation": {
+          "timestamp": 1752404400000,
+          "total_volume": 100.62842835,
+          "buy_volume": 86.59965726277352,
+          "sell_volume": 14.028771087226469,
+          "delta": 72.57088617554705,
+          "delta_ratio": 0.7211767824012433
+        },
+        "confidence_score": 0.6725042762910978,
+        "strength": 0.6144072712553262,
+        "description": "Bullish FVG at 117856.9000-117992.0000 with 67.3% confidence"
+      },
+      "order_block": {
+        "timestamp": 1752588000000,
+        "type": "order_block",
+        "direction": "support",
+        "price_high": 118450.0,
+        "price_low": 115726.7,
+        "volume": 627.6966121866667,
+        "volume_ratio": 2.1589015535763307,
+        "size": 2723.300000000003,
+        "strength": 1.0,
+        "confidence_score": 1.0,
+        "description": "Support OB at 115726.7000 with 100.0% confidence"
+      },
+      "direction": "bullish",
+      "confluence_strength": 0.8072036356276631,
+      "high_probability_zone": {
+        "high": 117992.0,
+        "low": 117856.9
+      }
+    },
+    {
+      "timestamp": 1752508800000,
+      "type": "fvg_ob_confluence",
+      "fvg_pattern": {
+        "timestamp": 1752458400000,
+        "type": "FVG",
+        "direction": "bullish",
+        "gap_high": 119596.1,
+        "gap_low": 119249.9,
+        "gap_size": 346.20000000001164,
+        "gap_size_percent": 0.289301123026524,
+        "volume_confirmation": {
+          "timestamp": 1752458400000,
+          "total_volume": 536.77102362,
+          "buy_volume": 333.88895417082057,
+          "sell_volume": 202.8820694491795,
+          "delta": 131.00688472164106,
+          "delta_ratio": 0.24406474820143356
+        },
+        "confidence_score": 0.7402723460481043,
+        "strength": 0.789301123026524,
+        "description": "Bullish FVG at 119249.9000-119596.1000 with 74.0% confidence"
+      },
+      "order_block": {
+        "timestamp": 1752508800000,
+        "type": "order_block",
+        "direction": "support",
+        "price_high": 122115.9,
+        "price_low": 119226.6,
+        "volume": 480.82171209333336,
+        "volume_ratio": 1.6537395950176494,
+        "size": 2889.2999999999884,
+        "strength": 1.0,
+        "confidence_score": 1.0,
+        "description": "Support OB at 119226.6000 with 100.0% confidence"
+      },
+      "direction": "bullish",
+      "confluence_strength": 0.894650561513262,
+      "high_probability_zone": {
+        "high": 119596.1,
+        "low": 119249.9
+      }
+    },
+    {
+      "timestamp": 1752508800000,
+      "type": "fvg_ob_confluence",
+      "fvg_pattern": {
+        "timestamp": 1752462000000,
+        "type": "FVG",
+        "direction": "bullish",
+        "gap_high": 120560.0,
+        "gap_low": 120088.0,
+        "gap_size": 472.0,
+        "gap_size_percent": 0.3907909127865628,
+        "volume_confirmation": {
+          "timestamp": 1752462000000,
+          "total_volume": 1053.77793802,
+          "buy_volume": 605.8852329168033,
+          "sell_volume": 447.89270510319676,
+          "delta": 157.9925278136065,
+          "delta_ratio": 0.14992962189972125
+        },
+        "confidence_score": 0.8528546899064007,
+        "strength": 0.8907909127865627,
+        "description": "Bullish FVG at 120088.0000-120560.0000 with 85.3% confidence"
+      },
+      "order_block": {
+        "timestamp": 1752508800000,
+        "type": "order_block",
+        "direction": "support",
+        "price_high": 122115.9,
+        "price_low": 119226.6,
+        "volume": 480.82171209333336,
+        "volume_ratio": 1.6537395950176494,
+        "size": 2889.2999999999884,
+        "strength": 1.0,
+        "confidence_score": 1.0,
+        "description": "Support OB at 119226.6000 with 100.0% confidence"
+      },
+      "direction": "bullish",
+      "confluence_strength": 0.9453954563932814,
+      "high_probability_zone": {
+        "high": 120560.0,
+        "low": 120088.0
+      }
+    },
+    {
+      "timestamp": 1752508800000,
+      "type": "fvg_ob_confluence",
+      "fvg_pattern": {
+        "timestamp": 1752469200000,
+        "type": "FVG",
+        "direction": "bullish",
+        "gap_high": 122041.0,
+        "gap_low": 121460.6,
+        "gap_size": 580.3999999999942,
+        "gap_size_percent": 0.4739762227916858,
+        "volume_confirmation": {
+          "timestamp": 1752469200000,
+          "total_volume": 912.12528423,
+          "buy_volume": 777.5308972834345,
+          "sell_volume": 134.59438694656555,
+          "delta": 642.9365103368689,
+          "delta_ratio": 0.7048774126238858
+        },
+        "confidence_score": 0.9036971830985904,
+        "strength": 0.9739762227916857,
+        "description": "Bullish FVG at 121460.6000-122041.0000 with 90.4% confidence"
+      },
+      "order_block": {
+        "timestamp": 1752508800000,
+        "type": "order_block",
+        "direction": "support",
+        "price_high": 122115.9,
+        "price_low": 119226.6,
+        "volume": 480.82171209333336,
+        "volume_ratio": 1.6537395950176494,
+        "size": 2889.2999999999884,
+        "strength": 1.0,
+        "confidence_score": 1.0,
+        "description": "Support OB at 119226.6000 with 100.0% confidence"
+      },
+      "direction": "bullish",
+      "confluence_strength": 0.9869881113958429,
+      "high_probability_zone": {
+        "high": 122041.0,
+        "low": 121460.6
+      }
+    },
+    {
+      "timestamp": 1752548400000,
+      "type": "fvg_ob_confluence",
+      "fvg_pattern": {
+        "timestamp": 1752548400000,
+        "type": "FVG",
+        "direction": "bearish",
+        "gap_high": 117822.9,
+        "gap_low": 117519.8,
+        "gap_size": 303.09999999999127,
+        "gap_size_percent": 0.2587102385579753,
+        "volume_confirmation": {
+          "timestamp": 1752548400000,
+          "total_volume": 1175.43387583,
+          "buy_volume": 260.85451970905575,
+          "sell_volume": 914.5793561209443,
+          "delta": -653.7248364118886,
+          "delta_ratio": -0.5561561988761631
+        },
+        "confidence_score": 0.7904479154909018,
+        "strength": 0.7587102385579754,
+        "description": "Bearish FVG at 117519.8000-117822.9000 with 79.0% confidence"
+      },
+      "order_block": {
+        "timestamp": 1752224400000,
+        "type": "order_block",
+        "direction": "resistance",
+        "price_high": 118868.0,
+        "price_low": 117443.3,
+        "volume": 441.0795253166668,
+        "volume_ratio": 1.5170502022299903,
+        "size": 1424.699999999997,
+        "strength": 1.0,
+        "confidence_score": 1.0,
+        "description": "Resistance OB at 118868.0000 with 100.0% confidence"
+      },
+      "direction": "bearish",
+      "confluence_strength": 0.8793551192789877,
+      "high_probability_zone": {
+        "high": 117822.9,
+        "low": 117519.8
+      }
+    },
+    {
+      "timestamp": 1752588000000,
+      "type": "fvg_ob_confluence",
+      "fvg_pattern": {
+        "timestamp": 1752588000000,
+        "type": "FVG",
+        "direction": "bearish",
+        "gap_high": 117147.8,
+        "gap_low": 116749.9,
+        "gap_size": 397.90000000000873,
+        "gap_size_percent": 0.3429935866492041,
+        "volume_confirmation": {
+          "timestamp": 1752588000000,
+          "total_volume": 916.20769096,
+          "buy_volume": 94.63857212464671,
+          "sell_volume": 821.5691188353533,
+          "delta": -726.9305467107065,
+          "delta_ratio": -0.7934124040685913
+        },
+        "confidence_score": 0.8716646842146578,
+        "strength": 0.8429935866492041,
+        "description": "Bearish FVG at 116749.9000-117147.8000 with 87.2% confidence"
+      },
+      "order_block": {
+        "timestamp": 1752181200000,
+        "type": "order_block",
+        "direction": "resistance",
+        "price_high": 117548.2,
+        "price_low": 112982.0,
+        "volume": 699.27686566,
+        "volume_ratio": 2.4050948855597936,
+        "size": 4566.199999999997,
+        "strength": 1.0,
+        "confidence_score": 1.0,
+        "description": "Resistance OB at 117548.2000 with 100.0% confidence"
+      },
+      "direction": "bearish",
+      "confluence_strength": 0.9214967933246021,
+      "high_probability_zone": {
+        "high": 117147.8,
+        "low": 116749.9
+      }
+    },
+    {
+      "timestamp": 1752595200000,
+      "type": "fvg_ob_confluence",
+      "fvg_pattern": {
+        "timestamp": 1752595200000,
+        "type": "FVG",
+        "direction": "bullish",
+        "gap_high": 117124.0,
+        "gap_low": 116749.9,
+        "gap_size": 374.1000000000058,
+        "gap_size_percent": 0.31924180710831934,
+        "volume_confirmation": {
+          "timestamp": 1752595200000,
+          "total_volume": 480.94448905,
+          "buy_volume": 290.65607979543154,
+          "sell_volume": 190.28840925456848,
+          "delta": 100.36767054086306,
+          "delta_ratio": 0.2086886799329322
+        },
+        "confidence_score": 0.7937880568349759,
+        "strength": 0.8192418071083194,
+        "description": "Bullish FVG at 116749.9000-117124.0000 with 79.4% confidence"
+      },
+      "order_block": {
+        "timestamp": 1752588000000,
+        "type": "order_block",
+        "direction": "support",
+        "price_high": 118450.0,
+        "price_low": 115726.7,
+        "volume": 627.6966121866667,
+        "volume_ratio": 2.1589015535763307,
+        "size": 2723.300000000003,
+        "strength": 1.0,
+        "confidence_score": 1.0,
+        "description": "Support OB at 115726.7000 with 100.0% confidence"
+      },
+      "direction": "bullish",
+      "confluence_strength": 0.9096209035541597,
+      "high_probability_zone": {
+        "high": 117124.0,
+        "low": 116749.9
+      }
+    },
+    {
+      "timestamp": 1752613200000,
+      "type": "fvg_ob_confluence",
+      "fvg_pattern": {
+        "timestamp": 1752613200000,
+        "type": "FVG",
+        "direction": "bullish",
+        "gap_high": 117232.4,
+        "gap_low": 116692.3,
+        "gap_size": 540.0999999999913,
+        "gap_size_percent": 0.45947226619955894,
+        "volume_confirmation": {
+          "timestamp": 1752613200000,
+          "total_volume": 146.99896902,
+          "buy_volume": 142.29940858174533,
+          "sell_volume": 4.699560438254675,
+          "delta": 137.59984814349065,
+          "delta_ratio": 0.9360599537590597
+        },
+        "confidence_score": 0.9754604161683793,
+        "strength": 0.9594722661995589,
+        "description": "Bullish FVG at 116692.3000-117232.4000 with 97.5% confidence"
+      },
+      "order_block": {
+        "timestamp": 1752588000000,
+        "type": "order_block",
+        "direction": "support",
+        "price_high": 118450.0,
+        "price_low": 115726.7,
+        "volume": 627.6966121866667,
+        "volume_ratio": 2.1589015535763307,
+        "size": 2723.300000000003,
+        "strength": 1.0,
+        "confidence_score": 1.0,
+        "description": "Support OB at 115726.7000 with 100.0% confidence"
+      },
+      "direction": "bullish",
+      "confluence_strength": 0.9797361330997795,
+      "high_probability_zone": {
+        "high": 117232.4,
+        "low": 116692.3
+      }
+    }
+  ],
+  "volume_confirmation": {
+    "volume_deltas": [
+      {
+        "timestamp": 1752681600000,
+        "total_volume": 235.43504056,
+        "buy_volume": 224.30361564483908,
+        "sell_volume": 11.131424915160913,
+        "delta": 213.17219072967816,
+        "delta_ratio": 0.9054395226073062
+      },
+      {
+        "timestamp": 1752685200000,
+        "total_volume": 274.03232582,
+        "buy_volume": 41.63076949830681,
+        "sell_volume": 232.40155632169316,
+        "delta": -190.77078682338635,
+        "delta_ratio": -0.6961616161616475
+      },
+      {
+        "timestamp": 1752688800000,
+        "total_volume": 293.8348948,
+        "buy_volume": 175.3535291867639,
+        "sell_volume": 118.48136561323606,
+        "delta": 56.87216357352783,
+        "delta_ratio": 0.19355142830206779
+      },
+      {
+        "timestamp": 1752692400000,
+        "total_volume": 166.19137308,
+        "buy_volume": 81.89864232703493,
+        "sell_volume": 84.29273075296507,
+        "delta": -2.3940884259301356,
+        "delta_ratio": -0.014405611925341556
+      },
+      {
+        "timestamp": 1752696000000,
+        "total_volume": 186.20223039,
+        "buy_volume": 181.54485522030387,
+        "sell_volume": 4.6573751696961505,
+        "delta": 176.88748005060773,
+        "delta_ratio": 0.9499750871948066
+      },
+      {
+        "timestamp": 1752699600000,
+        "total_volume": 215.00871726,
+        "buy_volume": 23.044690864246693,
+        "sell_volume": 191.96402639575328,
+        "delta": -168.9193355315066,
+        "delta_ratio": -0.7856394739904444
+      },
+      {
+        "timestamp": 1752703200000,
+        "total_volume": 159.78844637,
+        "buy_volume": 10.803195888028686,
+        "sell_volume": 148.98525048197132,
+        "delta": -138.18205459394264,
+        "delta_ratio": -0.864781263809109
+      },
+      {
+        "timestamp": 1752706800000,
+        "total_volume": 124.31516662,
+        "buy_volume": 64.26848792906418,
+        "sell_volume": 60.04667869093581,
+        "delta": 4.221809238128365,
+        "delta_ratio": 0.03396053235429727
+      },
+      {
+        "timestamp": 1752710400000,
+        "total_volume": 168.10806988,
+        "buy_volume": 81.13015951517173,
+        "sell_volume": 86.97791036482828,
+        "delta": -5.847750849656549,
+        "delta_ratio": -0.03478566408995612
+      },
+      {
+        "timestamp": 1752714000000,
+        "total_volume": 18.42641815,
+        "buy_volume": 7.1597719438857625,
+        "sell_volume": 11.266646206114237,
+        "delta": -4.106874262228474,
+        "delta_ratio": -0.22287968441812844
+      }
+    ],
+    "cvd_data": [
+      {
+        "timestamp": 1752681600000,
+        "cvd": 7691.714743126479,
+        "delta": 213.17219072967816,
+        "delta_ratio": 0.9054395226073062
+      },
+      {
+        "timestamp": 1752685200000,
+        "cvd": 7500.943956303093,
+        "delta": -190.77078682338635,
+        "delta_ratio": -0.6961616161616475
+      },
+      {
+        "timestamp": 1752688800000,
+        "cvd": 7557.816119876621,
+        "delta": 56.87216357352783,
+        "delta_ratio": 0.19355142830206779
+      },
+      {
+        "timestamp": 1752692400000,
+        "cvd": 7555.422031450691,
+        "delta": -2.3940884259301356,
+        "delta_ratio": -0.014405611925341556
+      },
+      {
+        "timestamp": 1752696000000,
+        "cvd": 7732.309511501298,
+        "delta": 176.88748005060773,
+        "delta_ratio": 0.9499750871948066
+      },
+      {
+        "timestamp": 1752699600000,
+        "cvd": 7563.390175969792,
+        "delta": -168.9193355315066,
+        "delta_ratio": -0.7856394739904444
+      },
+      {
+        "timestamp": 1752703200000,
+        "cvd": 7425.208121375849,
+        "delta": -138.18205459394264,
+        "delta_ratio": -0.864781263809109
+      },
+      {
+        "timestamp": 1752706800000,
+        "cvd": 7429.429930613977,
+        "delta": 4.221809238128365,
+        "delta_ratio": 0.03396053235429727
+      },
+      {
+        "timestamp": 1752710400000,
+        "cvd": 7423.582179764321,
+        "delta": -5.847750849656549,
+        "delta_ratio": -0.03478566408995612
+      },
+      {
+        "timestamp": 1752714000000,
+        "cvd": 7419.475305502093,
+        "delta": -4.106874262228474,
+        "delta_ratio": -0.22287968441812844
+      }
+    ],
+    "volume_absorptions": [
+      {
+        "timestamp": 1752217200000,
+        "type": "absorption",
+        "volume": 1198.75306595,
+        "volume_ratio": 4.122994781536624,
+        "delta": -853.383673415022,
+        "price_range": 656.6999999999971,
+        "body_size": 108.80000000000291,
+        "direction": "bearish"
+      },
+      {
+        "timestamp": 1752314400000,
+        "type": "absorption",
+        "volume": 980.82140225,
+        "volume_ratio": 3.373439983564435,
+        "delta": 437.01503282065966,
+        "price_range": 378.40000000000873,
+        "body_size": 84.5,
+        "direction": "bullish"
+      },
+      {
+        "timestamp": 1752325200000,
+        "type": "absorption",
+        "volume": 1198.76688905,
+        "volume_ratio": 4.123042324746968,
+        "delta": 583.94936060703,
+        "price_range": 376.70000000001164,
+        "body_size": 22.39999999999418,
+        "direction": "bullish"
+      },
+      {
+        "timestamp": 1752415200000,
+        "type": "absorption",
+        "volume": 775.34777895,
+        "volume_ratio": 2.66673340597754,
+        "delta": -197.96719558054946,
+        "price_range": 1088.7999999999884,
+        "body_size": 153.3000000000029,
+        "direction": "bearish"
+      },
+      {
+        "timestamp": 1752544800000,
+        "type": "absorption",
+        "volume": 1287.62619416,
+        "volume_ratio": 4.428665277184765,
+        "delta": -259.12206951246344,
+        "price_range": 1064.4000000000087,
+        "body_size": 269.8999999999942,
+        "direction": "bearish"
+      },
+      {
+        "timestamp": 1752552000000,
+        "type": "absorption",
+        "volume": 827.35745884,
+        "volume_ratio": 2.8456156502585355,
+        "delta": 779.4860467158743,
+        "price_range": 1234.0,
+        "body_size": 326.0,
+        "direction": "bullish"
+      },
+      {
+        "timestamp": 1752678000000,
+        "type": "absorption",
+        "volume": 923.80493136,
+        "volume_ratio": 3.1773373677560595,
+        "delta": 31.864028307308445,
+        "price_range": 1467.0,
+        "body_size": 37.5,
+        "direction": "bullish"
+      }
+    ],
+    "cvd_divergences": [
+      {
+        "timestamp": 1752044400000,
+        "type": "bullish_divergence",
+        "price_change": -0.0016006068163994971,
+        "cvd_change": 38.7894574666202,
+        "strength": 0.000931785649589398
+      },
+      {
+        "timestamp": 1752051600000,
+        "type": "bullish_divergence",
+        "price_change": -0.0014496079907459576,
+        "cvd_change": 4.825103747574779,
+        "strength": 0.00012493864494644966
+      },
+      {
+        "timestamp": 1752055200000,
+        "type": "bullish_divergence",
+        "price_change": -0.00023500576039515688,
+        "cvd_change": 9.010819995308779,
+        "strength": 1.8918612358775467e-05
+      },
+      {
+        "timestamp": 1752069600000,
+        "type": "bearish_divergence",
+        "price_change": 0.0031604060352610104,
+        "cvd_change": -102.28029810393211,
+        "strength": 0.0028830647120200396
+      },
+      {
+        "timestamp": 1752073200000,
+        "type": "bearish_divergence",
+        "price_change": 0.0027163821283198697,
+        "cvd_change": -123.85202307367392,
+        "strength": 0.004506193112729321
+      },
+      {
+        "timestamp": 1752076800000,
+        "type": "bearish_divergence",
+        "price_change": 0.005186245470648331,
+        "cvd_change": -112.04303476293526,
+        "strength": 0.0053753383165012015
+      },
+      {
+        "timestamp": 1752080400000,
+        "type": "bearish_divergence",
+        "price_change": 0.004067257838577248,
+        "cvd_change": -110.93326132805751,
+        "strength": 0.006771441580783889
+      },
+      {
+        "timestamp": 1752127200000,
+        "type": "bearish_divergence",
+        "price_change": 0.0047328299432782975,
+        "cvd_change": -289.44025064284347,
+        "strength": 0.0013293952299675944
+      },
+      {
+        "timestamp": 1752130800000,
+        "type": "bearish_divergence",
+        "price_change": 0.0035730688059363467,
+        "cvd_change": -304.1676398400774,
+        "strength": 0.0012056079790751185
+      },
+      {
+        "timestamp": 1752141600000,
+        "type": "bearish_divergence",
+        "price_change": 0.0016128566946625959,
+        "cvd_change": -32.57094720633745,
+        "strength": 7.530131144348781e-05
+      },
+      {
+        "timestamp": 1752152400000,
+        "type": "bullish_divergence",
+        "price_change": -0.002348738622031278,
+        "cvd_change": 49.28345335563313,
+        "strength": 0.00017621020856231712
+      },
+      {
+        "timestamp": 1752217200000,
+        "type": "bearish_divergence",
+        "price_change": 0.009014677931937862,
+        "cvd_change": -307.4647290553803,
+        "strength": 0.0005841961754020582
+      },
+      {
+        "timestamp": 1752224400000,
+        "type": "bearish_divergence",
+        "price_change": 0.021136757978863344,
+        "cvd_change": -21.37260383229841,
+        "strength": 9.668092358241365e-05
+      },
+      {
+        "timestamp": 1752228000000,
+        "type": "bearish_divergence",
+        "price_change": 0.020690526308503834,
+        "cvd_change": -154.21044523608816,
+        "strength": 0.0006885338680356331
+      },
+      {
+        "timestamp": 1752231600000,
+        "type": "bearish_divergence",
+        "price_change": 0.015913804179583248,
+        "cvd_change": -307.820225681985,
+        "strength": 0.0010303137097303025
+      },
+      {
+        "timestamp": 1752235200000,
+        "type": "bearish_divergence",
+        "price_change": 0.010365345648663283,
+        "cvd_change": -582.4879796629357,
+        "strength": 0.001219665043022434
+      },
+      {
+        "timestamp": 1752238800000,
+        "type": "bearish_divergence",
+        "price_change": 0.009237025776930603,
+        "cvd_change": -700.5016718743882,
+        "strength": 0.0012303997716460264
+      },
+      {
+        "timestamp": 1752242400000,
+        "type": "bearish_divergence",
+        "price_change": 0.008124483024381172,
+        "cvd_change": -766.9986452115609,
+        "strength": 0.0011569264396993936
+      },
+      {
+        "timestamp": 1752256800000,
+        "type": "bullish_divergence",
+        "price_change": -0.0021539374417225213,
+        "cvd_change": 451.25078497074173,
+        "strength": 0.00019380520264191152
+      },
+      {
+        "timestamp": 1752260400000,
+        "type": "bullish_divergence",
+        "price_change": -0.0030455455941304273,
+        "cvd_change": 680.5287665292326,
+        "strength": 0.0003887267752677865
+      },
+      {
+        "timestamp": 1752264000000,
+        "type": "bullish_divergence",
+        "price_change": -0.002694620422154448,
+        "cvd_change": 744.1508316470463,
+        "strength": 0.00038384581924331095
+      },
+      {
+        "timestamp": 1752267600000,
+        "type": "bullish_divergence",
+        "price_change": -0.0016636392958392042,
+        "cvd_change": 745.9761662493775,
+        "strength": 0.00023899976590296935
+      },
+      {
+        "timestamp": 1752271200000,
+        "type": "bullish_divergence",
+        "price_change": -0.002143761839681881,
+        "cvd_change": 1014.8650061463859,
+        "strength": 0.000404192009203533
+      },
+      {
+        "timestamp": 1752274800000,
+        "type": "bullish_divergence",
+        "price_change": -0.0037006617284954454,
+        "cvd_change": 779.2284035760249,
+        "strength": 0.0005402512607738699
+      },
+      {
+        "timestamp": 1752278400000,
+        "type": "bullish_divergence",
+        "price_change": -0.0036807723343037536,
+        "cvd_change": 728.7785423024297,
+        "strength": 0.000501582806729076
+      },
+      {
+        "timestamp": 1752292800000,
+        "type": "bullish_divergence",
+        "price_change": -0.00039077134015031106,
+        "cvd_change": 188.7427137333916,
+        "strength": 1.4173037262787851e-05
+      },
+      {
+        "timestamp": 1752303600000,
+        "type": "bearish_divergence",
+        "price_change": 0.0010874185923922715,
+        "cvd_change": -17.895212514165905,
+        "strength": 3.7475459606862597e-06
+      },
+      {
+        "timestamp": 1752307200000,
+        "type": "bearish_divergence",
+        "price_change": 0.0025836520035843707,
+        "cvd_change": -154.98116641218166,
+        "strength": 7.439022156587659e-05
+      },
+      {
+        "timestamp": 1752321600000,
+        "type": "bullish_divergence",
+        "price_change": -0.0005390546817409998,
+        "cvd_change": 358.9678715632126,
+        "strength": 3.375823985561845e-05
+      },
+      {
+        "timestamp": 1752325200000,
+        "type": "bullish_divergence",
+        "price_change": -0.00216839626125689,
+        "cvd_change": 904.1980436512722,
+        "strength": 0.000310428346668302
+      },
+      {
+        "timestamp": 1752328800000,
+        "type": "bullish_divergence",
+        "price_change": -0.0023761386726766256,
+        "cvd_change": 709.3105760811577,
+        "strength": 0.00028502566554264075
+      },
+      {
+        "timestamp": 1752332400000,
+        "type": "bullish_divergence",
+        "price_change": -0.004889223485266853,
+        "cvd_change": 605.3251048116335,
+        "strength": 0.0005054531775924681
+      },
+      {
+        "timestamp": 1752336000000,
+        "type": "bullish_divergence",
+        "price_change": -0.005533300353584815,
+        "cvd_change": 564.3726501470173,
+        "strength": 0.0005355902582102342
+      },
+      {
+        "timestamp": 1752339600000,
+        "type": "bullish_divergence",
+        "price_change": -0.002206446254179452,
+        "cvd_change": 691.8940822366649,
+        "strength": 0.0002602225939397725
+      },
+      {
+        "timestamp": 1752343200000,
+        "type": "bullish_divergence",
+        "price_change": -0.003613218562836218,
+        "cvd_change": 671.1063850733517,
+        "strength": 0.0004110767274649252
+      },
+      {
+        "timestamp": 1752346800000,
+        "type": "bullish_divergence",
+        "price_change": -0.005101090963249829,
+        "cvd_change": 562.7907797863872,
+        "strength": 0.00048559496600611353
+      },
+      {
+        "timestamp": 1752350400000,
+        "type": "bullish_divergence",
+        "price_change": -0.00894260473687063,
+        "cvd_change": 68.75565724808075,
+        "strength": 0.00010501361514858308
+      },
+      {
+        "timestamp": 1752354000000,
+        "type": "bullish_divergence",
+        "price_change": -0.0026931368721248273,
+        "cvd_change": 139.0547316075672,
+        "strength": 6.349222668842313e-05
+      },
+      {
+        "timestamp": 1752357600000,
+        "type": "bullish_divergence",
+        "price_change": -0.001372183217510082,
+        "cvd_change": 148.64980413418834,
+        "strength": 3.468556413192042e-05
+      },
+      {
+        "timestamp": 1752418800000,
+        "type": "bearish_divergence",
+        "price_change": 0.007822896153006844,
+        "cvd_change": -55.42817996148915,
+        "strength": 7.237171738471046e-05
+      },
+      {
+        "timestamp": 1752422400000,
+        "type": "bearish_divergence",
+        "price_change": 0.005375532293911042,
+        "cvd_change": -210.82901424439206,
+        "strength": 0.00018891494300379364
+      },
+      {
+        "timestamp": 1752426000000,
+        "type": "bearish_divergence",
+        "price_change": 0.005922038916982158,
+        "cvd_change": -203.06155000087983,
+        "strength": 0.00019923847853352825
+      },
+      {
+        "timestamp": 1752429600000,
+        "type": "bearish_divergence",
+        "price_change": 0.009266013027547836,
+        "cvd_change": -157.5750061889139,
+        "strength": 0.00024149736516171802
+      },
+      {
+        "timestamp": 1752433200000,
+        "type": "bearish_divergence",
+        "price_change": 0.010329178336495323,
+        "cvd_change": -259.0425075409703,
+        "strength": 0.00044465910458598714
+      },
+      {
+        "timestamp": 1752436800000,
+        "type": "bearish_divergence",
+        "price_change": 0.01124129814150893,
+        "cvd_change": -239.84904170522623,
+        "strength": 0.00044972525813754774
+      },
+      {
+        "timestamp": 1752440400000,
+        "type": "bearish_divergence",
+        "price_change": 0.0047973145200695426,
+        "cvd_change": -362.32740090200423,
+        "strength": 0.0002864618159605533
+      },
+      {
+        "timestamp": 1752444000000,
+        "type": "bearish_divergence",
+        "price_change": 0.0007895059044064562,
+        "cvd_change": -443.6155217140813,
+        "strength": 5.6956789369566214e-05
+      },
+      {
+        "timestamp": 1752447600000,
+        "type": "bearish_divergence",
+        "price_change": 0.004071219789382405,
+        "cvd_change": -445.218519832767,
+        "strength": 0.0002902858121426048
+      },
+      {
+        "timestamp": 1752451200000,
+        "type": "bearish_divergence",
+        "price_change": 0.002623635452758192,
+        "cvd_change": -325.4397479340814,
+        "strength": 0.0001412193550204575
+      },
+      {
+        "timestamp": 1752454800000,
+        "type": "bearish_divergence",
+        "price_change": 0.0036224037964880983,
+        "cvd_change": -201.7388195701942,
+        "strength": 0.00012311004953746935
+      },
+      {
+        "timestamp": 1752501600000,
+        "type": "bullish_divergence",
+        "price_change": -0.0019264982044607962,
+        "cvd_change": 315.74957119413193,
+        "strength": 8.818462386598678e-05
+      },
+      {
+        "timestamp": 1752577200000,
+        "type": "bullish_divergence",
+        "price_change": -0.01183618677009961,
+        "cvd_change": 169.06237210352356,
+        "strength": 0.00031753356522428073
+      },
+      {
+        "timestamp": 1752580800000,
+        "type": "bullish_divergence",
+        "price_change": -0.008773087071240056,
+        "cvd_change": 672.8368847772181,
+        "strength": 0.0009016788234896727
+      },
+      {
+        "timestamp": 1752588000000,
+        "type": "bullish_divergence",
+        "price_change": -0.01256425337556321,
+        "cvd_change": 151.2128836377442,
+        "strength": 0.0003088901822938174
+      },
+      {
+        "timestamp": 1752591600000,
+        "type": "bullish_divergence",
+        "price_change": -0.007947622745339455,
+        "cvd_change": 386.6803569203357,
+        "strength": 0.0004836521484790678
+      },
+      {
+        "timestamp": 1752602400000,
+        "type": "bullish_divergence",
+        "price_change": -0.0004933086450627668,
+        "cvd_change": 324.5026526436841,
+        "strength": 2.4624500292450313e-05
+      },
+      {
+        "timestamp": 1752606000000,
+        "type": "bullish_divergence",
+        "price_change": -0.0031855860793313694,
+        "cvd_change": 330.62322041962125,
+        "strength": 0.00016578563665951962
+      },
+      {
+        "timestamp": 1752609600000,
+        "type": "bullish_divergence",
+        "price_change": -0.00527375947862342,
+        "cvd_change": 246.02305466734833,
+        "strength": 0.00020504057757298762
+      },
+      {
+        "timestamp": 1752706800000,
+        "type": "bullish_divergence",
+        "price_change": -0.00045835962862766564,
+        "cvd_change": 223.39115248553753,
+        "strength": 1.3782145689274343e-05
+      }
+    ]
+  },
+  "ai_snapshot": {
+    "ai_summary": {
+      "market_bias": "bullish",
+      "key_levels": {
+        "resistance": [
+          123226.0,
+          118868.0,
+          117548.2,
+          112000.0
+        ],
+        "support": [
+          115726.7,
+          119226.6
+        ],
+        "fvg_zones": [
+          110067.55,
+          111991.9,
+          112853.5,
+          114685.9,
+          116225.05
+        ]
+      },
+      "trading_opportunities": [],
+      "risk_factors": [
+        {
+          "type": "liquidity_sweep",
+          "severity": "medium",
+          "description": "bearish IRL liquidity sweep"
+        },
+        {
+          "type": "liquidity_sweep",
+          "severity": "medium",
+          "description": "bearish IRL liquidity sweep"
+        },
+        {
+          "type": "liquidity_sweep",
+          "severity": "medium",
+          "description": "bearish IRL liquidity sweep"
+        },
+        {
+          "type": "liquidity_sweep",
+          "severity": "medium",
+          "description": "bearish IRL liquidity sweep"
+        },
+        {
+          "type": "liquidity_sweep",
+          "severity": "medium",
+          "description": "bearish IRL liquidity sweep"
+        }
+      ],
+      "confluence_zones": {
+        "nested_blocks": 0,
+        "fvg_ob_confluences": 10,
+        "total_confluences": 10,
+        "high_probability_zones": [
+          {
+            "timestamp": 1752588000000,
+            "type": "fvg_ob_confluence",
+            "fvg_pattern": {
+              "timestamp": 1752199200000,
+              "type": "FVG",
+              "direction": "bullish",
+              "gap_high": 116370.0,
+              "gap_low": 116080.1,
+              "gap_size": 289.8999999999942,
+              "gap_size_percent": 0.24848372641589794,
+              "volume_confirmation": {
+                "timestamp": 1752199200000,
+                "total_volume": 255.30827308,
+                "buy_volume": 225.56384819086765,
+                "sell_volume": 29.74442488913236,
+                "delta": 195.8194233017353,
+                "delta_ratio": 0.766992079572666
+              },
+              "confidence_score": 0.7416132161930202,
+              "strength": 0.7484837264158979,
+              "description": "Bullish FVG at 116080.1000-116370.0000 with 74.2% confidence"
+            },
+            "order_block": {
+              "timestamp": 1752588000000,
+              "type": "order_block",
+              "direction": "support",
+              "price_high": 118450.0,
+              "price_low": 115726.7,
+              "volume": 627.6966121866667,
+              "volume_ratio": 2.1589015535763307,
+              "size": 2723.300000000003,
+              "strength": 1.0,
+              "confidence_score": 1.0,
+              "description": "Support OB at 115726.7000 with 100.0% confidence"
+            },
+            "direction": "bullish",
+            "confluence_strength": 0.8742418632079489,
+            "high_probability_zone": {
+              "high": 116370.0,
+              "low": 116080.1
+            }
+          },
+          {
+            "timestamp": 1752588000000,
+            "type": "fvg_ob_confluence",
+            "fvg_pattern": {
+              "timestamp": 1752210000000,
+              "type": "FVG",
+              "direction": "bullish",
+              "gap_high": 117594.3,
+              "gap_low": 116930.9,
+              "gap_size": 663.4000000000087,
+              "gap_size_percent": 0.5628907844240371,
+              "volume_confirmation": {
+                "timestamp": 1752210000000,
+                "total_volume": 825.49112135,
+                "buy_volume": 522.5188989089318,
+                "sell_volume": 302.9722224410682,
+                "delta": 219.54667646786356,
+                "delta_ratio": 0.26595885865958085
+              },
+              "confidence_score": 0.8890975447909742,
+              "strength": 1.0,
+              "description": "Bullish FVG at 116930.9000-117594.3000 with 88.9% confidence"
+            },
+            "order_block": {
+              "timestamp": 1752588000000,
+              "type": "order_block",
+              "direction": "support",
+              "price_high": 118450.0,
+              "price_low": 115726.7,
+              "volume": 627.6966121866667,
+              "volume_ratio": 2.1589015535763307,
+              "size": 2723.300000000003,
+              "strength": 1.0,
+              "confidence_score": 1.0,
+              "description": "Support OB at 115726.7000 with 100.0% confidence"
+            },
+            "direction": "bullish",
+            "confluence_strength": 1.0,
+            "high_probability_zone": {
+              "high": 117594.3,
+              "low": 116930.9
+            }
+          },
+          {
+            "timestamp": 1752588000000,
+            "type": "fvg_ob_confluence",
+            "fvg_pattern": {
+              "timestamp": 1752404400000,
+              "type": "FVG",
+              "direction": "bullish",
+              "gap_high": 117992.0,
+              "gap_low": 117856.9,
+              "gap_size": 135.10000000000582,
+              "gap_size_percent": 0.11440727125532624,
+              "volume_confirmation": {
+                "timestamp": 1752404400000,
+                "total_volume": 100.62842835,
+                "buy_volume": 86.59965726277352,
+                "sell_volume": 14.028771087226469,
+                "delta": 72.57088617554705,
+                "delta_ratio": 0.7211767824012433
+              },
+              "confidence_score": 0.6725042762910978,
+              "strength": 0.6144072712553262,
+              "description": "Bullish FVG at 117856.9000-117992.0000 with 67.3% confidence"
+            },
+            "order_block": {
+              "timestamp": 1752588000000,
+              "type": "order_block",
+              "direction": "support",
+              "price_high": 118450.0,
+              "price_low": 115726.7,
+              "volume": 627.6966121866667,
+              "volume_ratio": 2.1589015535763307,
+              "size": 2723.300000000003,
+              "strength": 1.0,
+              "confidence_score": 1.0,
+              "description": "Support OB at 115726.7000 with 100.0% confidence"
+            },
+            "direction": "bullish",
+            "confluence_strength": 0.8072036356276631,
+            "high_probability_zone": {
+              "high": 117992.0,
+              "low": 117856.9
+            }
+          },
+          {
+            "timestamp": 1752508800000,
+            "type": "fvg_ob_confluence",
+            "fvg_pattern": {
+              "timestamp": 1752458400000,
+              "type": "FVG",
+              "direction": "bullish",
+              "gap_high": 119596.1,
+              "gap_low": 119249.9,
+              "gap_size": 346.20000000001164,
+              "gap_size_percent": 0.289301123026524,
+              "volume_confirmation": {
+                "timestamp": 1752458400000,
+                "total_volume": 536.77102362,
+                "buy_volume": 333.88895417082057,
+                "sell_volume": 202.8820694491795,
+                "delta": 131.00688472164106,
+                "delta_ratio": 0.24406474820143356
+              },
+              "confidence_score": 0.7402723460481043,
+              "strength": 0.789301123026524,
+              "description": "Bullish FVG at 119249.9000-119596.1000 with 74.0% confidence"
+            },
+            "order_block": {
+              "timestamp": 1752508800000,
+              "type": "order_block",
+              "direction": "support",
+              "price_high": 122115.9,
+              "price_low": 119226.6,
+              "volume": 480.82171209333336,
+              "volume_ratio": 1.6537395950176494,
+              "size": 2889.2999999999884,
+              "strength": 1.0,
+              "confidence_score": 1.0,
+              "description": "Support OB at 119226.6000 with 100.0% confidence"
+            },
+            "direction": "bullish",
+            "confluence_strength": 0.894650561513262,
+            "high_probability_zone": {
+              "high": 119596.1,
+              "low": 119249.9
+            }
+          },
+          {
+            "timestamp": 1752508800000,
+            "type": "fvg_ob_confluence",
+            "fvg_pattern": {
+              "timestamp": 1752462000000,
+              "type": "FVG",
+              "direction": "bullish",
+              "gap_high": 120560.0,
+              "gap_low": 120088.0,
+              "gap_size": 472.0,
+              "gap_size_percent": 0.3907909127865628,
+              "volume_confirmation": {
+                "timestamp": 1752462000000,
+                "total_volume": 1053.77793802,
+                "buy_volume": 605.8852329168033,
+                "sell_volume": 447.89270510319676,
+                "delta": 157.9925278136065,
+                "delta_ratio": 0.14992962189972125
+              },
+              "confidence_score": 0.8528546899064007,
+              "strength": 0.8907909127865627,
+              "description": "Bullish FVG at 120088.0000-120560.0000 with 85.3% confidence"
+            },
+            "order_block": {
+              "timestamp": 1752508800000,
+              "type": "order_block",
+              "direction": "support",
+              "price_high": 122115.9,
+              "price_low": 119226.6,
+              "volume": 480.82171209333336,
+              "volume_ratio": 1.6537395950176494,
+              "size": 2889.2999999999884,
+              "strength": 1.0,
+              "confidence_score": 1.0,
+              "description": "Support OB at 119226.6000 with 100.0% confidence"
+            },
+            "direction": "bullish",
+            "confluence_strength": 0.9453954563932814,
+            "high_probability_zone": {
+              "high": 120560.0,
+              "low": 120088.0
+            }
+          },
+          {
+            "timestamp": 1752508800000,
+            "type": "fvg_ob_confluence",
+            "fvg_pattern": {
+              "timestamp": 1752469200000,
+              "type": "FVG",
+              "direction": "bullish",
+              "gap_high": 122041.0,
+              "gap_low": 121460.6,
+              "gap_size": 580.3999999999942,
+              "gap_size_percent": 0.4739762227916858,
+              "volume_confirmation": {
+                "timestamp": 1752469200000,
+                "total_volume": 912.12528423,
+                "buy_volume": 777.5308972834345,
+                "sell_volume": 134.59438694656555,
+                "delta": 642.9365103368689,
+                "delta_ratio": 0.7048774126238858
+              },
+              "confidence_score": 0.9036971830985904,
+              "strength": 0.9739762227916857,
+              "description": "Bullish FVG at 121460.6000-122041.0000 with 90.4% confidence"
+            },
+            "order_block": {
+              "timestamp": 1752508800000,
+              "type": "order_block",
+              "direction": "support",
+              "price_high": 122115.9,
+              "price_low": 119226.6,
+              "volume": 480.82171209333336,
+              "volume_ratio": 1.6537395950176494,
+              "size": 2889.2999999999884,
+              "strength": 1.0,
+              "confidence_score": 1.0,
+              "description": "Support OB at 119226.6000 with 100.0% confidence"
+            },
+            "direction": "bullish",
+            "confluence_strength": 0.9869881113958429,
+            "high_probability_zone": {
+              "high": 122041.0,
+              "low": 121460.6
+            }
+          },
+          {
+            "timestamp": 1752548400000,
+            "type": "fvg_ob_confluence",
+            "fvg_pattern": {
+              "timestamp": 1752548400000,
+              "type": "FVG",
+              "direction": "bearish",
+              "gap_high": 117822.9,
+              "gap_low": 117519.8,
+              "gap_size": 303.09999999999127,
+              "gap_size_percent": 0.2587102385579753,
+              "volume_confirmation": {
+                "timestamp": 1752548400000,
+                "total_volume": 1175.43387583,
+                "buy_volume": 260.85451970905575,
+                "sell_volume": 914.5793561209443,
+                "delta": -653.7248364118886,
+                "delta_ratio": -0.5561561988761631
+              },
+              "confidence_score": 0.7904479154909018,
+              "strength": 0.7587102385579754,
+              "description": "Bearish FVG at 117519.8000-117822.9000 with 79.0% confidence"
+            },
+            "order_block": {
+              "timestamp": 1752224400000,
+              "type": "order_block",
+              "direction": "resistance",
+              "price_high": 118868.0,
+              "price_low": 117443.3,
+              "volume": 441.0795253166668,
+              "volume_ratio": 1.5170502022299903,
+              "size": 1424.699999999997,
+              "strength": 1.0,
+              "confidence_score": 1.0,
+              "description": "Resistance OB at 118868.0000 with 100.0% confidence"
+            },
+            "direction": "bearish",
+            "confluence_strength": 0.8793551192789877,
+            "high_probability_zone": {
+              "high": 117822.9,
+              "low": 117519.8
+            }
+          },
+          {
+            "timestamp": 1752588000000,
+            "type": "fvg_ob_confluence",
+            "fvg_pattern": {
+              "timestamp": 1752588000000,
+              "type": "FVG",
+              "direction": "bearish",
+              "gap_high": 117147.8,
+              "gap_low": 116749.9,
+              "gap_size": 397.90000000000873,
+              "gap_size_percent": 0.3429935866492041,
+              "volume_confirmation": {
+                "timestamp": 1752588000000,
+                "total_volume": 916.20769096,
+                "buy_volume": 94.63857212464671,
+                "sell_volume": 821.5691188353533,
+                "delta": -726.9305467107065,
+                "delta_ratio": -0.7934124040685913
+              },
+              "confidence_score": 0.8716646842146578,
+              "strength": 0.8429935866492041,
+              "description": "Bearish FVG at 116749.9000-117147.8000 with 87.2% confidence"
+            },
+            "order_block": {
+              "timestamp": 1752181200000,
+              "type": "order_block",
+              "direction": "resistance",
+              "price_high": 117548.2,
+              "price_low": 112982.0,
+              "volume": 699.27686566,
+              "volume_ratio": 2.4050948855597936,
+              "size": 4566.199999999997,
+              "strength": 1.0,
+              "confidence_score": 1.0,
+              "description": "Resistance OB at 117548.2000 with 100.0% confidence"
+            },
+            "direction": "bearish",
+            "confluence_strength": 0.9214967933246021,
+            "high_probability_zone": {
+              "high": 117147.8,
+              "low": 116749.9
+            }
+          },
+          {
+            "timestamp": 1752595200000,
+            "type": "fvg_ob_confluence",
+            "fvg_pattern": {
+              "timestamp": 1752595200000,
+              "type": "FVG",
+              "direction": "bullish",
+              "gap_high": 117124.0,
+              "gap_low": 116749.9,
+              "gap_size": 374.1000000000058,
+              "gap_size_percent": 0.31924180710831934,
+              "volume_confirmation": {
+                "timestamp": 1752595200000,
+                "total_volume": 480.94448905,
+                "buy_volume": 290.65607979543154,
+                "sell_volume": 190.28840925456848,
+                "delta": 100.36767054086306,
+                "delta_ratio": 0.2086886799329322
+              },
+              "confidence_score": 0.7937880568349759,
+              "strength": 0.8192418071083194,
+              "description": "Bullish FVG at 116749.9000-117124.0000 with 79.4% confidence"
+            },
+            "order_block": {
+              "timestamp": 1752588000000,
+              "type": "order_block",
+              "direction": "support",
+              "price_high": 118450.0,
+              "price_low": 115726.7,
+              "volume": 627.6966121866667,
+              "volume_ratio": 2.1589015535763307,
+              "size": 2723.300000000003,
+              "strength": 1.0,
+              "confidence_score": 1.0,
+              "description": "Support OB at 115726.7000 with 100.0% confidence"
+            },
+            "direction": "bullish",
+            "confluence_strength": 0.9096209035541597,
+            "high_probability_zone": {
+              "high": 117124.0,
+              "low": 116749.9
+            }
+          },
+          {
+            "timestamp": 1752613200000,
+            "type": "fvg_ob_confluence",
+            "fvg_pattern": {
+              "timestamp": 1752613200000,
+              "type": "FVG",
+              "direction": "bullish",
+              "gap_high": 117232.4,
+              "gap_low": 116692.3,
+              "gap_size": 540.0999999999913,
+              "gap_size_percent": 0.45947226619955894,
+              "volume_confirmation": {
+                "timestamp": 1752613200000,
+                "total_volume": 146.99896902,
+                "buy_volume": 142.29940858174533,
+                "sell_volume": 4.699560438254675,
+                "delta": 137.59984814349065,
+                "delta_ratio": 0.9360599537590597
+              },
+              "confidence_score": 0.9754604161683793,
+              "strength": 0.9594722661995589,
+              "description": "Bullish FVG at 116692.3000-117232.4000 with 97.5% confidence"
+            },
+            "order_block": {
+              "timestamp": 1752588000000,
+              "type": "order_block",
+              "direction": "support",
+              "price_high": 118450.0,
+              "price_low": 115726.7,
+              "volume": 627.6966121866667,
+              "volume_ratio": 2.1589015535763307,
+              "size": 2723.300000000003,
+              "strength": 1.0,
+              "confidence_score": 1.0,
+              "description": "Support OB at 115726.7000 with 100.0% confidence"
+            },
+            "direction": "bullish",
+            "confluence_strength": 0.9797361330997795,
+            "high_probability_zone": {
+              "high": 117232.4,
+              "low": 116692.3
+            }
+          }
+        ]
+      },
+      "volume_insights": {
+        "volume_absorptions": 7,
+        "cvd_divergences": 59,
+        "bullish_volume_signals": 32,
+        "bearish_volume_signals": 27,
+        "institutional_activity": 7
+      }
+    },
+    "gpt_descriptions": {
+      "market_structure": "No clear market structure signals detected",
+      "support_resistance": "Detected 2 support levels and 4 resistance levels with institutional volume",
+      "fair_value_gaps": "Detected 12 bullish FVGs and 5 bearish FVGs representing unfilled market inefficiencies",
+      "liquidity_analysis": "Detected 0 External Range Liquidity sweeps and 6 Internal Range Liquidity sweeps",
+      "inducement_analysis": "Detected 12 inducement patterns indicating potential smart money manipulation",
+      "volume_analysis": "Volume analysis shows 7 absorption patterns and 59 CVD divergences"
+    },
+    "pattern_counts": {
+      "choch_bos": 0,
+      "order_blocks": 6,
+      "fvg": 17,
+      "liquidity_sweeps": 6,
+      "inducements": 12,
+      "confluences": 10
+    },
+    "visualization_ready": {
+      "levels": [
+        {
+          "price": 112000.0,
+          "type": "resistance",
+          "strength": 1.0,
+          "source": "order_block"
+        },
+        {
+          "price": 117548.2,
+          "type": "resistance",
+          "strength": 1.0,
+          "source": "order_block"
+        },
+        {
+          "price": 118868.0,
+          "type": "resistance",
+          "strength": 1.0,
+          "source": "order_block"
+        },
+        {
+          "price": 123226.0,
+          "type": "resistance",
+          "strength": 1.0,
+          "source": "order_block"
+        },
+        {
+          "price": 119226.6,
+          "type": "support",
+          "strength": 1.0,
+          "source": "order_block"
+        },
+        {
+          "price": 115726.7,
+          "type": "support",
+          "strength": 1.0,
+          "source": "order_block"
+        },
+        {
+          "price": 110067.55,
+          "type": "fvg",
+          "strength": 0.966343457007773,
+          "source": "fair_value_gap"
+        },
+        {
+          "price": 111991.9,
+          "type": "fvg",
+          "strength": 0.9677969762418993,
+          "source": "fair_value_gap"
+        },
+        {
+          "price": 112853.5,
+          "type": "fvg",
+          "strength": 0.7880689708542152,
+          "source": "fair_value_gap"
+        },
+        {
+          "price": 114685.9,
+          "type": "fvg",
+          "strength": 0.9163468474967541,
+          "source": "fair_value_gap"
+        },
+        {
+          "price": 116225.05,
+          "type": "fvg",
+          "strength": 0.7416132161930202,
+          "source": "fair_value_gap"
+        },
+        {
+          "price": 117262.6,
+          "type": "fvg",
+          "strength": 0.8890975447909742,
+          "source": "fair_value_gap"
+        },
+        {
+          "price": 119423.0,
+          "type": "fvg",
+          "strength": 0.7402723460481043,
+          "source": "fair_value_gap"
+        },
+        {
+          "price": 120324.0,
+          "type": "fvg",
+          "strength": 0.8528546899064007,
+          "source": "fair_value_gap"
+        },
+        {
+          "price": 121750.8,
+          "type": "fvg",
+          "strength": 0.9036971830985904,
+          "source": "fair_value_gap"
+        },
+        {
+          "price": 120484.3,
+          "type": "fvg",
+          "strength": 0.8075672942651018,
+          "source": "fair_value_gap"
+        },
+        {
+          "price": 118993.65,
+          "type": "fvg",
+          "strength": 0.7382957869432301,
+          "source": "fair_value_gap"
+        },
+        {
+          "price": 117671.35,
+          "type": "fvg",
+          "strength": 0.7904479154909018,
+          "source": "fair_value_gap"
+        },
+        {
+          "price": 116948.85,
+          "type": "fvg",
+          "strength": 0.8716646842146578,
+          "source": "fair_value_gap"
+        },
+        {
+          "price": 116936.95,
+          "type": "fvg",
+          "strength": 0.7937880568349759,
+          "source": "fair_value_gap"
+        },
+        {
+          "price": 116962.35,
+          "type": "fvg",
+          "strength": 0.9754604161683793,
+          "source": "fair_value_gap"
+        },
+        {
+          "price": 118495.79999999999,
+          "type": "fvg",
+          "strength": 0.8567469411858122,
+          "source": "fair_value_gap"
+        },
+        {
+          "price": 119025.1,
+          "type": "fvg",
+          "strength": 0.8257867017653299,
+          "source": "fair_value_gap"
+        }
+      ],
+      "zones": [
+        {
+          "high": 116370.0,
+          "low": 116080.1,
+          "type": "fvg_ob_confluence",
+          "strength": 0.8742418632079489
+        },
+        {
+          "high": 117594.3,
+          "low": 116930.9,
+          "type": "fvg_ob_confluence",
+          "strength": 1.0
+        },
+        {
+          "high": 117992.0,
+          "low": 117856.9,
+          "type": "fvg_ob_confluence",
+          "strength": 0.8072036356276631
+        },
+        {
+          "high": 119596.1,
+          "low": 119249.9,
+          "type": "fvg_ob_confluence",
+          "strength": 0.894650561513262
+        },
+        {
+          "high": 120560.0,
+          "low": 120088.0,
+          "type": "fvg_ob_confluence",
+          "strength": 0.9453954563932814
+        },
+        {
+          "high": 122041.0,
+          "low": 121460.6,
+          "type": "fvg_ob_confluence",
+          "strength": 0.9869881113958429
+        },
+        {
+          "high": 117822.9,
+          "low": 117519.8,
+          "type": "fvg_ob_confluence",
+          "strength": 0.8793551192789877
+        },
+        {
+          "high": 117147.8,
+          "low": 116749.9,
+          "type": "fvg_ob_confluence",
+          "strength": 0.9214967933246021
+        },
+        {
+          "high": 117124.0,
+          "low": 116749.9,
+          "type": "fvg_ob_confluence",
+          "strength": 0.9096209035541597
+        },
+        {
+          "high": 117232.4,
+          "low": 116692.3,
+          "type": "fvg_ob_confluence",
+          "strength": 0.9797361330997795
+        }
+      ],
+      "signals": [
+        {
+          "timestamp": 1752062400000,
+          "price": 109525.3,
+          "type": "liquidity_sweep",
+          "direction": "bearish",
+          "strength": 1.0
+        },
+        {
+          "timestamp": 1752166800000,
+          "price": 113800.0,
+          "type": "liquidity_sweep",
+          "direction": "bearish",
+          "strength": 1.0
+        },
+        {
+          "timestamp": 1752210000000,
+          "price": 118409.0,
+          "type": "liquidity_sweep",
+          "direction": "bearish",
+          "strength": 1.0
+        },
+        {
+          "timestamp": 1752415200000,
+          "price": 119449.9,
+          "type": "liquidity_sweep",
+          "direction": "bearish",
+          "strength": 1.0
+        },
+        {
+          "timestamp": 1752469200000,
+          "price": 122679.7,
+          "type": "liquidity_sweep",
+          "direction": "bearish",
+          "strength": 1.0
+        },
+        {
+          "timestamp": 1752552000000,
+          "price": 116285.8,
+          "type": "liquidity_sweep",
+          "direction": "bullish",
+          "strength": 1.0
+        }
+      ]
+    }
+  },
+  "trading_signals": [],
+  "confidence_score": 0.6677594811644135,
+  "smc_summary": {
+    "analysis_quality": "medium",
+    "confidence_score": 0.6677594811644135,
+    "market_bias": "neutral",
+    "bias_strength": 0.0,
+    "pattern_summary": {
+      "total_patterns": 30,
+      "strong_patterns": 23,
+      "choch_bos_count": 0,
+      "order_block_count": 6,
+      "fvg_count": 18,
+      "liquidity_sweep_count": 6,
+      "inducement_count": 12
+    },
+    "key_levels": {
+      "resistance_levels": [
+        123226.0,
+        118868.0,
+        117548.2
+      ],
+      "support_levels": [
+        115726.7,
+        119226.6
+      ],
+      "fvg_levels": [
+        109579.1,
+        111416.0,
+        112725.0
+      ]
+    },
+    "trading_context": {
+      "high_probability_zones": 6,
+      "confluence_opportunities": 5,
+      "risk_areas": 6
+    },
+    "recommendation": "MEDIUM CONFIDENCE: Wait for clearer signals, mixed structure"
+  }
+}

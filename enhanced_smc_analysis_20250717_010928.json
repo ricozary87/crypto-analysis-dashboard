@@ -1,0 +1,54 @@
+{
+  "symbol": "UNKNOWN",
+  "timeframe": "1H",
+  "timestamp": 1752714568534,
+  "current_price": 0.0,
+  "structure": {
+    "swing_points": {
+      "swing_highs": [],
+      "swing_lows": []
+    },
+    "choch_bos_signals": [],
+    "market_structure": {
+      "trend": "neutral",
+      "trend_strength": 0.5,
+      "structure_quality": 0.5
+    }
+  },
+  "order_blocks": [],
+  "fvg": [],
+  "liquidity_sweeps": [],
+  "eqh_eql_signals": [],
+  "inducement": [],
+  "nested_order_blocks": [],
+  "confluence_zones": [],
+  "volume_confirmation": {
+    "volume_deltas": [],
+    "cvd_data": [],
+    "volume_absorptions": [],
+    "cvd_divergences": []
+  },
+  "ai_snapshot": {
+    "ai_summary": {},
+    "gpt_descriptions": {},
+    "pattern_counts": {},
+    "visualization_ready": {}
+  },
+  "trading_signals": [],
+  "confidence_score": 0.0,
+  "smc_summary": {
+    "analysis_quality": "low",
+    "confidence_score": 0.0,
+    "market_bias": "neutral",
+    "pattern_summary": {
+      "total_patterns": 0
+    },
+    "key_levels": {
+      "resistance_levels": [],
+      "support_levels": [],
+      "fvg_levels": []
+    },
+    "trading_context": {},
+    "recommendation": "No analysis available"
+  }
+}
