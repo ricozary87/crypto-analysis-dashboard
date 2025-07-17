@@ -62,6 +62,7 @@ def test_technical_analyzer():
         print(f"   Speed improvement: {time1/time2:.1f}x faster")
         # Cache hit rate method tidak ada, hapus
         # print(f"   Cache hit rate: {analyzer.get_cache_hit_rate():.1%}")
+        # Skip cache hit rate display untuk sekarang
         
         # Display analysis summary
         print(f"\n📊 Technical Analysis Summary:")

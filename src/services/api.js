@@ -1,8 +1,8 @@
 // API service for backend communication
 const API_BASE_URL = 'http://localhost:5000/api'
 
-// Generic API call function
-async function apiCall(endpoint, options = {}) {
+// Generic API call function with retry mechanism
+async function apiCall(endpoint, options = {}, retryCount = 0) {
   const url = `${API_BASE_URL}${endpoint}`
   
   const defaultOptions = {
@@ -10,20 +10,48 @@ async function apiCall(endpoint, options = {}) {
     headers: {
       'Content-Type': 'application/json',
     },
+    timeout: 10000, // 10 second timeout
     ...options
   }
   
   try {
-    const response = await fetch(url, defaultOptions)
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), defaultOptions.timeout)
+    
+    const response = await fetch(url, {
+      ...defaultOptions,
+      signal: controller.signal
+    })
+    
+    clearTimeout(timeoutId)
     
     if (!response.ok) {
+      // Specific handling for 503 Service Unavailable
+      if (response.status === 503) {
+        throw new Error(`Service temporarily unavailable (503)`)
+      }
       throw new Error(`HTTP error! status: ${response.status}`)
     }
     
     const data = await response.json()
     return data
   } catch (error) {
-    console.error(`API call failed for ${endpoint}:`, error)
+    console.error(`API call failed for ${endpoint} (attempt ${retryCount + 1}):`, error)
+    
+    // Retry logic untuk specific errors
+    if (retryCount < 3 && (
+      error.name === 'AbortError' || 
+      error.message.includes('503') || 
+      error.message.includes('timeout') ||
+      error.message.includes('Failed to fetch')
+    )) {
+      const delay = Math.min(1000 * Math.pow(2, retryCount), 5000) // Exponential backoff, max 5s
+      console.log(`Retrying ${endpoint} in ${delay}ms...`)
+      
+      await new Promise(resolve => setTimeout(resolve, delay))
+      return apiCall(endpoint, options, retryCount + 1)
+    }
+    
     throw error
   }
 }

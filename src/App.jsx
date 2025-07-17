@@ -8,6 +8,7 @@ import OrderFlowPanel from './components/OrderFlowPanel'
 import IndicatorsPanel from './components/IndicatorsPanel'
 import SMCPanel from './components/SMCPanel'
 import GPTSignalBox from './components/GPTSignalBox'
+import ErrorBoundary from './components/ErrorBoundary'
 import { generateDummyData, getCurrentMarketData } from './services/dummyData'
 import { generateDummyOrderbook } from './services/orderbook'
 import { wsManager, marketAPI, analysisAPI } from './services/api'
@@ -165,46 +166,45 @@ function App() {
             </div>
           </div>
 
-          {/* Bottom Panels */}
+          {/* Bottom Panels - Responsive Layout */}
           <div className="h-80 flex-shrink-0 p-4">
-            <div className="grid grid-cols-4 gap-4 h-full">
-              <OrderFlowPanel
-                data={chartData}
-                orderbook={orderbook}
-              />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 h-full">
+              <ErrorBoundary>
+                <OrderFlowPanel
+                  data={chartData}
+                  orderbook={orderbook}
+                />
+              </ErrorBoundary>
               
-              <IndicatorsPanel
-                indicators={indicators}
-                onToggle={handleIndicatorToggle}
-              />
+              <ErrorBoundary>
+                <IndicatorsPanel
+                  indicators={indicators}
+                  onToggle={handleIndicatorToggle}
+                />
+              </ErrorBoundary>
               
-              <SMCPanel
-                data={{
-                  symbol: selectedPair,
-                  timeframe: selectedTimeframe,
-                  bos: false,
-                  choch: false,
-                  fvgZone: null,
-                  ob: null,
-                  liquiditySweep: false,
-                  signalStrength: 0,
-                  narrative: ''
-                }}
-              />
+              <ErrorBoundary>
+                <SMCPanel
+                  data={{
+                    symbol: selectedPair,
+                    timeframe: selectedTimeframe,
+                    bos: false,
+                    choch: false,
+                    fvgZone: null,
+                    ob: null,
+                    liquiditySweep: false,
+                    signalStrength: 0,
+                    narrative: ''
+                  }}
+                />
+              </ErrorBoundary>
               
-              <GPTSignalBox
-                data={{
-                  symbol: selectedPair,
-                  timeframe: selectedTimeframe,
-                  bias: 'neutral',
-                  entry: 0,
-                  stopLoss: 0,
-                  takeProfit: 0,
-                  riskReward: '1:1',
-                  confidence: 0,
-                  narrative: ''
-                }}
-              />
+              <ErrorBoundary>
+                <GPTSignalBox
+                  pair={selectedPair}
+                  tf={selectedTimeframe}
+                />
+              </ErrorBoundary>
             </div>
           </div>
         </div>
