@@ -22,3 +22,5 @@ prometheus-flask-exporter
 sentry-sdk
 psutil
 flask-cors
+pytest
+pytest-cov
