@@ -2070,14 +2070,53 @@ def get_enhanced_ai_narrative(symbol):
             quick_mode=quick_mode
         )
         
+        # Extract trading plan from analysis data
+        smc_analysis = analysis_data.get('smc_analysis', {})
+        signals = smc_analysis.get('trading_signals', [])
+        
+        # Determine bias from signals or analysis
+        bias = 'Neutral'
+        entry_price = analysis_data.get('current_price', 0)
+        stop_loss = entry_price * 0.98  # Default 2% SL
+        take_profit = entry_price * 1.02  # Default 2% TP
+        confidence = smc_analysis.get('confidence_score', 50)
+        
+        # Check for actual signals
+        if signals:
+            signal = signals[0]  # Use first signal
+            action = signal.get('action', '').lower()
+            if action == 'buy':
+                bias = 'Bullish'
+            elif action == 'sell':
+                bias = 'Bearish'
+            
+            entry_price = signal.get('entry_price', entry_price)
+            stop_loss = signal.get('stop_loss', stop_loss)
+            take_profit = signal.get('take_profit', take_profit)
+            confidence = signal.get('confidence', confidence)
+        else:
+            # Try to determine bias from narrative
+            if 'bullish' in narrative.lower():
+                bias = 'Bullish'
+                stop_loss = entry_price * 0.97
+                take_profit = entry_price * 1.03
+            elif 'bearish' in narrative.lower():
+                bias = 'Bearish'  
+                stop_loss = entry_price * 1.03
+                take_profit = entry_price * 0.97
+        
         return jsonify({
             'success': True,
             'symbol': symbol.upper(),
-            'language': language,
-            'quick_mode': quick_mode,
-            'narrative': narrative,
-            'generated_at': datetime.now().replace(microsecond=0).isoformat(),
-            'current_price': analysis_data.get('current_price', 0)
+            'analysis': {
+                'bias': bias,
+                'entry_price': round(entry_price, 2),
+                'stop_loss': round(stop_loss, 2),
+                'take_profit': round(take_profit, 2),
+                'confidence': round(confidence, 0),
+                'narrative': narrative
+            },
+            'generated_at': datetime.now().replace(microsecond=0).isoformat()
         })
         
     except Exception as e:
