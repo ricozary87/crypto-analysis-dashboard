@@ -27,6 +27,10 @@ class SnapshotType(Enum):
     QUICK = "quick"
     COMPREHENSIVE = "comprehensive"
     DEEP_ANALYSIS = "deep_analysis"
+    
+    def __json__(self):
+        """Make enum JSON serializable"""
+        return self.value
 
 @dataclass
 class MarketSnapshot:
@@ -73,8 +77,11 @@ class MarketSnapshot:
     data_quality: str
     
     def to_dict(self) -> Dict[str, Any]:
-        """Convert snapshot to dictionary for JSON serialization"""
-        return asdict(self)
+        """Convert snapshot to dictionary with proper JSON serialization"""
+        data = asdict(self)
+        # Convert enum to its value for JSON serialization
+        data['snapshot_type'] = self.snapshot_type.value
+        return data
 
 class SnapshotGenerator:
     """Advanced market snapshot generator with comprehensive analysis"""
@@ -243,8 +250,13 @@ class SnapshotGenerator:
                 'price_action': price_action_analysis
             }
             
-            # Generate narrative
-            narrative = self.ai_engine.generate_comprehensive_analysis(analysis_data)
+            # Generate narrative using the correct method
+            narrative = self.ai_engine.generate_ai_snapshot(
+                symbol=symbol,
+                timeframe="1H",
+                analysis_result=analysis_data,
+                quick_mode=False
+            )
             confidence = 0.75  # Calculate based on confluence
             
             return narrative, confidence

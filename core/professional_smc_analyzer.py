@@ -387,8 +387,8 @@ class ProfessionalSMCAnalyzer:
         for i, ob in enumerate(order_blocks):
             # Cari candle setelah order block yang membreak struktur
             ob_timestamp = ob['timestamp']
-            ob_high = ob.get('price_high', ob.get('price', 0))
-            ob_low = ob.get('price_low', ob.get('price', 0))
+            ob_high = ob.get('price_high', self._safe_get_price(ob))
+            ob_low = ob.get('price_low', self._safe_get_price(ob))
             
             # Cari candle yang membreak order block
             for j, candle in enumerate(data):
@@ -466,14 +466,14 @@ class ProfessionalSMCAnalyzer:
             return liquidity_sweeps  # Return original jika tidak ada swing points
         
         # Tentukan current range
-        current_range_high = max(sh['price'] for sh in recent_highs)
-        current_range_low = min(sl['price'] for sl in recent_lows)
+        current_range_high = max(self._safe_get_price(sh) for sh in recent_highs)
+        current_range_low = min(self._safe_get_price(sl) for sl in recent_lows)
         range_size = current_range_high - current_range_low
         
         self.logger.info(f"💧 Analyzing liquidity with range: {current_range_low:.2f} - {current_range_high:.2f}")
         
         for sweep in liquidity_sweeps:
-            sweep_price = sweep.get('sweep_price', sweep.get('price', 0))
+            sweep_price = self._safe_get_price(sweep)
             enhanced_sweep = sweep.copy()
             
             # Categorize berdasarkan posisi relatif terhadap range
@@ -625,8 +625,8 @@ class ProfessionalSMCAnalyzer:
             return patterns  # Return original jika tidak ada swing points
         
         # Ambil swing range terbaru
-        latest_high = max(sh['price'] for sh in recent_highs)
-        latest_low = min(sl['price'] for sl in recent_lows)
+        latest_high = max(self._safe_get_price(sh) for sh in recent_highs)
+        latest_low = min(self._safe_get_price(sl) for sl in recent_lows)
         swing_range = latest_high - latest_low
         midline = latest_low + (swing_range * 0.5)  # Fibonacci 0.5
         
@@ -640,12 +640,7 @@ class ProfessionalSMCAnalyzer:
             enhanced_pattern = pattern.copy()
             
             # Get pattern price - safely handle different price fields
-            pattern_price = (pattern.get('price') or 
-                           pattern.get('sweep_price') or 
-                           pattern.get('price_high') or 
-                           pattern.get('price_low') or 
-                           pattern.get('level') or 
-                           0)
+            pattern_price = self._safe_get_price(pattern)
             
             if pattern_price > 0:
                 # Calculate position in range (0-1)
@@ -1131,6 +1126,8 @@ class ProfessionalSMCAnalyzer:
             
         except Exception as e:
             self.logger.error(f"Enhanced SMC analysis error for {symbol}: {e}")
+            import traceback
+            self.logger.error(f"Full traceback: {traceback.format_exc()}")
             return self._empty_smc_analysis()
     
     def detect_choch_bos_with_volume_confirmation(self, data: List[Dict], swing_points: Dict[str, List[Dict]], 
@@ -3635,6 +3632,31 @@ class ConfluenceDetector:
             })
         return data
     
+    def _safe_get_price(self, data_point: Dict, default: float = 0.0) -> float:
+        """
+        Safely extract price from various data structures with multiple fallbacks
+        
+        Args:
+            data_point: Dictionary that may contain price information
+            default: Default value if no price found
+            
+        Returns:
+            Price value or default
+        """
+        try:
+            # Try different possible price keys
+            price_keys = ['price', 'sweep_price', 'price_high', 'price_low', 'level', 'close', 'high', 'low']
+            
+            for key in price_keys:
+                if key in data_point and data_point[key] is not None:
+                    return float(data_point[key])
+            
+            # If no price found, return default
+            return default
+            
+        except (ValueError, TypeError, KeyError):
+            return default
+    
     def _get_previous_swing_low(self, all_swings: List[Dict], current_index: int) -> Dict:
         """Get previous swing low before current index"""
         for i in range(current_index - 1, -1, -1):
@@ -3660,8 +3682,14 @@ class ConfluenceDetector:
                 volume_factor = 1.0
             
             # Price movement factor
-            price_diff = abs(signal_point['price'] - reference_point['price'])
-            price_factor = price_diff / reference_point['price'] * 100
+            signal_price = self._safe_get_price(signal_point)
+            reference_price = self._safe_get_price(reference_point)
+            
+            if reference_price > 0:
+                price_diff = abs(signal_price - reference_price)
+                price_factor = price_diff / reference_price * 100
+            else:
+                price_factor = 0
             
             # Time factor (more recent = stronger)
             time_diff = abs(signal_point['timestamp'] - reference_point['timestamp']) / 3600000  # hours
