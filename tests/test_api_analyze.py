@@ -6,6 +6,7 @@ Testing comprehensive untuk endpoint /api/analyze/<symbol>
 import pytest
 import json
 import time
+import pandas as pd
 from unittest.mock import patch, MagicMock
 from flask import Flask
 from app import app, db
@@ -61,11 +62,21 @@ class TestAnalyzeEndpoint:
     
     def test_analyze_success_btc(self, client, mock_okx_data, expected_smc_analysis):
         """Test successful analysis untuk BTC-USDT"""
-        # Mock OKX API response
-        with patch('core.okx_fetcher.OKXAPIManager.get_historical_data') as mock_okx, \
+        # Mock OKX API response dengan method yang benar
+        with patch('core.okx_fetcher.OKXAPIManager.get_candles') as mock_okx, \
              patch('core.professional_smc_analyzer.ProfessionalSMCAnalyzer.analyze_comprehensive') as mock_smc:
             
-            mock_okx.return_value = mock_okx_data
+            # Create mock DataFrame
+            mock_df = pd.DataFrame({
+                'open': [108766.1, 108800.0, 108850.0],
+                'high': [108942.0, 108950.0, 109000.0],
+                'low': [108632.0, 108650.0, 108700.0],
+                'close': [108632.1, 108750.0, 108800.0],
+                'volume': [52.3334683, 45.2, 50.1],
+                'timestamp': pd.date_range('2024-01-01', periods=3, freq='1H')
+            })
+            
+            mock_okx.return_value = mock_df
             mock_smc.return_value = expected_smc_analysis['smc_analysis']
             
             # Test API call
@@ -94,10 +105,20 @@ class TestAnalyzeEndpoint:
         """Test multiple symbols yang valid"""
         valid_symbols = ['BTC-USDT', 'ETH-USDT', 'SOL-USDT']
         
-        with patch('core.okx_fetcher.OKXAPIManager.get_historical_data') as mock_okx, \
+        with patch('core.okx_fetcher.OKXAPIManager.get_candles') as mock_okx, \
              patch('core.professional_smc_analyzer.ProfessionalSMCAnalyzer.analyze_comprehensive') as mock_smc:
             
-            mock_okx.return_value = mock_okx_data
+            # Create mock DataFrame
+            mock_df = pd.DataFrame({
+                'open': [108766.1, 108800.0, 108850.0],
+                'high': [108942.0, 108950.0, 109000.0],
+                'low': [108632.0, 108650.0, 108700.0],
+                'close': [108632.1, 108750.0, 108800.0],
+                'volume': [52.3334683, 45.2, 50.1],
+                'timestamp': pd.date_range('2024-01-01', periods=3, freq='1H')
+            })
+            
+            mock_okx.return_value = mock_df
             mock_smc.return_value = {'confidence_score': 75.0, 'smc_summary': 'Test analysis'}
             
             for symbol in valid_symbols:
@@ -108,7 +129,7 @@ class TestAnalyzeEndpoint:
     
     def test_analyze_api_error_handling(self, client):
         """Test error handling ketika API internal error"""
-        with patch('core.okx_fetcher.OKXAPIManager.get_historical_data') as mock_okx:
+        with patch('core.okx_fetcher.OKXAPIManager.get_candles') as mock_okx:
             mock_okx.side_effect = Exception("API connection failed")
             
             response = client.get('/api/analyze/BTC-USDT')
@@ -118,10 +139,20 @@ class TestAnalyzeEndpoint:
     
     def test_analyze_response_time(self, client, mock_okx_data):
         """Test response time untuk performance monitoring"""
-        with patch('core.okx_fetcher.OKXAPIManager.get_historical_data') as mock_okx, \
+        with patch('core.okx_fetcher.OKXAPIManager.get_candles') as mock_okx, \
              patch('core.professional_smc_analyzer.ProfessionalSMCAnalyzer.analyze_comprehensive') as mock_smc:
             
-            mock_okx.return_value = mock_okx_data
+            # Create mock DataFrame
+            mock_df = pd.DataFrame({
+                'open': [108766.1, 108800.0, 108850.0],
+                'high': [108942.0, 108950.0, 109000.0],
+                'low': [108632.0, 108650.0, 108700.0],
+                'close': [108632.1, 108750.0, 108800.0],
+                'volume': [52.3334683, 45.2, 50.1],
+                'timestamp': pd.date_range('2024-01-01', periods=3, freq='1H')
+            })
+            
+            mock_okx.return_value = mock_df
             mock_smc.return_value = {'confidence_score': 60.0}
             
             start_time = time.time()
