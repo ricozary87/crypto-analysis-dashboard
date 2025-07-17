@@ -1027,6 +1027,23 @@ class ProfessionalSMCAnalyzer:
                 enhanced_choch_bos, enhanced_order_blocks, inducement_patterns, cvd_divergences
             )
             
+            # 🚀 NEW ADVANCED SMC FEATURES
+            # 1. Volume Imbalance Detection
+            volume_imbalances = self.detect_volume_imbalance(data, volume_deltas)
+            
+            # 2. FVG Refinement Entries
+            refined_fvg_entries = self.detect_fvg_refinement_entries(data, enhanced_fvg_signals, enhanced_order_blocks)
+            
+            # 3. Real-time Swing Detection
+            realtime_swings = self.detect_realtime_swing_points(data, lookback_period=10)
+            
+            # 4. Multi-timeframe Confluence (for now without HTF data)
+            mtf_confluence = self.analyze_multi_timeframe_confluence({
+                'order_blocks': enhanced_order_blocks,
+                'fvg': enhanced_fvg_signals,
+                'structure': market_structure
+            })
+            
             # 🎯 7. Generate Trading Signals with Enhanced Advanced Features
             trading_signals = self._generate_enhanced_trading_signals(
                 enhanced_choch_bos, enhanced_order_blocks, enhanced_fvg_signals, enhanced_liquidity_final, 
@@ -1082,6 +1099,15 @@ class ProfessionalSMCAnalyzer:
                     'killzone_timing_applied': True,
                     'premium_discount_mapped': True
                 },
+                
+                # 🎯 NEW ADVANCED SMC PATTERNS
+                'advanced_patterns': (
+                    volume_imbalances +
+                    refined_fvg_entries +
+                    realtime_swings.get('swing_highs', []) +
+                    realtime_swings.get('swing_lows', []) +
+                    mtf_confluence.get('confluence_signals', [])
+                ),
                 
                 # 📈 Volume Analysis
                 'volume_confirmation': {
@@ -1781,6 +1807,313 @@ class ProfessionalSMCAnalyzer:
                     })
         
         return trading_signals
+    
+    # ======================================================================
+    # 🚀 ADVANCED SMC FEATURES - FITUR LANJUTAN
+    # ======================================================================
+    
+    def detect_volume_imbalance(self, data: List[Dict], volume_deltas: List[Dict]) -> List[Dict]:
+        """
+        📊 Volume Imbalance Detection
+        
+        Deteksi ketidakseimbangan volume antara side bid/ask secara tiba-tiba
+        Mencari imbalance > 2x untuk korelasi dengan FVG atau OB
+        
+        Args:
+            data: OHLCV data
+            volume_deltas: Volume delta data
+            
+        Returns:
+            List of volume imbalance patterns
+        """
+        volume_imbalances = []
+        
+        if not volume_deltas or len(volume_deltas) < 2:
+            return volume_imbalances
+        
+        self.logger.info(f"📊 Analyzing {len(volume_deltas)} candles for volume imbalance")
+        
+        for i in range(1, len(volume_deltas)):
+            current_vd = volume_deltas[i]
+            prev_vd = volume_deltas[i-1]
+            
+            buy_volume = current_vd.get('buy_volume', 0)
+            sell_volume = current_vd.get('sell_volume', 0)
+            
+            if buy_volume > 0 and sell_volume > 0:
+                # Calculate imbalance ratio
+                if buy_volume > sell_volume:
+                    imbalance_ratio = buy_volume / sell_volume
+                    direction = 'bullish'
+                    dominant_volume = buy_volume
+                else:
+                    imbalance_ratio = sell_volume / buy_volume
+                    direction = 'bearish'
+                    dominant_volume = sell_volume
+                
+                # Check for significant imbalance (>2x)
+                if imbalance_ratio >= 2.0:
+                    candle = data[i]
+                    
+                    # Calculate confidence based on imbalance strength
+                    confidence = min(0.9, 0.4 + (imbalance_ratio / 10))
+                    
+                    # Check for volume spike
+                    avg_volume = sum(vd.get('total_volume', 0) for vd in volume_deltas[max(0, i-5):i]) / min(5, i)
+                    is_volume_spike = current_vd.get('total_volume', 0) > avg_volume * 1.5
+                    
+                    volume_imbalances.append({
+                        'timestamp': candle['timestamp'],
+                        'type': 'volume_imbalance',
+                        'direction': direction,
+                        'imbalance_ratio': imbalance_ratio,
+                        'dominant_volume': dominant_volume,
+                        'total_volume': current_vd.get('total_volume', 0),
+                        'is_volume_spike': is_volume_spike,
+                        'confidence_score': confidence,
+                        'price_level': candle['close'],
+                        'description': f"{direction.title()} volume imbalance {imbalance_ratio:.1f}:1 with {confidence:.1%} confidence"
+                    })
+        
+        return volume_imbalances
+    
+    def detect_fvg_refinement_entries(self, data: List[Dict], fvg_signals: List[Dict], 
+                                    order_blocks: List[Dict]) -> List[Dict]:
+        """
+        🎯 FVG Refinement Entry Detection
+        
+        Untuk setiap FVG, cari internal order block atau level retracement
+        untuk entry yang lebih presisi (fibo 0.62)
+        
+        Args:
+            data: OHLCV data
+            fvg_signals: Detected FVG signals
+            order_blocks: Detected order blocks
+            
+        Returns:
+            Enhanced FVG signals with refined entry zones
+        """
+        enhanced_fvgs = []
+        
+        if not fvg_signals:
+            return enhanced_fvgs
+        
+        self.logger.info(f"🎯 Analyzing {len(fvg_signals)} FVG signals for refinement entries")
+        
+        for fvg in fvg_signals:
+            enhanced_fvg = fvg.copy()
+            fvg_high = fvg.get('fvg_high', 0)
+            fvg_low = fvg.get('fvg_low', 0)
+            fvg_timestamp = fvg.get('timestamp')
+            
+            # Find internal order blocks within FVG
+            internal_obs = []
+            for ob in order_blocks:
+                ob_high = ob.get('price_high', ob.get('price', 0))
+                ob_low = ob.get('price_low', ob.get('price', 0))
+                ob_timestamp = ob.get('timestamp')
+                
+                # Check if OB is within FVG price range and timeframe
+                if (fvg_low <= ob_high <= fvg_high and 
+                    fvg_low <= ob_low <= fvg_high and
+                    ob_timestamp >= fvg_timestamp):
+                    internal_obs.append(ob)
+            
+            # Calculate Fibonacci levels for refinement
+            fvg_range = fvg_high - fvg_low
+            fibo_levels = {
+                'fibo_618': fvg_low + (fvg_range * 0.618),
+                'fibo_500': fvg_low + (fvg_range * 0.500),
+                'fibo_382': fvg_low + (fvg_range * 0.382)
+            }
+            
+            # Determine refined entry zone
+            if internal_obs:
+                # Use internal order block as refined entry
+                best_ob = max(internal_obs, key=lambda x: x.get('confidence_score', 0))
+                refined_entry = {
+                    'type': 'internal_order_block',
+                    'entry_high': best_ob.get('price_high', best_ob.get('price', 0)),
+                    'entry_low': best_ob.get('price_low', best_ob.get('price', 0)),
+                    'confidence_boost': 0.2,
+                    'ob_strength': best_ob.get('strength', 0)
+                }
+            else:
+                # Use Fibonacci 0.618 as refined entry
+                refined_entry = {
+                    'type': 'fibonacci_retracement',
+                    'entry_level': fibo_levels['fibo_618'],
+                    'fibo_382': fibo_levels['fibo_382'],
+                    'fibo_500': fibo_levels['fibo_500'],
+                    'confidence_boost': 0.15
+                }
+            
+            # Add refined entry to FVG
+            enhanced_fvg['refined_entry_zone'] = refined_entry
+            enhanced_fvg['confidence_score'] = min(0.95, 
+                enhanced_fvg.get('confidence_score', 0) + refined_entry.get('confidence_boost', 0))
+            
+            enhanced_fvgs.append(enhanced_fvg)
+        
+        return enhanced_fvgs
+    
+    def detect_realtime_swing_points(self, data: List[Dict], lookback_period: int = 10) -> Dict[str, List[Dict]]:
+        """
+        ⚡ Real-time Swing Point Detection
+        
+        Deteksi swing point yang tidak perlu menunggu candle selesai penuh
+        Untuk analisa streaming (1m/5m)
+        
+        Args:
+            data: OHLCV data
+            lookback_period: Number of candles to look back
+            
+        Returns:
+            Dictionary with swing highs and lows
+        """
+        realtime_swings = {'swing_highs': [], 'swing_lows': []}
+        
+        if len(data) < lookback_period * 2:
+            return realtime_swings
+        
+        self.logger.info(f"⚡ Detecting real-time swing points with {lookback_period} lookback")
+        
+        # Use shorter lookback for real-time detection
+        for i in range(lookback_period, len(data) - lookback_period):
+            current_candle = data[i]
+            
+            # Check for swing high (peak)
+            is_swing_high = True
+            for j in range(i - lookback_period, i + lookback_period + 1):
+                if j != i and data[j]['high'] >= current_candle['high']:
+                    is_swing_high = False
+                    break
+            
+            if is_swing_high:
+                # Calculate swing strength based on price deviation
+                price_range = max(c['high'] for c in data[i-lookback_period:i+lookback_period]) - \
+                             min(c['low'] for c in data[i-lookback_period:i+lookback_period])
+                
+                strength = min(0.9, 0.5 + (price_range / current_candle['high']))
+                
+                realtime_swings['swing_highs'].append({
+                    'timestamp': current_candle['timestamp'],
+                    'type': 'realtime_swing_high',
+                    'price': current_candle['high'],
+                    'strength': strength,
+                    'lookback_period': lookback_period,
+                    'confidence_score': 0.7 + (strength * 0.2),
+                    'description': f"Real-time swing high at {current_candle['high']:.4f}"
+                })
+            
+            # Check for swing low (valley)
+            is_swing_low = True
+            for j in range(i - lookback_period, i + lookback_period + 1):
+                if j != i and data[j]['low'] <= current_candle['low']:
+                    is_swing_low = False
+                    break
+            
+            if is_swing_low:
+                price_range = max(c['high'] for c in data[i-lookback_period:i+lookback_period]) - \
+                             min(c['low'] for c in data[i-lookback_period:i+lookback_period])
+                
+                strength = min(0.9, 0.5 + (price_range / current_candle['low']))
+                
+                realtime_swings['swing_lows'].append({
+                    'timestamp': current_candle['timestamp'],
+                    'type': 'realtime_swing_low',
+                    'price': current_candle['low'],
+                    'strength': strength,
+                    'lookback_period': lookback_period,
+                    'confidence_score': 0.7 + (strength * 0.2),
+                    'description': f"Real-time swing low at {current_candle['low']:.4f}"
+                })
+        
+        return realtime_swings
+    
+    def analyze_multi_timeframe_confluence(self, current_analysis: Dict, higher_tf_analysis: Dict = None) -> Dict:
+        """
+        📈 Multi-Timeframe Confluence Analysis
+        
+        Bandingkan hasil analisis SMC dari timeframe lebih tinggi
+        untuk validasi sinyal dengan confidence boost
+        
+        Args:
+            current_analysis: Current timeframe analysis
+            higher_tf_analysis: Higher timeframe analysis (1H/4H)
+            
+        Returns:
+            Enhanced analysis with MTF confluence
+        """
+        mtf_confluence = {
+            'has_htf_confirmation': False,
+            'confluence_signals': [],
+            'confidence_boost': 0.0
+        }
+        
+        if not higher_tf_analysis:
+            return mtf_confluence
+        
+        self.logger.info(f"📈 Analyzing multi-timeframe confluence")
+        
+        # Get current timeframe patterns
+        current_obs = current_analysis.get('order_blocks', [])
+        current_fvgs = current_analysis.get('fvg', [])
+        current_structure = current_analysis.get('structure', {})
+        
+        # Get higher timeframe patterns
+        htf_obs = higher_tf_analysis.get('order_blocks', [])
+        htf_fvgs = higher_tf_analysis.get('fvg', [])
+        htf_structure = higher_tf_analysis.get('structure', {})
+        
+        confluence_found = False
+        
+        # Check structure alignment
+        current_trend = current_structure.get('trend', 'neutral')
+        htf_trend = htf_structure.get('trend', 'neutral')
+        
+        if current_trend == htf_trend and current_trend != 'neutral':
+            confluence_found = True
+            mtf_confluence['confluence_signals'].append({
+                'type': 'structure_alignment',
+                'description': f"HTF and LTF both show {current_trend} trend",
+                'confidence_boost': 0.15
+            })
+        
+        # Check order block confluence
+        for current_ob in current_obs:
+            current_price = current_ob.get('price', 0)
+            for htf_ob in htf_obs:
+                htf_price = htf_ob.get('price', 0)
+                # Check if prices are within 0.5% of each other
+                if abs(current_price - htf_price) / current_price < 0.005:
+                    confluence_found = True
+                    mtf_confluence['confluence_signals'].append({
+                        'type': 'order_block_confluence',
+                        'description': f"OB confluence at {current_price:.4f}",
+                        'confidence_boost': 0.2
+                    })
+        
+        # Check FVG confluence
+        for current_fvg in current_fvgs:
+            current_mid = (current_fvg.get('fvg_high', 0) + current_fvg.get('fvg_low', 0)) / 2
+            for htf_fvg in htf_fvgs:
+                htf_mid = (htf_fvg.get('fvg_high', 0) + htf_fvg.get('fvg_low', 0)) / 2
+                if abs(current_mid - htf_mid) / current_mid < 0.01:
+                    confluence_found = True
+                    mtf_confluence['confluence_signals'].append({
+                        'type': 'fvg_confluence',
+                        'description': f"FVG confluence at {current_mid:.4f}",
+                        'confidence_boost': 0.18
+                    })
+        
+        # Calculate total confidence boost
+        mtf_confluence['has_htf_confirmation'] = confluence_found
+        mtf_confluence['confidence_boost'] = sum(
+            signal.get('confidence_boost', 0) for signal in mtf_confluence['confluence_signals']
+        )
+        
+        return mtf_confluence
     
     def _calculate_enhanced_confidence_score(self, choch_bos_signals: List[Dict], order_blocks: List[Dict],
                                            fvg_signals: List[Dict], liquidity_sweeps: List[Dict],

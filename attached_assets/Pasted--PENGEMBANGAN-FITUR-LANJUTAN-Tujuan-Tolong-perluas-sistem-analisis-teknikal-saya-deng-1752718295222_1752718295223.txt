@@ -1,0 +1,65 @@
+=== PENGEMBANGAN FITUR LANJUTAN ===
+
+🎯 Tujuan:
+Tolong perluas sistem analisis teknikal saya dengan fitur-fitur lanjutan untuk:
+- Smart Money Concept (SMC)
+- Price Action Pattern (Candlestick Behavior)
+
+Sistem ini digunakan untuk mendeteksi sinyal entry berkualitas tinggi untuk crypto trading, dengan pendekatan berbasis struktur pasar institusional, volume, dan price action.
+
+---
+
+## 📐 Tambahkan Fitur SMC Tingkat Lanjut
+
+1. **Breaker Block Detection**
+   - Deteksi order block yang telah di-break dan sekarang menjadi zona support/resistance yang baru.
+   - Tandai sebagai "breaker_block", berikan arah (support/resistance), dan konfirmasi volume jika ada.
+
+2. **Refinement Entry dalam FVG**
+   - Jika ada FVG, cari internal order block atau level retracement (misalnya fibo 0.62) untuk entry yang lebih presisi.
+   - Berikan hasil sebagai `refined_entry_zone` dalam setiap FVG.
+
+3. **Volume Imbalance Detection**
+   - Deteksi ketidakseimbangan volume antara side bid/ask secara tiba-tiba (misalnya > 2x imbalance).
+   - Tandai zona ini dan korelasikan dengan FVG atau OB jika ada.
+
+4. **Real-time Swing Detection**
+   - Buat versi real-time dari swing point (swing high/low) yang tidak perlu menunggu candle selesai penuh.
+   - Gunakan ini untuk analisa streaming (1m/5m).
+
+5. **Multi-Timeframe Confluence**
+   - Bandingkan hasil analisis SMC dari timeframe lebih tinggi (misalnya 1H atau 4H) untuk validasi sinyal 5m/15m.
+   - Tandai sinyal yang mendapat konfirmasi higher timeframe dengan confidence boost.
+
+---
+
+## 🕯️ Tambahkan Fitur Price Action Tingkat Lanjut
+
+1. **Pattern Stacking**
+   - Gabungkan 2–3 candle untuk mengenali pola kompleks seperti Morning Star, Evening Star, Three Soldiers, dll.
+
+2. **SNR Flip Detection**
+   - Deteksi area support yang berubah jadi resistance (dan sebaliknya) berdasarkan level sebelumnya yang tertembus dan di-retest.
+
+3. **Wick Trap Detector**
+   - Identifikasi candle dengan wick panjang dan body kecil yang menyentuh level penting lalu memantul (indikasi stop hunt).
+
+4. **Momentum Candle Detection**
+   - Deteksi candle dengan body besar tanpa wick (marubozu) → seringkali sebagai candle validasi breakout.
+
+5. **Compression Pattern**
+   - Deteksi rangkaian candle yang semakin kecil dengan low volatility → kemungkinan breakout besar (expansion phase).
+
+---
+
+## 📦 Output yang Diharapkan
+
+- Tambahkan output ke `smc_analysis['advanced_patterns']` dan `price_action['advanced_patterns']`
+- Semua pattern memiliki:
+  - `type`: nama pattern
+  - `direction`: bullish/bearish
+  - `confidence_score`: 0–1
+  - `timestamp`
+  - `description`
+
+Gunakan struktur  yang mudah diproses dan bisa digabungkan ke dalam sistem yang kita buat
