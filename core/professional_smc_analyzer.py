@@ -358,6 +358,31 @@ class ProfessionalSMCAnalyzer:
         
         self.logger.info("🚀 Professional SMC Analyzer initialized with enhanced features")
     
+    def _safe_get_price(self, data_point: Dict, default: float = 0.0) -> float:
+        """
+        Safely extract price from various data structures with multiple fallbacks
+        
+        Args:
+            data_point: Dictionary that may contain price information
+            default: Default value if no price found
+            
+        Returns:
+            Price value or default
+        """
+        try:
+            # Try different possible price keys
+            price_keys = ['price', 'sweep_price', 'price_high', 'price_low', 'level', 'close', 'high', 'low']
+            
+            for key in price_keys:
+                if key in data_point and data_point[key] is not None:
+                    return float(data_point[key])
+            
+            # If no price found, return default
+            return default
+            
+        except (ValueError, TypeError, KeyError):
+            return default
+    
     # 🚀 ADVANCED SMC LOGIC FEATURES
     # =========================================================
     
@@ -723,8 +748,8 @@ class ProfessionalSMCAnalyzer:
         
         for ob in order_blocks:
             ob_timestamp = ob['timestamp']
-            ob_high = ob.get('price_high', ob['price'])
-            ob_low = ob.get('price_low', ob['price'])
+            ob_high = ob.get('price_high', self._safe_get_price(ob))
+            ob_low = ob.get('price_low', self._safe_get_price(ob))
             ob_direction = ob['direction']
             
             # Cari candle setelah OB yang melakukan mitigation
@@ -3632,30 +3657,7 @@ class ConfluenceDetector:
             })
         return data
     
-    def _safe_get_price(self, data_point: Dict, default: float = 0.0) -> float:
-        """
-        Safely extract price from various data structures with multiple fallbacks
-        
-        Args:
-            data_point: Dictionary that may contain price information
-            default: Default value if no price found
-            
-        Returns:
-            Price value or default
-        """
-        try:
-            # Try different possible price keys
-            price_keys = ['price', 'sweep_price', 'price_high', 'price_low', 'level', 'close', 'high', 'low']
-            
-            for key in price_keys:
-                if key in data_point and data_point[key] is not None:
-                    return float(data_point[key])
-            
-            # If no price found, return default
-            return default
-            
-        except (ValueError, TypeError, KeyError):
-            return default
+
     
     def _get_previous_swing_low(self, all_swings: List[Dict], current_index: int) -> Dict:
         """Get previous swing low before current index"""
