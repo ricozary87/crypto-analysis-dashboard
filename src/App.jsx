@@ -201,6 +201,7 @@ function App() {
               
               <ErrorBoundary>
                 <GPTSignalBox
+                  key={selectedPair}
                   pair={selectedPair}
                   tf={selectedTimeframe}
                 />

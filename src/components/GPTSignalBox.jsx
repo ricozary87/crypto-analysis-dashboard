@@ -78,6 +78,16 @@ const GPTSignalBox = ({
 
   // Effect untuk auto-update saat pair berubah
   useEffect(() => {
+    // Reset state sebelum fetch untuk menghindari ghost data
+    setAiData({
+      bias: 'Loading...',
+      entry: 0,
+      sl: 0,
+      tp: 0,
+      confidence: 0,
+      narasi: 'Mengambil data analisis...'
+    });
+    
     fetchAIAnalysis();
   }, [pair, tf]); // Trigger saat pair atau timeframe berubah
 
