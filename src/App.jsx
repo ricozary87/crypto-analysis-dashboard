@@ -6,9 +6,11 @@ import OverviewPanel from './components/OverviewPanel'
 import HeatmapLiquidity from './components/HeatmapLiquidity'
 import OrderFlowPanel from './components/OrderFlowPanel'
 import IndicatorsPanel from './components/IndicatorsPanel'
+import SMCPanel from './components/SMCPanel'
+import GPTSignalBox from './components/GPTSignalBox'
 import { generateDummyData, getCurrentMarketData } from './services/dummyData'
 import { generateDummyOrderbook } from './services/orderbook'
-import { wsManager } from './services/api'
+import { wsManager, marketAPI, analysisAPI } from './services/api'
 
 function App() {
   const [selectedPair, setSelectedPair] = useState('BTC/USDT')
@@ -165,7 +167,7 @@ function App() {
 
           {/* Bottom Panels */}
           <div className="h-80 flex-shrink-0 p-4">
-            <div className="grid grid-cols-2 gap-4 h-full">
+            <div className="grid grid-cols-4 gap-4 h-full">
               <OrderFlowPanel
                 data={chartData}
                 orderbook={orderbook}
@@ -174,6 +176,34 @@ function App() {
               <IndicatorsPanel
                 indicators={indicators}
                 onToggle={handleIndicatorToggle}
+              />
+              
+              <SMCPanel
+                data={{
+                  symbol: selectedPair,
+                  timeframe: selectedTimeframe,
+                  bos: false,
+                  choch: false,
+                  fvgZone: null,
+                  ob: null,
+                  liquiditySweep: false,
+                  signalStrength: 0,
+                  narrative: ''
+                }}
+              />
+              
+              <GPTSignalBox
+                data={{
+                  symbol: selectedPair,
+                  timeframe: selectedTimeframe,
+                  bias: 'neutral',
+                  entry: 0,
+                  stopLoss: 0,
+                  takeProfit: 0,
+                  riskReward: '1:1',
+                  confidence: 0,
+                  narrative: ''
+                }}
               />
             </div>
           </div>

@@ -1,0 +1,87 @@
+ aku sudah menyelesaikan semua critical issues, dan sekarang ingin melanjutkan ke tahap penguatan sistem. Tolong bantu aku menyelesaikan tiga hal berikut ini secara terstruktur:
+
+🔄 1. React Integration (Frontend ↔ Backend)
+
+Tujuan:
+
+Hubungkan komponen React (misalnya tombol "Analisa" atau input pair) ke backend endpoint:
+
+pgsql
+Salin
+Edit
+GET /api/analyze/:pair
+Ambil data seperti:
+
+json
+Salin
+Edit
+{
+  "smc_analysis": {
+    "confidence_score": 50.197,
+    "summary": "Market is likely bullish based on current BOS/CHoCH"
+  }
+}
+Tampilkan hasil analisa di komponen <ResultCard /> atau sejenisnya
+
+Tambahkan loading spinner, error handler, dan format tampilan hasil
+
+Kebutuhan Teknis:
+
+Pakai fetch() atau axios di React
+
+Tambahkan handler di analyzeHandler.jsx
+
+Sesuaikan jika menggunakan Tailwind atau Chakra UI
+
+🛡️ 2. SQLAlchemy Raw Query Warning Fix
+
+Masalah:
+
+Terdapat peringatan dari SQLAlchemy karena penggunaan raw SQL yang tidak aman
+
+Solusi yang diharapkan:
+
+Cek dan refactor semua query seperti:
+
+python
+Salin
+Edit
+db.execute("SELECT * FROM transactions WHERE ...")
+Ubah ke:
+
+python
+Salin
+Edit
+from sqlalchemy import text
+db.execute(text("SELECT * FROM ..."))
+Atau lebih baik: gunakan ORM-style dengan session.query() atau select()
+
+⚙️ 3. Tambahkan Unit Test & Monitoring
+
+Tujuan:
+
+Buat unit test untuk endpoint /api/analyze/:pair dengan skenario:
+
+Sukses return
+
+Parameter tidak valid
+
+API error internal
+
+Contoh:
+
+python
+Salin
+Edit
+def test_analyze_success(client):
+    res = client.get("/api/analyze/BTC-USDT")
+    assert res.status_code == 200
+    assert "confidence_score" in res.json()["smc_analysis"]
+Tambahkan monitoring ringan (contoh: hitung response time API dan log error)
+
+Jika memungkinkan, pasang /metrics endpoint untuk Prometheus (opsional)
+
+🎯 Tujuanku: memastikan sistem sekarang benar-benar siap untuk production full dengan UI yang berfungsi, database yang aman, serta pengujian dasar untuk jaga stabilitas.
+
+Berikan jawaban per bagian, atau kerjakan satu-satu dengan penjelasan singkat di tiap langkah.
+

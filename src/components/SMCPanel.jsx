@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { analysisAPI } from '../services/api';
+import ResultCard from './ResultCard';
 
 const SMCPanel = ({ data }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -29,25 +31,21 @@ const SMCPanel = ({ data }) => {
     setShowAnalysis(true);
     
     try {
-      const response = await fetch('/api/analyze-smc', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          symbol: symbol,
-          timeframe: timeframe,
-          bos: bos,
-          choch: choch,
-          fvgZone: fvgZone,
-          ob: ob,
-          liquiditySweep: liquiditySweep
-        })
-      });
+      // Convert symbol from 'BTC/USDT' to 'BTC-USDT' for backend
+      const backendSymbol = symbol.replace('/', '-');
       
-      if (response.ok) {
-        const data = await response.json();
-        setAnalysisResult(data);
+      // Call backend API using the proper service
+      const response = await analysisAPI.getTechnicalAnalysis(backendSymbol, timeframe);
+      
+      if (response && response.smc_analysis) {
+        setAnalysisResult({
+          narrative: response.smc_analysis.smc_summary || 'Analisa SMC berhasil dijalankan',
+          confidence: response.smc_analysis.confidence_score || 0,
+          signals: response.smc_analysis.trading_signals || [],
+          patterns: response.smc_analysis.advanced_patterns || [],
+          marketStructure: response.smc_analysis.market_structure || {},
+          full_response: response
+        });
       } else {
         setAnalysisResult({
           narrative: 'Gagal mendapatkan analisa. Silakan coba lagi.',
@@ -55,9 +53,11 @@ const SMCPanel = ({ data }) => {
         });
       }
     } catch (error) {
+      console.error('SMC Analysis Error:', error);
       setAnalysisResult({
-        narrative: 'Error: Tidak dapat terhubung ke server.',
-        confidence: 0
+        narrative: 'Error: Tidak dapat terhubung ke server atau terjadi kesalahan dalam analisa.',
+        confidence: 0,
+        error: error.message
       });
     } finally {
       setIsAnalyzing(false);
@@ -171,35 +171,12 @@ const SMCPanel = ({ data }) => {
         )}
       </button>
 
-      {/* Analysis Result */}
-      {showAnalysis && analysisResult && (
-        <div className="bg-gray-800 border border-gray-700 rounded-lg p-4 mb-4">
-          <h4 className="text-gray-300 text-sm font-semibold mb-2 flex items-center">
-            <span className="mr-2">📡</span>
-            Hasil Analisa GPT
-          </h4>
-          <p className="text-gray-400 text-sm whitespace-pre-line leading-relaxed mb-2">
-            {analysisResult.narrative}
-          </p>
-          {analysisResult.confidence > 0 && (
-            <div className="mt-3">
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-xs text-gray-500">Confidence</span>
-                <span className="text-xs text-gray-400">{analysisResult.confidence}%</span>
-              </div>
-              <div className="w-full bg-gray-700 rounded-full h-1.5">
-                <div 
-                  className="h-1.5 rounded-full transition-all duration-300"
-                  style={{
-                    width: `${analysisResult.confidence}%`,
-                    backgroundColor: analysisResult.confidence >= 80 ? '#10b981' : analysisResult.confidence >= 60 ? '#f59e0b' : '#ef4444'
-                  }}
-                />
-              </div>
-            </div>
-          )}
-        </div>
-      )}
+      {/* Analysis Result using ResultCard */}
+      <ResultCard 
+        analysisResult={analysisResult}
+        isLoading={isAnalyzing}
+        error={analysisResult?.error}
+      />
 
       {/* GPT Analysis Narrative */}
       {narrative && (
