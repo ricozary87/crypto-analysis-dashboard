@@ -358,6 +358,591 @@ class ProfessionalSMCAnalyzer:
         
         self.logger.info("🚀 Professional SMC Analyzer initialized with enhanced features")
     
+    # 🚀 ADVANCED SMC LOGIC FEATURES
+    # =========================================================
+    
+    def detect_breaker_blocks(self, data: List[Dict], order_blocks: List[Dict], 
+                            swing_points: Dict[str, List[Dict]]) -> List[Dict]:
+        """
+        🧱 BREAKER BLOCK LOGIC
+        
+        Deteksi breaker block: area order block sebelumnya yang gagal → lalu dibreak → 
+        jadi support/resistance balik arah. Berfungsi sebagai zona reentry setelah stop hunt.
+        
+        Args:
+            data: OHLCV data
+            order_blocks: Previously detected order blocks
+            swing_points: Swing highs and lows
+            
+        Returns:
+            List of breaker block patterns
+        """
+        breaker_blocks = []
+        
+        if not order_blocks:
+            return breaker_blocks
+        
+        self.logger.info(f"🧱 Analyzing {len(order_blocks)} order blocks for breaker patterns")
+        
+        for i, ob in enumerate(order_blocks):
+            # Cari candle setelah order block yang membreak struktur
+            ob_timestamp = ob['timestamp']
+            ob_high = ob.get('price_high', ob.get('price', 0))
+            ob_low = ob.get('price_low', ob.get('price', 0))
+            
+            # Cari candle yang membreak order block
+            for j, candle in enumerate(data):
+                if candle['timestamp'] > ob_timestamp:
+                    # Check untuk bullish breaker (resistance OB yang dibreak ke atas)
+                    if (ob['direction'] == 'resistance' and 
+                        candle['close'] > ob_high * 1.001):  # 0.1% break threshold
+                        
+                        # Setelah break, area ini menjadi support
+                        breaker_blocks.append({
+                            'timestamp': candle['timestamp'],
+                            'type': 'breaker_block',
+                            'direction': 'support',  # Balik arah
+                            'original_ob': ob,
+                            'break_candle': candle,
+                            'price_high': ob_high,
+                            'price_low': ob_low,
+                            'break_price': candle['close'],
+                            'break_strength': (candle['close'] - ob_high) / ob_high,
+                            'volume_confirmation': candle['volume'] > ob.get('volume', 0) * 1.2,
+                            'confidence_score': min(1.0, 0.7 + (candle['volume'] / ob.get('volume', 1)) * 0.3)
+                        })
+                        break
+                    
+                    # Check untuk bearish breaker (support OB yang dibreak ke bawah)
+                    elif (ob['direction'] == 'support' and 
+                          candle['close'] < ob_low * 0.999):  # 0.1% break threshold
+                        
+                        # Setelah break, area ini menjadi resistance
+                        breaker_blocks.append({
+                            'timestamp': candle['timestamp'],
+                            'type': 'breaker_block',
+                            'direction': 'resistance',  # Balik arah
+                            'original_ob': ob,
+                            'break_candle': candle,
+                            'price_high': ob_high,
+                            'price_low': ob_low,
+                            'break_price': candle['close'],
+                            'break_strength': (ob_low - candle['close']) / ob_low,
+                            'volume_confirmation': candle['volume'] > ob.get('volume', 0) * 1.2,
+                            'confidence_score': min(1.0, 0.7 + (candle['volume'] / ob.get('volume', 1)) * 0.3)
+                        })
+                        break
+        
+        self.logger.info(f"🧱 Detected {len(breaker_blocks)} breaker block patterns")
+        return breaker_blocks
+    
+    def categorize_irl_erl_liquidity(self, data: List[Dict], swing_points: Dict[str, List[Dict]], 
+                                   liquidity_sweeps: List[Dict]) -> List[Dict]:
+        """
+        💧 IRL & ERL LIQUIDITY CATEGORIZATION
+        
+        Deteksi akumulasi likuiditas:
+        - IRL (Internal Range Liquidity): di dalam swing range
+        - ERL (External Range Liquidity): di luar swing range
+        
+        Args:
+            data: OHLCV data
+            swing_points: Swing highs and lows
+            liquidity_sweeps: Existing liquidity sweeps
+            
+        Returns:
+            Enhanced liquidity sweeps with IRL/ERL categorization
+        """
+        enhanced_sweeps = []
+        
+        if not liquidity_sweeps:
+            return enhanced_sweeps
+        
+        # Ambil swing range terbaru untuk referensi
+        recent_highs = swing_points.get('swing_highs', [])[-5:]
+        recent_lows = swing_points.get('swing_lows', [])[-5:]
+        
+        if not recent_highs or not recent_lows:
+            return liquidity_sweeps  # Return original jika tidak ada swing points
+        
+        # Tentukan current range
+        current_range_high = max(sh['price'] for sh in recent_highs)
+        current_range_low = min(sl['price'] for sl in recent_lows)
+        range_size = current_range_high - current_range_low
+        
+        self.logger.info(f"💧 Analyzing liquidity with range: {current_range_low:.2f} - {current_range_high:.2f}")
+        
+        for sweep in liquidity_sweeps:
+            sweep_price = sweep.get('sweep_price', sweep.get('price', 0))
+            enhanced_sweep = sweep.copy()
+            
+            # Categorize berdasarkan posisi relatif terhadap range
+            if sweep_price > current_range_high + (range_size * 0.1):
+                # External Range Liquidity - Above range
+                enhanced_sweep['liquidity_category'] = 'ERL'
+                enhanced_sweep['liquidity_type'] = 'external_high'
+                enhanced_sweep['range_position'] = 'above'
+                enhanced_sweep['significance'] = 'high'  # ERL lebih significant
+                
+            elif sweep_price < current_range_low - (range_size * 0.1):
+                # External Range Liquidity - Below range
+                enhanced_sweep['liquidity_category'] = 'ERL'
+                enhanced_sweep['liquidity_type'] = 'external_low'
+                enhanced_sweep['range_position'] = 'below'
+                enhanced_sweep['significance'] = 'high'  # ERL lebih significant
+                
+            else:
+                # Internal Range Liquidity - Within range
+                enhanced_sweep['liquidity_category'] = 'IRL'
+                enhanced_sweep['liquidity_type'] = 'internal'
+                enhanced_sweep['range_position'] = 'within'
+                enhanced_sweep['significance'] = 'medium'  # IRL kurang significant
+            
+            # Tambahkan range context
+            enhanced_sweep['range_context'] = {
+                'range_high': current_range_high,
+                'range_low': current_range_low,
+                'range_size': range_size,
+                'distance_from_range': min(
+                    abs(sweep_price - current_range_high),
+                    abs(sweep_price - current_range_low)
+                )
+            }
+            
+            enhanced_sweeps.append(enhanced_sweep)
+        
+        self.logger.info(f"💧 Categorized {len(enhanced_sweeps)} liquidity sweeps (IRL/ERL)")
+        return enhanced_sweeps
+    
+    def analyze_killzone_timing(self, data: List[Dict], patterns: List[Dict]) -> List[Dict]:
+        """
+        ⏱️ KILLZONE SMC TIMING
+        
+        Implementasi time filter berbasis sesi trading:
+        - London Open: 07:00–10:00 UTC
+        - New York Open: 13:00–16:00 UTC  
+        - Asia Session: 00:00–03:00 UTC
+        
+        Args:
+            data: OHLCV data
+            patterns: SMC patterns to analyze
+            
+        Returns:
+            Patterns with killzone timing analysis
+        """
+        killzone_patterns = []
+        
+        # Define killzone sessions (UTC)
+        killzones = {
+            'asia': {'start': 0, 'end': 3},      # 00:00-03:00 UTC
+            'london': {'start': 7, 'end': 10},   # 07:00-10:00 UTC
+            'ny': {'start': 13, 'end': 16}       # 13:00-16:00 UTC
+        }
+        
+        for pattern in patterns:
+            enhanced_pattern = pattern.copy()
+            
+            # Extract timestamp and convert to UTC hour
+            timestamp = pattern.get('timestamp', 0)
+            if timestamp:
+                dt = datetime.fromtimestamp(timestamp / 1000)
+                utc_hour = dt.hour
+                
+                # Check which killzone the pattern falls into
+                active_killzone = None
+                killzone_strength = 0.0
+                
+                for zone_name, zone_time in killzones.items():
+                    if zone_time['start'] <= utc_hour <= zone_time['end']:
+                        active_killzone = zone_name
+                        
+                        # Calculate strength based on position in killzone
+                        zone_duration = zone_time['end'] - zone_time['start']
+                        zone_progress = (utc_hour - zone_time['start']) / zone_duration
+                        
+                        # Highest strength at the beginning of killzone
+                        if zone_progress <= 0.5:
+                            killzone_strength = 1.0 - (zone_progress * 0.3)
+                        else:
+                            killzone_strength = 0.7 - ((zone_progress - 0.5) * 0.4)
+                        
+                        break
+                
+                # Add killzone analysis to pattern
+                enhanced_pattern['killzone_analysis'] = {
+                    'active_killzone': active_killzone,
+                    'killzone_strength': killzone_strength,
+                    'utc_hour': utc_hour,
+                    'timing_confidence': killzone_strength if active_killzone else 0.3,
+                    'timing_description': self._get_killzone_description(active_killzone, utc_hour)
+                }
+                
+                # Boost pattern confidence if in strong killzone
+                if active_killzone and killzone_strength > 0.7:
+                    original_confidence = enhanced_pattern.get('confidence_score', 0.5)
+                    enhanced_pattern['confidence_score'] = min(1.0, original_confidence + (killzone_strength * 0.2))
+                    enhanced_pattern['killzone_boost'] = True
+                
+            killzone_patterns.append(enhanced_pattern)
+        
+        self.logger.info(f"⏱️ Analyzed {len(killzone_patterns)} patterns for killzone timing")
+        return killzone_patterns
+    
+    def _get_killzone_description(self, killzone: str, utc_hour: int) -> str:
+        """Helper untuk generate killzone description"""
+        if killzone == 'asia':
+            return f"Asia Session (UTC {utc_hour}:00) - Lower volatility, range-bound"
+        elif killzone == 'london':
+            return f"London Open (UTC {utc_hour}:00) - High volatility, trend initiation"
+        elif killzone == 'ny':
+            return f"New York Open (UTC {utc_hour}:00) - Highest volatility, trend continuation"
+        else:
+            return f"Outside major sessions (UTC {utc_hour}:00) - Reduced significance"
+    
+    def map_premium_discount_zones(self, data: List[Dict], swing_points: Dict[str, List[Dict]], 
+                                 patterns: List[Dict]) -> List[Dict]:
+        """
+        🎯 PREMIUM/DISCOUNT ZONE MAPPING
+        
+        Tandai area berdasarkan Fibonacci 0.5 (midline) dari swing terakhir:
+        - Premium Zone: >0.5 (area mahal)
+        - Discount Zone: <0.5 (area murah)
+        
+        Args:
+            data: OHLCV data
+            swing_points: Swing highs and lows
+            patterns: SMC patterns to analyze
+            
+        Returns:
+            Patterns with premium/discount zone mapping
+        """
+        mapped_patterns = []
+        
+        recent_highs = swing_points.get('swing_highs', [])[-3:]
+        recent_lows = swing_points.get('swing_lows', [])[-3:]
+        
+        if not recent_highs or not recent_lows:
+            return patterns  # Return original jika tidak ada swing points
+        
+        # Ambil swing range terbaru
+        latest_high = max(sh['price'] for sh in recent_highs)
+        latest_low = min(sl['price'] for sl in recent_lows)
+        swing_range = latest_high - latest_low
+        midline = latest_low + (swing_range * 0.5)  # Fibonacci 0.5
+        
+        # Define zone levels
+        premium_threshold = latest_low + (swing_range * 0.618)  # 61.8% = Premium
+        discount_threshold = latest_low + (swing_range * 0.382)  # 38.2% = Discount
+        
+        self.logger.info(f"🎯 Mapping zones - High: {latest_high:.2f}, Low: {latest_low:.2f}, Mid: {midline:.2f}")
+        
+        for pattern in patterns:
+            enhanced_pattern = pattern.copy()
+            
+            # Get pattern price - safely handle different price fields
+            pattern_price = (pattern.get('price') or 
+                           pattern.get('sweep_price') or 
+                           pattern.get('price_high') or 
+                           pattern.get('price_low') or 
+                           pattern.get('level') or 
+                           0)
+            
+            if pattern_price > 0:
+                # Calculate position in range (0-1)
+                range_position = (pattern_price - latest_low) / swing_range if swing_range > 0 else 0.5
+                
+                # Determine zone
+                if range_position >= 0.618:
+                    zone_type = 'premium'
+                    zone_quality = 'high_premium'
+                    logic_validity = 'bearish_bias'  # Di premium, look for sells
+                elif range_position <= 0.382:
+                    zone_type = 'discount'
+                    zone_quality = 'high_discount'
+                    logic_validity = 'bullish_bias'  # Di discount, look for buys
+                else:
+                    zone_type = 'equilibrium'
+                    zone_quality = 'neutral'
+                    logic_validity = 'neutral_bias'
+                
+                # Add zone analysis
+                enhanced_pattern['zone_analysis'] = {
+                    'zone_type': zone_type,
+                    'zone_quality': zone_quality,
+                    'logic_validity': logic_validity,
+                    'range_position': range_position,
+                    'distance_from_midline': abs(pattern_price - midline),
+                    'swing_context': {
+                        'swing_high': latest_high,
+                        'swing_low': latest_low,
+                        'swing_range': swing_range,
+                        'midline': midline
+                    }
+                }
+                
+                # Validate logic: OB/FVG di area yang tepat
+                pattern_direction = pattern.get('direction', 'neutral')
+                
+                # Boost confidence untuk pattern yang logis
+                if ((zone_type == 'premium' and pattern_direction == 'bearish') or
+                    (zone_type == 'discount' and pattern_direction == 'bullish')):
+                    original_confidence = enhanced_pattern.get('confidence_score', 0.5)
+                    enhanced_pattern['confidence_score'] = min(1.0, original_confidence + 0.15)
+                    enhanced_pattern['zone_logic_boost'] = True
+                
+                # Reduce confidence untuk pattern yang tidak logis
+                elif ((zone_type == 'premium' and pattern_direction == 'bullish') or
+                      (zone_type == 'discount' and pattern_direction == 'bearish')):
+                    original_confidence = enhanced_pattern.get('confidence_score', 0.5)
+                    enhanced_pattern['confidence_score'] = max(0.2, original_confidence - 0.1)
+                    enhanced_pattern['zone_logic_penalty'] = True
+            
+            mapped_patterns.append(enhanced_pattern)
+        
+        self.logger.info(f"🎯 Mapped {len(mapped_patterns)} patterns to premium/discount zones")
+        return mapped_patterns
+    
+    def detect_mitigation_blocks(self, data: List[Dict], order_blocks: List[Dict]) -> List[Dict]:
+        """
+        🧱 MITIGATION BLOCK LOGIC
+        
+        Deteksi candle besar setelah OB yang "mengisi kembali" area imbalance OB sebelumnya.
+        Digunakan untuk validasi OB yang sudah di-acknowledge oleh market.
+        
+        Args:
+            data: OHLCV data
+            order_blocks: Previously detected order blocks
+            
+        Returns:
+            List of mitigation block patterns
+        """
+        mitigation_blocks = []
+        
+        if not order_blocks:
+            return mitigation_blocks
+        
+        # Calculate average candle size for reference
+        avg_candle_size = sum(abs(candle['close'] - candle['open']) for candle in data) / len(data)
+        
+        self.logger.info(f"🧱 Analyzing {len(order_blocks)} order blocks for mitigation patterns")
+        
+        for ob in order_blocks:
+            ob_timestamp = ob['timestamp']
+            ob_high = ob.get('price_high', ob['price'])
+            ob_low = ob.get('price_low', ob['price'])
+            ob_direction = ob['direction']
+            
+            # Cari candle setelah OB yang melakukan mitigation
+            for i, candle in enumerate(data):
+                if candle['timestamp'] > ob_timestamp:
+                    candle_size = abs(candle['close'] - candle['open'])
+                    
+                    # Mitigation criteria:
+                    # 1. Candle besar (>2x average)
+                    # 2. Candle "mengisi" area OB
+                    # 3. Volume tinggi
+                    
+                    is_large_candle = candle_size > avg_candle_size * 2.0
+                    
+                    if is_large_candle:
+                        # Check apakah candle mengisi area OB
+                        candle_fills_ob = False
+                        mitigation_type = None
+                        
+                        if ob_direction == 'resistance':
+                            # Untuk resistance OB, mitigation = candle naik yang mengisi area
+                            if (candle['close'] > candle['open'] and 
+                                candle['open'] < ob_high and candle['close'] > ob_low):
+                                candle_fills_ob = True
+                                mitigation_type = 'bullish_mitigation'
+                        
+                        elif ob_direction == 'support':
+                            # Untuk support OB, mitigation = candle turun yang mengisi area
+                            if (candle['close'] < candle['open'] and 
+                                candle['open'] > ob_low and candle['close'] < ob_high):
+                                candle_fills_ob = True
+                                mitigation_type = 'bearish_mitigation'
+                        
+                        if candle_fills_ob:
+                            # Calculate mitigation strength
+                            fill_percentage = min(1.0, candle_size / (ob_high - ob_low))
+                            volume_strength = candle['volume'] / ob.get('volume', candle['volume'])
+                            
+                            mitigation_blocks.append({
+                                'timestamp': candle['timestamp'],
+                                'type': 'mitigation_block',
+                                'mitigation_type': mitigation_type,
+                                'original_ob': ob,
+                                'mitigation_candle': candle,
+                                'fill_percentage': fill_percentage,
+                                'volume_strength': volume_strength,
+                                'candle_size_ratio': candle_size / avg_candle_size,
+                                'confidence_score': min(1.0, 0.6 + (fill_percentage * 0.2) + (volume_strength * 0.2)),
+                                'market_acknowledgment': True,  # OB sudah di-acknowledge
+                                'ob_validation': 'confirmed'
+                            })
+                            break  # Hanya ambil mitigation pertama per OB
+        
+        self.logger.info(f"🧱 Detected {len(mitigation_blocks)} mitigation block patterns")
+        return mitigation_blocks
+    
+    def detect_trendline_liquidity(self, data: List[Dict], swing_points: Dict[str, List[Dict]]) -> List[Dict]:
+        """
+        📉 TRENDLINE LIQUIDITY DETECTION
+        
+        Identifikasi support/resistance miring (trendline) yang tersentuh berkali-kali
+        → akumulasi likuiditas. Saat break, anggap sebagai sweep zone + entry confluence.
+        
+        Args:
+            data: OHLCV data
+            swing_points: Swing highs and lows
+            
+        Returns:
+            List of trendline liquidity patterns
+        """
+        trendline_liquidities = []
+        
+        swing_highs = swing_points.get('swing_highs', [])
+        swing_lows = swing_points.get('swing_lows', [])
+        
+        if len(swing_highs) < 3 or len(swing_lows) < 3:
+            return trendline_liquidities
+        
+        self.logger.info(f"📉 Analyzing trendlines from {len(swing_highs)} highs and {len(swing_lows)} lows")
+        
+        # Analyze swing highs untuk resistance trendlines
+        for i in range(len(swing_highs) - 2):
+            point1 = swing_highs[i]
+            point2 = swing_highs[i + 1]
+            point3 = swing_highs[i + 2]
+            
+            # Calculate trendline slope
+            time_diff = point2['timestamp'] - point1['timestamp']
+            price_diff = point2['price'] - point1['price']
+            
+            if time_diff > 0:
+                slope = price_diff / time_diff
+                
+                # Project trendline to point3
+                projected_price = point1['price'] + slope * (point3['timestamp'] - point1['timestamp'])
+                price_deviation = abs(point3['price'] - projected_price) / point3['price']
+                
+                # Jika point3 dekat dengan trendline (deviation < 2%), ini valid trendline
+                if price_deviation < 0.02:
+                    # Hitung berapa kali trendline tersentuh
+                    touch_count = 3  # Minimal 3 (point1, point2, point3)
+                    
+                    # Cari touch tambahan
+                    for j in range(i + 3, len(swing_highs)):
+                        point = swing_highs[j]
+                        projected = point1['price'] + slope * (point['timestamp'] - point1['timestamp'])
+                        deviation = abs(point['price'] - projected) / point['price']
+                        
+                        if deviation < 0.02:
+                            touch_count += 1
+                    
+                    # Cari trendline break
+                    trendline_break = None
+                    for candle in data:
+                        if candle['timestamp'] > point3['timestamp']:
+                            projected = point1['price'] + slope * (candle['timestamp'] - point1['timestamp'])
+                            
+                            # Check untuk break
+                            if candle['high'] > projected * 1.01:  # 1% break threshold
+                                trendline_break = {
+                                    'timestamp': candle['timestamp'],
+                                    'break_price': candle['high'],
+                                    'projected_price': projected,
+                                    'break_strength': (candle['high'] - projected) / projected,
+                                    'volume': candle['volume']
+                                }
+                                break
+                    
+                    # Liquidity accumulation strength
+                    liquidity_strength = min(1.0, 0.4 + (touch_count * 0.15))
+                    
+                    trendline_liquidities.append({
+                        'timestamp': point1['timestamp'],
+                        'type': 'trendline_liquidity',
+                        'trendline_type': 'resistance',
+                        'direction': 'bearish',
+                        'touch_points': [point1, point2, point3],
+                        'touch_count': touch_count,
+                        'slope': slope,
+                        'liquidity_strength': liquidity_strength,
+                        'trendline_break': trendline_break,
+                        'sweep_potential': 'high' if trendline_break else 'building',
+                        'confidence_score': min(1.0, 0.5 + (touch_count * 0.1) + (0.3 if trendline_break else 0))
+                    })
+        
+        # Analyze swing lows untuk support trendlines
+        for i in range(len(swing_lows) - 2):
+            point1 = swing_lows[i]
+            point2 = swing_lows[i + 1]
+            point3 = swing_lows[i + 2]
+            
+            # Calculate trendline slope
+            time_diff = point2['timestamp'] - point1['timestamp']
+            price_diff = point2['price'] - point1['price']
+            
+            if time_diff > 0:
+                slope = price_diff / time_diff
+                
+                # Project trendline to point3
+                projected_price = point1['price'] + slope * (point3['timestamp'] - point1['timestamp'])
+                price_deviation = abs(point3['price'] - projected_price) / point3['price']
+                
+                # Jika point3 dekat dengan trendline (deviation < 2%), ini valid trendline
+                if price_deviation < 0.02:
+                    # Hitung berapa kali trendline tersentuh
+                    touch_count = 3  # Minimal 3 (point1, point2, point3)
+                    
+                    # Cari touch tambahan
+                    for j in range(i + 3, len(swing_lows)):
+                        point = swing_lows[j]
+                        projected = point1['price'] + slope * (point['timestamp'] - point1['timestamp'])
+                        deviation = abs(point['price'] - projected) / point['price']
+                        
+                        if deviation < 0.02:
+                            touch_count += 1
+                    
+                    # Cari trendline break
+                    trendline_break = None
+                    for candle in data:
+                        if candle['timestamp'] > point3['timestamp']:
+                            projected = point1['price'] + slope * (candle['timestamp'] - point1['timestamp'])
+                            
+                            # Check untuk break
+                            if candle['low'] < projected * 0.99:  # 1% break threshold
+                                trendline_break = {
+                                    'timestamp': candle['timestamp'],
+                                    'break_price': candle['low'],
+                                    'projected_price': projected,
+                                    'break_strength': (projected - candle['low']) / projected,
+                                    'volume': candle['volume']
+                                }
+                                break
+                    
+                    # Liquidity accumulation strength
+                    liquidity_strength = min(1.0, 0.4 + (touch_count * 0.15))
+                    
+                    trendline_liquidities.append({
+                        'timestamp': point1['timestamp'],
+                        'type': 'trendline_liquidity',
+                        'trendline_type': 'support',
+                        'direction': 'bullish',
+                        'touch_points': [point1, point2, point3],
+                        'touch_count': touch_count,
+                        'slope': slope,
+                        'liquidity_strength': liquidity_strength,
+                        'trendline_break': trendline_break,
+                        'sweep_potential': 'high' if trendline_break else 'building',
+                        'confidence_score': min(1.0, 0.5 + (touch_count * 0.1) + (0.3 if trendline_break else 0))
+                    })
+        
+        self.logger.info(f"📉 Detected {len(trendline_liquidities)} trendline liquidity patterns")
+        return trendline_liquidities
+    
     def analyze_comprehensive(self, df: pd.DataFrame, symbol: str, timeframe: str) -> Dict[str, Any]:
         """
         🚀 Comprehensive SMC Analysis with Enhanced Features
@@ -406,27 +991,58 @@ class ProfessionalSMCAnalyzer:
             nested_order_blocks = self.confluence_detector.detect_nested_order_blocks(order_blocks)
             fvg_ob_confluences = self.confluence_detector.detect_fvg_ob_confluence(fvg_signals, order_blocks)
             
-            # 🧠 5. Enhanced Market Structure Analysis
+            # 🚀 5. ADVANCED SMC FEATURES
+            self.logger.info("🚀 Running Advanced SMC Features Analysis...")
+            
+            # 5.1 Breaker Block Detection
+            breaker_blocks = self.detect_breaker_blocks(data, order_blocks, swing_points)
+            
+            # 5.2 Enhanced IRL/ERL Liquidity Categorization
+            enhanced_liquidity_sweeps = self.categorize_irl_erl_liquidity(data, swing_points, liquidity_sweeps)
+            
+            # 5.3 Mitigation Block Detection
+            mitigation_blocks = self.detect_mitigation_blocks(data, order_blocks)
+            
+            # 5.4 Trendline Liquidity Detection
+            trendline_liquidities = self.detect_trendline_liquidity(data, swing_points)
+            
+            # 5.5 Killzone Timing Analysis (Apply to all patterns)
+            all_patterns = choch_bos_signals + order_blocks + fvg_signals + enhanced_liquidity_sweeps + breaker_blocks + mitigation_blocks + trendline_liquidities
+            killzone_analyzed_patterns = self.analyze_killzone_timing(data, all_patterns)
+            
+            # 5.6 Premium/Discount Zone Mapping (Apply to all patterns)
+            zone_mapped_patterns = self.map_premium_discount_zones(data, swing_points, killzone_analyzed_patterns)
+            
+            # Separate patterns back by type for organized results
+            enhanced_choch_bos = [p for p in zone_mapped_patterns if p.get('type') in ['choch', 'bos']]
+            enhanced_order_blocks = [p for p in zone_mapped_patterns if p.get('type') == 'order_block']
+            enhanced_fvg_signals = [p for p in zone_mapped_patterns if p.get('type') == 'fvg']
+            enhanced_liquidity_final = [p for p in zone_mapped_patterns if p.get('type') == 'liquidity_sweep']
+            enhanced_breaker_blocks = [p for p in zone_mapped_patterns if p.get('type') == 'breaker_block']
+            enhanced_mitigation_blocks = [p for p in zone_mapped_patterns if p.get('type') == 'mitigation_block']
+            enhanced_trendline_liquidities = [p for p in zone_mapped_patterns if p.get('type') == 'trendline_liquidity']
+            
+            # 🧠 6. Enhanced Market Structure Analysis
             market_structure = self._determine_enhanced_market_structure(
-                choch_bos_signals, order_blocks, inducement_patterns, cvd_divergences
+                enhanced_choch_bos, enhanced_order_blocks, inducement_patterns, cvd_divergences
             )
             
-            # 🎯 6. Generate Trading Signals with Confidence Scoring
+            # 🎯 7. Generate Trading Signals with Enhanced Advanced Features
             trading_signals = self._generate_enhanced_trading_signals(
-                choch_bos_signals, order_blocks, fvg_signals, liquidity_sweeps, 
+                enhanced_choch_bos, enhanced_order_blocks, enhanced_fvg_signals, enhanced_liquidity_final, 
                 market_structure, inducement_patterns, cvd_divergences
             )
             
-            # 📦 7. Generate AI-Ready Output
+            # 📦 8. Generate AI-Ready Output with Advanced Features
             ai_ready_output = self._generate_ai_ready_output(
-                choch_bos_signals, order_blocks, fvg_signals, liquidity_sweeps,
+                enhanced_choch_bos, enhanced_order_blocks, enhanced_fvg_signals, enhanced_liquidity_final,
                 eqh_eql_signals, inducement_patterns, nested_order_blocks,
                 fvg_ob_confluences, volume_absorptions, cvd_divergences
             )
             
-            # 🎯 8. Calculate Overall Confidence Score
+            # 🎯 9. Calculate Overall Confidence Score with Advanced Features
             confidence_score = self._calculate_enhanced_confidence_score(
-                choch_bos_signals, order_blocks, fvg_signals, liquidity_sweeps,
+                enhanced_choch_bos, enhanced_order_blocks, enhanced_fvg_signals, enhanced_liquidity_final,
                 inducement_patterns, cvd_divergences, nested_order_blocks, fvg_ob_confluences
             )
             
@@ -436,23 +1052,36 @@ class ProfessionalSMCAnalyzer:
                 'timestamp': int(df['timestamp'].iloc[-1].timestamp() * 1000) if 'timestamp' in df.columns else int(datetime.now().timestamp() * 1000),
                 'current_price': float(df['close'].iloc[-1]),
                 
-                # 📊 Core SMC Patterns
+                # 📊 Core SMC Patterns (Enhanced)
                 'structure': {
                     'swing_points': swing_points,
-                    'choch_bos_signals': choch_bos_signals,
+                    'choch_bos_signals': enhanced_choch_bos,
                     'market_structure': market_structure
                 },
                 
-                # 🎯 Trading Zones
-                'order_blocks': order_blocks,
-                'fvg': fvg_signals,
-                'liquidity_sweeps': liquidity_sweeps,
+                # 🎯 Trading Zones (Enhanced)
+                'order_blocks': enhanced_order_blocks,
+                'fvg': enhanced_fvg_signals,
+                'liquidity_sweeps': enhanced_liquidity_final,
                 'eqh_eql_signals': eqh_eql_signals,
                 
                 # 🔍 Advanced Features
                 'inducement': inducement_patterns,
                 'nested_order_blocks': nested_order_blocks,
                 'confluence_zones': fvg_ob_confluences,
+                
+                # 🚀 ADVANCED SMC FEATURES
+                'breaker_blocks': enhanced_breaker_blocks,
+                'mitigation_blocks': enhanced_mitigation_blocks,
+                'trendline_liquidities': enhanced_trendline_liquidities,
+                'advanced_features': {
+                    'breaker_blocks_count': len(enhanced_breaker_blocks),
+                    'mitigation_blocks_count': len(enhanced_mitigation_blocks),
+                    'trendline_liquidities_count': len(enhanced_trendline_liquidities),
+                    'irl_erl_enhanced': True,
+                    'killzone_timing_applied': True,
+                    'premium_discount_mapped': True
+                },
                 
                 # 📈 Volume Analysis
                 'volume_confirmation': {
@@ -469,7 +1098,7 @@ class ProfessionalSMCAnalyzer:
                 
                 # 📊 Summary for GPT Integration
                 'smc_summary': self._generate_enhanced_smc_summary(
-                    choch_bos_signals, order_blocks, fvg_signals, liquidity_sweeps,
+                    enhanced_choch_bos, enhanced_order_blocks, enhanced_fvg_signals, enhanced_liquidity_final,
                     eqh_eql_signals, inducement_patterns, confidence_score
                 )
             }

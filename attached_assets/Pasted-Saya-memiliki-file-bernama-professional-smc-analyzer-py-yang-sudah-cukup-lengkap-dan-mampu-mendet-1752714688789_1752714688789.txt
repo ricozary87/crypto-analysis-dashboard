@@ -1,0 +1,46 @@
+Saya memiliki file bernama `professional_smc_analyzer.py`, yang sudah cukup lengkap dan mampu mendeteksi struktur pasar seperti:
+- CHoCH
+- BOS
+- Order Block
+- FVG
+- Liquidity Sweep
+- EQH/EQL
+
+Namun sekarang saya ingin kamu membantu saya **menambahkan** 3–5 logika lanjutan (advanced SMC logic) ke dalam sistem **tanpa menghapus atau mengganti logika yang sudah ada**.
+
+🎯 Fitur lanjutan yang saya ingin tambahkan adalah:
+
+1. 🧱 **Breaker Block Logic**
+   - Deteksi breaker block: area order block sebelumnya yang gagal → lalu dibreak → jadi support/resistance balik arah
+   - Berfungsi sebagai zona reentry setelah stop hunt
+
+2. 💧 **IRL & ERL (Internal Range Liquidity & External Range Liquidity)**
+   - Deteksi akumulasi likuiditas di dalam range (IRL) atau di luar swing (ERL)
+   - Biasanya digunakan sebelum sweep / inducement
+
+3. ⏱️ **Killzone SMC Timing**
+   - Implementasikan time filter berbasis sesi: London Open (07:00–10:00 UTC), New York Open (13:00–16:00 UTC), Asia (00:00–03:00 UTC)
+   - Gunakan ini untuk memberikan confidence tambahan jika sinyal SMC muncul di waktu strategis
+
+4. 🎯 **Premium/Discount Zone Mapping**
+   - Tandai area berdasarkan Fibo 0.5 (midline) dari swing terakhir
+   - Berikan label apakah zona OB/FVG berada di premium (>0.5) atau discount (<0.5)
+   - Hanya validasi OB/FVG jika berada di area yang logis
+
+5. 🧱 **Mitigation Block Logic**
+   - Deteksi candle besar setelah OB yang “mengisi kembali” area imbalance OB sebelumnya
+   - Gunakan untuk validasi OB yang sudah di-acknowledge oleh market
+
+6. 📉 **Trendline Liquidity Detection**
+   - Identifikasi support/resistance miring (trendline) yang tersentuh berkali-kali → akumulasi likuiditas
+   - Saat break, anggap sebagai sweep zone + entry confluence
+
+🎯 Format output per fitur:
+- Buat fungsi baru per fitur di dalam class `ProfessionalSMCAnalyzer`
+- Kembalikan hasil sebagai bagian dari dict `analysis_result` bersama fitur-fitur yang sudah ada
+- Tambahkan komentar detail dan logika per baris
+- Jangan menghapus logika existing seperti CHoCH, BOS, OB, FVG
+
+🔁 Pastikan kode siap dipanggil oleh sistem analisa utama saya (`run_full_analysis()`) dan bisa digunakan sebagai tambahan konfluensi untuk AI snapshot system dan signal generator GPT.
+
+Berikan kode bersih, production-ready, dan bisa diintegrasikan dengan class sebelumnya. Tambahkan catatan jika ada dependensi tambahan (misalnya waktu UTC, candle timestamp, dsb).
