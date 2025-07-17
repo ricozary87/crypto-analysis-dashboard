@@ -19,6 +19,13 @@ logger = logging.getLogger(__name__)
 class InducementDetector:
     """Advanced Inducement Detection for institutional manipulation"""
     
+    # Class constants for better maintainability
+    MIN_DATA_LENGTH = 20
+    LEVEL_PROXIMITY_THRESHOLD = 0.01  # 1% proximity to key levels
+    MULTIPLE_ATTEMPT_LOWER_BOUND = 0.998  # 99.8% of key level
+    MULTIPLE_ATTEMPT_UPPER_BOUND = 1.003  # 100.3% of key level
+    MIN_ATTEMPTS_FOR_INDUCEMENT = 3
+    
     def __init__(self, 
                  false_breakout_threshold: float = 0.005,  # 0.5% for false breakout
                  volume_spike_multiplier: float = 1.8,    # 1.8x volume for confirmation
@@ -37,7 +44,7 @@ class InducementDetector:
         """Main method to detect all types of inducements"""
         
         try:
-            if not data or len(data) < 20:
+            if not data or len(data) < self.MIN_DATA_LENGTH:
                 return []
             
             inducements = []
@@ -429,7 +436,8 @@ class InducementDetector:
                 'bullish_inducements': 0,
                 'bearish_inducements': 0,
                 'strongest_inducement': None,
-                'most_recent_inducement': None
+                'most_recent_inducement': None,
+                'visualization_data': []
             }
         
         bullish_count = sum(1 for ind in inducements if 'bullish' in ind.get('direction', ''))
@@ -453,5 +461,70 @@ class InducementDetector:
                 'wick_inducement': sum(1 for ind in inducements if ind.get('type') == 'wick_inducement'),
                 'multiple_attempts': sum(1 for ind in inducements if ind.get('type') == 'multiple_attempts'),
                 'time_based': sum(1 for ind in inducements if ind.get('type') == 'time_based')
-            }
+            },
+            'visualization_data': self._prepare_visualization_data(inducements)
         }
+    
+    def _prepare_visualization_data(self, inducements: List[Dict]) -> List[Dict]:
+        """Prepare visualization data for chart display"""
+        
+        visualization_data = []
+        
+        for inducement in inducements:
+            viz_data = {
+                'timestamp': inducement.get('timestamp'),
+                'type': inducement.get('type'),
+                'direction': inducement.get('direction'),
+                'key_level': inducement.get('key_level'),
+                'confidence': inducement.get('confidence_score', 50),
+                'description': inducement.get('description'),
+                'chart_annotation': {
+                    'type': 'zone',
+                    'color': '#FF5722' if 'bearish' in inducement.get('direction', '') else '#4CAF50',
+                    'opacity': 0.3,
+                    'label': f"{inducement.get('type', '').title()} - {inducement.get('confidence_score', 50):.0f}%"
+                }
+            }
+            
+            # Add specific visualization data based on inducement type
+            if inducement.get('type') == 'false_breakout':
+                viz_data['chart_annotation']['marker'] = {
+                    'symbol': 'triangle-up' if 'bullish' in inducement.get('direction', '') else 'triangle-down',
+                    'size': 8,
+                    'color': viz_data['chart_annotation']['color']
+                }
+            elif inducement.get('type') == 'wick_inducement':
+                viz_data['chart_annotation']['line'] = {
+                    'width': 2,
+                    'dash': 'dash',
+                    'color': viz_data['chart_annotation']['color']
+                }
+            
+            visualization_data.append(viz_data)
+        
+        return visualization_data
+    
+    def log_inducement_for_analysis(self, inducement: Dict, symbol: str, timeframe: str) -> None:
+        """Log inducement for manual analysis"""
+        
+        log_message = f"""
+        🎯 INDUCEMENT DETECTED - {symbol} {timeframe}
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        Type: {inducement.get('type', 'unknown').upper()}
+        Direction: {inducement.get('direction', 'unknown').upper()}
+        Key Level: ${inducement.get('key_level', 0):.4f}
+        Confidence: {inducement.get('confidence_score', 0):.1f}%
+        Description: {inducement.get('description', 'No description')}
+        
+        📊 Technical Details:
+        - Timestamp: {inducement.get('timestamp', 0)}
+        - Strength: {inducement.get('strength', 0):.1f}
+        
+        📈 Market Context:
+        - Volume Ratio: {inducement.get('volume_ratio', 'N/A')}
+        - Reversal Candles: {inducement.get('reversal_candles', 'N/A')}
+        - Attempts: {inducement.get('attempt_count', 'N/A')}
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        """
+        
+        self.logger.info(log_message)

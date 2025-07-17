@@ -14,6 +14,7 @@ import pandas as pd
 from typing import List, Dict, Any, Optional, Tuple
 from datetime import datetime
 import logging
+from .inducement_detector import InducementDetector
 
 logger = logging.getLogger(__name__)
 
@@ -23,6 +24,7 @@ class ProfessionalSMCAnalyzer:
     def __init__(self):
         self.swing_period = 5  # Period for swing high/low detection
         self.min_swing_strength = 3  # Minimum bars for swing confirmation
+        self.inducement_detector = InducementDetector()  # Initialize inducement detector
         self.logger = logging.getLogger(__name__)
         
     def analyze_comprehensive(self, df: pd.DataFrame, symbol: str, timeframe: str) -> Dict[str, Any]:
@@ -53,19 +55,22 @@ class ProfessionalSMCAnalyzer:
             # 6. Detect Equal Highs/Lows (EQH/EQL)
             eqh_eql_signals = self.detect_eqh_eql(data, swing_points)
             
-            # 7. Determine market structure
+            # 7. Detect Inducement Patterns
+            inducement_patterns = self.inducement_detector.detect_inducements(data, swing_points)
+            
+            # 8. Determine market structure
             market_structure = self._determine_market_structure(choch_bos_signals, order_blocks)
             
-            # 8. Generate comprehensive summary
+            # 9. Generate comprehensive summary
             smc_summary = self._generate_smc_summary(
                 choch_bos_signals, order_blocks, fvg_signals, 
-                liquidity_sweeps, eqh_eql_signals
+                liquidity_sweeps, eqh_eql_signals, inducement_patterns
             )
             
-            # 9. Generate trading signals
+            # 10. Generate trading signals
             trading_signals = self._generate_trading_signals(
                 choch_bos_signals, order_blocks, fvg_signals, 
-                liquidity_sweeps, market_structure
+                liquidity_sweeps, market_structure, inducement_patterns
             )
             
             return {
@@ -79,11 +84,12 @@ class ProfessionalSMCAnalyzer:
                 'fvg_signals': fvg_signals,
                 'liquidity_sweeps': liquidity_sweeps,
                 'eqh_eql_signals': eqh_eql_signals,
+                'inducement_patterns': inducement_patterns,
                 'market_structure': market_structure,
                 'smc_summary': smc_summary,
                 'trading_signals': trading_signals,
                 'confidence_score': self._calculate_confidence_score(
-                    choch_bos_signals, order_blocks, fvg_signals, liquidity_sweeps
+                    choch_bos_signals, order_blocks, fvg_signals, liquidity_sweeps, inducement_patterns
                 )
             }
             
