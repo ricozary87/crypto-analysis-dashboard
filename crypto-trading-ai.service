@@ -1,0 +1,39 @@
+[Unit]
+Description=Cryptocurrency Trading AI Platform
+After=network.target
+After=postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=exec
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/opt/crypto-trading-ai
+Environment=PATH=/opt/crypto-trading-ai/venv/bin
+Environment=PYTHONPATH=/opt/crypto-trading-ai
+Environment=FLASK_ENV=production
+EnvironmentFile=/opt/crypto-trading-ai/.env
+ExecStart=/opt/crypto-trading-ai/venv/bin/gunicorn --config gunicorn.conf.py wsgi:application
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+TimeoutStopSec=30
+PrivateTmp=true
+Restart=always
+RestartSec=10
+
+# Security settings
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/crypto-trading-ai/logs
+ReadWritePaths=/opt/crypto-trading-ai/reports
+ReadWritePaths=/opt/crypto-trading-ai/snapshots
+ReadWritePaths=/opt/crypto-trading-ai/instance
+
+# Resource limits
+LimitNOFILE=65535
+MemoryMax=2G
+CPUQuota=200%
+
+[Install]
+WantedBy=multi-user.target

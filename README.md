@@ -23,6 +23,19 @@ docker-compose up -d
 ./deploy.sh production
 ```
 
+#### Systemd Service (Linux VPS)
+```bash
+# Install as system service
+sudo ./install-systemd-service.sh
+
+# Configure environment
+sudo nano /opt/crypto-trading-ai/.env
+
+# Start and enable service
+sudo systemctl start crypto-trading-ai
+sudo systemctl enable crypto-trading-ai
+```
+
 #### Local Development
 ```bash
 ./start-local.sh
