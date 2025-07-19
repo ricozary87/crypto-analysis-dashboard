@@ -4,8 +4,14 @@ from datetime import timedelta
 class Config:
     """Base configuration."""
     SECRET_KEY = os.environ.get('SESSION_SECRET', 'dev-secret-key-change-in-production')
-    # Use PostgreSQL database from environment variable
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    # Database configuration with fallback to SQLite
+    database_url = os.environ.get('DATABASE_URL')
+    if database_url and database_url.startswith('postgres://'):
+        # Convert postgres:// to postgresql:// for SQLAlchemy compatibility
+        database_url = database_url.replace('postgres://', 'postgresql://', 1)
+    
+    # Use PostgreSQL if available, otherwise fallback to SQLite
+    SQLALCHEMY_DATABASE_URI = database_url or 'sqlite:///trading_ai.db'
     SQLALCHEMY_ENGINE_OPTIONS = {
         "pool_recycle": 300,
         "pool_pre_ping": True,

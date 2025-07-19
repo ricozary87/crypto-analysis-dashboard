@@ -4,7 +4,10 @@ WSGI Entry Point for Production Deployment
 Standard entry point compatible with gunicorn, uwsgi, and other WSGI servers
 """
 
-from app import app, socketio
+from app import app, socketio, init_scheduler
+
+# Initialize scheduler for production deployment
+init_scheduler()
 
 # For WSGI servers (gunicorn, uwsgi)
 application = socketio

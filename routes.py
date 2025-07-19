@@ -14,7 +14,7 @@ from core.snapshot_generator import SnapshotGenerator, SnapshotType
 
 # Monitoring imports
 from core.monitoring import monitor_api_performance, track_trading_signal, track_ai_narrative, monitor
-from monitoring_dashboard import monitor_performance, create_monitoring_routes
+# from monitoring_dashboard import monitor_performance, create_monitoring_routes  # Module not found, commented out
 from core.okx_fetcher import OKXAPIManager
 from core.analyzer import TechnicalAnalyzer
 from core.professional_smc_analyzer import ProfessionalSMCAnalyzer

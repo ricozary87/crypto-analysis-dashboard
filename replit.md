@@ -8,6 +8,15 @@ This is a comprehensive cryptocurrency trading analysis platform that combines F
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes (July 2025)
+
+### APScheduler Stability Fix ✅
+- **Problem**: APScheduler kept restarting every few seconds due to module-level initialization
+- **Solution**: Moved scheduler initialization to dedicated function called only once at app startup
+- **Files Modified**: `app.py`, `main.py`, `wsgi.py`
+- **Result**: Scheduler now stable, compatible with VPS deployment via `python main.py` or `gunicorn wsgi:application`
+- **Date**: July 19, 2025
+
 ## System Architecture
 
 ### Backend Architecture

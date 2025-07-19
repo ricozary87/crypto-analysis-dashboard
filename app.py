@@ -112,10 +112,8 @@ ai_narrative_requests = Counter('ai_narrative_requests_total', 'Total AI narrati
 system_health = Gauge('system_health_score', 'System health score (0-100)')
 database_connections = Gauge('database_connections_active', 'Active database connections')
 
-# Initialize scheduler for background tasks
-scheduler = BackgroundScheduler()
-scheduler.start()
-atexit.register(lambda: scheduler.shutdown())
+# Initialize scheduler variable (will be started in main.py)
+scheduler = None
 
 with app.app_context():
     # Import models to create tables
@@ -138,6 +136,16 @@ import monitoring_routes
 # Initialize trading orchestrator
 from core.orchestrator import MainOrchestrator
 trading_orchestrator = MainOrchestrator()
+
+def init_scheduler():
+    """Initialize scheduler - called only once from main.py"""
+    global scheduler
+    if scheduler is None:
+        scheduler = BackgroundScheduler()
+        scheduler.start()
+        atexit.register(lambda: scheduler.shutdown() if scheduler else None)
+        app.logger.info("🚀 APScheduler initialized successfully")
+    return scheduler
 
 def run_trading_cycle():
     """Background task to run trading analysis"""

@@ -97,3 +97,97 @@
 2025-07-19 13:33:09,196 - apscheduler.scheduler - INFO - Scheduler has been shut down
 2025-07-19 13:33:09,197 - apscheduler.scheduler - DEBUG - Looking for jobs to run
 2025-07-19 13:33:09,197 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-19 13:36:38,276 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 13:36:38,278 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-19 13:36:38,278 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-19 13:36:38,279 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-19 13:36:38,279 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-19 13:36:38,338 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-19 13:36:38,338 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-19 13:36:38,338 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-19 13:37:13,648 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 13:37:13,650 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-19 13:37:13,650 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-19 13:37:13,651 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-19 13:37:13,651 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-19 13:37:13,704 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-19 13:37:13,704 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-19 13:37:13,704 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-19 13:40:40,059 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 13:40:40,061 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-19 13:40:40,062 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-19 13:40:40,062 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-19 13:40:40,062 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-19 13:40:40,117 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-19 13:40:40,117 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-19 13:40:40,118 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-19 13:40:46,759 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 13:40:46,762 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-19 13:40:46,762 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-19 13:40:46,762 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-19 13:40:46,763 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-19 13:40:46,832 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-19 13:40:46,832 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-19 13:40:46,832 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-19 13:41:17,533 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 13:41:17,535 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-19 13:41:17,535 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-19 13:41:17,536 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-19 13:41:17,537 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-19 13:41:17,593 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-19 13:41:17,594 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-19 13:41:17,594 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-19 13:41:40,205 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 13:41:56,167 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 13:42:22,173 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 13:42:23,225 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-19 13:42:23,225 - core.professional_smc_analyzer - INFO - 🚀 Professional SMC Analyzer initialized with enhanced features
+2025-07-19 13:42:23,240 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-19 13:42:23,241 - core.professional_smc_analyzer - INFO - 🚀 Professional SMC Analyzer initialized with enhanced features
+2025-07-19 13:42:23,254 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-19 13:42:23,254 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-19 13:42:23,288 - core.monitoring - DEBUG - Active signals count updated
+2025-07-19 13:42:23,303 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-19 13:42:23,304 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-19 13:42:23,371 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 13:42:28,894 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 13:42:55,090 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 13:43:21,398 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 13:43:22,595 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-19 13:43:22,595 - core.professional_smc_analyzer - INFO - 🚀 Professional SMC Analyzer initialized with enhanced features
+2025-07-19 13:43:22,610 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-19 13:43:22,611 - core.professional_smc_analyzer - INFO - 🚀 Professional SMC Analyzer initialized with enhanced features
+2025-07-19 13:43:22,624 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-19 13:43:22,624 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-19 13:43:22,663 - core.monitoring - DEBUG - Active signals count updated
+2025-07-19 13:43:22,680 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-19 13:43:22,680 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-19 13:43:50,898 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 13:44:07,507 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 13:44:17,594 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 13:44:18,233 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-19 13:44:18,234 - core.professional_smc_analyzer - INFO - 🚀 Professional SMC Analyzer initialized with enhanced features
+2025-07-19 13:44:18,247 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-19 13:44:18,248 - core.professional_smc_analyzer - INFO - 🚀 Professional SMC Analyzer initialized with enhanced features
+2025-07-19 13:44:18,261 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-19 13:44:18,262 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-19 13:44:18,298 - core.monitoring - DEBUG - Active signals count updated
+2025-07-19 13:44:18,311 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-19 13:44:18,312 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-19 13:44:18,355 - monitoring_routes - INFO - Monitoring routes initialized successfully
+2025-07-19 13:44:18,359 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-19 13:44:18,360 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-19 13:44:18,362 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-19 13:44:18,362 - app - INFO - 🚀 APScheduler initialized successfully
+2025-07-19 13:44:18,363 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-19 13:44:18,364 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-19 13:44:18,365 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-19 13:44:18,366 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-19 13:44:20,721 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 13:44:26,212 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 13:44:43,020 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 13:44:59,317 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 13:45:15,656 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 13:45:42,316 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 13:46:20,127 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 13:46:39,575 - engineio.server - INFO - Server initialized for threading.
