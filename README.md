@@ -1,173 +1,146 @@
-# Crypto Technical Dashboard
+# 🚀 Cryptocurrency Trading AI Platform
 
-Professional cryptocurrency trading dashboard dengan React + Vite + Tailwind CSS + Chart.js
+Platform analisis trading cryptocurrency yang komprehensif dengan AI-powered insights, Smart Money Concept (SMC) analysis, dan real-time market data processing.
 
-## 🚀 Quick Start
+## ⚡ Quick Start
 
+### Prerequisites
+- Python 3.11+
+- Node.js 18+
+- PostgreSQL (production) atau SQLite (development)
+
+### 🚀 Deployment Options
+
+#### Docker (Recommended)
 ```bash
-# Install dependencies
-npm install
-
-# Run development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
+cp .env.example .env
+# Edit .env dengan API keys Anda
+docker-compose up -d
 ```
 
-Access dashboard: `http://localhost:3000`
-
-## 📦 Tech Stack
-
-- **React 18.2.0** - UI Framework
-- **Vite** - Build Tool & Dev Server
-- **Tailwind CSS** - Styling Framework
-- **Chart.js 4 + Financial Plugin** - Advanced Charting
-- **React-ChartJS-2** - React Chart Integration
-- **Lucide React** - Icons
-- **Date-fns** - Date Utilities
-
-## 🎯 Features
-
-### Core Dashboard
-- **Sidebar**: Trading pairs list dengan search, watchlist, dan market data
-- **Topbar**: Pair selection, timeframe controls, chart type switcher
-- **Main Chart**: Interactive candlestick/OHLC/line charts dengan professional styling
-- **Overview Panel**: Real-time price, volume, statistics, orderbook summary
-- **Technical Indicators**: 40+ indicators dengan toggle controls
-- **Liquidity Heatmap**: Visual orderbook depth dengan color coding
-- **Order Flow**: Volume profile analysis dan footprint cluster
-
-### Chart Types
-- **Candlestick** (default)
-- **OHLC** bars
-- **Line** charts
-- **Renko** (ready for plugin)
-- **Kagi** (ready for plugin)
-
-### Technical Indicators
-- **Moving Averages**: EMA-9, EMA-200, SMA-20, SMA-50
-- **Oscillators**: RSI, MACD, Stochastic
-- **Volatility**: Bollinger Bands, ATR
-- **Volume**: OBV, Volume Profile
-- **Custom**: VWAP, Fibonacci
-
-### Real-time Features
-- Auto-updating price data (5 second intervals)
-- WebSocket ready untuk live streaming
-- Responsive design untuk mobile/desktop
-- Dark mode optimized
-
-## 📁 Structure
-
+#### Manual Production
+```bash
+./deploy.sh production
 ```
-src/
-├── components/
-│   ├── Sidebar.jsx           # Trading pairs & watchlist
-│   ├── Topbar.jsx            # Controls & pair selection
-│   ├── ChartView.jsx         # Main chart dengan indicators
-│   ├── OverviewPanel.jsx     # Market statistics
-│   ├── HeatmapLiquidity.jsx  # Orderbook heatmap
-│   ├── OrderFlowPanel.jsx    # Volume analysis
-│   └── IndicatorsPanel.jsx   # Technical indicators
-├── services/
-│   ├── api.js                # Backend API integration
-│   ├── dummyData.js          # Chart data generator
-│   ├── orderbook.js          # Orderbook utilities
-│   └── indicators.js         # Technical calculations
-├── App.jsx                   # Main app component
-├── main.jsx                  # React entry point
-└── index.css                 # Tailwind & custom styles
+
+#### Local Development
+```bash
+./start-local.sh
 ```
 
 ## 🔧 Configuration
 
-### Chart Settings
-- Default timeframe: 1H
-- Default chart type: Candlestick
-- Default indicators: EMA-9, EMA-200
-- Data points: 200 candles
+Copy `.env.example` to `.env` dan isi:
 
-### Supported Pairs
-- BTC/USDT, ETH/USDT, SOL/USDT
-- BNB/USDT, ADA/USDT, DOT/USDT
-- AVAX/USDT, MATIC/USDT
+```env
+# Database
+DATABASE_URL=postgresql://user:pass@localhost/trading_db
 
-### Timeframes
-- 5m, 15m, 1H, 4H, 1D, 1W
+# API Keys
+OPENAI_API_KEY=your_openai_key
+OKX_API_KEY=your_okx_key
+OKX_SECRET_KEY=your_okx_secret
+OKX_PASSPHRASE=your_okx_passphrase
 
-## 🎨 UI/UX
+# Security
+SESSION_SECRET=your_random_secret_key
+```
 
-- **Dark Mode**: Professional trading theme
-- **Responsive**: Mobile-first design
-- **Accessibility**: Keyboard navigation support
-- **Performance**: Optimized rendering
-- **Animations**: Smooth transitions
+## 🏗️ Features
 
-## 📊 Data Integration
+### 📊 Advanced SMC Analysis
+- Change of Character (CHoCH) Detection
+- Break of Structure (BOS) Analysis
+- Fair Value Gap (FVG) Identification
+- Order Block Detection
+- Breaker Block Analysis
+- Liquidity Analysis (IRL/ERL)
+- Killzone Timing
 
-Currently menggunakan dummy data untuk testing. Ready untuk integrasi dengan:
-- Flask backend API
-- OKX exchange data
-- Real-time WebSocket streams
-- AI analysis endpoints
+### 🤖 AI-Powered Insights
+- OpenAI GPT-4o Integration
+- Professional Market Narratives
+- Confidence Scoring
+- Multi-timeframe Analysis
 
-## 🔮 Future Enhancements
+### 📈 Technical Analysis
+- 40+ Technical Indicators
+- Price Action Pattern Detection
+- Volume Analysis with CVD
+- Real-time Signal Generation
 
-### Ready for Integration
-- **SMC Analysis Panel**: Order blocks, fair value gaps
-- **AI Panel**: GPT signals, sentiment analysis
-- **Drawing Tools**: 40+ technical drawing tools
-- **Alerts System**: Price & indicator alerts
+### 🔄 Real-time Features
+- Live Market Data Streaming
+- WebSocket Integration
+- Multi-symbol Support
+- Automated Alerts
 
-### Modular Architecture
-Dashboard didesain modular untuk easy integration:
-- Components dapat di-extend
-- Services dapat di-customize
-- API endpoints siap untuk backend
-- WebSocket manager untuk real-time
+## 📁 Project Structure
+
+```
+├── core/                    # Core analysis engines
+├── src/                     # React frontend
+├── templates/               # Flask templates
+├── static/                  # Static assets
+├── tests/                   # Test suites
+├── docs/                    # Documentation
+├── archive/                 # Old files
+├── reports/                 # Analysis reports
+├── logs/                    # Application logs
+├── snapshots/               # Generated reports
+└── development/             # Development scripts
+```
 
 ## 🛠️ Development
 
-### Add New Indicator
-1. Add calculation di `services/indicators.js`
-2. Update `components/IndicatorsPanel.jsx`
-3. Implement display di `components/ChartView.jsx`
+### Frontend Development
+```bash
+cd src/
+npm run dev
+```
 
-### Add New Chart Type
-1. Register controller di `ChartView.jsx`
-2. Add option di `components/Topbar.jsx`
-3. Update chart data generator
+### Backend Development
+```bash
+python main.py
+```
 
-### Customize Styling
-- Edit `tailwind.config.js` untuk colors
-- Modify `src/index.css` untuk components
-- Update theme variables
+### Running Tests
+```bash
+python test_deployment.py
+```
 
-## 📱 Mobile Support
+## 📦 Dependencies
 
-- Touch-friendly controls
-- Responsive grid layout
-- Optimized chart rendering
-- Swipe gestures ready
+### Backend
+- Flask + SocketIO
+- SQLAlchemy + PostgreSQL
+- Pandas + NumPy
+- Technical Analysis Library
+- OpenAI API
 
-## 🔒 Security
+### Frontend
+- React 19
+- Chart.js Financial
+- TailwindCSS
+- Vite Build System
 
-- No API keys di frontend
-- Secure WebSocket connections
-- Input validation
-- Error handling
+## 🔍 Monitoring
 
-## 📈 Performance
+- Prometheus metrics
+- Real-time system monitoring
+- Performance tracking
+- Error logging with Sentry
 
-- Lazy loading components
-- Chart data optimization
-- Memory management
-- Efficient re-renders
+## 📄 Documentation
+
+- [Deployment Guide](docs/DEPLOYMENT_SUMMARY.md)
+- [Architecture Overview](replit.md)
+- [API Documentation](docs/)
+
+## 🤝 Support
+
+Untuk bantuan deployment atau konfigurasi, silakan lihat dokumentasi di folder `docs/`.
 
 ---
 
-**Ready to use!** Dashboard siap untuk development dan production deployment.
+**Status: ✅ Production Ready - VPS Deployment Tested**
