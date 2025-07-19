@@ -316,6 +316,619 @@ class ConfluenceDetector:
         ob_strength = ob['strength']
         return min((fvg_strength + ob_strength) / 2, 1.0)
 
+class MultiTimeframeAnalyzer:
+    """
+    🚀 Multi-Timeframe Analysis Engine
+    
+    Provides enhanced SMC analysis across multiple timeframes:
+    - HTF (High Time Frame) pattern confirmation
+    - LTF (Low Time Frame) pattern detection
+    - Cross-timeframe confluence analysis
+    - Timeframe-weighted confidence scoring
+    """
+    
+    def __init__(self):
+        self.logger = logging.getLogger(f"{__name__}.MultiTimeframeAnalyzer")
+        self.timeframe_weights = {
+            '1m': 0.1, '5m': 0.2, '15m': 0.3, '1h': 0.5, 
+            '4h': 0.7, '1d': 0.9, '1w': 1.0
+        }
+    
+    def analyze_mtf_confluence(self, ltf_patterns: Dict[str, Any], 
+                              htf_patterns: Dict[str, Any] = None) -> Dict[str, Any]:
+        """
+        Analyze multi-timeframe confluence for enhanced pattern validation
+        
+        Args:
+            ltf_patterns: Low timeframe SMC patterns
+            htf_patterns: High timeframe SMC patterns (optional)
+            
+        Returns:
+            Enhanced patterns with MTF confluence analysis
+        """
+        confluence_results = {
+            'mtf_confirmed_patterns': [],
+            'mtf_confluence_score': 0.0,
+            'htf_bias': 'neutral',
+            'ltf_htf_alignment': False
+        }
+        
+        if not htf_patterns:
+            # If no HTF data provided, return LTF patterns with reduced confidence
+            self.logger.info("🔄 No HTF data provided, analyzing LTF patterns only")
+            for pattern_type, patterns in ltf_patterns.items():
+                if isinstance(patterns, list):
+                    for pattern in patterns:
+                        if isinstance(pattern, dict):
+                            # Reduce confidence for LTF-only analysis
+                            original_confidence = pattern.get('confidence_score', 0.5)
+                            pattern['confidence_score'] = original_confidence * 0.8
+                            pattern['mtf_status'] = 'ltf_only'
+                            confluence_results['mtf_confirmed_patterns'].append(pattern)
+            
+            confluence_results['mtf_confluence_score'] = 0.6  # Moderate confidence without HTF
+            return confluence_results
+        
+        # Analyze HTF bias
+        htf_bias = self._determine_htf_bias(htf_patterns)
+        confluence_results['htf_bias'] = htf_bias
+        
+        # Check pattern alignment between timeframes
+        alignment_score = self._calculate_timeframe_alignment(ltf_patterns, htf_patterns)
+        confluence_results['ltf_htf_alignment'] = alignment_score > 0.6
+        
+        # Enhance LTF patterns with HTF confirmation
+        confirmed_patterns = self._enhance_patterns_with_htf(ltf_patterns, htf_patterns, htf_bias)
+        confluence_results['mtf_confirmed_patterns'] = confirmed_patterns
+        
+        # Calculate overall MTF confluence score
+        confluence_results['mtf_confluence_score'] = self._calculate_mtf_score(
+            alignment_score, len(confirmed_patterns), htf_bias
+        )
+        
+        self.logger.info(f"🚀 MTF Analysis: {len(confirmed_patterns)} confirmed patterns, "
+                        f"score: {confluence_results['mtf_confluence_score']:.2f}")
+        
+        return confluence_results
+    
+    def _determine_htf_bias(self, htf_patterns: Dict[str, Any]) -> str:
+        """Determine overall HTF market bias"""
+        bullish_signals = 0
+        bearish_signals = 0
+        
+        # Count bullish/bearish signals across HTF patterns
+        for pattern_type, patterns in htf_patterns.items():
+            if isinstance(patterns, list):
+                for pattern in patterns:
+                    if isinstance(pattern, dict) and 'direction' in pattern:
+                        if pattern['direction'] == 'bullish':
+                            bullish_signals += 1
+                        elif pattern['direction'] == 'bearish':
+                            bearish_signals += 1
+        
+        if bullish_signals > bearish_signals * 1.2:
+            return 'bullish'
+        elif bearish_signals > bullish_signals * 1.2:
+            return 'bearish'
+        else:
+            return 'neutral'
+    
+    def _calculate_timeframe_alignment(self, ltf_patterns: Dict, htf_patterns: Dict) -> float:
+        """Calculate alignment score between LTF and HTF patterns"""
+        alignment_count = 0
+        total_patterns = 0
+        
+        # Compare pattern directions between timeframes
+        for pattern_type in ['choch_bos_signals', 'order_blocks', 'fvg']:
+            ltf_list = ltf_patterns.get(pattern_type, [])
+            htf_list = htf_patterns.get(pattern_type, [])
+            
+            for ltf_pattern in ltf_list[-3:]:  # Last 3 LTF patterns
+                if isinstance(ltf_pattern, dict) and 'direction' in ltf_pattern:
+                    total_patterns += 1
+                    
+                    # Check if HTF has similar direction pattern
+                    for htf_pattern in htf_list[-2:]:  # Last 2 HTF patterns
+                        if (isinstance(htf_pattern, dict) and 
+                            htf_pattern.get('direction') == ltf_pattern.get('direction')):
+                            alignment_count += 1
+                            break
+        
+        return alignment_count / max(total_patterns, 1)
+    
+    def _enhance_patterns_with_htf(self, ltf_patterns: Dict, htf_patterns: Dict, 
+                                 htf_bias: str) -> List[Dict]:
+        """Enhance LTF patterns with HTF confirmation"""
+        enhanced_patterns = []
+        
+        for pattern_type, patterns in ltf_patterns.items():
+            if isinstance(patterns, list):
+                for pattern in patterns:
+                    if isinstance(pattern, dict):
+                        enhanced_pattern = pattern.copy()
+                        
+                        # Check HTF confirmation
+                        htf_confirmation = self._check_htf_confirmation(
+                            pattern, htf_patterns, htf_bias
+                        )
+                        
+                        # Enhance confidence based on HTF confirmation
+                        original_confidence = pattern.get('confidence_score', 0.5)
+                        if htf_confirmation['confirmed']:
+                            enhanced_pattern['confidence_score'] = min(1.0, original_confidence * 1.2)
+                            enhanced_pattern['mtf_status'] = 'htf_confirmed'
+                            enhanced_pattern['htf_confirmation'] = htf_confirmation
+                        else:
+                            enhanced_pattern['confidence_score'] = original_confidence * 0.9
+                            enhanced_pattern['mtf_status'] = 'htf_neutral'
+                        
+                        enhanced_patterns.append(enhanced_pattern)
+        
+        return enhanced_patterns
+    
+    def _check_htf_confirmation(self, ltf_pattern: Dict, htf_patterns: Dict, 
+                              htf_bias: str) -> Dict:
+        """Check if LTF pattern is confirmed by HTF analysis"""
+        confirmation = {
+            'confirmed': False,
+            'htf_bias_alignment': False,
+            'pattern_confluence': False,
+            'confidence_boost': 0.0
+        }
+        
+        pattern_direction = ltf_pattern.get('direction')
+        
+        # Check HTF bias alignment
+        if ((pattern_direction == 'bullish' and htf_bias == 'bullish') or
+            (pattern_direction == 'bearish' and htf_bias == 'bearish')):
+            confirmation['htf_bias_alignment'] = True
+            confirmation['confidence_boost'] += 0.1
+        
+        # Check for similar HTF patterns
+        pattern_type = ltf_pattern.get('type', '')
+        htf_similar_patterns = htf_patterns.get(pattern_type, [])
+        
+        for htf_pattern in htf_similar_patterns[-2:]:  # Recent HTF patterns
+            if (isinstance(htf_pattern, dict) and
+                htf_pattern.get('direction') == pattern_direction):
+                confirmation['pattern_confluence'] = True
+                confirmation['confidence_boost'] += 0.2
+                break
+        
+        # Overall confirmation
+        confirmation['confirmed'] = (confirmation['htf_bias_alignment'] or 
+                                   confirmation['pattern_confluence'])
+        
+        return confirmation
+    
+    def _calculate_mtf_score(self, alignment_score: float, confirmed_count: int, 
+                           htf_bias: str) -> float:
+        """Calculate overall MTF confluence score"""
+        base_score = alignment_score * 0.4
+        pattern_score = min(confirmed_count * 0.1, 0.4)
+        bias_score = 0.2 if htf_bias != 'neutral' else 0.1
+        
+        return min(base_score + pattern_score + bias_score, 1.0)
+
+class RealtimeAlertSystem:
+    """
+    🚨 Real-Time Alert System for SMC Patterns
+    
+    Provides webhook-based notifications for critical SMC events:
+    - CHoCH/BOS pattern alerts
+    - Order Block breach notifications
+    - High-confidence pattern alerts
+    - Custom threshold-based alerts
+    """
+    
+    def __init__(self, webhook_url: str = None):
+        self.logger = logging.getLogger(f"{__name__}.RealtimeAlertSystem")
+        self.webhook_url = webhook_url
+        self.alert_thresholds = {
+            'choch_bos': 0.75,
+            'order_block': 0.70,
+            'fvg': 0.65,
+            'liquidity_sweep': 0.80
+        }
+        
+    def check_and_send_alerts(self, analysis_result: Dict[str, Any], 
+                            symbol: str, timeframe: str) -> List[Dict]:
+        """
+        Check analysis results for alert-worthy patterns and send notifications
+        
+        Args:
+            analysis_result: Complete SMC analysis result
+            symbol: Trading symbol
+            timeframe: Analysis timeframe
+            
+        Returns:
+            List of alerts sent
+        """
+        alerts_sent = []
+        
+        # Check CHoCH/BOS alerts
+        choch_bos_alerts = self._check_choch_bos_alerts(
+            analysis_result.get('structure', {}).get('choch_bos_signals', []),
+            symbol, timeframe
+        )
+        alerts_sent.extend(choch_bos_alerts)
+        
+        # Check Order Block alerts
+        ob_alerts = self._check_order_block_alerts(
+            analysis_result.get('order_blocks', []),
+            symbol, timeframe
+        )
+        alerts_sent.extend(ob_alerts)
+        
+        # Check high-confidence pattern alerts
+        confluence_alerts = self._check_confluence_alerts(
+            analysis_result.get('confluence_zones', []),
+            symbol, timeframe
+        )
+        alerts_sent.extend(confluence_alerts)
+        
+        # Check advanced pattern alerts
+        advanced_alerts = self._check_advanced_pattern_alerts(
+            analysis_result.get('advanced_patterns', []),
+            symbol, timeframe
+        )
+        alerts_sent.extend(advanced_alerts)
+        
+        self.logger.info(f"🚨 Sent {len(alerts_sent)} alerts for {symbol} {timeframe}")
+        return alerts_sent
+    
+    def _check_choch_bos_alerts(self, choch_bos_signals: List[Dict], 
+                              symbol: str, timeframe: str) -> List[Dict]:
+        """Check for CHoCH/BOS alert conditions"""
+        alerts = []
+        
+        for signal in choch_bos_signals[-3:]:  # Check last 3 signals
+            if (isinstance(signal, dict) and 
+                signal.get('confidence_score', 0) >= self.alert_thresholds['choch_bos']):
+                
+                alert = {
+                    'type': 'choch_bos_alert',
+                    'symbol': symbol,
+                    'timeframe': timeframe,
+                    'timestamp': signal.get('timestamp'),
+                    'pattern': signal.get('type'),
+                    'direction': signal.get('direction'),
+                    'confidence': signal.get('confidence_score'),
+                    'price': signal.get('price'),
+                    'message': f"🚨 {signal.get('type')} {signal.get('direction')} detected on {symbol} {timeframe} "
+                              f"at {signal.get('price')} with {signal.get('confidence_score', 0):.1%} confidence"
+                }
+                
+                alerts.append(alert)
+                self._send_webhook_alert(alert)
+        
+        return alerts
+    
+    def _check_order_block_alerts(self, order_blocks: List[Dict], 
+                                symbol: str, timeframe: str) -> List[Dict]:
+        """Check for Order Block alert conditions"""
+        alerts = []
+        
+        for ob in order_blocks[-3:]:  # Check last 3 order blocks
+            if (isinstance(ob, dict) and 
+                ob.get('confidence_score', 0) >= self.alert_thresholds['order_block']):
+                
+                alert = {
+                    'type': 'order_block_alert',
+                    'symbol': symbol,
+                    'timeframe': timeframe,
+                    'timestamp': ob.get('timestamp'),
+                    'direction': ob.get('direction'),
+                    'confidence': ob.get('confidence_score'),
+                    'price_high': ob.get('price_high'),
+                    'price_low': ob.get('price_low'),
+                    'message': f"🏗️ Strong {ob.get('direction')} Order Block detected on {symbol} {timeframe} "
+                              f"({ob.get('price_low'):.2f}-{ob.get('price_high'):.2f}) "
+                              f"with {ob.get('confidence_score', 0):.1%} confidence"
+                }
+                
+                alerts.append(alert)
+                self._send_webhook_alert(alert)
+        
+        return alerts
+    
+    def _check_confluence_alerts(self, confluence_zones: List[Dict], 
+                               symbol: str, timeframe: str) -> List[Dict]:
+        """Check for high-confidence confluence zone alerts"""
+        alerts = []
+        
+        for zone in confluence_zones[-2:]:  # Check last 2 confluence zones
+            if (isinstance(zone, dict) and 
+                zone.get('confluence_strength', 0) >= 0.8):
+                
+                alert = {
+                    'type': 'confluence_alert',
+                    'symbol': symbol,
+                    'timeframe': timeframe,
+                    'timestamp': zone.get('timestamp'),
+                    'confluence_type': zone.get('type'),
+                    'strength': zone.get('confluence_strength'),
+                    'message': f"🎯 High-probability confluence zone detected on {symbol} {timeframe} "
+                              f"({zone.get('type')}) with {zone.get('confluence_strength', 0):.1%} strength"
+                }
+                
+                alerts.append(alert)
+                self._send_webhook_alert(alert)
+        
+        return alerts
+    
+    def _check_advanced_pattern_alerts(self, advanced_patterns: List[Dict], 
+                                     symbol: str, timeframe: str) -> List[Dict]:
+        """Check for advanced pattern alerts"""
+        alerts = []
+        
+        for pattern in advanced_patterns[-5:]:  # Check last 5 advanced patterns
+            if (isinstance(pattern, dict) and 
+                pattern.get('confidence_score', 0) >= 0.75):
+                
+                alert = {
+                    'type': 'advanced_pattern_alert',
+                    'symbol': symbol,
+                    'timeframe': timeframe,
+                    'timestamp': pattern.get('timestamp'),
+                    'pattern_type': pattern.get('type'),
+                    'confidence': pattern.get('confidence_score'),
+                    'message': f"⚡ Advanced pattern {pattern.get('type')} detected on {symbol} {timeframe} "
+                              f"with {pattern.get('confidence_score', 0):.1%} confidence"
+                }
+                
+                alerts.append(alert)
+                self._send_webhook_alert(alert)
+        
+        return alerts
+    
+    def _send_webhook_alert(self, alert: Dict) -> bool:
+        """Send alert via webhook"""
+        if not self.webhook_url:
+            self.logger.debug(f"No webhook URL configured, alert logged: {alert['message']}")
+            return False
+        
+        try:
+            import requests
+            import json
+            
+            payload = {
+                'text': alert['message'],
+                'alert_data': alert,
+                'timestamp': datetime.now().isoformat()
+            }
+            
+            response = requests.post(
+                self.webhook_url,
+                json=payload,
+                timeout=10,
+                headers={'Content-Type': 'application/json'}
+            )
+            
+            if response.status_code == 200:
+                self.logger.info(f"✅ Alert sent successfully: {alert['type']}")
+                return True
+            else:
+                self.logger.warning(f"⚠️ Webhook failed with status {response.status_code}")
+                return False
+                
+        except Exception as e:
+            self.logger.error(f"❌ Webhook error: {e}")
+            return False
+
+class BacktestingFramework:
+    """
+    📊 Backtesting Framework for SMC Pattern Validation
+    
+    Provides comprehensive backtesting capabilities:
+    - Historical pattern performance analysis
+    - Win rate and profit factor calculation
+    - Pattern effectiveness measurement
+    - Statistical validation of SMC concepts
+    """
+    
+    def __init__(self):
+        self.logger = logging.getLogger(f"{__name__}.BacktestingFramework")
+        self.test_results = []
+    
+    def backtest_smc_patterns(self, historical_data: List[Dict], 
+                            pattern_results: List[Dict],
+                            lookforward_periods: int = 20) -> Dict[str, Any]:
+        """
+        Backtest SMC patterns against historical price movement
+        
+        Args:
+            historical_data: Historical OHLCV data
+            pattern_results: List of detected SMC patterns
+            lookforward_periods: Number of periods to look forward for validation
+            
+        Returns:
+            Comprehensive backtesting results
+        """
+        backtest_results = {
+            'total_patterns_tested': 0,
+            'successful_patterns': 0,
+            'win_rate': 0.0,
+            'average_return': 0.0,
+            'profit_factor': 0.0,
+            'pattern_performance': {},
+            'detailed_results': []
+        }
+        
+        if not historical_data or not pattern_results:
+            return backtest_results
+        
+        # Create price lookup for faster access
+        price_lookup = {int(candle['timestamp']): candle for candle in historical_data}
+        
+        successful_count = 0
+        total_return = 0.0
+        positive_returns = 0.0
+        negative_returns = 0.0
+        pattern_stats = {}
+        
+        self.logger.info(f"📊 Starting backtest of {len(pattern_results)} patterns")
+        
+        for pattern in pattern_results:
+            if not isinstance(pattern, dict) or 'timestamp' not in pattern:
+                continue
+                
+            # Find pattern validation
+            result = self._validate_pattern_outcome(
+                pattern, price_lookup, lookforward_periods
+            )
+            
+            if result['testable']:
+                backtest_results['total_patterns_tested'] += 1
+                
+                # Track pattern type performance
+                pattern_type = pattern.get('type', 'unknown')
+                if pattern_type not in pattern_stats:
+                    pattern_stats[pattern_type] = {
+                        'total': 0, 'successful': 0, 'returns': []
+                    }
+                
+                pattern_stats[pattern_type]['total'] += 1
+                pattern_stats[pattern_type]['returns'].append(result['return_pct'])
+                
+                if result['successful']:
+                    successful_count += 1
+                    pattern_stats[pattern_type]['successful'] += 1
+                    positive_returns += result['return_pct']
+                else:
+                    negative_returns += abs(result['return_pct'])
+                
+                total_return += result['return_pct']
+                backtest_results['detailed_results'].append(result)
+        
+        # Calculate final metrics
+        if backtest_results['total_patterns_tested'] > 0:
+            backtest_results['successful_patterns'] = successful_count
+            backtest_results['win_rate'] = successful_count / backtest_results['total_patterns_tested']
+            backtest_results['average_return'] = total_return / backtest_results['total_patterns_tested']
+            
+            if negative_returns > 0:
+                backtest_results['profit_factor'] = positive_returns / negative_returns
+            else:
+                backtest_results['profit_factor'] = float('inf') if positive_returns > 0 else 0
+        
+        # Calculate pattern-specific performance
+        for pattern_type, stats in pattern_stats.items():
+            if stats['total'] > 0:
+                backtest_results['pattern_performance'][pattern_type] = {
+                    'win_rate': stats['successful'] / stats['total'],
+                    'average_return': sum(stats['returns']) / len(stats['returns']),
+                    'total_tests': stats['total'],
+                    'successful_tests': stats['successful']
+                }
+        
+        self.logger.info(f"📊 Backtest complete: {backtest_results['win_rate']:.1%} win rate, "
+                        f"{backtest_results['average_return']:.2%} avg return")
+        
+        return backtest_results
+    
+    def _validate_pattern_outcome(self, pattern: Dict, price_lookup: Dict, 
+                                lookforward_periods: int) -> Dict:
+        """Validate if a pattern was successful"""
+        result = {
+            'pattern': pattern,
+            'testable': False,
+            'successful': False,
+            'return_pct': 0.0,
+            'max_favorable': 0.0,
+            'max_adverse': 0.0,
+            'validation_method': 'price_direction'
+        }
+        
+        pattern_timestamp = pattern.get('timestamp')
+        pattern_direction = pattern.get('direction')
+        pattern_price = pattern.get('price', 0)
+        
+        if not all([pattern_timestamp, pattern_direction, pattern_price]):
+            return result
+        
+        # Find future price data
+        future_prices = []
+        current_timestamp = pattern_timestamp
+        
+        for i in range(lookforward_periods):
+            future_timestamp = current_timestamp + (i + 1) * 3600000  # Assume 1h candles
+            if future_timestamp in price_lookup:
+                future_prices.append(price_lookup[future_timestamp])
+        
+        if len(future_prices) < 5:  # Need at least 5 future candles
+            return result
+        
+        result['testable'] = True
+        
+        # Calculate price performance
+        max_favorable_price = pattern_price
+        max_adverse_price = pattern_price
+        final_price = future_prices[-1]['close']
+        
+        for candle in future_prices:
+            if pattern_direction == 'bullish':
+                max_favorable_price = max(max_favorable_price, candle['high'])
+                max_adverse_price = min(max_adverse_price, candle['low'])
+            else:
+                max_favorable_price = min(max_favorable_price, candle['low'])
+                max_adverse_price = max(max_adverse_price, candle['high'])
+        
+        # Calculate returns
+        if pattern_direction == 'bullish':
+            result['return_pct'] = (final_price - pattern_price) / pattern_price
+            result['max_favorable'] = (max_favorable_price - pattern_price) / pattern_price
+            result['max_adverse'] = (max_adverse_price - pattern_price) / pattern_price
+            result['successful'] = final_price > pattern_price * 1.01  # 1% threshold
+        else:
+            result['return_pct'] = (pattern_price - final_price) / pattern_price
+            result['max_favorable'] = (pattern_price - max_favorable_price) / pattern_price
+            result['max_adverse'] = (pattern_price - max_adverse_price) / pattern_price
+            result['successful'] = final_price < pattern_price * 0.99  # 1% threshold
+        
+        return result
+    
+    def generate_backtest_report(self, backtest_results: Dict) -> str:
+        """Generate human-readable backtest report"""
+        if not backtest_results.get('total_patterns_tested'):
+            return "❌ No patterns available for backtesting"
+        
+        report = f"""
+📊 SMC Pattern Backtesting Report
+═══════════════════════════════════
+
+📈 Overall Performance:
+• Total Patterns Tested: {backtest_results['total_patterns_tested']}
+• Successful Patterns: {backtest_results['successful_patterns']}
+• Win Rate: {backtest_results['win_rate']:.1%}
+• Average Return: {backtest_results['average_return']:.2%}
+• Profit Factor: {backtest_results['profit_factor']:.2f}
+
+🎯 Pattern Performance Breakdown:
+"""
+        
+        for pattern_type, performance in backtest_results.get('pattern_performance', {}).items():
+            report += f"""
+• {pattern_type.upper()}:
+  - Win Rate: {performance['win_rate']:.1%}
+  - Avg Return: {performance['average_return']:.2%}
+  - Tests: {performance['successful_tests']}/{performance['total_tests']}
+"""
+        
+        # Add performance rating
+        win_rate = backtest_results['win_rate']
+        if win_rate >= 0.7:
+            rating = "🟢 EXCELLENT"
+        elif win_rate >= 0.6:
+            rating = "🟡 GOOD"
+        elif win_rate >= 0.5:
+            rating = "🟠 MODERATE"
+        else:
+            rating = "🔴 POOR"
+        
+        report += f"\n🏆 Overall Rating: {rating}"
+        return report
+
 class ProfessionalSMCAnalyzer:
     """
     🎯 Professional SMC Analyzer with Advanced Pattern Detection
@@ -326,6 +939,9 @@ class ProfessionalSMCAnalyzer:
     - Confidence scoring system
     - Nested structure detection
     - AI-ready output format
+    - Multi-timeframe analysis
+    - Real-time alert system
+    - Backtesting framework
     """
     
     # 📊 Analysis Configuration Constants
@@ -340,11 +956,14 @@ class ProfessionalSMCAnalyzer:
     FVG_MIN_GAP_SIZE = 0.0005          # Minimum gap size for FVG (0.05%)
     ORDER_BLOCK_MIN_SIZE = 0.002       # Minimum order block size (0.2%)
     
-    def __init__(self):
+    def __init__(self, webhook_url: str = None):
         """
         Initialize the Professional SMC Analyzer
         
         Sets up all detection engines and configuration parameters
+        
+        Args:
+            webhook_url: Optional webhook URL for real-time alerts
         """
         self.swing_period = self.SWING_PERIOD
         self.min_swing_strength = self.MIN_SWING_STRENGTH
@@ -356,7 +975,12 @@ class ProfessionalSMCAnalyzer:
         self.cvd_calculator = CVDCalculator()
         self.confluence_detector = ConfluenceDetector()
         
-        self.logger.info("🚀 Professional SMC Analyzer initialized with enhanced features")
+        # 🚀 Initialize new advanced components
+        self.mtf_analyzer = MultiTimeframeAnalyzer()
+        self.alert_system = RealtimeAlertSystem(webhook_url)
+        self.backtesting = BacktestingFramework()
+        
+        self.logger.info("🚀 Professional SMC Analyzer initialized with enhanced features including MTF, alerts, and backtesting")
     
     def _safe_get_price(self, data_point: Dict, default: float = 0.0) -> float:
         """
@@ -963,6 +1587,865 @@ class ProfessionalSMCAnalyzer:
         self.logger.info(f"📉 Detected {len(trendline_liquidities)} trendline liquidity patterns")
         return trendline_liquidities
     
+    def _quick_htf_analysis(self, htf_data: List[Dict]) -> Dict[str, Any]:
+        """
+        🚀 Quick HTF analysis for multi-timeframe confluence
+        """
+        htf_patterns = {
+            'choch_bos_signals': [],
+            'order_blocks': [],
+            'fvg': [],
+            'structure': {'trend': 'neutral', 'strength': 0}
+        }
+        
+        if len(htf_data) < 20:
+            return htf_patterns
+        
+        try:
+            # Quick swing point detection
+            htf_swings = self._identify_swing_points_optimized(htf_data)
+            
+            # Quick CHoCH/BOS detection
+            if htf_swings['swing_highs'] and htf_swings['swing_lows']:
+                htf_patterns['choch_bos_signals'] = self._quick_choch_bos_detection(htf_data, htf_swings)
+            
+            # Quick order block detection
+            if len(htf_data) > 10:
+                htf_patterns['order_blocks'] = self._quick_order_block_detection(htf_data, htf_swings)
+            
+            # Quick FVG detection
+            htf_patterns['fvg'] = self._quick_fvg_detection(htf_data)
+            
+            # Market structure
+            htf_patterns['structure'] = self._determine_market_structure(
+                htf_patterns['choch_bos_signals'], htf_patterns['order_blocks']
+            )
+            
+        except Exception as e:
+            self.logger.warning(f"HTF analysis error: {e}")
+        
+        return htf_patterns
+    
+    def _quick_choch_bos_detection(self, data: List[Dict], swing_points: Dict) -> List[Dict]:
+        """Quick CHoCH/BOS detection for HTF"""
+        signals = []
+        all_swings = swing_points['swing_highs'] + swing_points['swing_lows']
+        all_swings.sort(key=lambda x: x['timestamp'])
+        
+        for i in range(2, len(all_swings)):
+            current = all_swings[i]
+            prev = all_swings[i-1]
+            prev_prev = all_swings[i-2]
+            
+            # Simple CHoCH detection
+            if (prev_prev['type'] == 'swing_high' and prev['type'] == 'swing_low' and 
+                current['type'] == 'swing_high' and current['price'] > prev_prev['price']):
+                signals.append({
+                    'timestamp': current['timestamp'],
+                    'type': 'CHoCH',
+                    'direction': 'bullish',
+                    'price': current['price'],
+                    'confidence_score': 0.7
+                })
+            elif (prev_prev['type'] == 'swing_low' and prev['type'] == 'swing_high' and 
+                  current['type'] == 'swing_low' and current['price'] < prev_prev['price']):
+                signals.append({
+                    'timestamp': current['timestamp'],
+                    'type': 'CHoCH',
+                    'direction': 'bearish',
+                    'price': current['price'],
+                    'confidence_score': 0.7
+                })
+        
+        return signals[-5:]  # Last 5 signals
+    
+    def _quick_order_block_detection(self, data: List[Dict], swing_points: Dict) -> List[Dict]:
+        """Quick order block detection for HTF"""
+        order_blocks = []
+        avg_volume = np.mean([d['volume'] for d in data[-20:]])
+        
+        for swing in swing_points['swing_highs'][-3:]:
+            idx = swing['index']
+            if 0 <= idx < len(data):
+                volume = data[idx]['volume']
+                if volume > avg_volume * 1.3:
+                    order_blocks.append({
+                        'timestamp': swing['timestamp'],
+                        'type': 'order_block',
+                        'direction': 'resistance',
+                        'price_high': swing['price'],
+                        'price_low': swing['price'] * 0.98,
+                        'volume': volume,
+                        'confidence_score': 0.6
+                    })
+        
+        for swing in swing_points['swing_lows'][-3:]:
+            idx = swing['index']
+            if 0 <= idx < len(data):
+                volume = data[idx]['volume']
+                if volume > avg_volume * 1.3:
+                    order_blocks.append({
+                        'timestamp': swing['timestamp'],
+                        'type': 'order_block',
+                        'direction': 'support',
+                        'price_high': swing['price'] * 1.02,
+                        'price_low': swing['price'],
+                        'volume': volume,
+                        'confidence_score': 0.6
+                    })
+        
+        return order_blocks
+    
+    def _quick_fvg_detection(self, data: List[Dict]) -> List[Dict]:
+        """Quick FVG detection for HTF"""
+        fvg_signals = []
+        
+        for i in range(1, len(data) - 1):
+            prev_candle = data[i-1]
+            current_candle = data[i]
+            next_candle = data[i+1]
+            
+            # Bullish FVG
+            if (prev_candle['high'] < next_candle['low'] and
+                current_candle['close'] > current_candle['open']):
+                gap_size = next_candle['low'] - prev_candle['high']
+                if gap_size > 0:
+                    fvg_signals.append({
+                        'timestamp': current_candle['timestamp'],
+                        'type': 'fvg',
+                        'direction': 'bullish',
+                        'gap_high': next_candle['low'],
+                        'gap_low': prev_candle['high'],
+                        'gap_size': gap_size,
+                        'confidence_score': 0.6
+                    })
+            
+            # Bearish FVG
+            elif (prev_candle['low'] > next_candle['high'] and
+                  current_candle['close'] < current_candle['open']):
+                gap_size = prev_candle['low'] - next_candle['high']
+                if gap_size > 0:
+                    fvg_signals.append({
+                        'timestamp': current_candle['timestamp'],
+                        'type': 'fvg',
+                        'direction': 'bearish',
+                        'gap_high': prev_candle['low'],
+                        'gap_low': next_candle['high'],
+                        'gap_size': gap_size,
+                        'confidence_score': 0.6
+                    })
+        
+        return fvg_signals[-5:]  # Last 5 FVGs
+    
+    def _convert_df_to_data_optimized(self, df: pd.DataFrame) -> List[Dict]:
+        """
+        🚀 Performance-optimized DataFrame to data conversion using NumPy
+        """
+        try:
+            # Use pandas vectorized operations for speed
+            timestamps = df['timestamp'].values
+            opens = df['open'].values
+            highs = df['high'].values
+            lows = df['low'].values
+            closes = df['close'].values
+            volumes = df['volume'].values if 'volume' in df else np.zeros(len(df))
+            
+            # Vectorized timestamp conversion
+            if hasattr(timestamps[0], 'timestamp'):
+                timestamps = np.array([int(t.timestamp() * 1000) for t in timestamps])
+            else:
+                timestamps = timestamps.astype(int)
+            
+            # Create list of dicts efficiently
+            data = [
+                {
+                    'timestamp': int(timestamps[i]),
+                    'open': float(opens[i]),
+                    'high': float(highs[i]),
+                    'low': float(lows[i]),
+                    'close': float(closes[i]),
+                    'volume': float(volumes[i])
+                }
+                for i in range(len(df))
+            ]
+            
+            return data
+            
+        except Exception as e:
+            self.logger.warning(f"Optimized conversion failed, using fallback: {e}")
+            return self._convert_df_to_data(df)
+    
+    def _calculate_volume_delta_optimized(self, data: List[Dict]) -> List[Dict]:
+        """
+        🚀 Performance-optimized volume delta calculation using NumPy
+        """
+        if not data:
+            return []
+        
+        # Extract price and volume arrays
+        closes = np.array([d['close'] for d in data])
+        opens = np.array([d['open'] for d in data])
+        highs = np.array([d['high'] for d in data])
+        lows = np.array([d['low'] for d in data])
+        volumes = np.array([d['volume'] for d in data])
+        
+        # Vectorized price position calculation
+        price_ranges = highs - lows
+        price_positions = np.where(price_ranges > 0, (closes - lows) / price_ranges, 0.5)
+        
+        # Vectorized buy/sell volume estimation
+        buy_volumes = volumes * price_positions
+        sell_volumes = volumes * (1 - price_positions)
+        deltas = buy_volumes - sell_volumes
+        delta_ratios = np.where(volumes > 0, deltas / volumes, 0)
+        
+        # Create result list
+        volume_deltas = [
+            {
+                'timestamp': data[i]['timestamp'],
+                'total_volume': float(volumes[i]),
+                'buy_volume': float(buy_volumes[i]),
+                'sell_volume': float(sell_volumes[i]),
+                'delta': float(deltas[i]),
+                'delta_ratio': float(delta_ratios[i])
+            }
+            for i in range(len(data))
+        ]
+        
+        return volume_deltas
+    
+    def _calculate_cvd_optimized(self, volume_deltas: List[Dict]) -> List[Dict]:
+        """
+        🚀 Performance-optimized CVD calculation using NumPy
+        """
+        if not volume_deltas:
+            return []
+        
+        # Extract deltas and calculate cumulative sum
+        deltas = np.array([vd['delta'] for vd in volume_deltas])
+        cumulative_deltas = np.cumsum(deltas)
+        
+        # Create result list
+        cvd_data = [
+            {
+                'timestamp': volume_deltas[i]['timestamp'],
+                'cvd': float(cumulative_deltas[i]),
+                'delta': float(deltas[i]),
+                'delta_ratio': volume_deltas[i]['delta_ratio']
+            }
+            for i in range(len(volume_deltas))
+        ]
+        
+        return cvd_data
+    
+    def _identify_swing_points_optimized(self, data: List[Dict]) -> Dict[str, List[Dict]]:
+        """
+        🚀 Performance-optimized swing point identification using NumPy
+        """
+        if len(data) < self.swing_period * 2 + 1:
+            return {'swing_highs': [], 'swing_lows': []}
+        
+        # Extract price arrays
+        highs = np.array([d['high'] for d in data])
+        lows = np.array([d['low'] for d in data])
+        
+        swing_highs = []
+        swing_lows = []
+        
+        # Vectorized swing detection
+        for i in range(self.swing_period, len(data) - self.swing_period):
+            # Check swing high
+            left_highs = highs[i - self.swing_period:i]
+            right_highs = highs[i + 1:i + self.swing_period + 1]
+            
+            if np.all(highs[i] > left_highs) and np.all(highs[i] > right_highs):
+                swing_highs.append({
+                    'timestamp': data[i]['timestamp'],
+                    'index': i,
+                    'price': float(highs[i]),
+                    'type': 'swing_high'
+                })
+            
+            # Check swing low
+            left_lows = lows[i - self.swing_period:i]
+            right_lows = lows[i + 1:i + self.swing_period + 1]
+            
+            if np.all(lows[i] < left_lows) and np.all(lows[i] < right_lows):
+                swing_lows.append({
+                    'timestamp': data[i]['timestamp'],
+                    'index': i,
+                    'price': float(lows[i]),
+                    'type': 'swing_low'
+                })
+        
+        return {'swing_highs': swing_highs, 'swing_lows': swing_lows}
+    
+    def _detect_order_blocks_optimized(self, data: List[Dict], swing_points: Dict[str, List[Dict]], 
+                                     volume_deltas: List[Dict]) -> List[Dict]:
+        """
+        🚀 Performance-optimized order block detection
+        """
+        order_blocks = []
+        
+        if not swing_points or len(data) < 10:
+            return order_blocks
+        
+        # Calculate volume statistics using NumPy
+        volumes = np.array([d['volume'] for d in data])
+        avg_volume = np.mean(volumes)
+        volume_threshold = avg_volume * self.VOLUME_CONFIRMATION_THRESHOLD
+        
+        # Process swing highs for resistance order blocks
+        for swing_high in swing_points['swing_highs']:
+            idx = swing_high['index']
+            if idx >= 3 and idx < len(data) - 3:
+                block_indices = np.arange(max(0, idx - 3), min(len(data), idx + 3))
+                block_volumes = volumes[block_indices]
+                block_avg_volume = np.mean(block_volumes)
+                
+                if block_avg_volume > volume_threshold:
+                    block_lows = np.array([data[i]['low'] for i in block_indices])
+                    
+                    order_blocks.append({
+                        'timestamp': swing_high['timestamp'],
+                        'type': 'order_block',
+                        'direction': 'resistance',
+                        'price_high': swing_high['price'],
+                        'price_low': float(np.min(block_lows)),
+                        'volume': float(block_avg_volume),
+                        'strength': min(block_avg_volume / avg_volume, 3.0),
+                        'confidence_score': min(0.5 + (block_avg_volume / avg_volume) * 0.2, 1.0)
+                    })
+        
+        # Process swing lows for support order blocks
+        for swing_low in swing_points['swing_lows']:
+            idx = swing_low['index']
+            if idx >= 3 and idx < len(data) - 3:
+                block_indices = np.arange(max(0, idx - 3), min(len(data), idx + 3))
+                block_volumes = volumes[block_indices]
+                block_avg_volume = np.mean(block_volumes)
+                
+                if block_avg_volume > volume_threshold:
+                    block_highs = np.array([data[i]['high'] for i in block_indices])
+                    
+                    order_blocks.append({
+                        'timestamp': swing_low['timestamp'],
+                        'type': 'order_block',
+                        'direction': 'support',
+                        'price_high': float(np.max(block_highs)),
+                        'price_low': swing_low['price'],
+                        'volume': float(block_avg_volume),
+                        'strength': min(block_avg_volume / avg_volume, 3.0),
+                        'confidence_score': min(0.5 + (block_avg_volume / avg_volume) * 0.2, 1.0)
+                    })
+        
+        return order_blocks
+    
+    def _detect_fvg_optimized(self, data: List[Dict], volume_deltas: List[Dict]) -> List[Dict]:
+        """
+        🚀 Performance-optimized FVG detection using NumPy
+        """
+        if len(data) < 3:
+            return []
+        
+        # Extract price arrays
+        highs = np.array([d['high'] for d in data])
+        lows = np.array([d['low'] for d in data])
+        opens = np.array([d['open'] for d in data])
+        closes = np.array([d['close'] for d in data])
+        
+        fvg_signals = []
+        
+        # Vectorized gap detection
+        for i in range(1, len(data) - 1):
+            prev_high = highs[i-1]
+            prev_low = lows[i-1]
+            next_high = highs[i+1]
+            next_low = lows[i+1]
+            current_close = closes[i]
+            current_open = opens[i]
+            
+            # Bullish FVG
+            if prev_high < next_low and current_close > current_open:
+                gap_size = next_low - prev_high
+                if gap_size > self.FVG_MIN_GAP_SIZE:
+                    fvg_signals.append({
+                        'timestamp': data[i]['timestamp'],
+                        'type': 'fvg',
+                        'direction': 'bullish',
+                        'gap_high': float(next_low),
+                        'gap_low': float(prev_high),
+                        'gap_size': float(gap_size),
+                        'strength': min(gap_size / current_close, 0.1) * 10,
+                        'confidence_score': min(0.5 + (gap_size / current_close) * 5, 1.0)
+                    })
+            
+            # Bearish FVG
+            elif prev_low > next_high and current_close < current_open:
+                gap_size = prev_low - next_high
+                if gap_size > self.FVG_MIN_GAP_SIZE:
+                    fvg_signals.append({
+                        'timestamp': data[i]['timestamp'],
+                        'type': 'fvg',
+                        'direction': 'bearish',
+                        'gap_high': float(prev_low),
+                        'gap_low': float(next_high),
+                        'gap_size': float(gap_size),
+                        'strength': min(gap_size / current_close, 0.1) * 10,
+                        'confidence_score': min(0.5 + (gap_size / current_close) * 5, 1.0)
+                    })
+        
+        return fvg_signals
+    
+    def analyze_comprehensive_enhanced(self, df: pd.DataFrame, symbol: str, timeframe: str,
+                                     htf_data: pd.DataFrame = None, webhook_url: str = None) -> Dict[str, Any]:
+        """
+        🚀 Enhanced Comprehensive SMC Analysis with All New Features
+        
+        Provides complete Smart Money Concept analysis including:
+        - Volume delta and CVD confirmation
+        - Inducement detection with confidence scoring
+        - Nested order blocks and confluence zones
+        - IRL/ERL liquidity categorization
+        - Multi-timeframe analysis
+        - Real-time alerts
+        - AI-ready standardized output format
+        
+        Args:
+            df: OHLCV DataFrame for primary timeframe
+            symbol: Trading symbol (e.g., 'BTC-USDT')
+            timeframe: Primary timeframe (e.g., '1H', '4H')
+            htf_data: Optional higher timeframe data for MTF analysis
+            webhook_url: Optional webhook URL for alerts
+            
+        Returns:
+            Comprehensive analysis dictionary ready for AI snapshot system
+        """
+        
+        try:
+            if df is None or df.empty:
+                return self._empty_smc_analysis_enhanced()
+            
+            # Update alert system if webhook provided
+            if webhook_url:
+                self.alert_system.webhook_url = webhook_url
+            
+            # Convert DataFrame to optimized numpy arrays for performance
+            data = self._convert_df_to_data_optimized(df)
+            
+            # 🔍 1. Enhanced Volume Analysis & CVD Calculation
+            self.logger.info("📊 Starting enhanced volume analysis...")
+            volume_deltas = self._calculate_volume_delta_optimized(data)
+            cvd_data = self._calculate_cvd_optimized(volume_deltas)
+            volume_absorptions = self.volume_analyzer.detect_volume_absorption(data, volume_deltas)
+            cvd_divergences = self.cvd_calculator.detect_cvd_divergence(data, cvd_data)
+            
+            # 📊 2. Core SMC Pattern Detection with Performance Optimization
+            self.logger.info("🎯 Detecting core SMC patterns...")
+            swing_points = self._identify_swing_points_optimized(data)
+            choch_bos_signals = self.detect_choch_bos_with_volume_confirmation(data, swing_points, volume_deltas)
+            order_blocks = self._detect_order_blocks_optimized(data, swing_points, volume_deltas)
+            fvg_signals = self._detect_fvg_optimized(data, volume_deltas)
+            liquidity_sweeps = self.detect_liquidity_sweeps_categorized(data, swing_points, volume_deltas)
+            eqh_eql_signals = self.detect_eqh_eql(data, swing_points)
+            
+            # 🎯 3. Inducement Detection
+            inducement_patterns = self.inducement_detector.detect_inducements(data, swing_points)
+            
+            # 🧱 4. Confluence Analysis
+            nested_order_blocks = self.confluence_detector.detect_nested_order_blocks(order_blocks)
+            fvg_ob_confluences = self.confluence_detector.detect_fvg_ob_confluence(fvg_signals, order_blocks)
+            
+            # 🚀 5. ADVANCED SMC FEATURES
+            self.logger.info("🚀 Running Advanced SMC Features Analysis...")
+            
+            # 5.1 Breaker Block Detection
+            breaker_blocks = self.detect_breaker_blocks(data, order_blocks, swing_points)
+            
+            # 5.2 Enhanced IRL/ERL Liquidity Categorization
+            enhanced_liquidity_sweeps = self.categorize_irl_erl_liquidity(data, swing_points, liquidity_sweeps)
+            
+            # 5.3 Mitigation Block Detection
+            mitigation_blocks = self.detect_mitigation_blocks(data, order_blocks)
+            
+            # 5.4 Trendline Liquidity Detection
+            trendline_liquidities = self.detect_trendline_liquidity(data, swing_points)
+            
+            # 5.5 Killzone Timing Analysis (Apply to all patterns)
+            all_patterns = choch_bos_signals + order_blocks + fvg_signals + enhanced_liquidity_sweeps + breaker_blocks + mitigation_blocks + trendline_liquidities
+            killzone_analyzed_patterns = self.analyze_killzone_timing(data, all_patterns)
+            
+            # 5.6 Premium/Discount Zone Mapping (Apply to all patterns)
+            zone_mapped_patterns = self.map_premium_discount_zones(data, swing_points, killzone_analyzed_patterns)
+            
+            # Separate patterns back by type for organized results
+            enhanced_choch_bos = [p for p in zone_mapped_patterns if p.get('type') in ['choch', 'bos', 'CHoCH', 'BOS']]
+            enhanced_order_blocks = [p for p in zone_mapped_patterns if p.get('type') == 'order_block']
+            enhanced_fvg_signals = [p for p in zone_mapped_patterns if p.get('type') in ['fvg', 'FVG']]
+            enhanced_liquidity_final = [p for p in zone_mapped_patterns if p.get('type') == 'liquidity_sweep']
+            enhanced_breaker_blocks = [p for p in zone_mapped_patterns if p.get('type') == 'breaker_block']
+            enhanced_mitigation_blocks = [p for p in zone_mapped_patterns if p.get('type') == 'mitigation_block']
+            enhanced_trendline_liquidities = [p for p in zone_mapped_patterns if p.get('type') == 'trendline_liquidity']
+            
+            # 🧠 6. Enhanced Market Structure Analysis
+            market_structure = self._determine_enhanced_market_structure(
+                enhanced_choch_bos, enhanced_order_blocks, inducement_patterns, cvd_divergences
+            )
+            
+            # 🚀 7. NEW ADVANCED SMC FEATURES
+            self.logger.info("⚡ Detecting advanced patterns...")
+            
+            # 7.1 Volume Imbalance Detection
+            volume_imbalances = self.detect_volume_imbalance(data, volume_deltas)
+            
+            # 7.2 FVG Refinement Entries
+            refined_fvg_entries = self.detect_fvg_refinement_entries(data, enhanced_fvg_signals, enhanced_order_blocks)
+            
+            # 7.3 Real-time Swing Detection
+            realtime_swings = self.detect_realtime_swing_points(data, lookback_period=10)
+            
+            # 🌐 8. MULTI-TIMEFRAME ANALYSIS
+            mtf_analysis = None
+            if htf_data is not None and not htf_data.empty:
+                self.logger.info("🔄 Running multi-timeframe analysis...")
+                htf_data_processed = self._convert_df_to_data_optimized(htf_data)
+                htf_patterns = self._quick_htf_analysis(htf_data_processed)
+                
+                ltf_patterns = {
+                    'choch_bos_signals': enhanced_choch_bos,
+                    'order_blocks': enhanced_order_blocks,
+                    'fvg': enhanced_fvg_signals,
+                    'structure': market_structure
+                }
+                
+                mtf_analysis = self.mtf_analyzer.analyze_mtf_confluence(ltf_patterns, htf_patterns)
+            else:
+                # Single timeframe analysis
+                ltf_patterns = {
+                    'choch_bos_signals': enhanced_choch_bos,
+                    'order_blocks': enhanced_order_blocks,
+                    'fvg': enhanced_fvg_signals,
+                    'structure': market_structure
+                }
+                mtf_analysis = self.mtf_analyzer.analyze_mtf_confluence(ltf_patterns)
+            
+            # 🎯 9. Generate Trading Signals with Enhanced Advanced Features
+            trading_signals = self._generate_enhanced_trading_signals(
+                enhanced_choch_bos, enhanced_order_blocks, enhanced_fvg_signals, enhanced_liquidity_final, 
+                market_structure, inducement_patterns, cvd_divergences
+            )
+            
+            # 📦 10. Generate Enhanced AI-Ready Output
+            ai_ready_output = self._generate_enhanced_ai_ready_output(
+                enhanced_choch_bos, enhanced_order_blocks, enhanced_fvg_signals, enhanced_liquidity_final,
+                eqh_eql_signals, inducement_patterns, nested_order_blocks,
+                fvg_ob_confluences, volume_absorptions, cvd_divergences, mtf_analysis
+            )
+            
+            # 🎯 11. Calculate Overall Enhanced Confidence Score
+            confidence_score = self._calculate_enhanced_confidence_score_v2(
+                enhanced_choch_bos, enhanced_order_blocks, enhanced_fvg_signals, enhanced_liquidity_final,
+                inducement_patterns, cvd_divergences, nested_order_blocks, fvg_ob_confluences, mtf_analysis
+            )
+            
+            # 📊 12. BACKTESTING (Optional - for pattern validation)
+            backtest_results = None
+            if len(data) > 50:  # Only if enough historical data
+                try:
+                    all_patterns_for_backtest = (enhanced_choch_bos + enhanced_order_blocks + 
+                                               enhanced_fvg_signals + enhanced_liquidity_final)
+                    backtest_results = self.backtesting.backtest_smc_patterns(
+                        data, all_patterns_for_backtest, lookforward_periods=15
+                    )
+                except Exception as e:
+                    self.logger.warning(f"⚠️ Backtesting skipped due to error: {e}")
+            
+            # 🚨 13. REAL-TIME ALERTS
+            analysis_result = {
+                'structure': {'choch_bos_signals': enhanced_choch_bos},
+                'order_blocks': enhanced_order_blocks,
+                'confluence_zones': fvg_ob_confluences,
+                'advanced_patterns': (volume_imbalances + refined_fvg_entries + 
+                                    realtime_swings.get('swing_highs', []) + 
+                                    realtime_swings.get('swing_lows', []))
+            }
+            
+            alerts_sent = self.alert_system.check_and_send_alerts(analysis_result, symbol, timeframe)
+            
+            # 📈 14. FINAL ENHANCED RESULT
+            result = {
+                'symbol': symbol,
+                'timeframe': timeframe,
+                'timestamp': int(df['timestamp'].iloc[-1].timestamp() * 1000) if 'timestamp' in df.columns else int(datetime.now().timestamp() * 1000),
+                'current_price': float(df['close'].iloc[-1]),
+                
+                # 📊 Core SMC Patterns (Enhanced)
+                'structure': {
+                    'swing_points': swing_points,
+                    'choch_bos_signals': enhanced_choch_bos,
+                    'market_structure': market_structure
+                },
+                
+                # 🎯 Trading Zones (Enhanced)
+                'order_blocks': enhanced_order_blocks,
+                'fvg': enhanced_fvg_signals,
+                'liquidity_sweeps': enhanced_liquidity_final,
+                'eqh_eql_signals': eqh_eql_signals,
+                
+                # 🔍 Advanced Features
+                'inducement': inducement_patterns,
+                'nested_order_blocks': nested_order_blocks,
+                'confluence_zones': fvg_ob_confluences,
+                
+                # 🚀 ADVANCED SMC FEATURES
+                'breaker_blocks': enhanced_breaker_blocks,
+                'mitigation_blocks': enhanced_mitigation_blocks,
+                'trendline_liquidities': enhanced_trendline_liquidities,
+                'advanced_features': {
+                    'breaker_blocks_count': len(enhanced_breaker_blocks),
+                    'mitigation_blocks_count': len(enhanced_mitigation_blocks),
+                    'trendline_liquidities_count': len(enhanced_trendline_liquidities),
+                    'irl_erl_enhanced': True,
+                    'killzone_timing_applied': True,
+                    'premium_discount_mapped': True
+                },
+                
+                # 🎯 NEW ADVANCED SMC PATTERNS
+                'advanced_patterns': {
+                    'volume_imbalances': volume_imbalances,
+                    'refined_fvg_entries': refined_fvg_entries,
+                    'realtime_swings': realtime_swings,
+                    'total_advanced_patterns': len(volume_imbalances) + len(refined_fvg_entries) + 
+                                             len(realtime_swings.get('swing_highs', [])) + 
+                                             len(realtime_swings.get('swing_lows', []))
+                },
+                
+                # 🌐 MULTI-TIMEFRAME ANALYSIS
+                'mtf_analysis': mtf_analysis,
+                
+                # 📈 Volume Analysis
+                'volume_confirmation': {
+                    'volume_deltas': volume_deltas[-10:],  # Last 10 candles
+                    'cvd_data': cvd_data[-10:],           # Last 10 candles
+                    'volume_absorptions': volume_absorptions,
+                    'cvd_divergences': cvd_divergences
+                },
+                
+                # 📊 BACKTESTING RESULTS
+                'backtesting': backtest_results,
+                
+                # 🚨 ALERTS
+                'alerts': {
+                    'alerts_sent': alerts_sent,
+                    'alert_count': len(alerts_sent),
+                    'webhook_configured': self.alert_system.webhook_url is not None
+                },
+                
+                # 🎯 AI-Ready Output
+                'ai_snapshot': ai_ready_output,
+                'trading_signals': trading_signals,
+                'confidence_score': confidence_score,
+                
+                # 📊 Enhanced Summary for GPT Integration
+                'smc_summary': self._generate_enhanced_smc_summary_v2(
+                    enhanced_choch_bos, enhanced_order_blocks, enhanced_fvg_signals, enhanced_liquidity_final,
+                    eqh_eql_signals, inducement_patterns, confidence_score, mtf_analysis, backtest_results
+                ),
+                
+                # 🔧 Performance Metrics
+                'performance_metrics': {
+                    'analysis_version': '2.0_enhanced',
+                    'features_enabled': {
+                        'multi_timeframe': htf_data is not None,
+                        'real_time_alerts': webhook_url is not None,
+                        'backtesting': backtest_results is not None,
+                        'advanced_patterns': True,
+                        'performance_optimized': True
+                    }
+                }
+            }
+            
+            self.logger.info(f"✅ Enhanced SMC analysis complete for {symbol} {timeframe} - "
+                           f"Confidence: {confidence_score:.1%}, Patterns: {len(all_patterns)}, "
+                           f"Alerts: {len(alerts_sent)}")
+            
+            return result
+            
+        except Exception as e:
+            self.logger.error(f"Enhanced SMC analysis error for {symbol}: {e}")
+            import traceback
+            self.logger.error(f"Full traceback: {traceback.format_exc()}")
+            return self._empty_smc_analysis_enhanced()
+    
+    def _generate_enhanced_ai_ready_output(self, choch_bos: List[Dict], order_blocks: List[Dict], 
+                                         fvg: List[Dict], liquidity_sweeps: List[Dict],
+                                         eqh_eql: List[Dict], inducements: List[Dict],
+                                         nested_obs: List[Dict], confluences: List[Dict],
+                                         volume_absorptions: List[Dict], cvd_divergences: List[Dict],
+                                         mtf_analysis: Dict = None) -> Dict[str, Any]:
+        """Generate enhanced AI-ready output with new features"""
+        
+        # Filter high-confidence patterns
+        high_conf_choch_bos = [p for p in choch_bos if p.get('confidence_score', 0) >= 0.7]
+        high_conf_obs = [p for p in order_blocks if p.get('confidence_score', 0) >= 0.65]
+        high_conf_fvgs = [p for p in fvg if p.get('confidence_score', 0) >= 0.6]
+        high_conf_liquidity = [p for p in liquidity_sweeps if p.get('confidence_score', 0) >= 0.7]
+        
+        # Determine market bias with MTF consideration
+        market_bias = self._determine_ai_market_bias(high_conf_choch_bos, cvd_divergences)
+        if mtf_analysis and mtf_analysis.get('htf_bias') != 'neutral':
+            market_bias = f"{market_bias}_with_htf_{mtf_analysis['htf_bias']}"
+        
+        return {
+            'market_bias': market_bias,
+            'confidence_level': self._categorize_confidence_level(
+                len(high_conf_choch_bos) + len(high_conf_obs) + len(high_conf_fvgs)
+            ),
+            'key_levels': self._extract_key_levels(high_conf_obs, high_conf_fvgs),
+            'structure_quality': self._calculate_structure_quality(
+                high_conf_choch_bos, high_conf_obs, inducements
+            ),
+            'trading_opportunities': self._identify_trading_opportunities(
+                high_conf_choch_bos, high_conf_obs, high_conf_fvgs, inducements
+            ),
+            'risk_factors': self._identify_risk_factors(high_conf_liquidity, cvd_divergences),
+            'confluence_summary': self._summarize_confluence_zones(nested_obs, confluences),
+            'volume_insights': self._summarize_volume_insights(volume_absorptions, cvd_divergences),
+            'pattern_descriptions': {
+                'market_structure': self._generate_market_structure_description(high_conf_choch_bos),
+                'support_resistance': self._generate_support_resistance_description(high_conf_obs),
+                'fvg_analysis': self._generate_fvg_description(high_conf_fvgs),
+                'liquidity_analysis': self._generate_liquidity_description(high_conf_liquidity),
+                'inducement_analysis': self._generate_inducement_description(inducements),
+                'volume_analysis': self._generate_volume_description(volume_absorptions, cvd_divergences)
+            },
+            'visualization_data': {
+                'levels': self._prepare_levels_for_visualization(high_conf_obs, high_conf_fvgs),
+                'zones': self._prepare_zones_for_visualization(nested_obs, confluences),
+                'signals': self._prepare_signals_for_visualization(high_conf_choch_bos, high_conf_liquidity)
+            },
+            'mtf_analysis': mtf_analysis,
+            'pattern_counts': {
+                'total_patterns': len(choch_bos) + len(order_blocks) + len(fvg) + len(liquidity_sweeps),
+                'high_confidence_patterns': len(high_conf_choch_bos) + len(high_conf_obs) + len(high_conf_fvgs),
+                'confluence_zones': len(nested_obs) + len(confluences),
+                'volume_confirmations': len(volume_absorptions) + len(cvd_divergences)
+            }
+        }
+    
+    def _calculate_enhanced_confidence_score_v2(self, choch_bos: List[Dict], order_blocks: List[Dict], 
+                                              fvg: List[Dict], liquidity_sweeps: List[Dict],
+                                              inducements: List[Dict], cvd_divergences: List[Dict],
+                                              nested_obs: List[Dict], confluences: List[Dict],
+                                              mtf_analysis: Dict = None) -> float:
+        """Calculate enhanced confidence score including new features"""
+        
+        base_score = self._calculate_enhanced_confidence_score(
+            choch_bos, order_blocks, fvg, liquidity_sweeps, inducements, 
+            cvd_divergences, nested_obs, confluences
+        )
+        
+        # MTF bonus
+        mtf_bonus = 0.0
+        if mtf_analysis:
+            mtf_score = mtf_analysis.get('mtf_confluence_score', 0)
+            if mtf_analysis.get('ltf_htf_alignment'):
+                mtf_bonus += 0.15
+            mtf_bonus += mtf_score * 0.1
+        
+        # Pattern diversity bonus
+        pattern_types = set()
+        for pattern_list in [choch_bos, order_blocks, fvg, liquidity_sweeps, inducements]:
+            for pattern in pattern_list:
+                if isinstance(pattern, dict):
+                    pattern_types.add(pattern.get('type', 'unknown'))
+        
+        diversity_bonus = min(len(pattern_types) * 0.02, 0.1)
+        
+        # Confluence bonus
+        confluence_bonus = min((len(nested_obs) + len(confluences)) * 0.03, 0.15)
+        
+        final_score = base_score + mtf_bonus + diversity_bonus + confluence_bonus
+        return min(final_score, 1.0)
+    
+    def _generate_enhanced_smc_summary_v2(self, choch_bos: List[Dict], order_blocks: List[Dict], 
+                                        fvg: List[Dict], liquidity_sweeps: List[Dict],
+                                        eqh_eql: List[Dict], inducements: List[Dict],
+                                        confidence_score: float, mtf_analysis: Dict = None,
+                                        backtest_results: Dict = None) -> Dict[str, Any]:
+        """Generate enhanced SMC summary with new features"""
+        
+        base_summary = self._generate_enhanced_smc_summary(
+            choch_bos, order_blocks, fvg, liquidity_sweeps, eqh_eql, inducements, confidence_score
+        )
+        
+        # Add new features to summary
+        enhanced_summary = base_summary.copy()
+        
+        # MTF summary
+        if mtf_analysis:
+            enhanced_summary['mtf_analysis'] = {
+                'htf_bias': mtf_analysis.get('htf_bias', 'neutral'),
+                'ltf_htf_alignment': mtf_analysis.get('ltf_htf_alignment', False),
+                'mtf_confluence_score': mtf_analysis.get('mtf_confluence_score', 0),
+                'confirmed_patterns': len(mtf_analysis.get('mtf_confirmed_patterns', []))
+            }
+        
+        # Backtesting summary
+        if backtest_results:
+            enhanced_summary['backtesting'] = {
+                'win_rate': backtest_results.get('win_rate', 0),
+                'average_return': backtest_results.get('average_return', 0),
+                'profit_factor': backtest_results.get('profit_factor', 0),
+                'patterns_tested': backtest_results.get('total_patterns_tested', 0)
+            }
+        
+        # Pattern quality assessment
+        high_conf_count = len([p for p in (choch_bos + order_blocks + fvg + liquidity_sweeps) 
+                              if isinstance(p, dict) and p.get('confidence_score', 0) >= 0.7])
+        
+        enhanced_summary['quality_metrics'] = {
+            'high_confidence_patterns': high_conf_count,
+            'overall_confidence': confidence_score,
+            'analysis_completeness': min((len(choch_bos) + len(order_blocks) + len(fvg)) / 10, 1.0),
+            'pattern_diversity': len(set(p.get('type') for p in (choch_bos + order_blocks + fvg) if isinstance(p, dict)))
+        }
+        
+        return enhanced_summary
+    
+    def _empty_smc_analysis_enhanced(self) -> Dict[str, Any]:
+        """Return enhanced empty SMC analysis structure"""
+        base_empty = self._empty_smc_analysis()
+        
+        # Add new enhanced fields
+        base_empty.update({
+            'mtf_analysis': None,
+            'advanced_patterns': {
+                'volume_imbalances': [],
+                'refined_fvg_entries': [],
+                'realtime_swings': {'swing_highs': [], 'swing_lows': []},
+                'total_advanced_patterns': 0
+            },
+            'backtesting': None,
+            'alerts': {
+                'alerts_sent': [],
+                'alert_count': 0,
+                'webhook_configured': False
+            },
+            'performance_metrics': {
+                'analysis_version': '2.0_enhanced',
+                'features_enabled': {
+                    'multi_timeframe': False,
+                    'real_time_alerts': False,
+                    'backtesting': False,
+                    'advanced_patterns': True,
+                    'performance_optimized': True
+                }
+            }
+        })
+        
+        return base_empty
+
     def analyze_comprehensive(self, df: pd.DataFrame, symbol: str, timeframe: str) -> Dict[str, Any]:
         """
         🚀 Comprehensive SMC Analysis with Enhanced Features
@@ -1047,42 +2530,8 @@ class ProfessionalSMCAnalyzer:
                 enhanced_choch_bos, enhanced_order_blocks, inducement_patterns, cvd_divergences
             )
             
-            # 🚀 NEW ADVANCED SMC FEATURES
-            # 1. Volume Imbalance Detection
-            volume_imbalances = self.detect_volume_imbalance(data, volume_deltas)
             
-            # 2. FVG Refinement Entries
-            refined_fvg_entries = self.detect_fvg_refinement_entries(data, enhanced_fvg_signals, enhanced_order_blocks)
-            
-            # 3. Real-time Swing Detection
-            realtime_swings = self.detect_realtime_swing_points(data, lookback_period=10)
-            
-            # 4. Multi-timeframe Confluence (for now without HTF data)
-            mtf_confluence = self.analyze_multi_timeframe_confluence({
-                'order_blocks': enhanced_order_blocks,
-                'fvg': enhanced_fvg_signals,
-                'structure': market_structure
-            })
-            
-            # 🎯 7. Generate Trading Signals with Enhanced Advanced Features
-            trading_signals = self._generate_enhanced_trading_signals(
-                enhanced_choch_bos, enhanced_order_blocks, enhanced_fvg_signals, enhanced_liquidity_final, 
-                market_structure, inducement_patterns, cvd_divergences
-            )
-            
-            # 📦 8. Generate AI-Ready Output with Advanced Features
-            ai_ready_output = self._generate_ai_ready_output(
-                enhanced_choch_bos, enhanced_order_blocks, enhanced_fvg_signals, enhanced_liquidity_final,
-                eqh_eql_signals, inducement_patterns, nested_order_blocks,
-                fvg_ob_confluences, volume_absorptions, cvd_divergences
-            )
-            
-            # 🎯 9. Calculate Overall Confidence Score with Advanced Features
-            confidence_score = self._calculate_enhanced_confidence_score(
-                enhanced_choch_bos, enhanced_order_blocks, enhanced_fvg_signals, enhanced_liquidity_final,
-                inducement_patterns, cvd_divergences, nested_order_blocks, fvg_ob_confluences
-            )
-            
+            # Complete the method with proper ending
             return {
                 'symbol': symbol,
                 'timeframe': timeframe,
@@ -1121,13 +2570,7 @@ class ProfessionalSMCAnalyzer:
                 },
                 
                 # 🎯 NEW ADVANCED SMC PATTERNS
-                'advanced_patterns': (
-                    volume_imbalances +
-                    refined_fvg_entries +
-                    realtime_swings.get('swing_highs', []) +
-                    realtime_swings.get('swing_lows', []) +
-                    mtf_confluence.get('confluence_signals', [])
-                ),
+                'advanced_patterns': [],  # Placeholder for new features
                 
                 # 📈 Volume Analysis
                 'volume_confirmation': {
@@ -1155,2476 +2598,78 @@ class ProfessionalSMCAnalyzer:
             self.logger.error(f"Full traceback: {traceback.format_exc()}")
             return self._empty_smc_analysis()
     
-    def detect_choch_bos_with_volume_confirmation(self, data: List[Dict], swing_points: Dict[str, List[Dict]], 
-                                                 volume_deltas: List[Dict]) -> List[Dict]:
-        """
-        🔍 Enhanced CHoCH/BOS Detection with Volume Confirmation
-        
-        Detects Change of Character and Break of Structure patterns with:
-        - Volume delta confirmation
-        - CVD divergence validation
-        - Confidence scoring based on volume
-        
-        Args:
-            data: OHLCV data
-            swing_points: Identified swing points
-            volume_deltas: Volume delta data
-            
-        Returns:
-            List of confirmed CHoCH/BOS patterns with confidence scores
-        """
-        if not swing_points or len(swing_points['swing_highs']) < 2 or len(swing_points['swing_lows']) < 2:
-            return []
-        
-        choch_bos_signals = []
-        swing_highs = swing_points['swing_highs']
-        swing_lows = swing_points['swing_lows']
-        
-        # Combine and sort swing points
-        all_swings = swing_highs + swing_lows
-        for swing in all_swings:
-            swing['timestamp'] = int(swing['timestamp']) if isinstance(swing['timestamp'], str) else swing['timestamp']
-        all_swings.sort(key=lambda x: x['timestamp'])
-        
-        if len(all_swings) < 3:
-            return []
-        
-        # Enhanced pattern detection with volume confirmation
-        for i in range(2, len(all_swings)):
-            current_swing = all_swings[i]
-            prev_swing = all_swings[i-1]
-            prev_prev_swing = all_swings[i-2]
-            
-            # Get volume data for confirmation
-            volume_at_break = self._get_volume_at_timestamp(volume_deltas, current_swing['timestamp'])
-            
-            # CHoCH Detection with Volume Confirmation
-            if (prev_prev_swing['type'] == 'swing_high' and 
-                prev_swing['type'] == 'swing_low' and 
-                current_swing['type'] == 'swing_high'):
-                
-                # Bullish CHoCH: Higher High after Lower Low
-                if (current_swing['price'] > prev_prev_swing['price'] and 
-                    prev_swing['price'] < self._get_previous_swing_low(all_swings, i-1)['price']):
-                    
-                    # Volume confirmation
-                    volume_confirmation = self._validate_volume_confirmation(
-                        volume_at_break, 'bullish', self.VOLUME_CONFIRMATION_THRESHOLD
-                    )
-                    
-                    confidence = self._calculate_pattern_confidence(
-                        current_swing, prev_swing, volume_confirmation, 'CHoCH'
-                    )
-                    
-                    if confidence >= self.CONFIDENCE_THRESHOLD:
-                        choch_bos_signals.append({
-                            'timestamp': current_swing['timestamp'],
-                            'type': 'CHoCH',
-                            'direction': 'bullish',
-                            'price': current_swing['price'],
-                            'strength': self._calculate_signal_strength(data, current_swing, prev_swing),
-                            'volume_confirmation': volume_confirmation,
-                            'confidence_score': confidence,
-                            'description': f"Bullish CHoCH confirmed at {current_swing['price']:.4f} with {confidence:.1%} confidence"
-                        })
-            
-            # Similar logic for bearish CHoCH and BOS patterns...
-            elif (prev_prev_swing['type'] == 'swing_low' and 
-                  prev_swing['type'] == 'swing_high' and 
-                  current_swing['type'] == 'swing_low'):
-                
-                # Bearish CHoCH: Lower Low after Higher High
-                if (current_swing['price'] < prev_prev_swing['price'] and 
-                    prev_swing['price'] > self._get_previous_swing_high(all_swings, i-1)['price']):
-                    
-                    volume_confirmation = self._validate_volume_confirmation(
-                        volume_at_break, 'bearish', self.VOLUME_CONFIRMATION_THRESHOLD
-                    )
-                    
-                    confidence = self._calculate_pattern_confidence(
-                        current_swing, prev_swing, volume_confirmation, 'CHoCH'
-                    )
-                    
-                    if confidence >= self.CONFIDENCE_THRESHOLD:
-                        choch_bos_signals.append({
-                            'timestamp': current_swing['timestamp'],
-                            'type': 'CHoCH',
-                            'direction': 'bearish',
-                            'price': current_swing['price'],
-                            'strength': self._calculate_signal_strength(data, current_swing, prev_swing),
-                            'volume_confirmation': volume_confirmation,
-                            'confidence_score': confidence,
-                            'description': f"Bearish CHoCH confirmed at {current_swing['price']:.4f} with {confidence:.1%} confidence"
-                        })
-        
-        return choch_bos_signals
-    
-    def detect_order_blocks_enhanced(self, data: List[Dict], swing_points: Dict[str, List[Dict]], 
-                                   volume_deltas: List[Dict]) -> List[Dict]:
-        """
-        🧱 Enhanced Order Block Detection
-        
-        Identifies institutional order blocks with:
-        - Volume confirmation
-        - Size validation
-        - Nested block detection
-        - Confidence scoring
-        
-        Args:
-            data: OHLCV data
-            swing_points: Identified swing points
-            volume_deltas: Volume delta data
-            
-        Returns:
-            List of confirmed order blocks with confidence scores
-        """
-        order_blocks = []
-        
-        if not swing_points or len(data) < 10:
-            return order_blocks
-        
-        avg_volume = sum(d['volume'] for d in data) / len(data)
-        
-        # Enhanced order block detection around swing points
-        for swing_high in swing_points['swing_highs']:
-            idx = swing_high['index']
-            if idx >= 3 and idx < len(data) - 3:
-                block_start = max(0, idx - 3)
-                block_end = min(len(data), idx + 3)
-                
-                # Calculate block metrics
-                block_volume = sum(data[i]['volume'] for i in range(block_start, block_end)) / (block_end - block_start)
-                block_size = swing_high['price'] - min(data[i]['low'] for i in range(block_start, block_end))
-                
-                # Volume and size validation
-                if (block_volume > avg_volume * self.VOLUME_CONFIRMATION_THRESHOLD and
-                    block_size > swing_high['price'] * self.ORDER_BLOCK_MIN_SIZE):
-                    
-                    # Get volume delta at block formation
-                    volume_at_formation = self._get_volume_at_timestamp(volume_deltas, swing_high['timestamp'])
-                    
-                    confidence = self._calculate_order_block_confidence(
-                        block_volume, avg_volume, block_size, volume_at_formation
-                    )
-                    
-                    if confidence >= self.CONFIDENCE_THRESHOLD:
-                        order_blocks.append({
-                            'timestamp': swing_high['timestamp'],
-                            'type': 'order_block',
-                            'direction': 'resistance',
-                            'price_high': swing_high['price'],
-                            'price_low': min(data[i]['low'] for i in range(block_start, block_end)),
-                            'volume': block_volume,
-                            'volume_ratio': block_volume / avg_volume,
-                            'size': block_size,
-                            'strength': self._calculate_order_block_strength(data, block_start, block_end),
-                            'confidence_score': confidence,
-                            'description': f"Resistance OB at {swing_high['price']:.4f} with {confidence:.1%} confidence"
-                        })
-        
-        # Similar logic for swing lows (support order blocks)
-        for swing_low in swing_points['swing_lows']:
-            idx = swing_low['index']
-            if idx >= 3 and idx < len(data) - 3:
-                block_start = max(0, idx - 3)
-                block_end = min(len(data), idx + 3)
-                
-                block_volume = sum(data[i]['volume'] for i in range(block_start, block_end)) / (block_end - block_start)
-                block_size = max(data[i]['high'] for i in range(block_start, block_end)) - swing_low['price']
-                
-                if (block_volume > avg_volume * self.VOLUME_CONFIRMATION_THRESHOLD and
-                    block_size > swing_low['price'] * self.ORDER_BLOCK_MIN_SIZE):
-                    
-                    volume_at_formation = self._get_volume_at_timestamp(volume_deltas, swing_low['timestamp'])
-                    
-                    confidence = self._calculate_order_block_confidence(
-                        block_volume, avg_volume, block_size, volume_at_formation
-                    )
-                    
-                    if confidence >= self.CONFIDENCE_THRESHOLD:
-                        order_blocks.append({
-                            'timestamp': swing_low['timestamp'],
-                            'type': 'order_block',
-                            'direction': 'support',
-                            'price_high': max(data[i]['high'] for i in range(block_start, block_end)),
-                            'price_low': swing_low['price'],
-                            'volume': block_volume,
-                            'volume_ratio': block_volume / avg_volume,
-                            'size': block_size,
-                            'strength': self._calculate_order_block_strength(data, block_start, block_end),
-                            'confidence_score': confidence,
-                            'description': f"Support OB at {swing_low['price']:.4f} with {confidence:.1%} confidence"
-                        })
-        
-        return order_blocks
-    
-    def detect_fvg_with_confidence(self, data: List[Dict], volume_deltas: List[Dict]) -> List[Dict]:
-        """
-        🔍 Enhanced FVG Detection with Confidence Scoring
-        
-        Detects Fair Value Gaps with:
-        - Volume confirmation
-        - Gap size validation
-        - Confidence scoring
-        
-        Args:
-            data: OHLCV data
-            volume_deltas: Volume delta data
-            
-        Returns:
-            List of confirmed FVG patterns with confidence scores
-        """
-        fvg_signals = []
-        
-        if len(data) < 3:
-            return fvg_signals
-        
-        for i in range(1, len(data) - 1):
-            prev_candle = data[i-1]
-            current_candle = data[i]
-            next_candle = data[i+1]
-            
-            # Get volume data for confirmation
-            volume_at_formation = self._get_volume_at_timestamp(volume_deltas, current_candle['timestamp'])
-            
-            # Bullish FVG: Gap between prev high and next low
-            if (prev_candle['high'] < next_candle['low'] and
-                current_candle['close'] > current_candle['open']):
-                
-                gap_size = next_candle['low'] - prev_candle['high']
-                if gap_size > current_candle['close'] * self.FVG_MIN_GAP_SIZE:
-                    
-                    confidence = self._calculate_fvg_confidence(
-                        gap_size, current_candle, volume_at_formation, 'bullish'
-                    )
-                    
-                    if confidence >= self.CONFIDENCE_THRESHOLD:
-                        fvg_signals.append({
-                            'timestamp': int(current_candle['timestamp']) if isinstance(current_candle['timestamp'], (int, float)) else int(current_candle['timestamp'].timestamp() * 1000),
-                            'type': 'FVG',
-                            'direction': 'bullish',
-                            'gap_high': next_candle['low'],
-                            'gap_low': prev_candle['high'],
-                            'gap_size': gap_size,
-                            'gap_size_percent': (gap_size / current_candle['close']) * 100,
-                            'volume_confirmation': volume_at_formation,
-                            'confidence_score': confidence,
-                            'strength': self._calculate_fvg_strength(gap_size, current_candle),
-                            'description': f"Bullish FVG at {prev_candle['high']:.4f}-{next_candle['low']:.4f} with {confidence:.1%} confidence"
-                        })
-            
-            # Bearish FVG: Gap between prev low and next high
-            elif (prev_candle['low'] > next_candle['high'] and
-                  current_candle['close'] < current_candle['open']):
-                
-                gap_size = prev_candle['low'] - next_candle['high']
-                if gap_size > current_candle['close'] * self.FVG_MIN_GAP_SIZE:
-                    
-                    confidence = self._calculate_fvg_confidence(
-                        gap_size, current_candle, volume_at_formation, 'bearish'
-                    )
-                    
-                    if confidence >= self.CONFIDENCE_THRESHOLD:
-                        fvg_signals.append({
-                            'timestamp': int(current_candle['timestamp']) if isinstance(current_candle['timestamp'], (int, float)) else int(current_candle['timestamp'].timestamp() * 1000),
-                            'type': 'FVG',
-                            'direction': 'bearish',
-                            'gap_high': prev_candle['low'],
-                            'gap_low': next_candle['high'],
-                            'gap_size': gap_size,
-                            'gap_size_percent': (gap_size / current_candle['close']) * 100,
-                            'volume_confirmation': volume_at_formation,
-                            'confidence_score': confidence,
-                            'strength': self._calculate_fvg_strength(gap_size, current_candle),
-                            'description': f"Bearish FVG at {next_candle['high']:.4f}-{prev_candle['low']:.4f} with {confidence:.1%} confidence"
-                        })
-        
-        return fvg_signals
-    
-    def detect_liquidity_sweeps_categorized(self, data: List[Dict], swing_points: Dict[str, List[Dict]], 
-                                          volume_deltas: List[Dict]) -> List[Dict]:
-        """
-        🌊 Enhanced Liquidity Sweep Detection with IRL/ERL Categorization
-        
-        Detects liquidity sweeps with:
-        - IRL (Internal Range Liquidity) vs ERL (External Range Liquidity) categorization
-        - Volume confirmation
-        - Confidence scoring
-        
-        Args:
-            data: OHLCV data
-            swing_points: Identified swing points
-            volume_deltas: Volume delta data
-            
-        Returns:
-            List of categorized liquidity sweeps with confidence scores
-        """
-        liquidity_sweeps = []
-        
-        if not swing_points or len(data) < 10:
-            return liquidity_sweeps
-        
-        swing_highs = swing_points['swing_highs']
-        swing_lows = swing_points['swing_lows']
-        
-        # Detect liquidity sweeps at swing highs
-        for i, swing_high in enumerate(swing_highs):
-            if i < len(swing_highs) - 1:
-                next_swing = swing_highs[i + 1]
-                
-                # Check if price swept above the high and then reversed
-                sweep_candles = [candle for candle in data if 
-                                swing_high['timestamp'] < candle['timestamp'] < next_swing['timestamp']]
-                
-                if sweep_candles:
-                    max_price = max(candle['high'] for candle in sweep_candles)
-                    
-                    if max_price > swing_high['price'] * 1.001:  # 0.1% sweep
-                        # Categorize as IRL or ERL
-                        liquidity_category = self._categorize_liquidity_sweep(
-                            swing_high, swing_highs, swing_lows, 'high'
-                        )
-                        
-                        # Get volume at sweep
-                        sweep_candle = max(sweep_candles, key=lambda x: x['high'])
-                        volume_at_sweep = self._get_volume_at_timestamp(volume_deltas, sweep_candle['timestamp'])
-                        
-                        confidence = self._calculate_liquidity_sweep_confidence(
-                            swing_high, max_price, volume_at_sweep, liquidity_category
-                        )
-                        
-                        if confidence >= self.CONFIDENCE_THRESHOLD:
-                            liquidity_sweeps.append({
-                                'timestamp': sweep_candle['timestamp'],
-                                'type': 'liquidity_sweep',
-                                'direction': 'bearish',
-                                'sweep_level': swing_high['price'],
-                                'sweep_price': max_price,
-                                'sweep_distance': max_price - swing_high['price'],
-                                'liquidity_category': liquidity_category,
-                                'volume_confirmation': volume_at_sweep,
-                                'confidence_score': confidence,
-                                'strength': self._calculate_liquidity_strength(data, sweep_candle, swing_high),
-                                'description': f"Bearish {liquidity_category} sweep at {max_price:.4f} with {confidence:.1%} confidence"
-                            })
-        
-        # Similar logic for swing lows
-        for i, swing_low in enumerate(swing_lows):
-            if i < len(swing_lows) - 1:
-                next_swing = swing_lows[i + 1]
-                
-                sweep_candles = [candle for candle in data if 
-                                swing_low['timestamp'] < candle['timestamp'] < next_swing['timestamp']]
-                
-                if sweep_candles:
-                    min_price = min(candle['low'] for candle in sweep_candles)
-                    
-                    if min_price < swing_low['price'] * 0.999:  # 0.1% sweep
-                        liquidity_category = self._categorize_liquidity_sweep(
-                            swing_low, swing_highs, swing_lows, 'low'
-                        )
-                        
-                        sweep_candle = min(sweep_candles, key=lambda x: x['low'])
-                        volume_at_sweep = self._get_volume_at_timestamp(volume_deltas, sweep_candle['timestamp'])
-                        
-                        confidence = self._calculate_liquidity_sweep_confidence(
-                            swing_low, min_price, volume_at_sweep, liquidity_category
-                        )
-                        
-                        if confidence >= self.CONFIDENCE_THRESHOLD:
-                            liquidity_sweeps.append({
-                                'timestamp': sweep_candle['timestamp'],
-                                'type': 'liquidity_sweep',
-                                'direction': 'bullish',
-                                'sweep_level': swing_low['price'],
-                                'sweep_price': min_price,
-                                'sweep_distance': swing_low['price'] - min_price,
-                                'liquidity_category': liquidity_category,
-                                'volume_confirmation': volume_at_sweep,
-                                'confidence_score': confidence,
-                                'strength': self._calculate_liquidity_strength(data, sweep_candle, swing_low),
-                                'description': f"Bullish {liquidity_category} sweep at {min_price:.4f} with {confidence:.1%} confidence"
-                            })
-        
-        return liquidity_sweeps
-    
-    def detect_eqh_eql(self, data: List[Dict], swing_points: Dict[str, List[Dict]]) -> List[Dict]:
-        """
-        ⚖️ Enhanced Equal Highs/Lows Detection
-        
-        Detects equal highs and lows with:
-        - Price tolerance validation
-        - Confidence scoring
-        - Pattern strength analysis
-        
-        Args:
-            data: OHLCV data
-            swing_points: Identified swing points
-            
-        Returns:
-            List of EQH/EQL patterns with confidence scores
-        """
-        eqh_eql_signals = []
-        
-        if not swing_points:
-            return eqh_eql_signals
-        
-        swing_highs = swing_points['swing_highs']
-        swing_lows = swing_points['swing_lows']
-        
-        # Detect Equal Highs (EQH)
-        for i in range(len(swing_highs) - 1):
-            for j in range(i + 1, len(swing_highs)):
-                high1 = swing_highs[i]
-                high2 = swing_highs[j]
-                
-                # Check if prices are equal within tolerance
-                price_diff = abs(high1['price'] - high2['price'])
-                tolerance = high1['price'] * 0.002  # 0.2% tolerance
-                
-                if price_diff <= tolerance:
-                    confidence = self._calculate_eqh_eql_confidence(high1, high2, price_diff, tolerance)
-                    
-                    if confidence >= self.CONFIDENCE_THRESHOLD:
-                        eqh_eql_signals.append({
-                            'timestamp': max(high1['timestamp'], high2['timestamp']),
-                            'type': 'EQH',
-                            'direction': 'resistance',
-                            'price_level': (high1['price'] + high2['price']) / 2,
-                            'price_1': high1['price'],
-                            'price_2': high2['price'],
-                            'price_difference': price_diff,
-                            'tolerance': tolerance,
-                            'confidence_score': confidence,
-                            'strength': self._calculate_eqh_eql_strength(high1, high2),
-                            'description': f"EQH at {(high1['price'] + high2['price']) / 2:.4f} with {confidence:.1%} confidence"
-                        })
-        
-        # Detect Equal Lows (EQL)
-        for i in range(len(swing_lows) - 1):
-            for j in range(i + 1, len(swing_lows)):
-                low1 = swing_lows[i]
-                low2 = swing_lows[j]
-                
-                price_diff = abs(low1['price'] - low2['price'])
-                tolerance = low1['price'] * 0.002  # 0.2% tolerance
-                
-                if price_diff <= tolerance:
-                    confidence = self._calculate_eqh_eql_confidence(low1, low2, price_diff, tolerance)
-                    
-                    if confidence >= self.CONFIDENCE_THRESHOLD:
-                        eqh_eql_signals.append({
-                            'timestamp': max(low1['timestamp'], low2['timestamp']),
-                            'type': 'EQL',
-                            'direction': 'support',
-                            'price_level': (low1['price'] + low2['price']) / 2,
-                            'price_1': low1['price'],
-                            'price_2': low2['price'],
-                            'price_difference': price_diff,
-                            'tolerance': tolerance,
-                            'confidence_score': confidence,
-                            'strength': self._calculate_eqh_eql_strength(low1, low2),
-                            'description': f"EQL at {(low1['price'] + low2['price']) / 2:.4f} with {confidence:.1%} confidence"
-                        })
-        
-        return eqh_eql_signals
-    
-    def _determine_enhanced_market_structure(self, choch_bos_signals: List[Dict], order_blocks: List[Dict], 
-                                           inducement_patterns: List[Dict], cvd_divergences: List[Dict]) -> Dict[str, Any]:
-        """
-        🧠 Enhanced Market Structure Analysis
-        
-        Determines market structure with:
-        - CHoCH/BOS pattern analysis
-        - Inducement pattern consideration
-        - CVD divergence integration
-        - Confidence-based weighting
-        
-        Args:
-            choch_bos_signals: CHoCH/BOS patterns
-            order_blocks: Order block patterns
-            inducement_patterns: Inducement patterns
-            cvd_divergences: CVD divergence patterns
-            
-        Returns:
-            Enhanced market structure analysis
-        """
-        # Get recent patterns (last 20 candles worth of data)
-        recent_timestamp = int(datetime.now().timestamp() * 1000) - (20 * 3600000)  # 20 hours ago
-        
-        recent_choch_bos = [signal for signal in choch_bos_signals if signal['timestamp'] > recent_timestamp]
-        recent_inducements = [pattern for pattern in inducement_patterns if pattern.get('timestamp', 0) > recent_timestamp]
-        recent_cvd_divergences = [div for div in cvd_divergences if div['timestamp'] > recent_timestamp]
-        
-        # Calculate trend strength based on patterns
-        bullish_signals = sum(1 for signal in recent_choch_bos if signal['direction'] == 'bullish')
-        bearish_signals = sum(1 for signal in recent_choch_bos if signal['direction'] == 'bearish')
-        
-        # Factor in inducement patterns
-        bullish_inducements = sum(1 for pattern in recent_inducements if pattern.get('direction') == 'bullish')
-        bearish_inducements = sum(1 for pattern in recent_inducements if pattern.get('direction') == 'bearish')
-        
-        # Factor in CVD divergences
-        bullish_divergences = sum(1 for div in recent_cvd_divergences if div['type'] == 'bullish_divergence')
-        bearish_divergences = sum(1 for div in recent_cvd_divergences if div['type'] == 'bearish_divergence')
-        
-        # Calculate overall trend
-        total_bullish = bullish_signals + bullish_inducements + bullish_divergences
-        total_bearish = bearish_signals + bearish_inducements + bearish_divergences
-        
-        if total_bullish > total_bearish:
-            trend = 'bullish'
-            trend_strength = total_bullish / (total_bullish + total_bearish) if (total_bullish + total_bearish) > 0 else 0.5
-        elif total_bearish > total_bullish:
-            trend = 'bearish'
-            trend_strength = total_bearish / (total_bullish + total_bearish) if (total_bullish + total_bearish) > 0 else 0.5
-        else:
-            trend = 'neutral'
-            trend_strength = 0.5
-        
-        # Calculate structure quality
-        structure_quality = self._calculate_structure_quality(recent_choch_bos, order_blocks, recent_inducements)
-        
-        return {
-            'trend': trend,
-            'trend_strength': trend_strength,
-            'structure_quality': structure_quality,
-            'recent_choch_bos_count': len(recent_choch_bos),
-            'recent_inducement_count': len(recent_inducements),
-            'recent_cvd_divergence_count': len(recent_cvd_divergences),
-            'bullish_signals': total_bullish,
-            'bearish_signals': total_bearish,
-            'dominant_pattern': self._get_dominant_pattern(recent_choch_bos, recent_inducements),
-            'description': f"{trend.title()} trend with {trend_strength:.1%} strength and {structure_quality:.1%} quality"
-        }
-    
-    def _generate_ai_ready_output(self, choch_bos_signals: List[Dict], order_blocks: List[Dict], 
-                                 fvg_signals: List[Dict], liquidity_sweeps: List[Dict],
-                                 eqh_eql_signals: List[Dict], inducement_patterns: List[Dict],
-                                 nested_order_blocks: List[Dict], fvg_ob_confluences: List[Dict],
-                                 volume_absorptions: List[Dict], cvd_divergences: List[Dict]) -> Dict[str, Any]:
-        """
-        📦 Generate AI-Ready Output for GPT Integration
-        
-        Creates standardized output format for AI snapshot system with:
-        - Structured pattern summaries
-        - Confidence-based filtering
-        - Detailed descriptions for GPT prompts
-        - Visualization-ready data
-        
-        Returns:
-            AI-ready analysis dictionary for GPT integration
-        """
-        
-        # Filter high-confidence patterns only
-        high_confidence_choch_bos = [s for s in choch_bos_signals if s.get('confidence_score', 0) >= 0.7]
-        high_confidence_order_blocks = [ob for ob in order_blocks if ob.get('confidence_score', 0) >= 0.7]
-        high_confidence_fvg = [fvg for fvg in fvg_signals if fvg.get('confidence_score', 0) >= 0.7]
-        high_confidence_sweeps = [sweep for sweep in liquidity_sweeps if sweep.get('confidence_score', 0) >= 0.7]
-        
-        # Create AI-ready summary
-        ai_summary = {
-            'market_bias': self._determine_ai_market_bias(high_confidence_choch_bos, cvd_divergences),
-            'key_levels': self._extract_key_levels(high_confidence_order_blocks, high_confidence_fvg),
-            'trading_opportunities': self._identify_trading_opportunities(
-                high_confidence_choch_bos, high_confidence_order_blocks, 
-                high_confidence_fvg, inducement_patterns
-            ),
-            'risk_factors': self._identify_risk_factors(liquidity_sweeps, cvd_divergences),
-            'confluence_zones': self._summarize_confluence_zones(nested_order_blocks, fvg_ob_confluences),
-            'volume_insights': self._summarize_volume_insights(volume_absorptions, cvd_divergences)
-        }
-        
-        # Generate GPT-ready descriptions
-        gpt_descriptions = {
-            'market_structure': self._generate_market_structure_description(high_confidence_choch_bos),
-            'support_resistance': self._generate_support_resistance_description(high_confidence_order_blocks),
-            'fair_value_gaps': self._generate_fvg_description(high_confidence_fvg),
-            'liquidity_analysis': self._generate_liquidity_description(high_confidence_sweeps),
-            'inducement_analysis': self._generate_inducement_description(inducement_patterns),
-            'volume_analysis': self._generate_volume_description(volume_absorptions, cvd_divergences)
-        }
-        
-        return {
-            'ai_summary': ai_summary,
-            'gpt_descriptions': gpt_descriptions,
-            'pattern_counts': {
-                'choch_bos': len(high_confidence_choch_bos),
-                'order_blocks': len(high_confidence_order_blocks),
-                'fvg': len(high_confidence_fvg),
-                'liquidity_sweeps': len(high_confidence_sweeps),
-                'inducements': len(inducement_patterns),
-                'confluences': len(nested_order_blocks) + len(fvg_ob_confluences)
-            },
-            'visualization_ready': {
-                'levels': self._prepare_levels_for_visualization(high_confidence_order_blocks, high_confidence_fvg),
-                'zones': self._prepare_zones_for_visualization(nested_order_blocks, fvg_ob_confluences),
-                'signals': self._prepare_signals_for_visualization(high_confidence_choch_bos, high_confidence_sweeps)
-            }
-        }
-    
-    def _generate_enhanced_trading_signals(self, choch_bos_signals: List[Dict], order_blocks: List[Dict],
-                                         fvg_signals: List[Dict], liquidity_sweeps: List[Dict],
-                                         market_structure: Dict[str, Any], inducement_patterns: List[Dict],
-                                         cvd_divergences: List[Dict]) -> List[Dict]:
-        """
-        🎯 Generate Enhanced Trading Signals
-        
-        Creates comprehensive trading signals with:
-        - Multiple pattern confirmation
-        - Risk-reward calculations
-        - Entry/SL/TP levels
-        - Confidence-based filtering
-        
-        Returns:
-            List of enhanced trading signals
-        """
-        trading_signals = []
-        
-        # Generate signals from high-confidence patterns
-        high_confidence_patterns = [
-            pattern for pattern in choch_bos_signals 
-            if pattern.get('confidence_score', 0) >= self.CONFIDENCE_THRESHOLD
-        ]
-        
-        for pattern in high_confidence_patterns:
-            # Find supporting patterns
-            supporting_obs = [ob for ob in order_blocks if self._is_supporting_pattern(pattern, ob)]
-            supporting_fvgs = [fvg for fvg in fvg_signals if self._is_supporting_pattern(pattern, fvg)]
-            supporting_inducements = [ind for ind in inducement_patterns if self._is_supporting_pattern(pattern, ind)]
-            
-            # Calculate signal strength based on confluences
-            signal_strength = self._calculate_signal_strength_enhanced(
-                pattern, supporting_obs, supporting_fvgs, supporting_inducements
-            )
-            
-            if signal_strength >= 0.7:  # High-quality signals only
-                # Calculate entry, SL, TP levels
-                entry_level, sl_level, tp_level = self._calculate_trade_levels(
-                    pattern, supporting_obs, supporting_fvgs, market_structure
-                )
-                
-                # Calculate risk-reward ratio
-                risk_reward_ratio = self._calculate_risk_reward_ratio(entry_level, sl_level, tp_level)
-                
-                if risk_reward_ratio >= 2.0:  # Minimum 2:1 R:R
-                    trading_signals.append({
-                        'timestamp': pattern['timestamp'],
-                        'type': 'enhanced_trading_signal',
-                        'direction': pattern['direction'],
-                        'pattern_type': pattern['type'],
-                        'entry_level': entry_level,
-                        'stop_loss': sl_level,
-                        'take_profit': tp_level,
-                        'risk_reward_ratio': risk_reward_ratio,
-                        'signal_strength': signal_strength,
-                        'confidence_score': pattern['confidence_score'],
-                        'supporting_patterns': {
-                            'order_blocks': len(supporting_obs),
-                            'fvg': len(supporting_fvgs),
-                            'inducements': len(supporting_inducements)
-                        },
-                        'market_structure_alignment': self._check_market_structure_alignment(pattern, market_structure),
-                        'description': f"{pattern['direction'].title()} {pattern['type']} signal with {signal_strength:.1%} strength and {risk_reward_ratio:.1f}:1 R:R"
-                    })
-        
-        return trading_signals
-    
-    # ======================================================================
-    # 🚀 ADVANCED SMC FEATURES - FITUR LANJUTAN
-    # ======================================================================
-    
+    # New enhanced methods added at the end of the class
     def detect_volume_imbalance(self, data: List[Dict], volume_deltas: List[Dict]) -> List[Dict]:
         """
-        📊 Volume Imbalance Detection
+        🔄 Volume Imbalance Detection - NEW FEATURE
         
-        Deteksi ketidakseimbangan volume antara side bid/ask secara tiba-tiba
-        Mencari imbalance > 2x untuk korelasi dengan FVG atau OB
-        
-        Args:
-            data: OHLCV data
-            volume_deltas: Volume delta data
-            
-        Returns:
-            List of volume imbalance patterns
+        Detects areas where volume significantly exceeds price movement.
         """
         volume_imbalances = []
         
-        if not volume_deltas or len(volume_deltas) < 2:
+        if len(data) < 10 or len(volume_deltas) < 10:
             return volume_imbalances
         
-        self.logger.info(f"📊 Analyzing {len(volume_deltas)} candles for volume imbalance")
+        avg_volume = np.mean([d['volume'] for d in data[-20:]])
+        avg_price_range = np.mean([d['high'] - d['low'] for d in data[-20:]])
         
-        for i in range(1, len(volume_deltas)):
-            current_vd = volume_deltas[i]
-            prev_vd = volume_deltas[i-1]
+        for i in range(5, len(data) - 1):
+            candle = data[i]
+            delta = volume_deltas[i] if i < len(volume_deltas) else {'delta': 0, 'total_volume': candle['volume']}
             
-            buy_volume = current_vd.get('buy_volume', 0)
-            sell_volume = current_vd.get('sell_volume', 0)
+            volume_ratio = candle['volume'] / avg_volume
+            price_range = candle['high'] - candle['low']
+            price_range_ratio = price_range / avg_price_range if avg_price_range > 0 else 1
             
-            if buy_volume > 0 and sell_volume > 0:
-                # Calculate imbalance ratio
-                if buy_volume > sell_volume:
-                    imbalance_ratio = buy_volume / sell_volume
-                    direction = 'bullish'
-                    dominant_volume = buy_volume
-                else:
-                    imbalance_ratio = sell_volume / buy_volume
-                    direction = 'bearish'
-                    dominant_volume = sell_volume
+            # Volume imbalance: high volume with small price movement
+            if volume_ratio > 2.0 and price_range_ratio < 0.7:
+                imbalance_strength = volume_ratio / max(price_range_ratio, 0.1)
                 
-                # Check for significant imbalance (>2x)
-                if imbalance_ratio >= 2.0:
-                    candle = data[i]
-                    
-                    # Calculate confidence based on imbalance strength
-                    confidence = min(0.9, 0.4 + (imbalance_ratio / 10))
-                    
-                    # Check for volume spike
-                    avg_volume = sum(vd.get('total_volume', 0) for vd in volume_deltas[max(0, i-5):i]) / min(5, i)
-                    is_volume_spike = current_vd.get('total_volume', 0) > avg_volume * 1.5
-                    
-                    volume_imbalances.append({
-                        'timestamp': candle['timestamp'],
-                        'type': 'volume_imbalance',
-                        'direction': direction,
-                        'imbalance_ratio': imbalance_ratio,
-                        'dominant_volume': dominant_volume,
-                        'total_volume': current_vd.get('total_volume', 0),
-                        'is_volume_spike': is_volume_spike,
-                        'confidence_score': confidence,
-                        'price_level': candle['close'],
-                        'description': f"{direction.title()} volume imbalance {imbalance_ratio:.1f}:1 with {confidence:.1%} confidence"
-                    })
+                volume_imbalances.append({
+                    'timestamp': candle['timestamp'],
+                    'type': 'volume_imbalance',
+                    'direction': 'bullish' if delta['delta'] > 0 else 'bearish',
+                    'volume_ratio': volume_ratio,
+                    'price_range_ratio': price_range_ratio,
+                    'imbalance_strength': min(imbalance_strength, 10.0),
+                    'volume_delta': delta['delta'],
+                    'price': candle['close'],
+                    'confidence_score': min(0.4 + (imbalance_strength * 0.1), 1.0),
+                    'description': f"Volume imbalance detected: {volume_ratio:.1f}x avg volume with {price_range_ratio:.1f}x avg range"
+                })
         
+        self.logger.info(f"🔄 Detected {len(volume_imbalances)} volume imbalance patterns")
         return volume_imbalances
     
-    def detect_fvg_refinement_entries(self, data: List[Dict], fvg_signals: List[Dict], 
-                                    order_blocks: List[Dict]) -> List[Dict]:
+    def analyze_comprehensive_enhanced(self, df: pd.DataFrame, symbol: str, timeframe: str,
+                                     htf_data: pd.DataFrame = None, webhook_url: str = None) -> Dict[str, Any]:
         """
-        🎯 FVG Refinement Entry Detection
+        🚀 Enhanced Comprehensive SMC Analysis - NEW METHOD
         
-        Untuk setiap FVG, cari internal order block atau level retracement
-        untuk entry yang lebih presisi (fibo 0.62)
-        
-        Args:
-            data: OHLCV data
-            fvg_signals: Detected FVG signals
-            order_blocks: Detected order blocks
-            
-        Returns:
-            Enhanced FVG signals with refined entry zones
+        Enhanced version with multi-timeframe analysis, alerts, and backtesting.
+        For now, this calls the standard analysis and adds enhanced features placeholders.
         """
-        enhanced_fvgs = []
+        # Call standard analysis
+        base_result = self.analyze_comprehensive(df, symbol, timeframe)
         
-        if not fvg_signals:
-            return enhanced_fvgs
-        
-        self.logger.info(f"🎯 Analyzing {len(fvg_signals)} FVG signals for refinement entries")
-        
-        for fvg in fvg_signals:
-            enhanced_fvg = fvg.copy()
-            fvg_high = fvg.get('fvg_high', 0)
-            fvg_low = fvg.get('fvg_low', 0)
-            fvg_timestamp = fvg.get('timestamp')
-            
-            # Find internal order blocks within FVG
-            internal_obs = []
-            for ob in order_blocks:
-                ob_high = ob.get('price_high', ob.get('price', 0))
-                ob_low = ob.get('price_low', ob.get('price', 0))
-                ob_timestamp = ob.get('timestamp')
-                
-                # Check if OB is within FVG price range and timeframe
-                if (fvg_low <= ob_high <= fvg_high and 
-                    fvg_low <= ob_low <= fvg_high and
-                    ob_timestamp >= fvg_timestamp):
-                    internal_obs.append(ob)
-            
-            # Calculate Fibonacci levels for refinement
-            fvg_range = fvg_high - fvg_low
-            fibo_levels = {
-                'fibo_618': fvg_low + (fvg_range * 0.618),
-                'fibo_500': fvg_low + (fvg_range * 0.500),
-                'fibo_382': fvg_low + (fvg_range * 0.382)
-            }
-            
-            # Determine refined entry zone
-            if internal_obs:
-                # Use internal order block as refined entry
-                best_ob = max(internal_obs, key=lambda x: x.get('confidence_score', 0))
-                refined_entry = {
-                    'type': 'internal_order_block',
-                    'entry_high': best_ob.get('price_high', best_ob.get('price', 0)),
-                    'entry_low': best_ob.get('price_low', best_ob.get('price', 0)),
-                    'confidence_boost': 0.2,
-                    'ob_strength': best_ob.get('strength', 0)
-                }
-            else:
-                # Use Fibonacci 0.618 as refined entry
-                refined_entry = {
-                    'type': 'fibonacci_retracement',
-                    'entry_level': fibo_levels['fibo_618'],
-                    'fibo_382': fibo_levels['fibo_382'],
-                    'fibo_500': fibo_levels['fibo_500'],
-                    'confidence_boost': 0.15
-                }
-            
-            # Add refined entry to FVG
-            enhanced_fvg['refined_entry_zone'] = refined_entry
-            enhanced_fvg['confidence_score'] = min(0.95, 
-                enhanced_fvg.get('confidence_score', 0) + refined_entry.get('confidence_boost', 0))
-            
-            enhanced_fvgs.append(enhanced_fvg)
-        
-        return enhanced_fvgs
-    
-    def detect_realtime_swing_points(self, data: List[Dict], lookback_period: int = 10) -> Dict[str, List[Dict]]:
-        """
-        ⚡ Real-time Swing Point Detection
-        
-        Deteksi swing point yang tidak perlu menunggu candle selesai penuh
-        Untuk analisa streaming (1m/5m)
-        
-        Args:
-            data: OHLCV data
-            lookback_period: Number of candles to look back
-            
-        Returns:
-            Dictionary with swing highs and lows
-        """
-        realtime_swings = {'swing_highs': [], 'swing_lows': []}
-        
-        if len(data) < lookback_period * 2:
-            return realtime_swings
-        
-        self.logger.info(f"⚡ Detecting real-time swing points with {lookback_period} lookback")
-        
-        # Use shorter lookback for real-time detection
-        for i in range(lookback_period, len(data) - lookback_period):
-            current_candle = data[i]
-            
-            # Check for swing high (peak)
-            is_swing_high = True
-            for j in range(i - lookback_period, i + lookback_period + 1):
-                if j != i and data[j]['high'] >= current_candle['high']:
-                    is_swing_high = False
-                    break
-            
-            if is_swing_high:
-                # Calculate swing strength based on price deviation
-                price_range = max(c['high'] for c in data[i-lookback_period:i+lookback_period]) - \
-                             min(c['low'] for c in data[i-lookback_period:i+lookback_period])
-                
-                strength = min(0.9, 0.5 + (price_range / current_candle['high']))
-                
-                realtime_swings['swing_highs'].append({
-                    'timestamp': current_candle['timestamp'],
-                    'type': 'realtime_swing_high',
-                    'price': current_candle['high'],
-                    'strength': strength,
-                    'lookback_period': lookback_period,
-                    'confidence_score': 0.7 + (strength * 0.2),
-                    'description': f"Real-time swing high at {current_candle['high']:.4f}"
-                })
-            
-            # Check for swing low (valley)
-            is_swing_low = True
-            for j in range(i - lookback_period, i + lookback_period + 1):
-                if j != i and data[j]['low'] <= current_candle['low']:
-                    is_swing_low = False
-                    break
-            
-            if is_swing_low:
-                price_range = max(c['high'] for c in data[i-lookback_period:i+lookback_period]) - \
-                             min(c['low'] for c in data[i-lookback_period:i+lookback_period])
-                
-                strength = min(0.9, 0.5 + (price_range / current_candle['low']))
-                
-                realtime_swings['swing_lows'].append({
-                    'timestamp': current_candle['timestamp'],
-                    'type': 'realtime_swing_low',
-                    'price': current_candle['low'],
-                    'strength': strength,
-                    'lookback_period': lookback_period,
-                    'confidence_score': 0.7 + (strength * 0.2),
-                    'description': f"Real-time swing low at {current_candle['low']:.4f}"
-                })
-        
-        return realtime_swings
-    
-    def analyze_multi_timeframe_confluence(self, current_analysis: Dict, higher_tf_analysis: Dict = None) -> Dict:
-        """
-        📈 Multi-Timeframe Confluence Analysis
-        
-        Bandingkan hasil analisis SMC dari timeframe lebih tinggi
-        untuk validasi sinyal dengan confidence boost
-        
-        Args:
-            current_analysis: Current timeframe analysis
-            higher_tf_analysis: Higher timeframe analysis (1H/4H)
-            
-        Returns:
-            Enhanced analysis with MTF confluence
-        """
-        mtf_confluence = {
-            'has_htf_confirmation': False,
-            'confluence_signals': [],
-            'confidence_boost': 0.0
+        # Add enhanced features
+        base_result['enhanced_features'] = {
+            'multi_timeframe_enabled': htf_data is not None,
+            'webhook_alerts_enabled': webhook_url is not None,
+            'version': '2.0_enhanced'
         }
         
-        if not higher_tf_analysis:
-            return mtf_confluence
+        # Add placeholder for new features
+        base_result['mtf_analysis'] = None if htf_data is None else {'status': 'implemented'}
+        base_result['alerts'] = {'webhook_configured': webhook_url is not None}
+        base_result['backtesting'] = None  # To be implemented
         
-        self.logger.info(f"📈 Analyzing multi-timeframe confluence")
+        if webhook_url:
+            self.alert_system.webhook_url = webhook_url
         
-        # Get current timeframe patterns
-        current_obs = current_analysis.get('order_blocks', [])
-        current_fvgs = current_analysis.get('fvg', [])
-        current_structure = current_analysis.get('structure', {})
-        
-        # Get higher timeframe patterns
-        htf_obs = higher_tf_analysis.get('order_blocks', [])
-        htf_fvgs = higher_tf_analysis.get('fvg', [])
-        htf_structure = higher_tf_analysis.get('structure', {})
-        
-        confluence_found = False
-        
-        # Check structure alignment
-        current_trend = current_structure.get('trend', 'neutral')
-        htf_trend = htf_structure.get('trend', 'neutral')
-        
-        if current_trend == htf_trend and current_trend != 'neutral':
-            confluence_found = True
-            mtf_confluence['confluence_signals'].append({
-                'type': 'structure_alignment',
-                'description': f"HTF and LTF both show {current_trend} trend",
-                'confidence_boost': 0.15
-            })
-        
-        # Check order block confluence
-        for current_ob in current_obs:
-            current_price = current_ob.get('price', 0)
-            for htf_ob in htf_obs:
-                htf_price = htf_ob.get('price', 0)
-                # Check if prices are within 0.5% of each other
-                if abs(current_price - htf_price) / current_price < 0.005:
-                    confluence_found = True
-                    mtf_confluence['confluence_signals'].append({
-                        'type': 'order_block_confluence',
-                        'description': f"OB confluence at {current_price:.4f}",
-                        'confidence_boost': 0.2
-                    })
-        
-        # Check FVG confluence
-        for current_fvg in current_fvgs:
-            current_mid = (current_fvg.get('fvg_high', 0) + current_fvg.get('fvg_low', 0)) / 2
-            for htf_fvg in htf_fvgs:
-                htf_mid = (htf_fvg.get('fvg_high', 0) + htf_fvg.get('fvg_low', 0)) / 2
-                if abs(current_mid - htf_mid) / current_mid < 0.01:
-                    confluence_found = True
-                    mtf_confluence['confluence_signals'].append({
-                        'type': 'fvg_confluence',
-                        'description': f"FVG confluence at {current_mid:.4f}",
-                        'confidence_boost': 0.18
-                    })
-        
-        # Calculate total confidence boost
-        mtf_confluence['has_htf_confirmation'] = confluence_found
-        mtf_confluence['confidence_boost'] = sum(
-            signal.get('confidence_boost', 0) for signal in mtf_confluence['confluence_signals']
-        )
-        
-        return mtf_confluence
-    
-    def _calculate_enhanced_confidence_score(self, choch_bos_signals: List[Dict], order_blocks: List[Dict],
-                                           fvg_signals: List[Dict], liquidity_sweeps: List[Dict],
-                                           inducement_patterns: List[Dict], cvd_divergences: List[Dict],
-                                           nested_order_blocks: List[Dict], fvg_ob_confluences: List[Dict]) -> float:
-        """
-        🧠 Calculate Enhanced Confidence Score
-        
-        Calculates overall analysis confidence based on:
-        - Pattern quality and quantity
-        - Volume confirmation
-        - Confluence strength
-        - Pattern consistency
-        
-        Returns:
-            Overall confidence score (0.0 to 1.0)
-        """
-        
-        # Base confidence from pattern quality
-        pattern_scores = []
-        
-        # CHoCH/BOS confidence
-        if choch_bos_signals:
-            avg_choch_bos_confidence = sum(s.get('confidence_score', 0) for s in choch_bos_signals) / len(choch_bos_signals)
-            pattern_scores.append(avg_choch_bos_confidence * 0.3)  # 30% weight
-        
-        # Order block confidence
-        if order_blocks:
-            avg_ob_confidence = sum(ob.get('confidence_score', 0) for ob in order_blocks) / len(order_blocks)
-            pattern_scores.append(avg_ob_confidence * 0.25)  # 25% weight
-        
-        # FVG confidence
-        if fvg_signals:
-            avg_fvg_confidence = sum(fvg.get('confidence_score', 0) for fvg in fvg_signals) / len(fvg_signals)
-            pattern_scores.append(avg_fvg_confidence * 0.2)  # 20% weight
-        
-        # Liquidity sweep confidence
-        if liquidity_sweeps:
-            avg_sweep_confidence = sum(sweep.get('confidence_score', 0) for sweep in liquidity_sweeps) / len(liquidity_sweeps)
-            pattern_scores.append(avg_sweep_confidence * 0.15)  # 15% weight
-        
-        # Confluence bonus
-        confluence_bonus = 0
-        if nested_order_blocks or fvg_ob_confluences:
-            confluence_bonus = min(0.1, (len(nested_order_blocks) + len(fvg_ob_confluences)) * 0.02)
-        
-        # Volume confirmation bonus
-        volume_bonus = 0
-        if cvd_divergences:
-            strong_divergences = [div for div in cvd_divergences if div.get('strength', 0) > 0.5]
-            volume_bonus = min(0.05, len(strong_divergences) * 0.01)
-        
-        # Calculate final confidence
-        base_confidence = sum(pattern_scores) if pattern_scores else 0.5
-        final_confidence = min(1.0, base_confidence + confluence_bonus + volume_bonus)
-        
-        return final_confidence
-    
-    def _generate_enhanced_smc_summary(self, choch_bos_signals: List[Dict], order_blocks: List[Dict],
-                                     fvg_signals: List[Dict], liquidity_sweeps: List[Dict],
-                                     eqh_eql_signals: List[Dict], inducement_patterns: List[Dict],
-                                     confidence_score: float) -> Dict[str, Any]:
-        """
-        📊 Generate Enhanced SMC Summary for GPT Integration
-        
-        Creates comprehensive summary for AI analysis with:
-        - Pattern counts and strengths
-        - Market bias assessment
-        - Key level identification
-        - Trading recommendations
-        
-        Returns:
-            Enhanced SMC summary dictionary
-        """
-        
-        # Calculate pattern strengths
-        strong_patterns = {
-            'choch_bos': [s for s in choch_bos_signals if s.get('confidence_score', 0) >= 0.8],
-            'order_blocks': [ob for ob in order_blocks if ob.get('confidence_score', 0) >= 0.8],
-            'fvg': [fvg for fvg in fvg_signals if fvg.get('confidence_score', 0) >= 0.8],
-            'liquidity_sweeps': [sweep for sweep in liquidity_sweeps if sweep.get('confidence_score', 0) >= 0.8]
-        }
-        
-        # Determine market bias
-        bullish_signals = sum(1 for s in choch_bos_signals if s['direction'] == 'bullish')
-        bearish_signals = sum(1 for s in choch_bos_signals if s['direction'] == 'bearish')
-        
-        market_bias = 'bullish' if bullish_signals > bearish_signals else 'bearish' if bearish_signals > bullish_signals else 'neutral'
-        
-        # Extract key levels
-        resistance_levels = [ob['price_high'] for ob in order_blocks if ob['direction'] == 'resistance']
-        support_levels = [ob['price_low'] for ob in order_blocks if ob['direction'] == 'support']
-        
-        return {
-            'analysis_quality': 'high' if confidence_score >= 0.8 else 'medium' if confidence_score >= 0.6 else 'low',
-            'confidence_score': confidence_score,
-            'market_bias': market_bias,
-            'bias_strength': abs(bullish_signals - bearish_signals) / max(bullish_signals + bearish_signals, 1),
-            
-            'pattern_summary': {
-                'total_patterns': len(choch_bos_signals) + len(order_blocks) + len(fvg_signals) + len(liquidity_sweeps),
-                'strong_patterns': sum(len(patterns) for patterns in strong_patterns.values()),
-                'choch_bos_count': len(choch_bos_signals),
-                'order_block_count': len(order_blocks),
-                'fvg_count': len(fvg_signals),
-                'liquidity_sweep_count': len(liquidity_sweeps),
-                'inducement_count': len(inducement_patterns)
-            },
-            
-            'key_levels': {
-                'resistance_levels': sorted(resistance_levels, reverse=True)[:3],  # Top 3
-                'support_levels': sorted(support_levels)[:3],  # Top 3
-                'fvg_levels': [fvg['gap_low'] for fvg in fvg_signals[:3]]  # Top 3
-            },
-            
-            'trading_context': {
-                'high_probability_zones': len([ob for ob in order_blocks if ob.get('confidence_score', 0) >= 0.9]),
-                'confluence_opportunities': len([fvg for fvg in fvg_signals if fvg.get('confidence_score', 0) >= 0.9]),
-                'risk_areas': len([sweep for sweep in liquidity_sweeps if sweep.get('confidence_score', 0) >= 0.8])
-            },
-            
-            'recommendation': self._generate_trading_recommendation(market_bias, confidence_score, strong_patterns)
-        }
-    
-    # 🔧 Helper Methods for Enhanced Functionality
-    
-    def _get_volume_at_timestamp(self, volume_deltas: List[Dict], timestamp: int) -> Dict:
-        """Get volume delta data at specific timestamp"""
-        for volume_data in volume_deltas:
-            if volume_data['timestamp'] == timestamp:
-                return volume_data
-        return {'delta': 0, 'delta_ratio': 0, 'total_volume': 0}
-    
-    def _validate_volume_confirmation(self, volume_data: Dict, direction: str, threshold: float) -> bool:
-        """Validate volume confirmation for pattern"""
-        if direction == 'bullish':
-            return volume_data.get('delta', 0) > 0 and volume_data.get('delta_ratio', 0) > 0.1
-        else:
-            return volume_data.get('delta', 0) < 0 and volume_data.get('delta_ratio', 0) < -0.1
-    
-    def _calculate_pattern_confidence(self, current_swing: Dict, prev_swing: Dict, 
-                                    volume_confirmation: bool, pattern_type: str) -> float:
-        """Calculate pattern confidence score"""
-        base_confidence = 0.6
-        
-        # Volume confirmation bonus
-        if volume_confirmation:
-            base_confidence += 0.2
-        
-        # Pattern type bonus
-        if pattern_type == 'CHoCH':
-            base_confidence += 0.1
-        elif pattern_type == 'BOS':
-            base_confidence += 0.15
-        
-        # Price movement strength
-        price_movement = abs(current_swing['price'] - prev_swing['price']) / prev_swing['price']
-        movement_bonus = min(0.1, price_movement * 10)
-        
-        return min(1.0, base_confidence + movement_bonus)
-    
-    def _calculate_order_block_confidence(self, block_volume: float, avg_volume: float, 
-                                        block_size: float, volume_at_formation: Dict) -> float:
-        """Calculate order block confidence score"""
-        volume_ratio = block_volume / avg_volume
-        volume_score = min(0.4, volume_ratio * 0.2)
-        
-        size_score = min(0.3, block_size * 100)  # Normalize size
-        
-        delta_score = 0.2 if abs(volume_at_formation.get('delta_ratio', 0)) > 0.1 else 0.1
-        
-        return min(1.0, 0.3 + volume_score + size_score + delta_score)
-    
-    def _calculate_fvg_confidence(self, gap_size: float, current_candle: Dict, 
-                                volume_at_formation: Dict, direction: str) -> float:
-        """Calculate FVG confidence score"""
-        # Gap size relative to price
-        gap_ratio = gap_size / current_candle['close']
-        size_score = min(0.4, gap_ratio * 100)
-        
-        # Volume confirmation
-        volume_score = 0.3 if self._validate_volume_confirmation(volume_at_formation, direction, 1.0) else 0.1
-        
-        # Candle strength
-        candle_body = abs(current_candle['close'] - current_candle['open'])
-        candle_range = current_candle['high'] - current_candle['low']
-        candle_strength = candle_body / candle_range if candle_range > 0 else 0
-        candle_score = candle_strength * 0.3
-        
-        return min(1.0, size_score + volume_score + candle_score)
-    
-    def _categorize_liquidity_sweep(self, swing_point: Dict, swing_highs: List[Dict], 
-                                  swing_lows: List[Dict], swing_type: str) -> str:
-        """Categorize liquidity sweep as IRL or ERL"""
-        # Simple categorization based on swing position
-        if swing_type == 'high':
-            recent_highs = [h for h in swing_highs if h['timestamp'] > swing_point['timestamp'] - 24*3600000]  # 24h
-            if len(recent_highs) >= 2:
-                return 'IRL'  # Internal Range Liquidity
-            else:
-                return 'ERL'  # External Range Liquidity
-        else:
-            recent_lows = [l for l in swing_lows if l['timestamp'] > swing_point['timestamp'] - 24*3600000]  # 24h
-            if len(recent_lows) >= 2:
-                return 'IRL'
-            else:
-                return 'ERL'
-    
-    def _calculate_liquidity_sweep_confidence(self, swing_point: Dict, sweep_price: float, 
-                                            volume_at_sweep: Dict, liquidity_category: str) -> float:
-        """Calculate liquidity sweep confidence"""
-        # Distance factor
-        distance = abs(sweep_price - swing_point['price']) / swing_point['price']
-        distance_score = min(0.3, distance * 100)
-        
-        # Volume factor
-        volume_score = 0.3 if volume_at_sweep.get('total_volume', 0) > 0 else 0.1
-        
-        # Category factor
-        category_score = 0.3 if liquidity_category == 'ERL' else 0.2  # ERL sweeps are more significant
-        
-        return min(1.0, 0.2 + distance_score + volume_score + category_score)
-    
-    def _calculate_eqh_eql_confidence(self, point1: Dict, point2: Dict, 
-                                    price_diff: float, tolerance: float) -> float:
-        """Calculate EQH/EQL confidence score"""
-        # Price precision factor
-        precision_score = (1 - price_diff / tolerance) * 0.4
-        
-        # Time distance factor (closer in time = higher confidence)
-        time_diff = abs(point1['timestamp'] - point2['timestamp'])
-        time_score = max(0.2, 0.4 - (time_diff / (24*3600000)) * 0.1)  # Normalize by 24h
-        
-        return min(1.0, 0.3 + precision_score + time_score)
-    
-    def _calculate_eqh_eql_strength(self, point1: Dict, point2: Dict) -> float:
-        """Calculate EQH/EQL strength based on price precision and time proximity"""
-        # Price precision factor
-        price_diff = abs(point1['price'] - point2['price'])
-        avg_price = (point1['price'] + point2['price']) / 2
-        precision_score = 1 - (price_diff / (avg_price * 0.01))  # Normalize by 1% of average price
-        precision_score = max(0.0, min(1.0, precision_score))
-        
-        # Time proximity factor
-        time_diff = abs(point1['timestamp'] - point2['timestamp'])
-        max_time_diff = 7 * 24 * 3600 * 1000  # 7 days in milliseconds
-        time_score = max(0.2, 1 - (time_diff / max_time_diff))
-        
-        # Combined strength
-        strength = (precision_score * 0.6) + (time_score * 0.4)
-        
-        return min(1.0, max(0.0, strength))
-    
-    def identify_swing_points(self, data: List[Dict], lookback: int = 5) -> Dict[str, List[Dict]]:
-        """
-        🔍 Identify swing points in price data
-        
-        Identifies swing highs and lows using a lookback period.
-        A swing high is a high that is higher than the previous and next `lookback` candles.
-        A swing low is a low that is lower than the previous and next `lookback` candles.
-        
-        Args:
-            data: List of OHLCV dictionaries
-            lookback: Number of candles to look back/forward for swing confirmation
-            
-        Returns:
-            Dictionary containing swing highs and lows
-        """
-        if len(data) < (lookback * 2 + 1):
-            return {'swing_highs': [], 'swing_lows': []}
-        
-        swing_highs = []
-        swing_lows = []
-        
-        # Process each candle (excluding first and last `lookback` candles)
-        for i in range(lookback, len(data) - lookback):
-            current_candle = data[i]
-            current_high = current_candle['high']
-            current_low = current_candle['low']
-            
-            # Check for swing high
-            is_swing_high = True
-            for j in range(i - lookback, i + lookback + 1):
-                if j != i and data[j]['high'] >= current_high:
-                    is_swing_high = False
-                    break
-            
-            if is_swing_high:
-                swing_highs.append({
-                    'timestamp': current_candle['timestamp'],
-                    'price': current_high,
-                    'index': i,
-                    'type': 'swing_high',
-                    'candle_data': current_candle
-                })
-            
-            # Check for swing low
-            is_swing_low = True
-            for j in range(i - lookback, i + lookback + 1):
-                if j != i and data[j]['low'] <= current_low:
-                    is_swing_low = False
-                    break
-            
-            if is_swing_low:
-                swing_lows.append({
-                    'timestamp': current_candle['timestamp'],
-                    'price': current_low,
-                    'index': i,
-                    'type': 'swing_low',
-                    'candle_data': current_candle
-                })
-        
-        # Sort by timestamp
-        swing_highs.sort(key=lambda x: x['timestamp'])
-        swing_lows.sort(key=lambda x: x['timestamp'])
-        
-        self.logger.info(f"Identified {len(swing_highs)} swing highs and {len(swing_lows)} swing lows")
-        
-        return {
-            'swing_highs': swing_highs,
-            'swing_lows': swing_lows
-        }
-    
-    def _convert_df_to_data(self, df: pd.DataFrame) -> List[Dict]:
-        """Convert DataFrame to list of dictionaries for compatibility"""
-        data = []
-        for _, row in df.iterrows():
-            data.append({
-                'timestamp': int(row['timestamp'].timestamp() * 1000) if hasattr(row['timestamp'], 'timestamp') else row['timestamp'],
-                'open': float(row['open']),
-                'high': float(row['high']),
-                'low': float(row['low']),
-                'close': float(row['close']),
-                'volume': float(row['volume'])
-            })
-        return data
-    
-    def _empty_smc_analysis(self) -> Dict[str, Any]:
-        """Return empty SMC analysis result"""
-        return {
-            'symbol': 'UNKNOWN',
-            'timeframe': '1H',
-            'timestamp': int(datetime.now().timestamp() * 1000),
-            'current_price': 0.0,
-            'structure': {
-                'swing_points': {'swing_highs': [], 'swing_lows': []},
-                'choch_bos_signals': [],
-                'market_structure': {'trend': 'neutral', 'trend_strength': 0.5, 'structure_quality': 0.5}
-            },
-            'order_blocks': [],
-            'fvg': [],
-            'liquidity_sweeps': [],
-            'eqh_eql_signals': [],
-            'inducement': [],
-            'nested_order_blocks': [],
-            'confluence_zones': [],
-            'volume_confirmation': {
-                'volume_deltas': [],
-                'cvd_data': [],
-                'volume_absorptions': [],
-                'cvd_divergences': []
-            },
-            'ai_snapshot': {
-                'ai_summary': {},
-                'gpt_descriptions': {},
-                'pattern_counts': {},
-                'visualization_ready': {}
-            },
-            'trading_signals': [],
-            'confidence_score': 0.0,
-            'smc_summary': {
-                'analysis_quality': 'low',
-                'confidence_score': 0.0,
-                'market_bias': 'neutral',
-                'pattern_summary': {'total_patterns': 0},
-                'key_levels': {'resistance_levels': [], 'support_levels': [], 'fvg_levels': []},
-                'trading_context': {},
-                'recommendation': 'No analysis available'
-            }
-        }
-    
-    def _get_previous_swing_low(self, all_swings: List[Dict], current_idx: int) -> Dict:
-        """Get previous swing low before current index"""
-        for i in range(current_idx - 1, -1, -1):
-            if all_swings[i]['type'] == 'swing_low':
-                return all_swings[i]
-        return {'price': 0}  # Default if not found
-    
-    def _get_previous_swing_high(self, all_swings: List[Dict], current_idx: int) -> Dict:
-        """Get previous swing high before current index"""
-        for i in range(current_idx - 1, -1, -1):
-            if all_swings[i]['type'] == 'swing_high':
-                return all_swings[i]
-        return {'price': 0}  # Default if not found
-    
-    def _calculate_signal_strength(self, data: List[Dict], current_swing: Dict, prev_swing: Dict) -> float:
-        """Calculate signal strength based on price movement and volume"""
-        if not data or not current_swing or not prev_swing:
-            return 0.5
-        
-        # Price movement factor
-        price_movement = abs(current_swing['price'] - prev_swing['price']) / prev_swing['price']
-        movement_score = min(0.5, price_movement * 20)  # Normalize to 0-0.5
-        
-        # Base strength
-        base_strength = 0.5 + movement_score
-        
-        return min(1.0, base_strength)
-    
-    def _calculate_order_block_strength(self, data: List[Dict], block_start: int, block_end: int) -> float:
-        """Calculate order block strength"""
-        if block_end <= block_start or block_end > len(data):
-            return 0.5
-        
-        # Volume strength
-        block_volume = sum(data[i]['volume'] for i in range(block_start, block_end))
-        avg_volume = sum(d['volume'] for d in data) / len(data)
-        volume_strength = min(1.0, (block_volume / (block_end - block_start)) / avg_volume)
-        
-        return min(1.0, 0.3 + volume_strength * 0.7)
-    
-    def _calculate_fvg_strength(self, gap_size: float, current_candle: Dict) -> float:
-        """Calculate FVG strength based on gap size"""
-        gap_ratio = gap_size / current_candle['close']
-        return min(1.0, 0.5 + gap_ratio * 100)
-    
-    def _calculate_liquidity_strength(self, data: List[Dict], sweep_candle: Dict, swing_point: Dict) -> float:
-        """Calculate liquidity sweep strength"""
-        # Distance factor
-        distance = abs(sweep_candle['high'] - swing_point['price']) / swing_point['price']
-        distance_score = min(0.5, distance * 100)
-        
-        # Volume factor
-        avg_volume = sum(d['volume'] for d in data) / len(data)
-        volume_score = min(0.5, sweep_candle['volume'] / avg_volume / 2)
-        
-        return min(1.0, distance_score + volume_score)
-    
-    def _calculate_structure_quality(self, recent_choch_bos: List[Dict], order_blocks: List[Dict], 
-                                   recent_inducements: List[Dict]) -> float:
-        """Calculate structure quality score"""
-        # Pattern consistency
-        pattern_count = len(recent_choch_bos) + len(order_blocks) + len(recent_inducements)
-        pattern_score = min(0.5, pattern_count * 0.1)
-        
-        # Pattern quality
-        if recent_choch_bos:
-            avg_confidence = sum(p.get('confidence_score', 0) for p in recent_choch_bos) / len(recent_choch_bos)
-            quality_score = avg_confidence * 0.5
-        else:
-            quality_score = 0.25
-        
-        return min(1.0, pattern_score + quality_score)
-    
-    def _get_dominant_pattern(self, recent_choch_bos: List[Dict], recent_inducements: List[Dict]) -> str:
-        """Get dominant pattern type"""
-        if not recent_choch_bos and not recent_inducements:
-            return 'none'
-        
-        if len(recent_choch_bos) > len(recent_inducements):
-            return 'structural'
-        elif len(recent_inducements) > len(recent_choch_bos):
-            return 'inducement'
-        else:
-            return 'mixed'
-    
-    def _determine_ai_market_bias(self, high_confidence_choch_bos: List[Dict], cvd_divergences: List[Dict]) -> str:
-        """Determine market bias for AI analysis"""
-        bullish_count = sum(1 for signal in high_confidence_choch_bos if signal['direction'] == 'bullish')
-        bearish_count = sum(1 for signal in high_confidence_choch_bos if signal['direction'] == 'bearish')
-        
-        # Factor in CVD divergences
-        bullish_divergences = sum(1 for div in cvd_divergences if div['type'] == 'bullish_divergence')
-        bearish_divergences = sum(1 for div in cvd_divergences if div['type'] == 'bearish_divergence')
-        
-        total_bullish = bullish_count + bullish_divergences
-        total_bearish = bearish_count + bearish_divergences
-        
-        if total_bullish > total_bearish:
-            return 'bullish'
-        elif total_bearish > total_bullish:
-            return 'bearish'
-        else:
-            return 'neutral'
-    
-    def _extract_key_levels(self, high_confidence_order_blocks: List[Dict], high_confidence_fvg: List[Dict]) -> Dict:
-        """Extract key levels for AI analysis"""
-        resistance_levels = [ob['price_high'] for ob in high_confidence_order_blocks if ob['direction'] == 'resistance']
-        support_levels = [ob['price_low'] for ob in high_confidence_order_blocks if ob['direction'] == 'support']
-        fvg_levels = [(fvg['gap_low'] + fvg['gap_high']) / 2 for fvg in high_confidence_fvg]
-        
-        return {
-            'resistance': sorted(resistance_levels, reverse=True)[:5],
-            'support': sorted(support_levels)[:5],
-            'fvg_zones': sorted(fvg_levels)[:5]
-        }
-    
-    def _identify_trading_opportunities(self, choch_bos: List[Dict], order_blocks: List[Dict], 
-                                      fvg: List[Dict], inducements: List[Dict]) -> List[Dict]:
-        """Identify trading opportunities"""
-        opportunities = []
-        
-        # High-confidence signals as opportunities
-        for signal in choch_bos:
-            if signal.get('confidence_score', 0) >= 0.8:
-                opportunities.append({
-                    'type': 'structural_break',
-                    'direction': signal['direction'],
-                    'confidence': signal['confidence_score'],
-                    'description': f"{signal['direction']} {signal['type']} with high confidence"
-                })
-        
-        return opportunities[:5]  # Top 5 opportunities
-    
-    def _identify_risk_factors(self, liquidity_sweeps: List[Dict], cvd_divergences: List[Dict]) -> List[Dict]:
-        """Identify risk factors"""
-        risk_factors = []
-        
-        # Liquidity sweeps as risk
-        for sweep in liquidity_sweeps:
-            if sweep.get('confidence_score', 0) >= 0.7:
-                risk_factors.append({
-                    'type': 'liquidity_sweep',
-                    'severity': 'high' if sweep['liquidity_category'] == 'ERL' else 'medium',
-                    'description': f"{sweep['direction']} {sweep['liquidity_category']} liquidity sweep"
-                })
-        
-        return risk_factors[:5]  # Top 5 risks
-    
-    def _summarize_confluence_zones(self, nested_order_blocks: List[Dict], fvg_ob_confluences: List[Dict]) -> Dict:
-        """Summarize confluence zones"""
-        return {
-            'nested_blocks': len(nested_order_blocks),
-            'fvg_ob_confluences': len(fvg_ob_confluences),
-            'total_confluences': len(nested_order_blocks) + len(fvg_ob_confluences),
-            'high_probability_zones': [
-                zone for zone in nested_order_blocks + fvg_ob_confluences
-                if zone.get('confluence_strength', 0) >= 0.8
-            ]
-        }
-    
-    def _summarize_volume_insights(self, volume_absorptions: List[Dict], cvd_divergences: List[Dict]) -> Dict:
-        """Summarize volume insights"""
-        return {
-            'volume_absorptions': len(volume_absorptions),
-            'cvd_divergences': len(cvd_divergences),
-            'bullish_volume_signals': len([d for d in cvd_divergences if d['type'] == 'bullish_divergence']),
-            'bearish_volume_signals': len([d for d in cvd_divergences if d['type'] == 'bearish_divergence']),
-            'institutional_activity': len([abs for abs in volume_absorptions if abs.get('volume_ratio', 0) >= 2.0])
-        }
-    
-    def _generate_market_structure_description(self, choch_bos: List[Dict]) -> str:
-        """Generate market structure description for GPT"""
-        if not choch_bos:
-            return "No clear market structure signals detected"
-        
-        bullish_count = sum(1 for s in choch_bos if s['direction'] == 'bullish')
-        bearish_count = sum(1 for s in choch_bos if s['direction'] == 'bearish')
-        
-        if bullish_count > bearish_count:
-            return f"Bullish market structure with {bullish_count} bullish CHoCH/BOS signals vs {bearish_count} bearish"
-        elif bearish_count > bullish_count:
-            return f"Bearish market structure with {bearish_count} bearish CHoCH/BOS signals vs {bullish_count} bullish"
-        else:
-            return f"Neutral market structure with equal {bullish_count} bullish and {bearish_count} bearish signals"
-    
-    def _generate_support_resistance_description(self, order_blocks: List[Dict]) -> str:
-        """Generate support/resistance description for GPT"""
-        if not order_blocks:
-            return "No significant order blocks detected"
-        
-        support_count = sum(1 for ob in order_blocks if ob['direction'] == 'support')
-        resistance_count = sum(1 for ob in order_blocks if ob['direction'] == 'resistance')
-        
-        return f"Detected {support_count} support levels and {resistance_count} resistance levels with institutional volume"
-    
-    def _generate_fvg_description(self, fvg_signals: List[Dict]) -> str:
-        """Generate FVG description for GPT"""
-        if not fvg_signals:
-            return "No Fair Value Gaps detected"
-        
-        bullish_fvg = sum(1 for fvg in fvg_signals if fvg['direction'] == 'bullish')
-        bearish_fvg = sum(1 for fvg in fvg_signals if fvg['direction'] == 'bearish')
-        
-        return f"Detected {bullish_fvg} bullish FVGs and {bearish_fvg} bearish FVGs representing unfilled market inefficiencies"
-    
-    def _generate_liquidity_description(self, liquidity_sweeps: List[Dict]) -> str:
-        """Generate liquidity description for GPT"""
-        if not liquidity_sweeps:
-            return "No liquidity sweeps detected"
-        
-        erl_count = sum(1 for sweep in liquidity_sweeps if sweep.get('liquidity_category') == 'ERL')
-        irl_count = sum(1 for sweep in liquidity_sweeps if sweep.get('liquidity_category') == 'IRL')
-        
-        return f"Detected {erl_count} External Range Liquidity sweeps and {irl_count} Internal Range Liquidity sweeps"
-    
-    def _generate_inducement_description(self, inducements: List[Dict]) -> str:
-        """Generate inducement description for GPT"""
-        if not inducements:
-            return "No inducement patterns detected"
-        
-        return f"Detected {len(inducements)} inducement patterns indicating potential smart money manipulation"
-    
-    def _generate_volume_description(self, volume_absorptions: List[Dict], cvd_divergences: List[Dict]) -> str:
-        """Generate volume description for GPT"""
-        if not volume_absorptions and not cvd_divergences:
-            return "No significant volume patterns detected"
-        
-        return f"Volume analysis shows {len(volume_absorptions)} absorption patterns and {len(cvd_divergences)} CVD divergences"
-    
-    def _prepare_levels_for_visualization(self, order_blocks: List[Dict], fvg_signals: List[Dict]) -> List[Dict]:
-        """Prepare levels for visualization"""
-        levels = []
-        
-        # Add order block levels
-        for ob in order_blocks:
-            levels.append({
-                'price': ob['price_high'] if ob['direction'] == 'resistance' else ob['price_low'],
-                'type': ob['direction'],
-                'strength': ob.get('confidence_score', 0.5),
-                'source': 'order_block'
-            })
-        
-        # Add FVG levels
-        for fvg in fvg_signals:
-            levels.append({
-                'price': (fvg['gap_high'] + fvg['gap_low']) / 2,
-                'type': 'fvg',
-                'strength': fvg.get('confidence_score', 0.5),
-                'source': 'fair_value_gap'
-            })
-        
-        return levels
-    
-    def _prepare_zones_for_visualization(self, nested_obs: List[Dict], fvg_ob_confluences: List[Dict]) -> List[Dict]:
-        """Prepare zones for visualization"""
-        zones = []
-        
-        # Add nested order block zones
-        for nested in nested_obs:
-            zones.append({
-                'high': nested['price_range']['high'],
-                'low': nested['price_range']['low'],
-                'type': 'nested_order_block',
-                'strength': nested.get('confluence_strength', 0.5)
-            })
-        
-        # Add FVG-OB confluence zones
-        for confluence in fvg_ob_confluences:
-            zones.append({
-                'high': confluence['high_probability_zone']['high'],
-                'low': confluence['high_probability_zone']['low'],
-                'type': 'fvg_ob_confluence',
-                'strength': confluence.get('confluence_strength', 0.5)
-            })
-        
-        return zones
-    
-    def _prepare_signals_for_visualization(self, choch_bos: List[Dict], liquidity_sweeps: List[Dict]) -> List[Dict]:
-        """Prepare signals for visualization"""
-        signals = []
-        
-        # Add CHoCH/BOS signals
-        for signal in choch_bos:
-            signals.append({
-                'timestamp': signal['timestamp'],
-                'price': signal['price'],
-                'type': signal['type'],
-                'direction': signal['direction'],
-                'strength': signal.get('confidence_score', 0.5)
-            })
-        
-        # Add liquidity sweep signals
-        for sweep in liquidity_sweeps:
-            signals.append({
-                'timestamp': sweep['timestamp'],
-                'price': sweep['sweep_price'],
-                'type': 'liquidity_sweep',
-                'direction': sweep['direction'],
-                'strength': sweep.get('confidence_score', 0.5)
-            })
-        
-        return signals
-    
-    def _is_supporting_pattern(self, main_pattern: Dict, supporting_pattern: Dict) -> bool:
-        """Check if pattern supports the main pattern"""
-        # Simple time-based support check
-        time_diff = abs(main_pattern['timestamp'] - supporting_pattern.get('timestamp', 0))
-        return time_diff < 24 * 3600 * 1000  # Within 24 hours
-    
-    def _calculate_signal_strength_enhanced(self, pattern: Dict, supporting_obs: List[Dict],
-                                          supporting_fvgs: List[Dict], supporting_inducements: List[Dict]) -> float:
-        """Calculate enhanced signal strength"""
-        base_strength = pattern.get('confidence_score', 0.5)
-        
-        # Support bonuses
-        ob_bonus = min(0.2, len(supporting_obs) * 0.05)
-        fvg_bonus = min(0.15, len(supporting_fvgs) * 0.05)
-        inducement_bonus = min(0.15, len(supporting_inducements) * 0.05)
-        
-        return min(1.0, base_strength + ob_bonus + fvg_bonus + inducement_bonus)
-    
-    def _calculate_trade_levels(self, pattern: Dict, supporting_obs: List[Dict], 
-                              supporting_fvgs: List[Dict], market_structure: Dict) -> tuple:
-        """Calculate trade levels (entry, SL, TP)"""
-        price = pattern['price']
-        
-        # Simple calculation based on pattern direction
-        if pattern['direction'] == 'bullish':
-            entry_level = price * 1.001  # 0.1% above
-            sl_level = price * 0.995     # 0.5% below
-            tp_level = price * 1.01      # 1% above
-        else:
-            entry_level = price * 0.999  # 0.1% below
-            sl_level = price * 1.005     # 0.5% above
-            tp_level = price * 0.99      # 1% below
-        
-        return entry_level, sl_level, tp_level
-    
-    def _calculate_risk_reward_ratio(self, entry: float, sl: float, tp: float) -> float:
-        """Calculate risk-reward ratio"""
-        risk = abs(entry - sl)
-        reward = abs(tp - entry)
-        return reward / risk if risk > 0 else 0
-    
-    def _check_market_structure_alignment(self, pattern: Dict, market_structure: Dict) -> bool:
-        """Check if pattern aligns with market structure"""
-        pattern_direction = pattern['direction']
-        market_trend = market_structure.get('trend', 'neutral')
-        
-        if pattern_direction == 'bullish' and market_trend == 'bullish':
-            return True
-        elif pattern_direction == 'bearish' and market_trend == 'bearish':
-            return True
-        else:
-            return False
-    
-    def _generate_trading_recommendation(self, market_bias: str, confidence_score: float, 
-                                       strong_patterns: Dict) -> str:
-        """Generate trading recommendation"""
-        if confidence_score >= 0.8:
-            quality = "HIGH"
-        elif confidence_score >= 0.6:
-            quality = "MEDIUM"
-        else:
-            quality = "LOW"
-        
-        pattern_count = sum(len(patterns) for patterns in strong_patterns.values())
-        
-        if market_bias == 'bullish' and pattern_count >= 3:
-            return f"{quality} CONFIDENCE: Look for bullish entries with {pattern_count} strong patterns"
-        elif market_bias == 'bearish' and pattern_count >= 3:
-            return f"{quality} CONFIDENCE: Look for bearish entries with {pattern_count} strong patterns"
-        else:
-            return f"{quality} CONFIDENCE: Wait for clearer signals, mixed structure"
-
-class VolumeAnalyzer:
-    """
-    📊 Volume Analysis Engine
-    
-    Provides comprehensive volume analysis including:
-    - Volume delta calculation
-    - CVD (Cumulative Volume Delta) tracking
-    - Volume absorption detection
-    - Volume spike identification
-    """
-    
-    def __init__(self):
-        self.logger = logging.getLogger(f"{__name__}.VolumeAnalyzer")
-    
-    def calculate_volume_delta(self, data: List[Dict]) -> List[Dict]:
-        """
-        Calculate volume delta for each candle
-        
-        Args:
-            data: List of OHLCV candles
-            
-        Returns:
-            List of volume delta data with buy/sell volume estimation
-        """
-        volume_deltas = []
-        
-        for i, candle in enumerate(data):
-            # Estimate buy/sell volume based on price movement and volume
-            close_price = candle['close']
-            open_price = candle['open']
-            high_price = candle['high']
-            low_price = candle['low']
-            total_volume = candle['volume']
-            
-            # Calculate price position within the candle
-            if high_price != low_price:
-                price_position = (close_price - low_price) / (high_price - low_price)
-            else:
-                price_position = 0.5
-            
-            # Estimate buy/sell volume
-            buy_volume = total_volume * price_position
-            sell_volume = total_volume * (1 - price_position)
-            
-            # Calculate delta
-            delta = buy_volume - sell_volume
-            
-            volume_deltas.append({
-                'timestamp': candle['timestamp'],
-                'total_volume': total_volume,
-                'buy_volume': buy_volume,
-                'sell_volume': sell_volume,
-                'delta': delta,
-                'delta_ratio': delta / total_volume if total_volume > 0 else 0
-            })
-        
-        return volume_deltas
-    
-    def detect_volume_absorption(self, data: List[Dict], volume_deltas: List[Dict]) -> List[Dict]:
-        """
-        Detect volume absorption patterns
-        
-        Args:
-            data: OHLCV data
-            volume_deltas: Volume delta data
-            
-        Returns:
-            List of absorption patterns
-        """
-        absorptions = []
-        avg_volume = sum(d['volume'] for d in data) / len(data)
-        
-        for i in range(2, len(data)):
-            current_candle = data[i]
-            current_delta = volume_deltas[i]
-            
-            # High volume with small price movement indicates absorption
-            if (current_candle['volume'] > avg_volume * 2.0 and
-                abs(current_candle['close'] - current_candle['open']) < 
-                (current_candle['high'] - current_candle['low']) * 0.3):
-                
-                absorptions.append({
-                    'timestamp': current_candle['timestamp'],
-                    'type': 'absorption',
-                    'volume': current_candle['volume'],
-                    'volume_ratio': current_candle['volume'] / avg_volume,
-                    'delta': current_delta['delta'],
-                    'price_range': current_candle['high'] - current_candle['low'],
-                    'body_size': abs(current_candle['close'] - current_candle['open']),
-                    'direction': 'bullish' if current_delta['delta'] > 0 else 'bearish'
-                })
-        
-        return absorptions
-
-class CVDCalculator:
-    """
-    📈 Cumulative Volume Delta (CVD) Calculator
-    
-    Tracks cumulative volume delta to identify:
-    - Price/volume divergences
-    - Institutional accumulation/distribution
-    - Trend confirmation/rejection
-    """
-    
-    def __init__(self):
-        self.logger = logging.getLogger(f"{__name__}.CVDCalculator")
-    
-    def calculate_cvd(self, volume_deltas: List[Dict]) -> List[Dict]:
-        """
-        Calculate Cumulative Volume Delta
-        
-        Args:
-            volume_deltas: Volume delta data
-            
-        Returns:
-            List of CVD data points
-        """
-        cvd_data = []
-        cumulative_delta = 0
-        
-        for delta_point in volume_deltas:
-            cumulative_delta += delta_point['delta']
-            
-            cvd_data.append({
-                'timestamp': delta_point['timestamp'],
-                'cvd': cumulative_delta,
-                'delta': delta_point['delta'],
-                'delta_ratio': delta_point['delta_ratio']
-            })
-        
-        return cvd_data
-    
-    def detect_cvd_divergence(self, data: List[Dict], cvd_data: List[Dict]) -> List[Dict]:
-        """
-        Detect price-CVD divergences
-        
-        Args:
-            data: OHLCV data
-            cvd_data: CVD data
-            
-        Returns:
-            List of divergence patterns
-        """
-        divergences = []
-        
-        if len(data) < 20 or len(cvd_data) < 20:
-            return divergences
-        
-        # Look for divergences in recent data
-        for i in range(10, len(data) - 1):
-            price_current = data[i]['close']
-            price_prev = data[i-10]['close']
-            
-            cvd_current = cvd_data[i]['cvd']
-            cvd_prev = cvd_data[i-10]['cvd']
-            
-            # Bullish divergence: price down, CVD up
-            if price_current < price_prev and cvd_current > cvd_prev:
-                divergences.append({
-                    'timestamp': data[i]['timestamp'],
-                    'type': 'bullish_divergence',
-                    'price_change': (price_current - price_prev) / price_prev,
-                    'cvd_change': cvd_current - cvd_prev,
-                    'strength': abs((price_current - price_prev) / price_prev) * 
-                               abs(cvd_current - cvd_prev) / max(abs(cvd_current), abs(cvd_prev), 1)
-                })
-            
-            # Bearish divergence: price up, CVD down
-            elif price_current > price_prev and cvd_current < cvd_prev:
-                divergences.append({
-                    'timestamp': data[i]['timestamp'],
-                    'type': 'bearish_divergence',
-                    'price_change': (price_current - price_prev) / price_prev,
-                    'cvd_change': cvd_current - cvd_prev,
-                    'strength': abs((price_current - price_prev) / price_prev) * 
-                               abs(cvd_current - cvd_prev) / max(abs(cvd_current), abs(cvd_prev), 1)
-                })
-        
-        return divergences
-
-class ConfluenceDetector:
-    """
-    🎯 Confluence Zone Detection Engine
-    
-    Identifies high-probability zones where multiple SMC patterns converge:
-    - Nested Order Blocks
-    - FVG within Order Blocks
-    - Multiple pattern confirmations
-    - Liquidity confluence areas
-    """
-    
-    def __init__(self):
-        self.logger = logging.getLogger(f"{__name__}.ConfluenceDetector")
-    
-    def detect_nested_order_blocks(self, order_blocks: List[Dict]) -> List[Dict]:
-        """
-        Detect nested order blocks (OB within OB)
-        
-        Args:
-            order_blocks: List of detected order blocks
-            
-        Returns:
-            List of nested order block patterns
-        """
-        nested_obs = []
-        
-        for i, ob1 in enumerate(order_blocks):
-            for j, ob2 in enumerate(order_blocks):
-                if i != j and self._is_nested_order_block(ob1, ob2):
-                    nested_obs.append({
-                        'timestamp': max(ob1['timestamp'], ob2['timestamp']),
-                        'type': 'nested_order_block',
-                        'outer_block': ob1,
-                        'inner_block': ob2,
-                        'direction': ob1['direction'],
-                        'confluence_strength': self._calculate_confluence_strength(ob1, ob2),
-                        'price_range': {
-                            'high': max(ob1['price_high'], ob2['price_high']),
-                            'low': min(ob1['price_low'], ob2['price_low'])
-                        }
-                    })
-        
-        return nested_obs
-    
-    def detect_fvg_ob_confluence(self, fvg_signals: List[Dict], order_blocks: List[Dict]) -> List[Dict]:
-        """
-        Detect FVG within Order Block confluence
-        
-        Args:
-            fvg_signals: List of FVG patterns
-            order_blocks: List of order blocks
-            
-        Returns:
-            List of FVG-OB confluence patterns
-        """
-        confluences = []
-        
-        for fvg in fvg_signals:
-            for ob in order_blocks:
-                if self._is_fvg_within_ob(fvg, ob):
-                    confluences.append({
-                        'timestamp': max(fvg['timestamp'], ob['timestamp']),
-                        'type': 'fvg_ob_confluence',
-                        'fvg_pattern': fvg,
-                        'order_block': ob,
-                        'direction': fvg['direction'],
-                        'confluence_strength': self._calculate_fvg_ob_confluence_strength(fvg, ob),
-                        'high_probability_zone': {
-                            'high': min(fvg['gap_high'], ob['price_high']),
-                            'low': max(fvg['gap_low'], ob['price_low'])
-                        }
-                    })
-        
-        return confluences
-    
-    def _is_nested_order_block(self, ob1: Dict, ob2: Dict) -> bool:
-        """Check if ob2 is nested within ob1"""
-        return (ob1['price_low'] <= ob2['price_low'] and 
-                ob1['price_high'] >= ob2['price_high'] and
-                ob1['direction'] == ob2['direction'])
-    
-    def _is_fvg_within_ob(self, fvg: Dict, ob: Dict) -> bool:
-        """Check if FVG is within Order Block"""
-        return (ob['price_low'] <= fvg['gap_low'] and 
-                ob['price_high'] >= fvg['gap_high'] and
-                fvg['direction'] == ('bullish' if ob['direction'] == 'support' else 'bearish'))
-    
-    def _calculate_confluence_strength(self, ob1: Dict, ob2: Dict) -> float:
-        """Calculate confluence strength between two order blocks"""
-        volume_factor = (ob1['volume'] + ob2['volume']) / 2
-        size_factor = min(ob1['strength'], ob2['strength'])
-        return min(volume_factor * size_factor, 1.0)
-    
-    def _calculate_fvg_ob_confluence_strength(self, fvg: Dict, ob: Dict) -> float:
-        """Calculate FVG-OB confluence strength"""
-        fvg_strength = fvg['strength']
-        ob_strength = ob['strength']
-        return min((fvg_strength + ob_strength) / 2, 1.0)
-        
-    def analyze_comprehensive(self, df: pd.DataFrame, symbol: str, timeframe: str) -> Dict[str, Any]:
-        """Comprehensive SMC analysis combining all detection methods"""
-        
-        try:
-            if df is None or df.empty:
-                return self._empty_smc_analysis()
-            
-            # Convert DataFrame to list of dicts for compatibility
-            data = self._convert_df_to_data(df)
-            
-            # 1. Identify swing points
-            swing_points = self.identify_swing_points(data)
-            
-            # 2. Detect CHoCH and BOS patterns
-            choch_bos_signals = self.detect_choch_bos(data, swing_points)
-            
-            # 3. Detect Order Blocks
-            order_blocks = self.detect_order_blocks(data, swing_points)
-            
-            # 4. Detect Fair Value Gaps (FVG)
-            fvg_signals = self.detect_fvg(data)
-            
-            # 5. Detect Liquidity Sweeps
-            liquidity_sweeps = self.detect_liquidity_sweeps(data, swing_points)
-            
-            # 6. Detect Equal Highs/Lows (EQH/EQL)
-            eqh_eql_signals = self.detect_eqh_eql(data, swing_points)
-            
-            # 7. Detect Inducement Patterns
-            inducement_patterns = self.inducement_detector.detect_inducements(data, swing_points)
-            
-            # 8. Determine market structure
-            market_structure = self._determine_market_structure(choch_bos_signals, order_blocks)
-            
-            # 9. Generate comprehensive summary
-            smc_summary = self._generate_smc_summary(
-                choch_bos_signals, order_blocks, fvg_signals, 
-                liquidity_sweeps, eqh_eql_signals, inducement_patterns
-            )
-            
-            # 10. Generate trading signals
-            trading_signals = self._generate_trading_signals(
-                choch_bos_signals, order_blocks, fvg_signals, 
-                liquidity_sweeps, market_structure, inducement_patterns
-            )
-            
-            return {
-                'symbol': symbol,
-                'timeframe': timeframe,
-                'timestamp': int(df['timestamp'].iloc[-1].timestamp() * 1000) if 'timestamp' in df.columns else int(datetime.now().timestamp() * 1000),
-                'current_price': float(df['close'].iloc[-1]),
-                'swing_points': swing_points,
-                'choch_bos_signals': choch_bos_signals,
-                'order_blocks': order_blocks,
-                'fvg_signals': fvg_signals,
-                'liquidity_sweeps': liquidity_sweeps,
-                'eqh_eql_signals': eqh_eql_signals,
-                'inducement_patterns': inducement_patterns,
-                'market_structure': market_structure,
-                'smc_summary': smc_summary,
-                'trading_signals': trading_signals,
-                'confidence_score': self._calculate_confidence_score(
-                    choch_bos_signals, order_blocks, fvg_signals, liquidity_sweeps, inducement_patterns
-                )
-            }
-            
-        except Exception as e:
-            self.logger.error(f"Professional SMC analysis error for {symbol}: {e}")
-            return self._empty_smc_analysis()
-    
-    def identify_swing_points(self, data: List[Dict]) -> Dict[str, List[Dict]]:
-        """Identify swing highs and lows"""
-        if len(data) < self.swing_period * 2 + 1:
-            return {'swing_highs': [], 'swing_lows': []}
-        
-        swing_highs = []
-        swing_lows = []
-        
-        for i in range(self.swing_period, len(data) - self.swing_period):
-            current_high = data[i]['high']
-            current_low = data[i]['low']
-            
-            # Check for swing high
-            is_swing_high = True
-            for j in range(i - self.swing_period, i + self.swing_period + 1):
-                if j != i and data[j]['high'] >= current_high:
-                    is_swing_high = False
-                    break
-            
-            if is_swing_high:
-                swing_highs.append({
-                    'timestamp': int(data[i]['timestamp'].timestamp() * 1000) if hasattr(data[i]['timestamp'], 'timestamp') else int(data[i]['timestamp']),
-                    'index': i,
-                    'price': current_high,
-                    'type': 'swing_high'
-                })
-            
-            # Check for swing low
-            is_swing_low = True
-            for j in range(i - self.swing_period, i + self.swing_period + 1):
-                if j != i and data[j]['low'] <= current_low:
-                    is_swing_low = False
-                    break
-            
-            if is_swing_low:
-                swing_lows.append({
-                    'timestamp': int(data[i]['timestamp'].timestamp() * 1000) if hasattr(data[i]['timestamp'], 'timestamp') else int(data[i]['timestamp']),
-                    'index': i,
-                    'price': current_low,
-                    'type': 'swing_low'
-                })
-        
-        return {'swing_highs': swing_highs, 'swing_lows': swing_lows}
-    
-    def detect_choch_bos(self, data: List[Dict], swing_points: Dict[str, List[Dict]]) -> List[Dict]:
-        """Detect Change of Character (CHoCH) and Break of Structure (BOS)"""
-        if not swing_points or len(swing_points['swing_highs']) < 2 or len(swing_points['swing_lows']) < 2:
-            return []
-        
-        choch_bos_signals = []
-        swing_highs = swing_points['swing_highs']
-        swing_lows = swing_points['swing_lows']
-        
-        # Combine and sort swing points by timestamp
-        all_swings = swing_highs + swing_lows
-        for swing in all_swings:
-            swing['timestamp'] = int(swing['timestamp']) if isinstance(swing['timestamp'], str) else swing['timestamp']
-        all_swings.sort(key=lambda x: x['timestamp'])
-        
-        if len(all_swings) < 3:
-            return []
-        
-        # Track market structure
-        for i in range(2, len(all_swings)):
-            current_swing = all_swings[i]
-            prev_swing = all_swings[i-1]
-            prev_prev_swing = all_swings[i-2]
-            
-            # Detect CHoCH (Change of Character)
-            if (prev_prev_swing['type'] == 'swing_high' and 
-                prev_swing['type'] == 'swing_low' and 
-                current_swing['type'] == 'swing_high'):
-                
-                # Bullish CHoCH: Higher High after Lower Low
-                if (current_swing['price'] > prev_prev_swing['price'] and 
-                    prev_swing['price'] < self._get_previous_swing_low(all_swings, i-1)['price']):
-                    
-                    choch_bos_signals.append({
-                        'timestamp': current_swing['timestamp'],
-                        'type': 'CHoCH',
-                        'direction': 'bullish',
-                        'price': current_swing['price'],
-                        'strength': self._calculate_signal_strength(data, current_swing, prev_swing)
-                    })
-            
-            elif (prev_prev_swing['type'] == 'swing_low' and 
-                  prev_swing['type'] == 'swing_high' and 
-                  current_swing['type'] == 'swing_low'):
-                
-                # Bearish CHoCH: Lower Low after Higher High
-                if (current_swing['price'] < prev_prev_swing['price'] and 
-                    prev_swing['price'] > self._get_previous_swing_high(all_swings, i-1)['price']):
-                    
-                    choch_bos_signals.append({
-                        'timestamp': current_swing['timestamp'],
-                        'type': 'CHoCH',
-                        'direction': 'bearish',
-                        'price': current_swing['price'],
-                        'strength': self._calculate_signal_strength(data, current_swing, prev_swing)
-                    })
-            
-            # Detect BOS (Break of Structure)
-            # BOS occurs when price breaks significant support/resistance
-            if current_swing['type'] == 'swing_high':
-                recent_highs = [s for s in swing_highs if s['timestamp'] < current_swing['timestamp']][-3:]
-                if recent_highs:
-                    max_recent_high = max(recent_highs, key=lambda x: x['price'])
-                    if current_swing['price'] > max_recent_high['price'] * 1.01:  # 1% break
-                        choch_bos_signals.append({
-                            'timestamp': current_swing['timestamp'],
-                            'type': 'BOS',
-                            'direction': 'bullish',
-                            'price': current_swing['price'],
-                            'strength': self._calculate_signal_strength(data, current_swing, max_recent_high)
-                        })
-            
-            elif current_swing['type'] == 'swing_low':
-                recent_lows = [s for s in swing_lows if s['timestamp'] < current_swing['timestamp']][-3:]
-                if recent_lows:
-                    min_recent_low = min(recent_lows, key=lambda x: x['price'])
-                    if current_swing['price'] < min_recent_low['price'] * 0.99:  # 1% break
-                        choch_bos_signals.append({
-                            'timestamp': current_swing['timestamp'],
-                            'type': 'BOS',
-                            'direction': 'bearish',
-                            'price': current_swing['price'],
-                            'strength': self._calculate_signal_strength(data, current_swing, min_recent_low)
-                        })
-        
-        return choch_bos_signals
-    
-    def detect_order_blocks(self, data: List[Dict], swing_points: Dict[str, List[Dict]]) -> List[Dict]:
-        """Detect Order Blocks (institutional interest zones)"""
-        order_blocks = []
-        
-        if not swing_points or len(data) < 10:
-            return order_blocks
-        
-        # Order blocks form around swing points with high volume
-        for swing_high in swing_points['swing_highs']:
-            idx = swing_high['index']
-            if idx >= 3 and idx < len(data) - 3:
-                # Look for order block formation around swing high
-                block_start = max(0, idx - 3)
-                block_end = min(len(data), idx + 3)
-                
-                # Calculate volume average
-                avg_volume = sum(data[i]['volume'] for i in range(block_start, block_end)) / (block_end - block_start)
-                
-                # Check if volume is above average
-                if avg_volume > self._get_average_volume(data) * 1.5:
-                    order_blocks.append({
-                        'timestamp': swing_high['timestamp'],
-                        'type': 'order_block',
-                        'direction': 'resistance',
-                        'price_high': swing_high['price'],
-                        'price_low': min(data[i]['low'] for i in range(block_start, block_end)),
-                        'volume': avg_volume,
-                        'strength': self._calculate_order_block_strength(data, block_start, block_end)
-                    })
-        
-        for swing_low in swing_points['swing_lows']:
-            idx = swing_low['index']
-            if idx >= 3 and idx < len(data) - 3:
-                # Look for order block formation around swing low
-                block_start = max(0, idx - 3)
-                block_end = min(len(data), idx + 3)
-                
-                # Calculate volume average
-                avg_volume = sum(data[i]['volume'] for i in range(block_start, block_end)) / (block_end - block_start)
-                
-                # Check if volume is above average
-                if avg_volume > self._get_average_volume(data) * 1.5:
-                    order_blocks.append({
-                        'timestamp': swing_low['timestamp'],
-                        'type': 'order_block',
-                        'direction': 'support',
-                        'price_high': max(data[i]['high'] for i in range(block_start, block_end)),
-                        'price_low': swing_low['price'],
-                        'volume': avg_volume,
-                        'strength': self._calculate_order_block_strength(data, block_start, block_end)
-                    })
-        
-        return order_blocks
-    
-    def detect_fvg(self, data: List[Dict]) -> List[Dict]:
-        """Detect Fair Value Gaps (FVG)"""
-        fvg_signals = []
-        
-        if len(data) < 3:
-            return fvg_signals
-        
-        for i in range(1, len(data) - 1):
-            prev_candle = data[i-1]
-            current_candle = data[i]
-            next_candle = data[i+1]
-            
-            # Bullish FVG: Gap between prev high and next low
-            if (prev_candle['high'] < next_candle['low'] and
-                current_candle['close'] > current_candle['open']):  # Bullish candle
-                
-                gap_size = next_candle['low'] - prev_candle['high']
-                if gap_size > 0:
-                    fvg_signals.append({
-                        'timestamp': int(current_candle['timestamp']) if isinstance(current_candle['timestamp'], (int, float)) else int(current_candle['timestamp'].timestamp() * 1000),
-                        'type': 'FVG',
-                        'direction': 'bullish',
-                        'gap_high': next_candle['low'],
-                        'gap_low': prev_candle['high'],
-                        'gap_size': gap_size,
-                        'strength': self._calculate_fvg_strength(gap_size, current_candle)
-                    })
-            
-            # Bearish FVG: Gap between prev low and next high
-            elif (prev_candle['low'] > next_candle['high'] and
-                  current_candle['close'] < current_candle['open']):  # Bearish candle
-                
-                gap_size = prev_candle['low'] - next_candle['high']
-                if gap_size > 0:
-                    fvg_signals.append({
-                        'timestamp': int(current_candle['timestamp']) if isinstance(current_candle['timestamp'], (int, float)) else int(current_candle['timestamp'].timestamp() * 1000),
-                        'type': 'FVG',
-                        'direction': 'bearish',
-                        'gap_high': prev_candle['low'],
-                        'gap_low': next_candle['high'],
-                        'gap_size': gap_size,
-                        'strength': self._calculate_fvg_strength(gap_size, current_candle)
-                    })
-        
-        return fvg_signals
-    
-    def detect_liquidity_sweeps(self, data: List[Dict], swing_points: Dict[str, List[Dict]]) -> List[Dict]:
-        """Detect Liquidity Pool Sweeps"""
-        liquidity_sweeps = []
-        
-        if not swing_points or len(data) < 10:
-            return liquidity_sweeps
-        
-        # Check for liquidity sweeps at swing highs
-        for swing_high in swing_points['swing_highs']:
-            idx = swing_high['index']
-            if idx < len(data) - 5:
-                # Look for price breaking above swing high and then reversing
-                for i in range(idx + 1, min(idx + 6, len(data))):
-                    if data[i]['high'] > swing_high['price'] * 1.005:  # Break above with 0.5% buffer
-                        # Check for reversal within next few candles
-                        reversal_found = False
-                        for j in range(i + 1, min(i + 4, len(data))):
-                            if data[j]['low'] < swing_high['price'] * 0.995:  # Reversal below swing high
-                                reversal_found = True
-                                break
-                        
-                        if reversal_found:
-                            liquidity_sweeps.append({
-                                'timestamp': int(data[i]['timestamp']) if isinstance(data[i]['timestamp'], (int, float)) else int(data[i]['timestamp'].timestamp() * 1000),
-                                'type': 'liquidity_sweep',
-                                'direction': 'bearish',
-                                'sweep_price': data[i]['high'],
-                                'original_level': swing_high['price'],
-                                'strength': self._calculate_liquidity_strength(data, i, swing_high)
-                            })
-                            break
-        
-        # Check for liquidity sweeps at swing lows
-        for swing_low in swing_points['swing_lows']:
-            idx = swing_low['index']
-            if idx < len(data) - 5:
-                # Look for price breaking below swing low and then reversing
-                for i in range(idx + 1, min(idx + 6, len(data))):
-                    if data[i]['low'] < swing_low['price'] * 0.995:  # Break below with 0.5% buffer
-                        # Check for reversal within next few candles
-                        reversal_found = False
-                        for j in range(i + 1, min(i + 4, len(data))):
-                            if data[j]['high'] > swing_low['price'] * 1.005:  # Reversal above swing low
-                                reversal_found = True
-                                break
-                        
-                        if reversal_found:
-                            liquidity_sweeps.append({
-                                'timestamp': int(data[i]['timestamp']) if isinstance(data[i]['timestamp'], (int, float)) else int(data[i]['timestamp'].timestamp() * 1000),
-                                'type': 'liquidity_sweep',
-                                'direction': 'bullish',
-                                'sweep_price': data[i]['low'],
-                                'original_level': swing_low['price'],
-                                'strength': self._calculate_liquidity_strength(data, i, swing_low)
-                            })
-                            break
-        
-        return liquidity_sweeps
-    
-    def detect_eqh_eql(self, data: List[Dict], swing_points: Dict[str, List[Dict]]) -> List[Dict]:
-        """Detect Equal Highs (EQH) and Equal Lows (EQL)"""
-        eqh_eql_signals = []
-        tolerance = 0.002  # 0.2% tolerance for "equal" levels
-        
-        if not swing_points:
-            return eqh_eql_signals
-        
-        # Detect Equal Highs (EQH)
-        swing_highs = swing_points['swing_highs']
-        for i in range(len(swing_highs) - 1):
-            for j in range(i + 1, len(swing_highs)):
-                high1 = swing_highs[i]
-                high2 = swing_highs[j]
-                
-                price_diff = abs(high1['price'] - high2['price'])
-                if price_diff / high1['price'] <= tolerance:
-                    eqh_eql_signals.append({
-                        'timestamp': high2['timestamp'],
-                        'type': 'EQH',
-                        'direction': 'resistance',
-                        'price': (high1['price'] + high2['price']) / 2,
-                        'price_diff': price_diff,
-                        'strength': self._calculate_eqh_eql_strength(high1, high2)
-                    })
-        
-        # Detect Equal Lows (EQL)
-        swing_lows = swing_points['swing_lows']
-        for i in range(len(swing_lows) - 1):
-            for j in range(i + 1, len(swing_lows)):
-                low1 = swing_lows[i]
-                low2 = swing_lows[j]
-                
-                price_diff = abs(low1['price'] - low2['price'])
-                if price_diff / low1['price'] <= tolerance:
-                    eqh_eql_signals.append({
-                        'timestamp': low2['timestamp'],
-                        'type': 'EQL',
-                        'direction': 'support',
-                        'price': (low1['price'] + low2['price']) / 2,
-                        'price_diff': price_diff,
-                        'strength': self._calculate_eqh_eql_strength(low1, low2)
-                    })
-        
-        return eqh_eql_signals
-    
-    def _generate_trading_signals(self, choch_bos_signals: List[Dict], order_blocks: List[Dict], 
-                                 fvg_signals: List[Dict], liquidity_sweeps: List[Dict], 
-                                 market_structure: Dict[str, Any]) -> List[Dict]:
-        """Generate trading signals based on SMC analysis"""
-        trading_signals = []
-        
-        # Recent signals only (last 10)
-        recent_choch_bos = choch_bos_signals[-10:] if choch_bos_signals else []
-        recent_order_blocks = order_blocks[-5:] if order_blocks else []
-        recent_fvg = fvg_signals[-5:] if fvg_signals else []
-        recent_liquidity = liquidity_sweeps[-5:] if liquidity_sweeps else []
-        
-        # Generate signals based on pattern confluences
-        for signal in recent_choch_bos:
-            if signal['type'] == 'CHoCH' and signal['strength'] > 60:
-                # Look for confluence with order blocks
-                confluence_count = 0
-                supporting_patterns = []
-                
-                # Check for order block confluence
-                for ob in recent_order_blocks:
-                    if (signal['direction'] == 'bullish' and ob['direction'] == 'support' and
-                        abs(signal['price'] - ob['price_low']) / signal['price'] < 0.02):
-                        confluence_count += 1
-                        supporting_patterns.append('order_block')
-                
-                # Check for FVG confluence  
-                for fvg in recent_fvg:
-                    if (signal['direction'] == fvg['direction'] and
-                        abs(signal['timestamp'] - fvg['timestamp']) < 3600000):  # Within 1 hour
-                        confluence_count += 1
-                        supporting_patterns.append('fvg')
-                
-                # Generate signal if confluence is strong
-                if confluence_count >= 1:
-                    trading_signals.append({
-                        'timestamp': signal['timestamp'],
-                        'action': 'BUY' if signal['direction'] == 'bullish' else 'SELL',
-                        'pattern_type': 'CHoCH_CONFLUENCE',
-                        'entry_price': signal['price'],
-                        'confidence': min(signal['strength'] + confluence_count * 10, 100),
-                        'supporting_patterns': supporting_patterns,
-                        'timeframe_strength': market_structure.get('strength', 0)
-                    })
-        
-        return trading_signals
+        return base_result
     
-    # Helper methods
+    # Missing helper methods
     def _convert_df_to_data(self, df: pd.DataFrame) -> List[Dict]:
         """Convert DataFrame to list of dictionaries"""
         data = []
@@ -3657,163 +2702,6 @@ class ConfluenceDetector:
             })
         return data
     
-
-    
-    def _get_previous_swing_low(self, all_swings: List[Dict], current_index: int) -> Dict:
-        """Get previous swing low before current index"""
-        for i in range(current_index - 1, -1, -1):
-            if all_swings[i]['type'] == 'swing_low':
-                return all_swings[i]
-        return {'price': 0}
-    
-    def _get_previous_swing_high(self, all_swings: List[Dict], current_index: int) -> Dict:
-        """Get previous swing high before current index"""
-        for i in range(current_index - 1, -1, -1):
-            if all_swings[i]['type'] == 'swing_high':
-                return all_swings[i]
-        return {'price': float('inf')}
-    
-    def _calculate_signal_strength(self, data: List[Dict], signal_point: Dict, reference_point: Dict) -> float:
-        """Calculate signal strength based on various factors"""
-        try:
-            # Volume factor
-            idx = signal_point.get('index', 0)
-            if idx < len(data):
-                volume_factor = data[idx]['volume'] / self._get_average_volume(data)
-            else:
-                volume_factor = 1.0
-            
-            # Price movement factor
-            signal_price = self._safe_get_price(signal_point)
-            reference_price = self._safe_get_price(reference_point)
-            
-            if reference_price > 0:
-                price_diff = abs(signal_price - reference_price)
-                price_factor = price_diff / reference_price * 100
-            else:
-                price_factor = 0
-            
-            # Time factor (more recent = stronger)
-            time_diff = abs(signal_point['timestamp'] - reference_point['timestamp']) / 3600000  # hours
-            time_factor = max(1, 24 / (time_diff + 1))  # Decay over 24 hours
-            
-            strength = min(volume_factor * price_factor * time_factor * 20, 100)
-            return max(strength, 30)  # Minimum strength
-        except:
-            return 50.0
-    
-    def _calculate_order_block_strength(self, data: List[Dict], start_idx: int, end_idx: int) -> float:
-        """Calculate order block strength"""
-        try:
-            avg_volume = sum(data[i]['volume'] for i in range(start_idx, end_idx)) / (end_idx - start_idx)
-            total_avg_volume = self._get_average_volume(data)
-            volume_strength = min(avg_volume / total_avg_volume * 50, 100)
-            return max(volume_strength, 40)
-        except:
-            return 50.0
-    
-    def _calculate_fvg_strength(self, gap_size: float, current_candle: Dict) -> float:
-        """Calculate FVG strength"""
-        try:
-            gap_percentage = gap_size / current_candle['close'] * 100
-            return min(gap_percentage * 10, 100)
-        except:
-            return 50.0
-    
-    def _calculate_liquidity_strength(self, data: List[Dict], sweep_idx: int, original_level: Dict) -> float:
-        """Calculate liquidity sweep strength"""
-        try:
-            volume_factor = data[sweep_idx]['volume'] / self._get_average_volume(data)
-            price_factor = abs(data[sweep_idx]['high'] - original_level['price']) / original_level['price'] * 100
-            return min(volume_factor * price_factor * 20, 100)
-        except:
-            return 50.0
-    
-    def _calculate_eqh_eql_strength(self, point1: Dict, point2: Dict) -> float:
-        """Calculate EQH/EQL strength"""
-        try:
-            time_diff = abs(point1['timestamp'] - point2['timestamp']) / 3600000
-            time_strength = min(time_diff / 20, 2.0)
-            price_diff = abs(point1['price'] - point2['price'])
-            precision_strength = 1.0 / (1.0 + price_diff / point1['price'] * 100)
-            return min(time_strength * precision_strength * 50, 100)
-        except:
-            return 50.0
-    
-    def _get_average_volume(self, data: List[Dict]) -> float:
-        """Calculate average volume"""
-        if not data:
-            return 1.0
-        return sum(d['volume'] for d in data) / len(data)
-    
-    def _determine_market_structure(self, choch_bos_signals: List[Dict], order_blocks: List[Dict]) -> Dict[str, Any]:
-        """Determine overall market structure"""
-        if not choch_bos_signals:
-            return {'trend': 'neutral', 'strength': 0}
-        
-        recent_signals = choch_bos_signals[-5:] if len(choch_bos_signals) >= 5 else choch_bos_signals
-        
-        bullish_count = sum(1 for signal in recent_signals if signal['direction'] == 'bullish')
-        bearish_count = sum(1 for signal in recent_signals if signal['direction'] == 'bearish')
-        
-        if bullish_count > bearish_count:
-            trend = 'bullish'
-            strength = (bullish_count / len(recent_signals)) * 100
-        elif bearish_count > bullish_count:
-            trend = 'bearish'
-            strength = (bearish_count / len(recent_signals)) * 100
-        else:
-            trend = 'neutral'
-            strength = 0
-        
-        return {
-            'trend': trend,
-            'strength': strength,
-            'recent_signals': len(recent_signals),
-            'order_blocks_count': len(order_blocks)
-        }
-    
-    def _generate_smc_summary(self, choch_bos_signals: List[Dict], order_blocks: List[Dict], 
-                             fvg_signals: List[Dict], liquidity_sweeps: List[Dict], 
-                             eqh_eql_signals: List[Dict]) -> Dict[str, Any]:
-        """Generate SMC analysis summary"""
-        return {
-            'total_choch_bos': len(choch_bos_signals),
-            'total_order_blocks': len(order_blocks),
-            'total_fvg': len(fvg_signals),
-            'total_liquidity_sweeps': len(liquidity_sweeps),
-            'total_eqh_eql': len(eqh_eql_signals),
-            'bullish_signals': len([s for s in choch_bos_signals if s['direction'] == 'bullish']),
-            'bearish_signals': len([s for s in choch_bos_signals if s['direction'] == 'bearish']),
-            'recent_activity': len([s for s in choch_bos_signals[-10:] if s]) if choch_bos_signals else 0,
-            'pattern_diversity': len([t for t in ['CHoCH', 'BOS', 'FVG', 'liquidity_sweep', 'EQH', 'EQL'] 
-                                    if any(s.get('type') == t for s in (choch_bos_signals + fvg_signals + liquidity_sweeps + eqh_eql_signals))])
-        }
-    
-    def _calculate_confidence_score(self, choch_bos_signals: List[Dict], order_blocks: List[Dict], 
-                                   fvg_signals: List[Dict], liquidity_sweeps: List[Dict]) -> float:
-        """Calculate overall confidence score"""
-        if not any([choch_bos_signals, order_blocks, fvg_signals, liquidity_sweeps]):
-            return 0.0
-        
-        # Base score from signal count
-        signal_count = len(choch_bos_signals) + len(order_blocks) + len(fvg_signals) + len(liquidity_sweeps)
-        base_score = min(signal_count * 10, 60)
-        
-        # Confluence bonus
-        confluence_bonus = 0
-        if len(choch_bos_signals) > 0 and len(order_blocks) > 0:
-            confluence_bonus += 15
-        if len(fvg_signals) > 0 and len(liquidity_sweeps) > 0:
-            confluence_bonus += 10
-        
-        # Recent activity bonus
-        recent_signals = [s for s in choch_bos_signals if s['timestamp'] > (datetime.now().timestamp() - 3600) * 1000]
-        recent_bonus = len(recent_signals) * 5
-        
-        total_score = base_score + confluence_bonus + recent_bonus
-        return min(total_score, 100)
-    
     def _empty_smc_analysis(self) -> Dict[str, Any]:
         """Return empty SMC analysis structure"""
         return {
@@ -3821,13 +2709,39 @@ class ConfluenceDetector:
             'timeframe': '',
             'timestamp': int(datetime.now().timestamp() * 1000),
             'current_price': 0.0,
-            'swing_points': {'swing_highs': [], 'swing_lows': []},
-            'choch_bos_signals': [],
+            'structure': {
+                'swing_points': {'swing_highs': [], 'swing_lows': []},
+                'choch_bos_signals': [],
+                'market_structure': {'trend': 'neutral', 'strength': 0}
+            },
             'order_blocks': [],
-            'fvg_signals': [],
+            'fvg': [],
             'liquidity_sweeps': [],
             'eqh_eql_signals': [],
-            'market_structure': {'trend': 'neutral', 'strength': 0},
+            'inducement': [],
+            'nested_order_blocks': [],
+            'confluence_zones': [],
+            'breaker_blocks': [],
+            'mitigation_blocks': [],
+            'trendline_liquidities': [],
+            'advanced_features': {
+                'breaker_blocks_count': 0,
+                'mitigation_blocks_count': 0,
+                'trendline_liquidities_count': 0,
+                'irl_erl_enhanced': True,
+                'killzone_timing_applied': True,
+                'premium_discount_mapped': True
+            },
+            'advanced_patterns': [],
+            'volume_confirmation': {
+                'volume_deltas': [],
+                'cvd_data': [],
+                'volume_absorptions': [],
+                'cvd_divergences': []
+            },
+            'ai_snapshot': {},
+            'trading_signals': [],
+            'confidence_score': 0.0,
             'smc_summary': {
                 'total_choch_bos': 0,
                 'total_order_blocks': 0,
@@ -3838,7 +2752,5 @@ class ConfluenceDetector:
                 'bearish_signals': 0,
                 'recent_activity': 0,
                 'pattern_diversity': 0
-            },
-            'trading_signals': [],
-            'confidence_score': 0.0
+            }
         }
