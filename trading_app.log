@@ -200,3 +200,155 @@
 2025-07-19 13:58:35,312 - engineio.server - INFO - Server initialized for threading.
 2025-07-19 13:59:11,628 - engineio.server - INFO - Server initialized for threading.
 2025-07-19 13:59:49,387 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 14:01:31,624 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 14:01:49,188 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 14:02:21,978 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 14:03:10,900 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 14:03:24,077 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 14:03:40,713 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 14:03:43,161 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-19 14:03:43,162 - core.professional_smc_analyzer - INFO - 🚀 Professional SMC Analyzer initialized with enhanced features
+2025-07-19 14:03:43,180 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-19 14:03:43,181 - core.professional_smc_analyzer - INFO - 🚀 Professional SMC Analyzer initialized with enhanced features
+2025-07-19 14:03:43,199 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-19 14:03:43,199 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-19 14:03:43,273 - core.monitoring - DEBUG - Active signals count updated
+2025-07-19 14:03:43,290 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-19 14:03:43,291 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-19 14:03:43,343 - monitoring_routes - INFO - Monitoring routes initialized successfully
+2025-07-19 14:03:49,953 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 14:04:06,739 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 14:04:07,496 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-19 14:04:07,497 - core.professional_smc_analyzer - INFO - 🚀 Professional SMC Analyzer initialized with enhanced features
+2025-07-19 14:04:07,516 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-19 14:04:07,516 - core.professional_smc_analyzer - INFO - 🚀 Professional SMC Analyzer initialized with enhanced features
+2025-07-19 14:04:07,544 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-19 14:04:07,549 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-19 14:04:07,589 - core.monitoring - DEBUG - Active signals count updated
+2025-07-19 14:04:07,604 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-19 14:04:07,604 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-19 14:04:07,645 - monitoring_routes - INFO - Monitoring routes initialized successfully
+2025-07-19 14:04:07,654 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-19 14:04:07,655 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-19 14:04:07,658 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-19 14:04:07,662 - app - INFO - 🚀 APScheduler initialized successfully
+2025-07-19 14:04:07,664 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-19 14:04:08,669 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-19 14:04:08,670 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-19 14:04:08,670 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-19 14:04:13,487 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 14:04:14,244 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-19 14:04:14,245 - core.professional_smc_analyzer - INFO - 🚀 Professional SMC Analyzer initialized with enhanced features
+2025-07-19 14:04:14,260 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-19 14:04:14,260 - core.professional_smc_analyzer - INFO - 🚀 Professional SMC Analyzer initialized with enhanced features
+2025-07-19 14:04:14,274 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-19 14:04:14,275 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-19 14:04:14,321 - core.monitoring - DEBUG - Active signals count updated
+2025-07-19 14:04:14,340 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-19 14:04:14,341 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-19 14:04:14,386 - monitoring_routes - INFO - Monitoring routes initialized successfully
+2025-07-19 14:04:14,388 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-19 14:04:14,388 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-19 14:04:14,389 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-19 14:04:14,389 - app - INFO - 🚀 APScheduler initialized successfully
+2025-07-19 14:04:14,390 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-19 14:04:14,404 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-19 14:04:14,404 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-19 14:04:14,405 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-19 14:04:26,066 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 14:05:09,570 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 14:05:20,688 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 14:05:21,478 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-19 14:05:21,479 - core.professional_smc_analyzer - INFO - 🚀 Professional SMC Analyzer initialized with enhanced features
+2025-07-19 14:05:21,494 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-19 14:05:21,494 - core.professional_smc_analyzer - INFO - 🚀 Professional SMC Analyzer initialized with enhanced features
+2025-07-19 14:05:21,516 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-19 14:05:21,517 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-19 14:05:21,585 - core.monitoring - DEBUG - Active signals count updated
+2025-07-19 14:05:21,606 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-19 14:05:21,607 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-19 14:05:21,667 - monitoring_routes - INFO - Monitoring routes initialized successfully
+2025-07-19 14:05:21,674 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-19 14:05:21,675 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-19 14:05:21,677 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-19 14:05:21,678 - app - INFO - 🚀 APScheduler initialized successfully
+2025-07-19 14:05:21,679 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-19 14:05:27,439 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 14:05:28,176 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-19 14:05:28,177 - core.professional_smc_analyzer - INFO - 🚀 Professional SMC Analyzer initialized with enhanced features
+2025-07-19 14:05:28,206 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-19 14:05:28,207 - core.professional_smc_analyzer - INFO - 🚀 Professional SMC Analyzer initialized with enhanced features
+2025-07-19 14:05:28,223 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-19 14:05:28,224 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-19 14:05:28,264 - core.monitoring - DEBUG - Active signals count updated
+2025-07-19 14:05:28,282 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-19 14:05:28,282 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-19 14:05:28,314 - monitoring_routes - INFO - Monitoring routes initialized successfully
+2025-07-19 14:05:28,316 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-19 14:05:28,317 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-19 14:05:28,319 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-19 14:05:28,320 - app - INFO - 🚀 APScheduler initialized successfully
+2025-07-19 14:05:28,320 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-19 14:05:28,321 - werkzeug - WARNING - Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
+2025-07-19 14:05:28,340 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.128.104:5000
+2025-07-19 14:05:28,341 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-07-19 14:05:28,341 - werkzeug - INFO -  * Restarting with stat
+2025-07-19 14:05:28,697 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-19 14:05:28,698 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-19 14:05:28,698 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-19 14:05:33,158 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 14:05:37,208 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-19 14:05:37,209 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-19 14:05:37,209 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-19 14:05:43,664 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 14:05:59,230 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 14:06:00,587 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-19 14:06:00,588 - core.professional_smc_analyzer - INFO - 🚀 Professional SMC Analyzer initialized with enhanced features
+2025-07-19 14:06:00,615 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-19 14:06:00,616 - core.professional_smc_analyzer - INFO - 🚀 Professional SMC Analyzer initialized with enhanced features
+2025-07-19 14:06:00,631 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-19 14:06:00,632 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-19 14:06:00,694 - core.monitoring - DEBUG - Active signals count updated
+2025-07-19 14:06:00,718 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-19 14:06:00,719 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-19 14:06:00,761 - monitoring_routes - INFO - Monitoring routes initialized successfully
+2025-07-19 14:06:00,763 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-19 14:06:00,764 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-19 14:06:00,766 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-19 14:06:00,767 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-19 14:06:00,767 - app - INFO - 🚀 APScheduler initialized successfully
+2025-07-19 14:06:00,768 - werkzeug - WARNING - Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
+2025-07-19 14:06:00,784 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.31.128.104:5000
+2025-07-19 14:06:00,786 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-07-19 14:06:00,787 - werkzeug - INFO -  * Restarting with stat
+2025-07-19 14:06:04,998 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 14:06:04,999 - app - DEBUG - Metrics are disabled when run in the Flask development server with reload enabled. Set the environment variable DEBUG_METRICS=1 to enable them anyway.
+2025-07-19 14:06:05,956 - core.okx_fetcher - INFO - OKX API initialized with authentication credentials
+2025-07-19 14:06:05,959 - core.professional_smc_analyzer - INFO - 🚀 Professional SMC Analyzer initialized with enhanced features
+2025-07-19 14:06:05,994 - core.enhanced_ai_engine - INFO - Enhanced AI Engine initialized with OpenAI GPT-4o
+2025-07-19 14:06:06,025 - core.professional_smc_analyzer - INFO - 🚀 Professional SMC Analyzer initialized with enhanced features
+2025-07-19 14:06:06,083 - core.ai_engine - INFO - AI Engine initialized successfully with OpenAI GPT-4o
+2025-07-19 14:06:06,088 - core.snapshot_generator - INFO - SnapshotGenerator initialized with comprehensive analysis capabilities
+2025-07-19 14:06:06,171 - core.monitoring - DEBUG - Active signals count updated
+2025-07-19 14:06:06,206 - core.monitoring - DEBUG - Win rate metrics updated
+2025-07-19 14:06:06,208 - core.monitoring - INFO - Monitoring system initialized successfully
+2025-07-19 14:06:06,261 - monitoring_routes - INFO - Monitoring routes initialized successfully
+2025-07-19 14:06:06,263 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-19 14:06:06,264 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-19 14:06:06,265 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-19 14:06:06,265 - app - INFO - 🚀 APScheduler initialized successfully
+2025-07-19 14:06:06,265 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-19 14:06:06,266 - werkzeug - WARNING - Werkzeug appears to be used in a production deployment. Consider switching to a production web server instead.
+2025-07-19 14:06:06,305 - werkzeug - WARNING -  * Debugger is active!
+2025-07-19 14:06:06,333 - werkzeug - INFO -  * Debugger PIN: 598-952-219
+2025-07-19 14:06:07,525 - werkzeug - INFO - 127.0.0.1 - - [19/Jul/2025 14:06:07] "GET / HTTP/1.1" 200 -
+2025-07-19 14:06:07,613 - werkzeug - INFO - 127.0.0.1 - - [19/Jul/2025 14:06:07] "[33mGET /api/health HTTP/1.1[0m" 404 -
+2025-07-19 14:06:07,680 - werkzeug - INFO - 127.0.0.1 - - [19/Jul/2025 14:06:07] "[33mGET /api/analysis/BTC-USDT/1h HTTP/1.1[0m" 404 -
+2025-07-19 14:06:37,977 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 14:07:07,729 - engineio.server - INFO - Server initialized for threading.
