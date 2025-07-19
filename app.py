@@ -73,14 +73,25 @@ CORS(app, origins=["http://localhost:3000", "http://localhost:5173"],
      methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
      allow_headers=["Content-Type", "Authorization"])
 
-# Configure the PostgreSQL database
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
-app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
-    "pool_recycle": 300,
-    "pool_pre_ping": True,
-    "pool_size": 10,
-    "max_overflow": 20,
-}
+# Configure the database with fallback
+DATABASE_URL = os.environ.get("DATABASE_URL")
+if not DATABASE_URL:
+    # Fallback to SQLite for local development
+    DATABASE_URL = "sqlite:///trading_local.db"
+    print("🔧 Using SQLite database for local development")
+
+app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
+
+# Engine options (only for PostgreSQL)
+if DATABASE_URL.startswith("postgresql"):
+    app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
+        "pool_recycle": 300,
+        "pool_pre_ping": True,
+        "pool_size": 10,
+        "max_overflow": 20,
+    }
+else:
+    app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {}
 
 # Initialize extensions
 db.init_app(app)
