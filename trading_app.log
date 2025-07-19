@@ -81,3 +81,19 @@
 2025-07-19 13:31:17,219 - apscheduler.scheduler - INFO - Scheduler has been shut down
 2025-07-19 13:31:17,220 - apscheduler.scheduler - DEBUG - Looking for jobs to run
 2025-07-19 13:31:17,220 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-19 13:32:59,144 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 13:32:59,149 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-19 13:32:59,149 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-19 13:32:59,150 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-19 13:32:59,150 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-19 13:32:59,220 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-19 13:32:59,221 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-19 13:32:59,221 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-19 13:33:09,144 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 13:33:09,146 - tzlocal - DEBUG - No explicit setting existed. Use localtime
+2025-07-19 13:33:09,146 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-19 13:33:09,147 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-19 13:33:09,158 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
+2025-07-19 13:33:09,196 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-07-19 13:33:09,197 - apscheduler.scheduler - DEBUG - Looking for jobs to run
+2025-07-19 13:33:09,197 - apscheduler.scheduler - DEBUG - No jobs; waiting until a job is added
