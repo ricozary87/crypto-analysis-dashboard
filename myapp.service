@@ -1,0 +1,34 @@
+[Unit]
+Description=MyApp Python Web Application
+After=network.target
+After=multi-user.target
+
+[Service]
+Type=exec
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/myapp
+Environment=PATH=/home/ubuntu/myapp/venv/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=/home/ubuntu/myapp/venv/bin/gunicorn wsgi:application --bind 0.0.0.0:8000
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+TimeoutStopSec=30
+Restart=always
+RestartSec=10
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=myapp
+
+# Security
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/home/ubuntu/myapp
+
+# Resource limits
+LimitNOFILE=65535
+
+[Install]
+WantedBy=multi-user.target
