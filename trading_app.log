@@ -352,3 +352,7 @@
 2025-07-19 14:06:07,680 - werkzeug - INFO - 127.0.0.1 - - [19/Jul/2025 14:06:07] "[33mGET /api/analysis/BTC-USDT/1h HTTP/1.1[0m" 404 -
 2025-07-19 14:06:37,977 - engineio.server - INFO - Server initialized for threading.
 2025-07-19 14:07:07,729 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 14:08:00,225 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 14:08:27,391 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 14:08:48,812 - engineio.server - INFO - Server initialized for threading.
+2025-07-19 14:09:07,003 - engineio.server - INFO - Server initialized for threading.
